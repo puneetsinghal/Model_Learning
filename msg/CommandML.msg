@@ -1,0 +1,9 @@
+trajectory_msgs/JointTrajectory jointTrajectory
+float64[] epsTau
+float64 controlType
+float64 dtList
+float64 motorOn
+float64[] pos_gain
+float64[] vel_gain
+bool closedLoop
+bool feedforward
