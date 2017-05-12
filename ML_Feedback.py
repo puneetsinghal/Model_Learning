@@ -6,9 +6,7 @@ from trajectory_msgs.msg import JointTrajectory
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Header
 import std_msgs.msg
-import arm_planner.srv
-import hebi_cpp.msg
-import hebi_cpp.srv
+
 import numpy as np
 import matplotlib.pyplot as plt
 import GPy
@@ -21,10 +19,7 @@ import rosbag
 import os
 import TrajectoryGenerartor as TG
 
-# global ML_count
-# global RMSE_ID
-# global RMSE_ML1
-# global save_position
+import model_learning.msg
 
 def minJerkSetup(x0,t0,tf):
 	A = np.array([[1,t0, t0**2, t0**3, t0**4, t0**5],
@@ -247,7 +242,7 @@ def resetPosition(motorOn,ps):
 	start_time = rospy.Time.now()
 	time_from_start = 0.
 
-	cmd = hebi_cpp.msg.CommandML()
+	cmd = model_learning.msg.CommandML()
 	point = JointTrajectoryPoint()
 
 	c_x = 0.0
@@ -305,9 +300,9 @@ class pubSub:
 		self.flush = flush
 
 		self.traj_pub = rospy.Publisher("ml_publisher",
-										hebi_cpp.msg.CommandML,queue_size=1)
+										model_learning.msg.CommandML,queue_size=1)
 		self.fbk_sub = rospy.Subscriber("armcontroller_fbk",
-							hebi_cpp.msg.FeedbackML,self.armControlCallback,
+							model_learning.msg.FeedbackML,self.armControlCallback,
 							queue_size=5000)
 		self.path1_pub = rospy.Publisher("/path1/color",
 							std_msgs.msg.ColorRGBA,queue_size=1)
@@ -456,7 +451,7 @@ class pubSub:
 		# 					JointTrajectoryPoint,self.trajectoryCmdCallback,
 		# 					queue_size=1000)
 		self.fbk_sub = rospy.Subscriber("armcontroller_fbk",
-							hebi_cpp.msg.FeedbackML,self.armControlCallback,
+							model_learning.msg.FeedbackML,self.armControlCallback,
 							queue_size=1000)
 		self.restart_joint = True
 		self.restart_traj = True
@@ -1087,7 +1082,7 @@ class modelDatabase:
 				initial_angles= TG.inverseKinematics(c_x,c_y+radius,c_z,0)
 		while control_info['tf']-time_from_start> 0:
 			deflection = self.ps.queue.deflection[:,-1]
-			cmd = hebi_cpp.msg.CommandML()
+			cmd = model_learning.msg.CommandML()
 			trajectory = JointTrajectory()
 			point = JointTrajectoryPoint()
 			trajectory.header.stamp = rospy.Time.now()
@@ -1212,7 +1207,7 @@ class modelDatabase:
 			cmd.vel_gain = control_info['v_gain']
 			self.ps.traj_pub.publish(cmd)
 			# if self.ps.bagging:
-			# 	message = hebi_cpp.msg.FeedbackML()
+			# 	message = model_learning.msg.FeedbackML()
 			# 	self.ps.bag.write("armcontroller_fbk",message)
 			# if control_info['ml']:
 				# time.sleep(0.005)
