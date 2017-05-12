@@ -24,14 +24,9 @@
 #include <model_learning/CommandML.h>
 #include <model_learning/FeedbackML.h>
 
-#include <model_learning/resetPosition.h>
-using namespace Eigen;
-using namespace std;
-
 class armcontroller
 {
 public:
-  Matrix4d T1o2i, T2o3i, T3o4i, T4o5i, T5o6;
   long timeoutFbk_ms = 10;
   double controlType = 0;
   double maxDt = 0;
@@ -78,16 +73,6 @@ public:
   std::vector<double> initial_position;
 
   ros::WallTime lastCommand_time;
-
-  Matrix4d rotationZ(double alpha)
-  {
-    Matrix4d rotation;
-    rotation << cos(alpha), -sin(alpha), 0.0, 0.0,
-      sin(alpha), cos(alpha), 0.0, 0.0,
-      0.0, 0.0, 1.0, 0.0,
-      0.0, 0.0, 0.0, 1.0;
-    return rotation;
-  }
 
   armcontroller();
   void init();
@@ -161,28 +146,6 @@ armcontroller::armcontroller()
   this->currentFbk.epsTau = {0,0,0,0,0};
 
   this->lastCommand_time = ros::WallTime::now();
-
-  //initialize matrices that will be used
-  T1o2i << 1, 0, 0, 0,
-    0, 0, -1, 0.010,
-    0, 1, 0, 0.070,
-    0, 0, 0, 1;
-  T2o3i << 1, 0, 0, 0,
-    0, -1, 0, 0.280,
-    0, 0, -1, 0,
-    0, 0, 0, 1;
-  T3o4i << 1, 0, 0, 0,
-    0, -1, 0, -0.280,
-    0, 0, -1, 0,
-    0, 0, 0, 1;
-  T4o5i << 1, 0, 0, 0,
-    0, 0, 1, 0.055,
-    0, -1, 0, 0.055,
-    0, 0, 0, 1;
-  T5o6 << 1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0.045,
-    0, 0, 0, 1;
 }
 
 void armcontroller::init()
@@ -714,7 +677,7 @@ int main(int argc, char* argv[])
   
 
   // string topicName_traj_1;
-  cout << "enter ros spin" << endl;
+  std::cout << "enter ros spin" << std::endl;
 
   // if ( !nh.getParam("arm_controller/topic_name_arm_1_traj", topicName_traj_1))
   //     cout << "FAIL TO GET arm_controller/topic_name_arm_1_traj" << endl;
