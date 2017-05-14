@@ -70,7 +70,7 @@ void Command::HighResAngleField::set(double radians)
   double revolutions_int;
   double radian_offset = std::modf (revolutions_raw, &revolutions_int);
   radian_offset = radian_offset * 2.0 * M_PI;
-  hebiCommandSetHighResAngle(internal_, field_, isnan(revolutions_int) ? 0 : (int64_t)revolutions_int, (float)radian_offset); // Preserve 'NAN' messages by just setting the floating point part.
+  hebiCommandSetHighResAngle(internal_, field_, std::isnan(revolutions_int) ? 0 : (int64_t)revolutions_int, (float)radian_offset); // Preserve 'NAN' messages by just setting the floating point part.
 }
 
 void Command::HighResAngleField::set(int64_t revolutions, float radian_offset)

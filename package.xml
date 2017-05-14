@@ -1,35 +1,27 @@
-<?xml version="1.0"?>
-<package>
+<package format="2">
   <name>model_learning</name>
   <version>1.0.0</version>
 
-  <description>
-    hebi api
-  </description>
-
   <maintainer email="ky.a.woodard@gmail.com">Ky Woodard</maintainer>
-  <author>Matt Tesch</author>
+  <author>Ky Woodard</author>
+
+  <description>
+    model learning
+  </description>
 
   <license>CC BY-NC-SA 4.0</license>
 
   <buildtool_depend>catkin</buildtool_depend>
 
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>trajectory_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>message_generation</depend>
+  <depend>cmake_modules</depend>
 
-  <build_depend>roscpp</build_depend>
-  <build_depend>rospy</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>geometry_msgs</build_depend>
-  <build_depend>trajectory_msgs</build_depend>
-  <build_depend>sensor_msgs</build_depend>
-  <build_depend>message_generation</build_depend>
-  <build_depend>cmake_modules</build_depend>
-
-  <run_depend>message_generation</run_depend>
-  <run_depend>message_runtime</run_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>rospy</run_depend>
-  <run_depend>std_msgs</run_depend>
-  <run_depend>geometry_msgs</run_depend>
-  <run_depend>trajectory_msgs</run_depend>
+  <exec_depend>message_runtime</exec_depend>
 
 </package>

@@ -20,10 +20,8 @@
 #include <arm_dynamics.hpp>
 #include <sstream>
 #include <deque>
-#include <hebi_cpp/CommandML.h>
-#include <hebi_cpp/FeedbackML.h>
-
-#include <hebi_cpp/resetPosition.h>
+#include <model_learning/CommandML.h>
+#include <model_learning/FeedbackML.h>
 
 using namespace Eigen;
 using namespace std;
@@ -31,16 +29,10 @@ using namespace std;
 class armcontroller
 {
 public:
-  Matrix4d T1o2i, T2o3i, T3o4i, T4o5i, T5o6;
-  long timeoutFbk_ms = 10;
-  double controlType = 0;
-  double maxDt = 0;
-  double fbksuccess_count = 1;
-  double fbkfailure_count = 1;
 
-  hebi_cpp::CommandML currentCmd;
+  model_learning::CommandML currentCmd;
 
-  hebi_cpp::FeedbackML currentFbk;
+  model_learning::FeedbackML currentFbk;
   sensor_msgs::JointState jointState;
   trajectory_msgs::JointTrajectoryPoint trajectoryCmd;
 
@@ -76,38 +68,23 @@ public:
   bool initializePosition;
   std::vector<double> initial_position;
 
-  Matrix4d rotationZ(double alpha)
-  {
-    Matrix4d rotation;
-    rotation << cos(alpha), -sin(alpha), 0.0, 0.0,
-      sin(alpha), cos(alpha), 0.0, 0.0,
-      0.0, 0.0, 1.0, 0.0,
-      0.0, 0.0, 0.0, 1.0;
-    return rotation;
-  }
-
   armcontroller();
   void init();
   bool updateFeedback();
   void getFeedbackMsg(sensor_msgs::JointState&,trajectory_msgs::JointTrajectoryPoint&,
-                      hebi_cpp::FeedbackML&);
+                      model_learning::FeedbackML&);
   void controller(const Eigen::VectorXd &,const Eigen::VectorXd &,
              const Eigen::VectorXd &, std::vector<double> &);
   void feedbackControl(const Eigen::VectorXd &,const Eigen::VectorXd &,
                 std::vector<double> &);
   bool sendCommand(const std::vector<double> &, const std::vector<double> &);
   bool sendTorqueCommand(const std::vector<double> &);
-
-  bool serviceResetCallback(hebi_cpp::resetPosition::Request&,hebi_cpp::resetPosition::Response&);
-  void subscriberCallback(const hebi_cpp::CommandML&);
+  void subscriberCallback(const model_learning::CommandML&);
 
   void WMAFilter(const std::vector<double> &, const std::vector<double> &,
                          std::vector<double> &, std::vector<double> &);
   void movingAverage(const std::vector<double> &,const int &,const int &,
                   double &,double &,double &) const;
-  
-  void forwardKinematics(const std::vector<double>&, Eigen::Matrix4d&);
-  bool inverseKinematics(const geometry_msgs::Pose&, std::vector<double> &);
 };
 
 armcontroller::armcontroller()
@@ -155,28 +132,6 @@ armcontroller::armcontroller()
   this->currentFbk.torqueID = {0,0,0,0,0};
   this->currentFbk.accel = {0,0,0,0,0};
   this->currentFbk.epsTau = {0,0,0,0,0};
-
-  //initialize matrices that will be used
-  T1o2i << 1, 0, 0, 0,
-    0, 0, -1, 0.010,
-    0, 1, 0, 0.070,
-    0, 0, 0, 1;
-  T2o3i << 1, 0, 0, 0,
-    0, -1, 0, 0.280,
-    0, 0, -1, 0,
-    0, 0, 0, 1;
-  T3o4i << 1, 0, 0, 0,
-    0, -1, 0, -0.280,
-    0, 0, -1, 0,
-    0, 0, 0, 1;
-  T4o5i << 1, 0, 0, 0,
-    0, 0, 1, 0.055,
-    0, -1, 0, 0.055,
-    0, 0, 0, 1;
-  T5o6 << 1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0.045,
-    0, 0, 0, 1;
 }
 
 void armcontroller::init()
@@ -337,7 +292,7 @@ bool armcontroller::updateFeedback()
 
 void armcontroller::getFeedbackMsg(sensor_msgs::JointState &jointState_fbk,
                                   trajectory_msgs::JointTrajectoryPoint &trajectoryCmd_fbk,
-                                  hebi_cpp::FeedbackML &armcontroller_fbk)
+                                  model_learning::FeedbackML &armcontroller_fbk)
 {
   jointState_fbk = this->jointState;
   trajectoryCmd_fbk = this->trajectoryCmd;
@@ -575,101 +530,7 @@ void armcontroller::movingAverage(const std::vector<double> &data_vector,const i
   }
 };
 
-bool armcontroller::serviceResetCallback(hebi_cpp::resetPosition::Request &req,
-                                    hebi_cpp::resetPosition::Response &res)  //TODO: Figure out how I want this to operate
-{
-  std::vector<double> alpha(5);
-  std::vector<double> torque(5);
-  geometry_msgs::Pose initial_pose = req.pose;
-
-  // initial_pose.position.x = 0.;
-  // initial_pose.position.y = 0.4;
-  // initial_pose.position.z = 0.21;
-  // initial_pose.orientation.x = 0.0;
-  // initial_pose.orientation.y = 1.0;
-  // initial_pose.orientation.z = 0.0;
-  // initial_pose.orientation.w = 0.0;
-
-  if(this->inverseKinematics(initial_pose, alpha))
-  {
-    dynamics::gravityComp(alpha,torque);
-    torque[4]=0;
-    sendCommand(alpha,torque);
-    hebi_sleep_ms(3000);
-    this->initial_position = alpha;
-    res.acknowledge = true;
-  }
-  return true;
-}
-
-bool armcontroller::inverseKinematics(const geometry_msgs::Pose &pose, std::vector<double> &alpha)  //Chaohui
-{
-  Quaternion<double> q(pose.orientation.w, pose.orientation.x, pose.orientation.y, pose.orientation.z);
-  //convert pose (quaterion) to matrix
-  Matrix4d g1i6;
-  g1i6.setIdentity();
-  g1i6.block(0, 0, 3, 3) << q.matrix();
-  g1i6.block(0, 3, 3, 1) << pose.position.x, pose.position.y, pose.position.z;
-  //make sure g1i6 is pointing downwards
-  if(g1i6(2, 2) > -0.95){
-    std::cout << "Invalid end-effector pose. Make sure the end-effector is pointing downwards." << std::endl;
-    return false;
-  }
-  // Matrix4d g4o6 = T4o5i * rotationZ(cmdAngle[4]) * T5o6;
-  Vector3d xAxis = g1i6.block(0, 0, 3, 1).normalized();
-  alpha[0] = atan2(g1i6(1, 3), g1i6(0, 3)) + asin(4.5 / sqrt(g1i6(0, 3) * 10000.0 * g1i6(0, 3)  + g1i6(1, 3) * 10000.0 * g1i6(1, 3)));
-  alpha[4] = M_PI - atan2(g1i6(1, 0), g1i6(0, 0)) + alpha[0];
-  if(last_alpha4 > -100.0){
-    double temp1 = alpha[4]+2*M_PI;
-    double temp2 = alpha[4]-2*M_PI;
-    if( fabs(temp1 - last_alpha4) < 0.5 )
-      alpha[4] = temp1;
-    if( fabs(temp2 - last_alpha4) < 0.5 )
-      alpha[4] = temp2;
-  }
-  last_alpha4 = alpha[4];
-  Matrix4d g4o6 = T4o5i * rotationZ(alpha[4]) * T5o6;
-  //get the g1i4o
-  Matrix4d g1i4o = g1i6 * g4o6.inverse();
-  //using simple inverse kinematics to  compute joint angles 1, 2, 3
-  // alpha[0] = atan2(g1i4o(1, 3), g1i4o(0, 3));
-  
-  Matrix4d g1i2i = rotationZ(alpha[0]) * T1o2i;
-  Matrix4d g2i4o = g1i2i.inverse() * g1i4o;
-
-  double elevation = g2i4o(1, 3), reach = g2i4o(0, 3);
-  double L2 = 0.280;
-  double L3 = sqrt(pow(elevation, 2) + pow(reach, 2));
-  if((L3 * L3 / L2 / L2 - 2.0 < -2.0) || (L3 * L3 / L2 / L2  - 2.0 > 2.0)){
-    return false;
-  }else{
-    alpha[2] = acos(((pow(elevation, 2) + pow(reach, 2)) / L2 / L2 - 2.0) / 2.0);
-  }
-  if((L2 / L3 * sin(alpha[2])) < -1 || (L2 / L3 * sin(alpha[2])) > 1){
-    return false;
-  }
-  double beta = asin(L2 / L3 * sin(alpha[2]));
-  alpha[1] = atan2(elevation, reach) + beta - M_PI / 2.0;
-  alpha[3] = M_PI - alpha[1] + alpha[2];
-  //printf("alpha3=%f\n", alpha[3]);
-  // gl2 = rotationZ(alpha[0])*Toff*T1oCi;
-  // gl3 = g1i2i * rotationZ(alpha[1]) * Toff * T2oCi;
-  // gl4 = g1i2i * rotationZ(alpha[1]) * Toff * T2o3i * rotaionZ(alpha[2]) * Toff * T3oCi;
-  // gl5 = (g1i2i * rotationZ(alpha[1]) * Toff * T2o3i * rotaionZ(alpha[2]) * Toff * T3o4i
-  //        * rotationZ(alpha[3]) * Toff * T4oCi)
-  // forwardKinematics(alpha);
-  return true;
-}
-
-void armcontroller::forwardKinematics(const std::vector<double> &alpha, Eigen::Matrix4d &g1i6)  //Chaohui
-{
-  g1i6 = rotationZ(alpha[0]) * T1o2i * rotationZ(alpha[1]) * 
-    T2o3i * rotationZ(alpha[2]) *
-    T3o4i * rotationZ(alpha[3]) * 
-    T4o5i * rotationZ(alpha[4]) * T5o6;
-}
-
-void armcontroller::subscriberCallback(const hebi_cpp::CommandML &cmd)
+void armcontroller::subscriberCallback(const model_learning::CommandML &cmd)
 {
   ros::WallTime start = ros::WallTime::now();
   // std::chrono::milliseconds ms_start,ms_current,ms_dt;
@@ -741,7 +602,7 @@ int main(int argc, char* argv[])
   ros::NodeHandle nh;
   ros::Publisher jointState_pub = nh.advertise<sensor_msgs::JointState>("jointState_fbk",10);
   ros::Publisher trajectory_pub = nh.advertise<trajectory_msgs::JointTrajectoryPoint>("trajectoryCmd_fbk",10);
-  ros::Publisher armcontroller_pub = nh.advertise<hebi_cpp::FeedbackML>("armcontroller_fbk",10);
+  ros::Publisher armcontroller_pub = nh.advertise<model_learning::FeedbackML>("armcontroller_fbk",10);
   ros::Subscriber armcontroller_sub = nh.subscribe("ml_publisher",10,&armcontroller::subscriberCallback, &ac);
 
   cout << "enter ros spin" << endl;
@@ -752,7 +613,7 @@ int main(int argc, char* argv[])
     ros::WallTime start = ros::WallTime::now();
     sensor_msgs::JointState jointState_fbk;
     trajectory_msgs::JointTrajectoryPoint trajectoryCmd_fbk;
-    hebi_cpp::FeedbackML armcontroller_fbk;
+    model_learning::FeedbackML armcontroller_fbk;
 
     if(ac.updateFeedback())
     {
