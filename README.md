@@ -14,15 +14,8 @@ Ubuntu 16.04
 ```
 ### C++ (Standard 11)
 1. [Eigen 3](http://eigen.tuxfamily.org/index.php?title=Main_Page)
-- [Download](http://eigen.tuxfamily.org/index.php?title=Main_Page#Download)
-- Extract to home folder (~)
 ```
-cd ~/eigen-eigen-67e894c6cd8f
-mkdir build
-cd build
-cmake ..
-make
-make install
+sudo apt install libeigen3-dev
 ```
 ## Implementation Specifics
 In this section, I cover some of the specific things to be aware of when using this code.
