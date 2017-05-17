@@ -1,0 +1,70 @@
+\hypertarget{structoption_1_1PrintUsageImplementation}{}\section{option\+:\+:Print\+Usage\+Implementation Struct Reference}
+\label{structoption_1_1PrintUsageImplementation}\index{option\+::\+Print\+Usage\+Implementation@{option\+::\+Print\+Usage\+Implementation}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structoption_1_1PrintUsageImplementation_1_1FunctionWriter}{Function\+Writer}
+\item 
+struct \hyperlink{structoption_1_1PrintUsageImplementation_1_1IStringWriter}{I\+String\+Writer}
+\item 
+class \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator}{Line\+Part\+Iterator}
+\item 
+class \hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper}{Line\+Wrapper}
+\item 
+struct \hyperlink{structoption_1_1PrintUsageImplementation_1_1OStreamWriter}{O\+Stream\+Writer}
+\item 
+struct \hyperlink{structoption_1_1PrintUsageImplementation_1_1StreamWriter}{Stream\+Writer}
+\item 
+struct \hyperlink{structoption_1_1PrintUsageImplementation_1_1SyscallWriter}{Syscall\+Writer}
+\item 
+struct \hyperlink{structoption_1_1PrintUsageImplementation_1_1TemporaryWriter}{Temporary\+Writer}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bfseries upmax} (int \&i1, int i2)\hypertarget{structoption_1_1PrintUsageImplementation_a0680dd84366df82398e30e4ccbd27ac0}{}\label{structoption_1_1PrintUsageImplementation_a0680dd84366df82398e30e4ccbd27ac0}
+
+\item 
+static void {\bfseries indent} (\hyperlink{structoption_1_1PrintUsageImplementation_1_1IStringWriter}{I\+String\+Writer} \&write, int \&x, int want\+\_\+x)\hypertarget{structoption_1_1PrintUsageImplementation_a4136c574bba35ea1f478e0b6d7022367}{}\label{structoption_1_1PrintUsageImplementation_a4136c574bba35ea1f478e0b6d7022367}
+
+\item 
+static bool \hyperlink{structoption_1_1PrintUsageImplementation_a41bfaabdf21e68877f3030d36acc0798}{is\+Wide\+Char} (unsigned ch)
+\begin{DoxyCompactList}\small\item\em Returns true if ch is the unicode code point of a wide character. \end{DoxyCompactList}\item 
+static void {\bfseries print\+Usage} (\hyperlink{structoption_1_1PrintUsageImplementation_1_1IStringWriter}{I\+String\+Writer} \&write, const \hyperlink{structoption_1_1Descriptor}{Descriptor} usage\mbox{[}$\,$\mbox{]}, int width=80, int last\+\_\+column\+\_\+min\+\_\+percent=50, int last\+\_\+column\+\_\+own\+\_\+line\+\_\+max\+\_\+percent=75)\hypertarget{structoption_1_1PrintUsageImplementation_ab38c4198c5cccea2ccd992c8e014df70}{}\label{structoption_1_1PrintUsageImplementation_ab38c4198c5cccea2ccd992c8e014df70}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{option\+::\+Print\+Usage\+Implementation@{option\+::\+Print\+Usage\+Implementation}!is\+Wide\+Char@{is\+Wide\+Char}}
+\index{is\+Wide\+Char@{is\+Wide\+Char}!option\+::\+Print\+Usage\+Implementation@{option\+::\+Print\+Usage\+Implementation}}
+\subsubsection[{\texorpdfstring{is\+Wide\+Char(unsigned ch)}{isWideChar(unsigned ch)}}]{\setlength{\rightskip}{0pt plus 5cm}static bool option\+::\+Print\+Usage\+Implementation\+::is\+Wide\+Char (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{ch}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{structoption_1_1PrintUsageImplementation_a41bfaabdf21e68877f3030d36acc0798}{}\label{structoption_1_1PrintUsageImplementation_a41bfaabdf21e68877f3030d36acc0798}
+
+
+Returns true if ch is the unicode code point of a wide character. 
+
+\begin{DoxyNote}{Note}
+The following character ranges are treated as wide 
+\begin{DoxyCode}
+1100..115F
+2329..232A  (just 2 characters!)
+2E80..A4C6  except \textcolor{keywordflow}{for} 303F
+A960..A97C
+AC00..D7FB
+F900..FAFF
+FE10..FE6B
+FF01..FF60
+FFE0..FFE6
+1B000......
+\end{DoxyCode}
+ 
+\end{DoxyNote}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{optionparser_8h}{optionparser.\+h}\end{DoxyCompactItemize}

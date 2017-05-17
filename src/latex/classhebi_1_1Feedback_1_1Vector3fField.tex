@@ -1,0 +1,56 @@
+\hypertarget{classhebi_1_1Feedback_1_1Vector3fField}{}\section{hebi\+:\+:Feedback\+:\+:Vector3f\+Field Class Reference}
+\label{classhebi_1_1Feedback_1_1Vector3fField}\index{hebi\+::\+Feedback\+::\+Vector3f\+Field@{hebi\+::\+Feedback\+::\+Vector3f\+Field}}
+
+
+A message field representable by a 3-\/D vector of single-\/precision floating point values.  
+
+
+
+
+{\ttfamily \#include $<$feedback.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Vector3f\+Field} (Hebi\+Feedback\+Ptr internal, Feedback\+Vector3f\+Field field)\hypertarget{classhebi_1_1Feedback_1_1Vector3fField_ab8f283eb2c0b88ddc08df740233a7d50}{}\label{classhebi_1_1Feedback_1_1Vector3fField_ab8f283eb2c0b88ddc08df740233a7d50}
+
+\item 
+\hyperlink{classhebi_1_1Feedback_1_1Vector3fField_a6d43c0cb59b36de35a5bba51b0c5c949}{operator bool} () const 
+\begin{DoxyCompactList}\small\item\em Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Feedback_1_1Vector3fField_ab9ad16f406c54f0e60dd0d961bb408fa}{has()}}. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Feedback_1_1Vector3fField_ab9ad16f406c54f0e60dd0d961bb408fa}{has} () const \hypertarget{classhebi_1_1Feedback_1_1Vector3fField_ab9ad16f406c54f0e60dd0d961bb408fa}{}\label{classhebi_1_1Feedback_1_1Vector3fField_ab9ad16f406c54f0e60dd0d961bb408fa}
+
+\begin{DoxyCompactList}\small\item\em True if (and only if) the field has a value. \end{DoxyCompactList}\item 
+\hyperlink{structhebi_1_1Vector3f}{Vector3f} \hyperlink{classhebi_1_1Feedback_1_1Vector3fField_a65a0b26fbd6da27e2d1492d0a6b4973f}{get} () const \hypertarget{classhebi_1_1Feedback_1_1Vector3fField_a65a0b26fbd6da27e2d1492d0a6b4973f}{}\label{classhebi_1_1Feedback_1_1Vector3fField_a65a0b26fbd6da27e2d1492d0a6b4973f}
+
+\begin{DoxyCompactList}\small\item\em If the field has a value, returns that value; otherwise, returns a default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A message field representable by a 3-\/D vector of single-\/precision floating point values. 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Feedback\+::\+Vector3f\+Field@{hebi\+::\+Feedback\+::\+Vector3f\+Field}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!hebi\+::\+Feedback\+::\+Vector3f\+Field@{hebi\+::\+Feedback\+::\+Vector3f\+Field}}
+\subsubsection[{\texorpdfstring{operator bool() const }{operator bool() const }}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Feedback\+::\+Vector3f\+Field\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classhebi_1_1Feedback_1_1Vector3fField_a6d43c0cb59b36de35a5bba51b0c5c949}{}\label{classhebi_1_1Feedback_1_1Vector3fField_a6d43c0cb59b36de35a5bba51b0c5c949}
+
+
+Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Feedback_1_1Vector3fField_ab9ad16f406c54f0e60dd0d961bb408fa}{has()}}. 
+
+This can be used as in the following (assuming \textquotesingle{}parent\textquotesingle{} is a parent message, and this field is called \textquotesingle{}my\+Field\textquotesingle{}) 
+\begin{DoxyCode}
+Feedback::Vector3fField& f = parent.myField();
+\textcolor{keywordflow}{if} (f)
+  std::cout << \textcolor{stringliteral}{"Field has value!"} << std::endl;
+\textcolor{keywordflow}{else}
+  std::cout << \textcolor{stringliteral}{"Field has no value!"} << std::endl;
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+feedback.\+hpp\item 
+feedback.\+cpp\end{DoxyCompactItemize}

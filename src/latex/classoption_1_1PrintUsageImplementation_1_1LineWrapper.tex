@@ -1,0 +1,63 @@
+\hypertarget{classoption_1_1PrintUsageImplementation_1_1LineWrapper}{}\section{option\+:\+:Print\+Usage\+Implementation\+:\+:Line\+Wrapper Class Reference}
+\label{classoption_1_1PrintUsageImplementation_1_1LineWrapper}\index{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper_a9383db9fd3fb18ce091db63ce0b149fd}{flush} (\hyperlink{structoption_1_1PrintUsageImplementation_1_1IStringWriter}{I\+String\+Writer} \&write)\hypertarget{classoption_1_1PrintUsageImplementation_1_1LineWrapper_a9383db9fd3fb18ce091db63ce0b149fd}{}\label{classoption_1_1PrintUsageImplementation_1_1LineWrapper_a9383db9fd3fb18ce091db63ce0b149fd}
+
+\begin{DoxyCompactList}\small\item\em Writes out all remaining data from the \hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper}{Line\+Wrapper} using {\ttfamily write}. Unlike \hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper_add20eca40865ad892d6c28b412ac14d5}{process()} this method indents all lines including the first and will output a \textbackslash{}n at the end (but only if something has been written). \end{DoxyCompactList}\item 
+void \hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper_add20eca40865ad892d6c28b412ac14d5}{process} (\hyperlink{structoption_1_1PrintUsageImplementation_1_1IStringWriter}{I\+String\+Writer} \&write, const char $\ast$data, int len)
+\begin{DoxyCompactList}\small\item\em Process, wrap and output the next piece of data. \end{DoxyCompactList}\item 
+\hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper_a288f16b6e928e9f54f48e13ff6817e95}{Line\+Wrapper} (int x1, int x2)
+\begin{DoxyCompactList}\small\item\em Constructs a \hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper}{Line\+Wrapper} that wraps its output to fit into screen columns {\ttfamily x1} (incl.) to {\ttfamily x2} (excl.). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper}!Line\+Wrapper@{Line\+Wrapper}}
+\index{Line\+Wrapper@{Line\+Wrapper}!option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper}}
+\subsubsection[{\texorpdfstring{Line\+Wrapper(int x1, int x2)}{LineWrapper(int x1, int x2)}}]{\setlength{\rightskip}{0pt plus 5cm}option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper\+::\+Line\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{int}]{x1, }
+\item[{int}]{x2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1PrintUsageImplementation_1_1LineWrapper_a288f16b6e928e9f54f48e13ff6817e95}{}\label{classoption_1_1PrintUsageImplementation_1_1LineWrapper_a288f16b6e928e9f54f48e13ff6817e95}
+
+
+Constructs a \hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper}{Line\+Wrapper} that wraps its output to fit into screen columns {\ttfamily x1} (incl.) to {\ttfamily x2} (excl.). 
+
+{\ttfamily x1} gives the indentation \hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper}{Line\+Wrapper} uses if it needs to indent. 
+
+\subsection{Member Function Documentation}
+\index{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper}!process@{process}}
+\index{process@{process}!option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper}}
+\subsubsection[{\texorpdfstring{process(\+I\+String\+Writer \&write, const char $\ast$data, int len)}{process(IStringWriter &write, const char *data, int len)}}]{\setlength{\rightskip}{0pt plus 5cm}void option\+::\+Print\+Usage\+Implementation\+::\+Line\+Wrapper\+::process (
+\begin{DoxyParamCaption}
+\item[{{\bf I\+String\+Writer} \&}]{write, }
+\item[{const char $\ast$}]{data, }
+\item[{int}]{len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1PrintUsageImplementation_1_1LineWrapper_add20eca40865ad892d6c28b412ac14d5}{}\label{classoption_1_1PrintUsageImplementation_1_1LineWrapper_add20eca40865ad892d6c28b412ac14d5}
+
+
+Process, wrap and output the next piece of data. 
+
+\hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper_add20eca40865ad892d6c28b412ac14d5}{process()} will output at least one line of output. This is not necessarily the {\ttfamily data} passed in. It may be data queued from a prior call to \hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper_add20eca40865ad892d6c28b412ac14d5}{process()}. If the internal buffer is full, more than 1 line will be output.
+
+\hyperlink{classoption_1_1PrintUsageImplementation_1_1LineWrapper_add20eca40865ad892d6c28b412ac14d5}{process()} assumes that the a proper amount of indentation has already been output. It won\textquotesingle{}t write any further indentation before the 1st line. If more than 1 line is written due to buffer constraints, the lines following the first will be indented by this method, though.
+
+No \textbackslash{}n is written by this method after the last line that is written.
+
+
+\begin{DoxyParams}{Parameters}
+{\em write} & where to write the data. \\
+\hline
+{\em data} & the new chunk of data to write. \\
+\hline
+{\em len} & the length of the chunk of data to write. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{optionparser_8h}{optionparser.\+h}\end{DoxyCompactItemize}

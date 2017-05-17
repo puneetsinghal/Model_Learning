@@ -1,0 +1,255 @@
+\hypertarget{classoption_1_1Parser}{}\section{option\+:\+:Parser Class Reference}
+\label{classoption_1_1Parser}\index{option\+::\+Parser@{option\+::\+Parser}}
+
+
+Checks argument vectors for validity and parses them into data structures that are easier to work with.  
+
+
+
+
+{\ttfamily \#include $<$optionparser.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structoption_1_1Parser_1_1Action}{Action}
+\item 
+class \hyperlink{classoption_1_1Parser_1_1StoreOptionAction}{Store\+Option\+Action}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classoption_1_1Parser_a895e9a1db19f1a026ee6a7412de17d04}{Parser} ()\hypertarget{classoption_1_1Parser_a895e9a1db19f1a026ee6a7412de17d04}{}\label{classoption_1_1Parser_a895e9a1db19f1a026ee6a7412de17d04}
+
+\begin{DoxyCompactList}\small\item\em Creates a new \hyperlink{classoption_1_1Parser}{Parser}. \end{DoxyCompactList}\item 
+\hyperlink{classoption_1_1Parser_aa747e9792c9c08ede32b6c323438db71}{Parser} (bool gnu, const \hyperlink{structoption_1_1Descriptor}{Descriptor} usage\mbox{[}$\,$\mbox{]}, int argc, const char $\ast$$\ast$argv, \hyperlink{classoption_1_1Option}{Option} options\mbox{[}$\,$\mbox{]}, \hyperlink{classoption_1_1Option}{Option} buffer\mbox{[}$\,$\mbox{]}, int min\+\_\+abbr\+\_\+len=0, bool single\+\_\+minus\+\_\+longopt=false, int bufmax=-\/1)
+\begin{DoxyCompactList}\small\item\em Creates a new \hyperlink{classoption_1_1Parser}{Parser} and immediately parses the given argument vector. \end{DoxyCompactList}\item 
+\hyperlink{classoption_1_1Parser_a78b4c7d73fff17204dd908b1b167dec9}{Parser} (bool gnu, const \hyperlink{structoption_1_1Descriptor}{Descriptor} usage\mbox{[}$\,$\mbox{]}, int argc, char $\ast$$\ast$argv, \hyperlink{classoption_1_1Option}{Option} options\mbox{[}$\,$\mbox{]}, \hyperlink{classoption_1_1Option}{Option} buffer\mbox{[}$\,$\mbox{]}, int min\+\_\+abbr\+\_\+len=0, bool single\+\_\+minus\+\_\+longopt=false, int bufmax=-\/1)\hypertarget{classoption_1_1Parser_a78b4c7d73fff17204dd908b1b167dec9}{}\label{classoption_1_1Parser_a78b4c7d73fff17204dd908b1b167dec9}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{classoption_1_1Parser}{Parser}(...) with non-\/const argv. \end{DoxyCompactList}\item 
+\hyperlink{classoption_1_1Parser_ae4100da4b662937ead22484e6cfc7cec}{Parser} (const \hyperlink{structoption_1_1Descriptor}{Descriptor} usage\mbox{[}$\,$\mbox{]}, int argc, const char $\ast$$\ast$argv, \hyperlink{classoption_1_1Option}{Option} options\mbox{[}$\,$\mbox{]}, \hyperlink{classoption_1_1Option}{Option} buffer\mbox{[}$\,$\mbox{]}, int min\+\_\+abbr\+\_\+len=0, bool single\+\_\+minus\+\_\+longopt=false, int bufmax=-\/1)\hypertarget{classoption_1_1Parser_ae4100da4b662937ead22484e6cfc7cec}{}\label{classoption_1_1Parser_ae4100da4b662937ead22484e6cfc7cec}
+
+\begin{DoxyCompactList}\small\item\em P\+O\+S\+IX \hyperlink{classoption_1_1Parser}{Parser}(...) (gnu==false). \end{DoxyCompactList}\item 
+\hyperlink{classoption_1_1Parser_a23ee244634a38d05f6c4cb1e3692a8a9}{Parser} (const \hyperlink{structoption_1_1Descriptor}{Descriptor} usage\mbox{[}$\,$\mbox{]}, int argc, char $\ast$$\ast$argv, \hyperlink{classoption_1_1Option}{Option} options\mbox{[}$\,$\mbox{]}, \hyperlink{classoption_1_1Option}{Option} buffer\mbox{[}$\,$\mbox{]}, int min\+\_\+abbr\+\_\+len=0, bool single\+\_\+minus\+\_\+longopt=false, int bufmax=-\/1)\hypertarget{classoption_1_1Parser_a23ee244634a38d05f6c4cb1e3692a8a9}{}\label{classoption_1_1Parser_a23ee244634a38d05f6c4cb1e3692a8a9}
+
+\begin{DoxyCompactList}\small\item\em P\+O\+S\+IX \hyperlink{classoption_1_1Parser}{Parser}(...) (gnu==false) with non-\/const argv. \end{DoxyCompactList}\item 
+void \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse} (bool gnu, const \hyperlink{structoption_1_1Descriptor}{Descriptor} usage\mbox{[}$\,$\mbox{]}, int argc, const char $\ast$$\ast$argv, \hyperlink{classoption_1_1Option}{Option} options\mbox{[}$\,$\mbox{]}, \hyperlink{classoption_1_1Option}{Option} buffer\mbox{[}$\,$\mbox{]}, int min\+\_\+abbr\+\_\+len=0, bool single\+\_\+minus\+\_\+longopt=false, int bufmax=-\/1)
+\begin{DoxyCompactList}\small\item\em Parses the given argument vector. \end{DoxyCompactList}\item 
+void \hyperlink{classoption_1_1Parser_ab26280e3b2ebc2f2fc4ed8b3b1e2a39c}{parse} (bool gnu, const \hyperlink{structoption_1_1Descriptor}{Descriptor} usage\mbox{[}$\,$\mbox{]}, int argc, char $\ast$$\ast$argv, \hyperlink{classoption_1_1Option}{Option} options\mbox{[}$\,$\mbox{]}, \hyperlink{classoption_1_1Option}{Option} buffer\mbox{[}$\,$\mbox{]}, int min\+\_\+abbr\+\_\+len=0, bool single\+\_\+minus\+\_\+longopt=false, int bufmax=-\/1)\hypertarget{classoption_1_1Parser_ab26280e3b2ebc2f2fc4ed8b3b1e2a39c}{}\label{classoption_1_1Parser_ab26280e3b2ebc2f2fc4ed8b3b1e2a39c}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} with non-\/const argv. \end{DoxyCompactList}\item 
+void \hyperlink{classoption_1_1Parser_a41885a7308249c8532714e15b36106bd}{parse} (const \hyperlink{structoption_1_1Descriptor}{Descriptor} usage\mbox{[}$\,$\mbox{]}, int argc, const char $\ast$$\ast$argv, \hyperlink{classoption_1_1Option}{Option} options\mbox{[}$\,$\mbox{]}, \hyperlink{classoption_1_1Option}{Option} buffer\mbox{[}$\,$\mbox{]}, int min\+\_\+abbr\+\_\+len=0, bool single\+\_\+minus\+\_\+longopt=false, int bufmax=-\/1)\hypertarget{classoption_1_1Parser_a41885a7308249c8532714e15b36106bd}{}\label{classoption_1_1Parser_a41885a7308249c8532714e15b36106bd}
+
+\begin{DoxyCompactList}\small\item\em P\+O\+S\+IX \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} (gnu==false). \end{DoxyCompactList}\item 
+void \hyperlink{classoption_1_1Parser_ad40585faa23a97a186cf9a45b8c2b42b}{parse} (const \hyperlink{structoption_1_1Descriptor}{Descriptor} usage\mbox{[}$\,$\mbox{]}, int argc, char $\ast$$\ast$argv, \hyperlink{classoption_1_1Option}{Option} options\mbox{[}$\,$\mbox{]}, \hyperlink{classoption_1_1Option}{Option} buffer\mbox{[}$\,$\mbox{]}, int min\+\_\+abbr\+\_\+len=0, bool single\+\_\+minus\+\_\+longopt=false, int bufmax=-\/1)\hypertarget{classoption_1_1Parser_ad40585faa23a97a186cf9a45b8c2b42b}{}\label{classoption_1_1Parser_ad40585faa23a97a186cf9a45b8c2b42b}
+
+\begin{DoxyCompactList}\small\item\em P\+O\+S\+IX \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} (gnu==false) with non-\/const argv. \end{DoxyCompactList}\item 
+int \hyperlink{classoption_1_1Parser_aee62badd2a19a5b88cbc4a9b11813b82}{options\+Count} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of valid \hyperlink{classoption_1_1Option}{Option} objects in {\ttfamily buffer}\mbox{[}\mbox{]}. \end{DoxyCompactList}\item 
+int \hyperlink{classoption_1_1Parser_aa64a6a7c196993a1b20d48e8ddd12a34}{non\+Options\+Count} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of non-\/option arguments that remained at the end of the most recent \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} that actually encountered non-\/option arguments. \end{DoxyCompactList}\item 
+const char $\ast$$\ast$ \hyperlink{classoption_1_1Parser_a2c11b050f4248d71758dda52c5f9154d}{non\+Options} ()
+\begin{DoxyCompactList}\small\item\em Returns a pointer to an array of non-\/option arguments (only valid if {\ttfamily \hyperlink{classoption_1_1Parser_aa64a6a7c196993a1b20d48e8ddd12a34}{non\+Options\+Count()} $>$0 }). \end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{classoption_1_1Parser_aeeafbf2892a5aca90b89803b2b1cb031}{non\+Option} (int i)\hypertarget{classoption_1_1Parser_aeeafbf2892a5aca90b89803b2b1cb031}{}\label{classoption_1_1Parser_aeeafbf2892a5aca90b89803b2b1cb031}
+
+\begin{DoxyCompactList}\small\item\em Returns {\bfseries {\ttfamily \hyperlink{classoption_1_1Parser_a2c11b050f4248d71758dda52c5f9154d}{non\+Options()}\mbox{[}i\mbox{]}}} ({\itshape without} checking if i is in range!). \end{DoxyCompactList}\item 
+bool \hyperlink{classoption_1_1Parser_a2caa149140067b4d13e4d7a104bb3090}{error} ()
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} if an unrecoverable error occurred while parsing options. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bfseries Stats}\hypertarget{classoption_1_1Parser_a7183dc3501d1c87153f9c0d41f869460}{}\label{classoption_1_1Parser_a7183dc3501d1c87153f9c0d41f869460}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Checks argument vectors for validity and parses them into data structures that are easier to work with. 
+
+\begin{DoxyParagraph}{Example\+:}
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])
+\{
+  argc-=(argc>0); argv+=(argc>0); \textcolor{comment}{// skip program name argv[0] if present}
+  \hyperlink{structoption_1_1Stats}{option::Stats}  stats(usage, argc, argv);
+  \hyperlink{classoption_1_1Option}{option::Option} options[stats.options\_max], buffer[stats.buffer\_max];
+  \hyperlink{classoption_1_1Parser}{option::Parser} \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse}(usage, argc, argv, options, buffer);
+
+  \textcolor{keywordflow}{if} (\hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse}.error())
+    \textcolor{keywordflow}{return} 1;
+
+  \textcolor{keywordflow}{if} (options[HELP])
+  ...
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{option\+::\+Parser@{option\+::\+Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!option\+::\+Parser@{option\+::\+Parser}}
+\subsubsection[{\texorpdfstring{Parser(bool gnu, const Descriptor usage[], int argc, const char $\ast$$\ast$argv, Option options[], Option buffer[], int min\+\_\+abbr\+\_\+len=0, bool single\+\_\+minus\+\_\+longopt=false, int bufmax=-\/1)}{Parser(bool gnu, const Descriptor usage[], int argc, const char **argv, Option options[], Option buffer[], int min_abbr_len=0, bool single_minus_longopt=false, int bufmax=-1)}}]{\setlength{\rightskip}{0pt plus 5cm}option\+::\+Parser\+::\+Parser (
+\begin{DoxyParamCaption}
+\item[{bool}]{gnu, }
+\item[{const {\bf Descriptor}}]{usage\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{argc, }
+\item[{const char $\ast$$\ast$}]{argv, }
+\item[{{\bf Option}}]{options\mbox{[}$\,$\mbox{]}, }
+\item[{{\bf Option}}]{buffer\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{min\+\_\+abbr\+\_\+len = {\ttfamily 0}, }
+\item[{bool}]{single\+\_\+minus\+\_\+longopt = {\ttfamily false}, }
+\item[{int}]{bufmax = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Parser_aa747e9792c9c08ede32b6c323438db71}{}\label{classoption_1_1Parser_aa747e9792c9c08ede32b6c323438db71}
+
+
+Creates a new \hyperlink{classoption_1_1Parser}{Parser} and immediately parses the given argument vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gnu} & if true, \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} will not stop at the first non-\/option argument. Instead it will reorder arguments so that all non-\/options are at the end. This is the default behaviour of G\+NU getopt() but is not conforming to P\+O\+S\+IX. ~\newline
+ Note, that once the argument vector has been reordered, the {\ttfamily gnu} flag will have no further effect on this argument vector. So it is enough to pass {\ttfamily gnu==true} when creating \hyperlink{structoption_1_1Stats}{Stats}. \\
+\hline
+{\em usage} & Array of \hyperlink{structoption_1_1Descriptor}{Descriptor} objects that describe the options to support. The last entry of this array must have 0 in all fields. \\
+\hline
+{\em argc} & The number of elements from {\ttfamily argv} that are to be parsed. If you pass -\/1, the number will be determined automatically. In that case the {\ttfamily argv} list must end with a N\+U\+LL pointer. \\
+\hline
+{\em argv} & The arguments to be parsed. If you pass -\/1 as {\ttfamily argc} the last pointer in the {\ttfamily argv} list must be N\+U\+LL to mark the end. \\
+\hline
+{\em options} & Each entry is the first element of a linked list of Options. Each new option that is parsed will be appended to the list specified by that \hyperlink{classoption_1_1Option}{Option}\textquotesingle{}s \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index}. If an entry is not yet used (i.\+e. the \hyperlink{classoption_1_1Option}{Option} is invalid), it will be replaced rather than appended to. ~\newline
+ The minimum length of this array is the greatest \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} value that occurs in {\ttfamily usage} {\itshape P\+L\+US} O\+NE. \\
+\hline
+{\em buffer} & Each argument that is successfully parsed (including unknown arguments, if they have a \hyperlink{structoption_1_1Descriptor}{Descriptor} whose Check\+Arg does not return \hyperlink{namespaceoption_aee8c76a07877335762631491e7a5a1a9a9528e32563b795bd2930b12d0a5e382d}{A\+R\+G\+\_\+\+I\+L\+L\+E\+G\+AL}) will be stored in this array. \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} scans the array for the first invalid entry and begins writing at that index. You can pass {\ttfamily bufmax} to limit the number of options stored. \\
+\hline
+{\em min\+\_\+abbr\+\_\+len} & Passing a value {\ttfamily  min\+\_\+abbr\+\_\+len $>$ 0 } enables abbreviated long options. The parser will match a prefix of a long option as if it was the full long option (e.\+g. {\ttfamily --foob=10} will be interpreted as if it was {\ttfamily --foobar=10} ), as long as the prefix has at least {\ttfamily min\+\_\+abbr\+\_\+len} characters (not counting the {\ttfamily --} ) and is unambiguous. ~\newline
+ Be careful if combining {\ttfamily min\+\_\+abbr\+\_\+len=1} with {\ttfamily single\+\_\+minus\+\_\+longopt=true} because the ambiguity check does not consider short options and abbreviated single minus long options will take precedence over short options. \\
+\hline
+{\em single\+\_\+minus\+\_\+longopt} & Passing {\ttfamily true} for this option allows long options to begin with a single minus. The double minus form will still be recognized. Note that single minus long options take precedence over short options and short option groups. E.\+g. {\ttfamily -\/file} would be interpreted as {\ttfamily --file} and not as {\ttfamily  -\/f -\/i -\/l -\/e } (assuming a long option named {\ttfamily \char`\"{}file\char`\"{}} exists). \\
+\hline
+{\em bufmax} & The greatest index in the {\ttfamily buffer}\mbox{[}\mbox{]} array that \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} will write to is {\ttfamily bufmax-\/1}. If there are more options, they will be processed (in particular their Check\+Arg will be called) but not stored. ~\newline
+ If you used \hyperlink{structoption_1_1Stats_a2c9a7b4174f91ba8bcadaa9ad6f0db06}{Stats\+::buffer\+\_\+max} to dimension this array, you can pass -\/1 (or not pass {\ttfamily bufmax} at all) which tells \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} that the buffer is \char`\"{}large enough\char`\"{}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{Attention}
+Remember that {\ttfamily options} and {\ttfamily buffer} store \hyperlink{classoption_1_1Option}{Option} {\itshape objects}, not pointers. Therefore it is not possible for the same object to be in both arrays. For those options that are found in both {\ttfamily buffer}\mbox{[}\mbox{]} and {\ttfamily options}\mbox{[}\mbox{]} the respective objects are independent copies. And only the objects in {\ttfamily options}\mbox{[}\mbox{]} are properly linked via \hyperlink{classoption_1_1Option_a59ae9aed505f4d410633bb36478a32be}{Option\+::next()} and \hyperlink{classoption_1_1Option_a4d12001a91b0b35cf47437d0c60d2b52}{Option\+::prev()}. You can iterate over {\ttfamily buffer}\mbox{[}\mbox{]} to process all options in the order they appear in the argument vector, but if you want access to the other Options with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index}, then you {\itshape must} access the linked list via {\ttfamily options}\mbox{[}\mbox{]}. You can get the linked list in options from a buffer object via something like {\ttfamily options}\mbox{[}buffer\mbox{[}i\mbox{]}.index()\mbox{]}. 
+\end{DoxyAttention}
+
+
+\subsection{Member Function Documentation}
+\index{option\+::\+Parser@{option\+::\+Parser}!error@{error}}
+\index{error@{error}!option\+::\+Parser@{option\+::\+Parser}}
+\subsubsection[{\texorpdfstring{error()}{error()}}]{\setlength{\rightskip}{0pt plus 5cm}bool option\+::\+Parser\+::error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Parser_a2caa149140067b4d13e4d7a104bb3090}{}\label{classoption_1_1Parser_a2caa149140067b4d13e4d7a104bb3090}
+
+
+Returns {\ttfamily true} if an unrecoverable error occurred while parsing options. 
+
+An illegal argument to an option (i.\+e. Check\+Arg returns \hyperlink{namespaceoption_aee8c76a07877335762631491e7a5a1a9a9528e32563b795bd2930b12d0a5e382d}{A\+R\+G\+\_\+\+I\+L\+L\+E\+G\+AL}) is an unrecoverable error that aborts the parse. Unknown options are only an error if their Check\+Arg function returns \hyperlink{namespaceoption_aee8c76a07877335762631491e7a5a1a9a9528e32563b795bd2930b12d0a5e382d}{A\+R\+G\+\_\+\+I\+L\+L\+E\+G\+AL}. Otherwise they are collected. In that case if you want to exit the program if either an illegal argument or an unknown option has been passed, use code like this
+
+
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (parser.error() || options[UNKNOWN])
+  exit(1);
+\end{DoxyCode}
+ \index{option\+::\+Parser@{option\+::\+Parser}!non\+Options@{non\+Options}}
+\index{non\+Options@{non\+Options}!option\+::\+Parser@{option\+::\+Parser}}
+\subsubsection[{\texorpdfstring{non\+Options()}{nonOptions()}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$$\ast$ option\+::\+Parser\+::non\+Options (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Parser_a2c11b050f4248d71758dda52c5f9154d}{}\label{classoption_1_1Parser_a2c11b050f4248d71758dda52c5f9154d}
+
+
+Returns a pointer to an array of non-\/option arguments (only valid if {\ttfamily \hyperlink{classoption_1_1Parser_aa64a6a7c196993a1b20d48e8ddd12a34}{non\+Options\+Count()} $>$0 }). 
+
+\begin{DoxyNote}{Note}
+\begin{DoxyItemize}
+\item \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} does not copy arguments, so this pointer points into the actual argument vector as passed to \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()}. \item As explained at \hyperlink{classoption_1_1Parser_aa64a6a7c196993a1b20d48e8ddd12a34}{non\+Options\+Count()} this pointer is only changed by \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} calls that actually encounter non-\/option arguments. A \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} call that encounters only options, will not change \hyperlink{classoption_1_1Parser_a2c11b050f4248d71758dda52c5f9154d}{non\+Options()}. \end{DoxyItemize}
+
+\end{DoxyNote}
+\index{option\+::\+Parser@{option\+::\+Parser}!non\+Options\+Count@{non\+Options\+Count}}
+\index{non\+Options\+Count@{non\+Options\+Count}!option\+::\+Parser@{option\+::\+Parser}}
+\subsubsection[{\texorpdfstring{non\+Options\+Count()}{nonOptionsCount()}}]{\setlength{\rightskip}{0pt plus 5cm}int option\+::\+Parser\+::non\+Options\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Parser_aa64a6a7c196993a1b20d48e8ddd12a34}{}\label{classoption_1_1Parser_aa64a6a7c196993a1b20d48e8ddd12a34}
+
+
+Returns the number of non-\/option arguments that remained at the end of the most recent \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} that actually encountered non-\/option arguments. 
+
+\begin{DoxyNote}{Note}
+A \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} that does not encounter non-\/option arguments will leave this value as well as \hyperlink{classoption_1_1Parser_a2c11b050f4248d71758dda52c5f9154d}{non\+Options()} undisturbed. This means you can feed the \hyperlink{classoption_1_1Parser}{Parser} a default argument vector that contains non-\/option arguments (e.\+g. a default filename). Then you feed it the actual arguments from the user. If the user has supplied at least one non-\/option argument, all of the non-\/option arguments from the default disappear and are replaced by the user\textquotesingle{}s non-\/option arguments. However, if the user does not supply any non-\/option arguments the defaults will still be in effect. 
+\end{DoxyNote}
+\index{option\+::\+Parser@{option\+::\+Parser}!options\+Count@{options\+Count}}
+\index{options\+Count@{options\+Count}!option\+::\+Parser@{option\+::\+Parser}}
+\subsubsection[{\texorpdfstring{options\+Count()}{optionsCount()}}]{\setlength{\rightskip}{0pt plus 5cm}int option\+::\+Parser\+::options\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Parser_aee62badd2a19a5b88cbc4a9b11813b82}{}\label{classoption_1_1Parser_aee62badd2a19a5b88cbc4a9b11813b82}
+
+
+Returns the number of valid \hyperlink{classoption_1_1Option}{Option} objects in {\ttfamily buffer}\mbox{[}\mbox{]}. 
+
+\begin{DoxyNote}{Note}
+\begin{DoxyItemize}
+\item The returned value always reflects the number of Options in the buffer\mbox{[}\mbox{]} array used for the most recent call to \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()}. \item The count (and the buffer\mbox{[}\mbox{]}) includes unknown options if they are collected (see \hyperlink{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}{Descriptor\+::longopt}). \end{DoxyItemize}
+
+\end{DoxyNote}
+\index{option\+::\+Parser@{option\+::\+Parser}!parse@{parse}}
+\index{parse@{parse}!option\+::\+Parser@{option\+::\+Parser}}
+\subsubsection[{\texorpdfstring{parse(bool gnu, const Descriptor usage[], int argc, const char $\ast$$\ast$argv, Option options[], Option buffer[], int min\+\_\+abbr\+\_\+len=0, bool single\+\_\+minus\+\_\+longopt=false, int bufmax=-\/1)}{parse(bool gnu, const Descriptor usage[], int argc, const char **argv, Option options[], Option buffer[], int min_abbr_len=0, bool single_minus_longopt=false, int bufmax=-1)}}]{\setlength{\rightskip}{0pt plus 5cm}void option\+::\+Parser\+::parse (
+\begin{DoxyParamCaption}
+\item[{bool}]{gnu, }
+\item[{const {\bf Descriptor}}]{usage\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{argc, }
+\item[{const char $\ast$$\ast$}]{argv, }
+\item[{{\bf Option}}]{options\mbox{[}$\,$\mbox{]}, }
+\item[{{\bf Option}}]{buffer\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{min\+\_\+abbr\+\_\+len = {\ttfamily 0}, }
+\item[{bool}]{single\+\_\+minus\+\_\+longopt = {\ttfamily false}, }
+\item[{int}]{bufmax = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{}\label{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}
+
+
+Parses the given argument vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gnu} & if true, \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} will not stop at the first non-\/option argument. Instead it will reorder arguments so that all non-\/options are at the end. This is the default behaviour of G\+NU getopt() but is not conforming to P\+O\+S\+IX. ~\newline
+ Note, that once the argument vector has been reordered, the {\ttfamily gnu} flag will have no further effect on this argument vector. So it is enough to pass {\ttfamily gnu==true} when creating \hyperlink{structoption_1_1Stats}{Stats}. \\
+\hline
+{\em usage} & Array of \hyperlink{structoption_1_1Descriptor}{Descriptor} objects that describe the options to support. The last entry of this array must have 0 in all fields. \\
+\hline
+{\em argc} & The number of elements from {\ttfamily argv} that are to be parsed. If you pass -\/1, the number will be determined automatically. In that case the {\ttfamily argv} list must end with a N\+U\+LL pointer. \\
+\hline
+{\em argv} & The arguments to be parsed. If you pass -\/1 as {\ttfamily argc} the last pointer in the {\ttfamily argv} list must be N\+U\+LL to mark the end. \\
+\hline
+{\em options} & Each entry is the first element of a linked list of Options. Each new option that is parsed will be appended to the list specified by that \hyperlink{classoption_1_1Option}{Option}\textquotesingle{}s \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index}. If an entry is not yet used (i.\+e. the \hyperlink{classoption_1_1Option}{Option} is invalid), it will be replaced rather than appended to. ~\newline
+ The minimum length of this array is the greatest \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} value that occurs in {\ttfamily usage} {\itshape P\+L\+US} O\+NE. \\
+\hline
+{\em buffer} & Each argument that is successfully parsed (including unknown arguments, if they have a \hyperlink{structoption_1_1Descriptor}{Descriptor} whose Check\+Arg does not return \hyperlink{namespaceoption_aee8c76a07877335762631491e7a5a1a9a9528e32563b795bd2930b12d0a5e382d}{A\+R\+G\+\_\+\+I\+L\+L\+E\+G\+AL}) will be stored in this array. \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} scans the array for the first invalid entry and begins writing at that index. You can pass {\ttfamily bufmax} to limit the number of options stored. \\
+\hline
+{\em min\+\_\+abbr\+\_\+len} & Passing a value {\ttfamily  min\+\_\+abbr\+\_\+len $>$ 0 } enables abbreviated long options. The parser will match a prefix of a long option as if it was the full long option (e.\+g. {\ttfamily --foob=10} will be interpreted as if it was {\ttfamily --foobar=10} ), as long as the prefix has at least {\ttfamily min\+\_\+abbr\+\_\+len} characters (not counting the {\ttfamily --} ) and is unambiguous. ~\newline
+ Be careful if combining {\ttfamily min\+\_\+abbr\+\_\+len=1} with {\ttfamily single\+\_\+minus\+\_\+longopt=true} because the ambiguity check does not consider short options and abbreviated single minus long options will take precedence over short options. \\
+\hline
+{\em single\+\_\+minus\+\_\+longopt} & Passing {\ttfamily true} for this option allows long options to begin with a single minus. The double minus form will still be recognized. Note that single minus long options take precedence over short options and short option groups. E.\+g. {\ttfamily -\/file} would be interpreted as {\ttfamily --file} and not as {\ttfamily  -\/f -\/i -\/l -\/e } (assuming a long option named {\ttfamily \char`\"{}file\char`\"{}} exists). \\
+\hline
+{\em bufmax} & The greatest index in the {\ttfamily buffer}\mbox{[}\mbox{]} array that \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} will write to is {\ttfamily bufmax-\/1}. If there are more options, they will be processed (in particular their Check\+Arg will be called) but not stored. ~\newline
+ If you used \hyperlink{structoption_1_1Stats_a2c9a7b4174f91ba8bcadaa9ad6f0db06}{Stats\+::buffer\+\_\+max} to dimension this array, you can pass -\/1 (or not pass {\ttfamily bufmax} at all) which tells \hyperlink{classoption_1_1Parser_a6e0b5778d1cfbd6cd51240e74d01e138}{parse()} that the buffer is \char`\"{}large enough\char`\"{}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{Attention}
+Remember that {\ttfamily options} and {\ttfamily buffer} store \hyperlink{classoption_1_1Option}{Option} {\itshape objects}, not pointers. Therefore it is not possible for the same object to be in both arrays. For those options that are found in both {\ttfamily buffer}\mbox{[}\mbox{]} and {\ttfamily options}\mbox{[}\mbox{]} the respective objects are independent copies. And only the objects in {\ttfamily options}\mbox{[}\mbox{]} are properly linked via \hyperlink{classoption_1_1Option_a59ae9aed505f4d410633bb36478a32be}{Option\+::next()} and \hyperlink{classoption_1_1Option_a4d12001a91b0b35cf47437d0c60d2b52}{Option\+::prev()}. You can iterate over {\ttfamily buffer}\mbox{[}\mbox{]} to process all options in the order they appear in the argument vector, but if you want access to the other Options with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index}, then you {\itshape must} access the linked list via {\ttfamily options}\mbox{[}\mbox{]}. You can get the linked list in options from a buffer object via something like {\ttfamily options}\mbox{[}buffer\mbox{[}i\mbox{]}.index()\mbox{]}. 
+\end{DoxyAttention}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{optionparser_8h}{optionparser.\+h}\end{DoxyCompactItemize}

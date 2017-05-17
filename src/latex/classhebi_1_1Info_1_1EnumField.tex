@@ -1,0 +1,58 @@
+\hypertarget{classhebi_1_1Info_1_1EnumField}{}\section{hebi\+:\+:Info\+:\+:Enum\+Field$<$ T $>$ Class Template Reference}
+\label{classhebi_1_1Info_1_1EnumField}\index{hebi\+::\+Info\+::\+Enum\+Field$<$ T $>$@{hebi\+::\+Info\+::\+Enum\+Field$<$ T $>$}}
+
+
+A message field representable by an enum of a given type.  
+
+
+
+
+{\ttfamily \#include $<$info.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Enum\+Field} (Hebi\+Info\+Ptr internal, Info\+Enum\+Field field)\hypertarget{classhebi_1_1Info_1_1EnumField_ad4680cb2ff477ed2dfb4ae47f0fd6836}{}\label{classhebi_1_1Info_1_1EnumField_ad4680cb2ff477ed2dfb4ae47f0fd6836}
+
+\item 
+\hyperlink{classhebi_1_1Info_1_1EnumField_a0a21c772969ad9822e53b997262f8957}{operator bool} () const 
+\begin{DoxyCompactList}\small\item\em Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Info_1_1EnumField_acd877e3edf6c0a63ddda79e1148f71c9}{has()}}. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Info_1_1EnumField_acd877e3edf6c0a63ddda79e1148f71c9}{has} () const \hypertarget{classhebi_1_1Info_1_1EnumField_acd877e3edf6c0a63ddda79e1148f71c9}{}\label{classhebi_1_1Info_1_1EnumField_acd877e3edf6c0a63ddda79e1148f71c9}
+
+\begin{DoxyCompactList}\small\item\em True if (and only if) the field has a value. \end{DoxyCompactList}\item 
+T \hyperlink{classhebi_1_1Info_1_1EnumField_ad253318045089e8199ef080b8a195cee}{get} () const \hypertarget{classhebi_1_1Info_1_1EnumField_ad253318045089e8199ef080b8a195cee}{}\label{classhebi_1_1Info_1_1EnumField_ad253318045089e8199ef080b8a195cee}
+
+\begin{DoxyCompactList}\small\item\em If the field has a value, returns that value; otherwise, returns a default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\\*
+class hebi\+::\+Info\+::\+Enum\+Field$<$ T $>$}
+
+A message field representable by an enum of a given type. 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Info\+::\+Enum\+Field@{hebi\+::\+Info\+::\+Enum\+Field}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!hebi\+::\+Info\+::\+Enum\+Field@{hebi\+::\+Info\+::\+Enum\+Field}}
+\subsubsection[{\texorpdfstring{operator bool() const }{operator bool() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ {\bf hebi\+::\+Info\+::\+Enum\+Field}$<$ T $>$\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\hypertarget{classhebi_1_1Info_1_1EnumField_a0a21c772969ad9822e53b997262f8957}{}\label{classhebi_1_1Info_1_1EnumField_a0a21c772969ad9822e53b997262f8957}
+
+
+Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Info_1_1EnumField_acd877e3edf6c0a63ddda79e1148f71c9}{has()}}. 
+
+This can be used as in the following (assuming \textquotesingle{}parent\textquotesingle{} is a parent message, and this field is called \textquotesingle{}my\+Field\textquotesingle{}) 
+\begin{DoxyCode}
+Info::EnumField& f = parent.myField();
+\textcolor{keywordflow}{if} (f)
+  std::cout << \textcolor{stringliteral}{"Field has value: "} << f.get() << std::endl;
+\textcolor{keywordflow}{else}
+  std::cout << \textcolor{stringliteral}{"Field has no value!"} << std::endl;
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+info.\+hpp\end{DoxyCompactItemize}

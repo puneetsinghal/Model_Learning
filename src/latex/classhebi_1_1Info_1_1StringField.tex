@@ -1,0 +1,56 @@
+\hypertarget{classhebi_1_1Info_1_1StringField}{}\section{hebi\+:\+:Info\+:\+:String\+Field Class Reference}
+\label{classhebi_1_1Info_1_1StringField}\index{hebi\+::\+Info\+::\+String\+Field@{hebi\+::\+Info\+::\+String\+Field}}
+
+
+A message field representable by a std\+::string.  
+
+
+
+
+{\ttfamily \#include $<$info.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries String\+Field} (Hebi\+Info\+Ptr internal, Info\+String\+Field field)\hypertarget{classhebi_1_1Info_1_1StringField_a4a864517189aed3d613b6c55d92b6572}{}\label{classhebi_1_1Info_1_1StringField_a4a864517189aed3d613b6c55d92b6572}
+
+\item 
+\hyperlink{classhebi_1_1Info_1_1StringField_a04db0b8f4a982f083fd0ff4f5b49a6de}{operator bool} () const 
+\begin{DoxyCompactList}\small\item\em Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Info_1_1StringField_aeb87dc356ac5284f12f461410151881f}{has()}}. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Info_1_1StringField_aeb87dc356ac5284f12f461410151881f}{has} () const \hypertarget{classhebi_1_1Info_1_1StringField_aeb87dc356ac5284f12f461410151881f}{}\label{classhebi_1_1Info_1_1StringField_aeb87dc356ac5284f12f461410151881f}
+
+\begin{DoxyCompactList}\small\item\em True if (and only if) the field has a value. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classhebi_1_1Info_1_1StringField_a6727fa4c435be34e94021ab87513e66a}{get} () const \hypertarget{classhebi_1_1Info_1_1StringField_a6727fa4c435be34e94021ab87513e66a}{}\label{classhebi_1_1Info_1_1StringField_a6727fa4c435be34e94021ab87513e66a}
+
+\begin{DoxyCompactList}\small\item\em If the field has a value, returns a copy of that value; otherwise, returns a default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A message field representable by a std\+::string. 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Info\+::\+String\+Field@{hebi\+::\+Info\+::\+String\+Field}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!hebi\+::\+Info\+::\+String\+Field@{hebi\+::\+Info\+::\+String\+Field}}
+\subsubsection[{\texorpdfstring{operator bool() const }{operator bool() const }}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Info\+::\+String\+Field\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classhebi_1_1Info_1_1StringField_a04db0b8f4a982f083fd0ff4f5b49a6de}{}\label{classhebi_1_1Info_1_1StringField_a04db0b8f4a982f083fd0ff4f5b49a6de}
+
+
+Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Info_1_1StringField_aeb87dc356ac5284f12f461410151881f}{has()}}. 
+
+This can be used as in the following (assuming \textquotesingle{}parent\textquotesingle{} is a parent message, and this field is called \textquotesingle{}my\+Field\textquotesingle{}) 
+\begin{DoxyCode}
+Info::StringField& f = parent.myField();
+\textcolor{keywordflow}{if} (f)
+  std::cout << \textcolor{stringliteral}{"Field has value: "} << f.get() << std::endl;
+\textcolor{keywordflow}{else}
+  std::cout << \textcolor{stringliteral}{"Field has no value!"} << std::endl;
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+info.\+hpp\item 
+info.\+cpp\end{DoxyCompactItemize}

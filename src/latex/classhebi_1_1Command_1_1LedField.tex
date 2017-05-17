@@ -1,0 +1,57 @@
+\hypertarget{classhebi_1_1Command_1_1LedField}{}\section{hebi\+:\+:Command\+:\+:Led\+Field Class Reference}
+\label{classhebi_1_1Command_1_1LedField}\index{hebi\+::\+Command\+::\+Led\+Field@{hebi\+::\+Command\+::\+Led\+Field}}
+
+
+A message field for interfacing with an L\+ED.  
+
+
+
+
+{\ttfamily \#include $<$command.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Led\+Field} (Hebi\+Command\+Ptr internal, Command\+Led\+Field field)\hypertarget{classhebi_1_1Command_1_1LedField_a51c1a35f4ca0dc607f9627abebaaad5e}{}\label{classhebi_1_1Command_1_1LedField_a51c1a35f4ca0dc607f9627abebaaad5e}
+
+\item 
+bool \hyperlink{classhebi_1_1Command_1_1LedField_a28b30332afd8b31555f5fc75e4b1a44e}{has\+Color} () const \hypertarget{classhebi_1_1Command_1_1LedField_a28b30332afd8b31555f5fc75e4b1a44e}{}\label{classhebi_1_1Command_1_1LedField_a28b30332afd8b31555f5fc75e4b1a44e}
+
+\begin{DoxyCompactList}\small\item\em Returns true if the L\+ED color is set, and false otherwise. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Command_1_1LedField_aae7b88394b6663c44e7cba94de51a7f3}{has\+Module\+Control} () const 
+\begin{DoxyCompactList}\small\item\em Returns true if the message indicates that the module should resume control of the L\+ED. \end{DoxyCompactList}\item 
+\hyperlink{structhebi_1_1Color}{Color} \hyperlink{classhebi_1_1Command_1_1LedField_a25c5054826a59ff3b314998d287e8feb}{get\+Color} () const \hypertarget{classhebi_1_1Command_1_1LedField_a25c5054826a59ff3b314998d287e8feb}{}\label{classhebi_1_1Command_1_1LedField_a25c5054826a59ff3b314998d287e8feb}
+
+\begin{DoxyCompactList}\small\item\em Returns the led color. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Command_1_1LedField_aa1c2fc432de51dba198988b5c285d6a4}{set\+Override\+Color} (const \hyperlink{structhebi_1_1Color}{Color} \&new\+\_\+color)\hypertarget{classhebi_1_1Command_1_1LedField_aa1c2fc432de51dba198988b5c285d6a4}{}\label{classhebi_1_1Command_1_1LedField_aa1c2fc432de51dba198988b5c285d6a4}
+
+\begin{DoxyCompactList}\small\item\em Commands a color that overrides the module\textquotesingle{}s control of the L\+ED. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Command_1_1LedField_a3f41b8c7cc1d1de4fe3d78683be62ef0}{set\+Module\+Control} ()\hypertarget{classhebi_1_1Command_1_1LedField_a3f41b8c7cc1d1de4fe3d78683be62ef0}{}\label{classhebi_1_1Command_1_1LedField_a3f41b8c7cc1d1de4fe3d78683be62ef0}
+
+\begin{DoxyCompactList}\small\item\em Sets the module to regain control of the L\+ED. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Command_1_1LedField_aa0e2f2c914e83e8b60ca9da40474dc15}{clear} ()\hypertarget{classhebi_1_1Command_1_1LedField_aa0e2f2c914e83e8b60ca9da40474dc15}{}\label{classhebi_1_1Command_1_1LedField_aa0e2f2c914e83e8b60ca9da40474dc15}
+
+\begin{DoxyCompactList}\small\item\em Removes any currently set value for this field, so that the module maintains its previous state of L\+ED control/color (i.\+e., does not have an override color command or an explicit \textquotesingle{}module control\textquotesingle{} command). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A message field for interfacing with an L\+ED. 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Command\+::\+Led\+Field@{hebi\+::\+Command\+::\+Led\+Field}!has\+Module\+Control@{has\+Module\+Control}}
+\index{has\+Module\+Control@{has\+Module\+Control}!hebi\+::\+Command\+::\+Led\+Field@{hebi\+::\+Command\+::\+Led\+Field}}
+\subsubsection[{\texorpdfstring{has\+Module\+Control() const }{hasModuleControl() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Command\+::\+Led\+Field\+::has\+Module\+Control (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhebi_1_1Command_1_1LedField_aae7b88394b6663c44e7cba94de51a7f3}{}\label{classhebi_1_1Command_1_1LedField_aae7b88394b6663c44e7cba94de51a7f3}
+
+
+Returns true if the message indicates that the module should resume control of the L\+ED. 
+
+Note\+: a return value of {\ttfamily false} can indicate either an override command (if and only if {\ttfamily \hyperlink{classhebi_1_1Command_1_1LedField_a28b30332afd8b31555f5fc75e4b1a44e}{has\+Color()}} returns {\ttfamily true}), or no information about the L\+ED (i.\+e., the module should maintain it\textquotesingle{}s current state regarding the L\+ED). 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+command.\+hpp\item 
+command.\+cpp\end{DoxyCompactItemize}

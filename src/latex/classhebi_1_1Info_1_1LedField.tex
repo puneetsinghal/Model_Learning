@@ -1,0 +1,56 @@
+\hypertarget{classhebi_1_1Info_1_1LedField}{}\section{hebi\+:\+:Info\+:\+:Led\+Field Class Reference}
+\label{classhebi_1_1Info_1_1LedField}\index{hebi\+::\+Info\+::\+Led\+Field@{hebi\+::\+Info\+::\+Led\+Field}}
+
+
+A message field for interfacing with an L\+ED.  
+
+
+
+
+{\ttfamily \#include $<$info.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Led\+Field} (Hebi\+Info\+Ptr internal, Info\+Led\+Field field)\hypertarget{classhebi_1_1Info_1_1LedField_af012c0a7e7b4cbe1d41ad8a19441a157}{}\label{classhebi_1_1Info_1_1LedField_af012c0a7e7b4cbe1d41ad8a19441a157}
+
+\item 
+\hyperlink{classhebi_1_1Info_1_1LedField_a61363ddb97509b63af4a1fdca0dfbbd9}{operator bool} () const 
+\begin{DoxyCompactList}\small\item\em Allows casting to a bool to check if the L\+ED color is set without directly calling {\ttfamily \hyperlink{classhebi_1_1Info_1_1LedField_a74357482507d6992496df77a27409763}{has\+Color()}}. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Info_1_1LedField_a74357482507d6992496df77a27409763}{has\+Color} () const \hypertarget{classhebi_1_1Info_1_1LedField_a74357482507d6992496df77a27409763}{}\label{classhebi_1_1Info_1_1LedField_a74357482507d6992496df77a27409763}
+
+\begin{DoxyCompactList}\small\item\em Returns true if the L\+ED color is set, and false otherwise. \end{DoxyCompactList}\item 
+\hyperlink{structhebi_1_1Color}{Color} \hyperlink{classhebi_1_1Info_1_1LedField_a1ee02308d8b3667e1c12faab25c9673e}{get\+Color} () const \hypertarget{classhebi_1_1Info_1_1LedField_a1ee02308d8b3667e1c12faab25c9673e}{}\label{classhebi_1_1Info_1_1LedField_a1ee02308d8b3667e1c12faab25c9673e}
+
+\begin{DoxyCompactList}\small\item\em Returns the led color. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A message field for interfacing with an L\+ED. 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Info\+::\+Led\+Field@{hebi\+::\+Info\+::\+Led\+Field}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!hebi\+::\+Info\+::\+Led\+Field@{hebi\+::\+Info\+::\+Led\+Field}}
+\subsubsection[{\texorpdfstring{operator bool() const }{operator bool() const }}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Info\+::\+Led\+Field\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\hypertarget{classhebi_1_1Info_1_1LedField_a61363ddb97509b63af4a1fdca0dfbbd9}{}\label{classhebi_1_1Info_1_1LedField_a61363ddb97509b63af4a1fdca0dfbbd9}
+
+
+Allows casting to a bool to check if the L\+ED color is set without directly calling {\ttfamily \hyperlink{classhebi_1_1Info_1_1LedField_a74357482507d6992496df77a27409763}{has\+Color()}}. 
+
+This can be used as in the following (assuming \textquotesingle{}parent\textquotesingle{} is a parent message, and this field is called \textquotesingle{}my\+Field\textquotesingle{}) 
+\begin{DoxyCode}
+Info::LedField& f = parent.myField();
+\textcolor{keywordflow}{if} (f)
+  std::cout << \textcolor{stringliteral}{"Field has color!"} << std::endl;
+\textcolor{keywordflow}{else}
+  std::cout << \textcolor{stringliteral}{"Field has no value!"} << std::endl;
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+info.\+hpp\item 
+info.\+cpp\end{DoxyCompactItemize}

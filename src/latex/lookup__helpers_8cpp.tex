@@ -1,0 +1,185 @@
+\hypertarget{lookup__helpers_8cpp}{}\section{lookup\+\_\+helpers.\+cpp File Reference}
+\label{lookup__helpers_8cpp}\index{lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}}
+{\ttfamily \#include \char`\"{}lookup.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}module.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}group.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mac\+\_\+address.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}optionparser.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+Include dependency graph for lookup\+\_\+helpers.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lookup__helpers_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structArg}{Arg}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries option\+Index} \{ \\*
+{\bfseries U\+N\+K\+N\+O\+WN}, 
+{\bfseries H\+E\+LP}, 
+{\bfseries V\+E\+R\+B\+O\+SE}, 
+{\bfseries N\+A\+ME}, 
+\\*
+{\bfseries F\+A\+M\+I\+LY}, 
+{\bfseries P\+A\+IR}, 
+{\bfseries M\+AC}, 
+{\bfseries N\+A\+M\+ES}, 
+\\*
+{\bfseries F\+A\+M\+I\+L\+I\+ES}, 
+{\bfseries P\+A\+I\+RS}, 
+{\bfseries M\+A\+CS}
+ \}\hypertarget{lookup__helpers_8cpp_a0ba79095c558cb72ea2e8b277be1da39}{}\label{lookup__helpers_8cpp_a0ba79095c558cb72ea2e8b277be1da39}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classhebi_1_1Module}{hebi\+::\+Module} $>$ \hyperlink{lookup__helpers_8cpp_a4eaf3947ef42501a94b2c32913176f57}{get\+Module\+From\+Args} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classhebi_1_1Group}{hebi\+::\+Group} $>$ \hyperlink{lookup__helpers_8cpp_a6db32406bd0d0eac1eebcf2fd261af8e}{get\+Group\+From\+Args} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{structoption_1_1Descriptor}{option\+::\+Descriptor} {\bfseries module\+Usage} \mbox{[}$\,$\mbox{]}
+\item 
+const \hyperlink{structoption_1_1Descriptor}{option\+::\+Descriptor} {\bfseries group\+Usage} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+common helper functions used by various examples.
+
+\begin{DoxyAuthor}{Author}
+Matthew Tesch $<$ matt @ hebirobotics.\+com $>$ 
+\end{DoxyAuthor}
+\begin{DoxySince}{Since}
+22 Jan 2016 
+\end{DoxySince}
+
+
+\subsection{Function Documentation}
+\index{lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}!get\+Group\+From\+Args@{get\+Group\+From\+Args}}
+\index{get\+Group\+From\+Args@{get\+Group\+From\+Args}!lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}}
+\subsubsection[{\texorpdfstring{get\+Group\+From\+Args(int argc, char $\ast$argv[])}{getGroupFromArgs(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf hebi\+::\+Group}$>$ get\+Group\+From\+Args (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lookup__helpers_8cpp_a6db32406bd0d0eac1eebcf2fd261af8e}{}\label{lookup__helpers_8cpp_a6db32406bd0d0eac1eebcf2fd261af8e}
+Parse the given arguments, and look up group based on the given arguments.
+
+\begin{DoxyAuthor}{Author}
+Matthew Tesch $<$ matt @ hebirobotics.\+com $>$ 
+\end{DoxyAuthor}
+\begin{DoxySince}{Since}
+22 Jan 2016 
+\end{DoxySince}
+\index{lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}!get\+Module\+From\+Args@{get\+Module\+From\+Args}}
+\index{get\+Module\+From\+Args@{get\+Module\+From\+Args}!lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}}
+\subsubsection[{\texorpdfstring{get\+Module\+From\+Args(int argc, char $\ast$argv[])}{getModuleFromArgs(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf hebi\+::\+Module}$>$ get\+Module\+From\+Args (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{lookup__helpers_8cpp_a4eaf3947ef42501a94b2c32913176f57}{}\label{lookup__helpers_8cpp_a4eaf3947ef42501a94b2c32913176f57}
+Parse the given arguments, and look up module based on the given arguments.
+
+\begin{DoxyAuthor}{Author}
+Matthew Tesch $<$ matt @ hebirobotics.\+com $>$ 
+\end{DoxyAuthor}
+\begin{DoxySince}{Since}
+22 May 2016 
+\end{DoxySince}
+
+
+\subsection{Variable Documentation}
+\index{lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}!group\+Usage@{group\+Usage}}
+\index{group\+Usage@{group\+Usage}!lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}}
+\subsubsection[{\texorpdfstring{group\+Usage}{groupUsage}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf option\+::\+Descriptor} group\+Usage\mbox{[}$\,$\mbox{]}}\hypertarget{lookup__helpers_8cpp_a801705ccfc80f1cad2bc748bc7367755}{}\label{lookup__helpers_8cpp_a801705ccfc80f1cad2bc748bc7367755}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+  \{ UNKNOWN, 0, \textcolor{stringliteral}{""}, \textcolor{stringliteral}{""},            Arg::Unknown, \textcolor{stringliteral}{"USAGE: program\_name [options]\(\backslash\)n\(\backslash\)n"}
+    \textcolor{stringliteral}{"Options are parsed to determine search terms for group. User can either provide:\(\backslash\)n"}
+    \textcolor{stringliteral}{" 1) single module specification to form connected group (-p, -n/-f, or -m)\(\backslash\)n"}
+    \textcolor{stringliteral}{" 2) list of families and list of names independently (-F and -N)\(\backslash\)n"}
+    \textcolor{stringliteral}{" 3) list of family/name pairs (-P)\(\backslash\)n"}
+    \textcolor{stringliteral}{" 4) list of mac addresses (-M)\(\backslash\)n\(\backslash\)n"}
+    \textcolor{stringliteral}{"Options:"} \},
+  \{ HELP,    0, \textcolor{stringliteral}{"h"}, \textcolor{stringliteral}{"help"},       \hyperlink{structoption_1_1Arg_a7fc01987899c91c6b6a1be5711a46e22}{option::Arg::None}, \textcolor{stringliteral}{"  -h, \(\backslash\)t--help  \(\backslash\)tPrint this help
+       and exit."} \},
+  \{ VERBOSE, 0, \textcolor{stringliteral}{"v"}, \textcolor{stringliteral}{"verbose"},    \hyperlink{structoption_1_1Arg_a7fc01987899c91c6b6a1be5711a46e22}{option::Arg::None}, \textcolor{stringliteral}{"  -v, \(\backslash\)t--verbose  \(\backslash\)tVerbose output
+       is enabled to help diagnose lookup issues."} \},
+  \{ NAME,    0, \textcolor{stringliteral}{"n"}, \textcolor{stringliteral}{"name"},       Arg::NonEmpty, \textcolor{stringliteral}{"  -n <name>, \(\backslash\)t--name=<name> \(\backslash\)tName of the module; only
+       for use in combination with '-f'. Used to create a group from all connected modules."} \},
+  \{ FAMILY,  0, \textcolor{stringliteral}{"f"}, \textcolor{stringliteral}{"family"},     Arg::NonEmpty, \textcolor{stringliteral}{"  -f <family\_name>, \(\backslash\)t--family=<family\_name> \(\backslash\)tName of
+       the family; only for use in combination with '-n'. Used to create a group from all connected modules."} \},
+  \{ PAIR,    0, \textcolor{stringliteral}{"p"}, \textcolor{stringliteral}{"pair"},       Arg::Pair, \textcolor{stringliteral}{"  -p <name pair>, \(\backslash\)t--pair=<name pair> \(\backslash\)tFamily + name pair;
+       must write as family\_name|name, with '|' symbol between family and name.  (Note: may need to escape the '|'
+       character in some shells). Creates a group from all connected modules."} \},
+  \{ MAC,     0, \textcolor{stringliteral}{"m"}, \textcolor{stringliteral}{"mac"},        Arg::Mac, \textcolor{stringliteral}{"  -m <mac>, \(\backslash\)t--mac=<mac> \(\backslash\)tMAC address of the module; must
+       be given in following format: 01:23:45:ab:cd:ef.  Creates a group from all connected modules."} \},
+  \{ NAMES,    0, \textcolor{stringliteral}{"N"}, \textcolor{stringliteral}{"names"},       Arg::NonEmpty, \textcolor{stringliteral}{"  -N <name> \(\backslash\)t--names=<name> \(\backslash\)tUsed to define a set of
+       module names; each '-N' or '--names' argument is another module.  Only for use in combination with '-F'."} \}
+      ,
+  \{ FAMILIES,  0, \textcolor{stringliteral}{"F"}, \textcolor{stringliteral}{"families"},     Arg::NonEmpty, \textcolor{stringliteral}{"  -F <family\_name>, \(\backslash\)t--families=<family\_name> \(\backslash\)t
+      Used to define a set of family names; each '-F' or '--families' argument is another family. Only for use in
+       combination with '-N'. Each -F/--families argument is combined pairwise with each -N/--names argument.  If only
+       one '-F' is given for a list of '-N' arguments, it applies to each '-N'."} \},
+  \{ PAIRS,    0, \textcolor{stringliteral}{"P"}, \textcolor{stringliteral}{"pairs"},       Arg::Pair, \textcolor{stringliteral}{"  -P <name pair>, \(\backslash\)t--pairs=<name pair> \(\backslash\)tUsed to define a
+       set of family + name pairs; each '-P' or '--pairs' argument is another pair. Matches format of '-p'
+       argument."} \},
+  \{ MACS,     0, \textcolor{stringliteral}{"M"}, \textcolor{stringliteral}{"macs"},        Arg::Mac, \textcolor{stringliteral}{"  -M <mac>, \(\backslash\)t--macs=<mac> \(\backslash\)tUsed to define a set of MAC
+       addresses; each '-M' argument is another mac address. Matches format of '-m' argument."} \},
+  \{ UNKNOWN, 0, \textcolor{stringliteral}{""}, \textcolor{stringliteral}{""}, \hyperlink{structoption_1_1Arg_a7fc01987899c91c6b6a1be5711a46e22}{option::Arg::None},
+ \textcolor{stringliteral}{"\(\backslash\)nExamples:\(\backslash\)n"}
+ \textcolor{stringliteral}{"  ./script -nModule05 -fArm \(\backslash\)n"}
+ \textcolor{stringliteral}{"  ./script -pArm|Module05 \(\backslash\)n"}
+ \textcolor{stringliteral}{"  ./script -ma1:2f:45:a3:c9:ef \(\backslash\)n"}
+ \textcolor{stringliteral}{"  ./script -NModule05 -NModule07 -NModule02 -FArm -FArm -FArm \(\backslash\)n"}
+ \textcolor{stringliteral}{"  ./script -N Module05 -N Module07 -N Module02 -F Arm \(\backslash\)n"}
+ \textcolor{stringliteral}{"  ./script -P Arm|Module05 -P Arm|Module06 \(\backslash\)n"}
+ \textcolor{stringliteral}{"  ./script -M 01:ab:23:4b:cd:4f --macs 0f:a4:25:a4:fe:3d \(\backslash\)n"} \},
+\{ 0, 0, 0, 0, 0, 0 \} \}
+\end{DoxyCode}
+\index{lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}!module\+Usage@{module\+Usage}}
+\index{module\+Usage@{module\+Usage}!lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}}
+\subsubsection[{\texorpdfstring{module\+Usage}{moduleUsage}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf option\+::\+Descriptor} module\+Usage\mbox{[}$\,$\mbox{]}}\hypertarget{lookup__helpers_8cpp_ad9cfe639d447c892c4c31e186c0cd2e7}{}\label{lookup__helpers_8cpp_ad9cfe639d447c892c4c31e186c0cd2e7}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+\{
+  \{ UNKNOWN, 0, \textcolor{stringliteral}{""}, \textcolor{stringliteral}{""},            Arg::Unknown, \textcolor{stringliteral}{"USAGE: ./program\_name [options]\(\backslash\)n\(\backslash\)n"}
+                                                      \textcolor{stringliteral}{"Options are parsed to determine search terms for
+       module.\(\backslash\)n\(\backslash\)n"}
+                                                      \textcolor{stringliteral}{"Options:"} \},
+  \{ HELP,    0, \textcolor{stringliteral}{"h"}, \textcolor{stringliteral}{"help"},       \hyperlink{structoption_1_1Arg_a7fc01987899c91c6b6a1be5711a46e22}{option::Arg::None}, \textcolor{stringliteral}{"  -h, \(\backslash\)t--help  \(\backslash\)tPrint this help
+       and exit."} \},
+  \{ VERBOSE, 0, \textcolor{stringliteral}{"v"}, \textcolor{stringliteral}{"verbose"},    \hyperlink{structoption_1_1Arg_a7fc01987899c91c6b6a1be5711a46e22}{option::Arg::None}, \textcolor{stringliteral}{"  -v, \(\backslash\)t--verbose  \(\backslash\)tVerbose output
+       is enabled to help diagnose lookup issues."} \},
+  \{ NAME,    0, \textcolor{stringliteral}{"n"}, \textcolor{stringliteral}{"name"},       Arg::NonEmpty, \textcolor{stringliteral}{"  -n <name>, \(\backslash\)t--name=<name> \(\backslash\)tName of the module; only
+       for use in combination with '-f'. First given value is used."} \},
+  \{ FAMILY,  0, \textcolor{stringliteral}{"f"}, \textcolor{stringliteral}{"family"},     Arg::NonEmpty, \textcolor{stringliteral}{"  -f <family\_name>, \(\backslash\)t--family=<family\_name> \(\backslash\)tName of
+       the family; only for use in combination with '-n'. First given value is used."} \},
+  \{ PAIR,    0, \textcolor{stringliteral}{"p"}, \textcolor{stringliteral}{"pair"},       Arg::Pair, \textcolor{stringliteral}{"  -p <name pair>, \(\backslash\)t--pair=<name pair> \(\backslash\)tFamily + name pair;
+       must write as family\_name|name, with '|' symbol between family and name.  (Note: may need to escape the '|'
+       character in some shells)"} \},
+  \{ MAC,     0, \textcolor{stringliteral}{"m"}, \textcolor{stringliteral}{"mac"},        Arg::Mac, \textcolor{stringliteral}{"  -m <mac>, \(\backslash\)t--mac=<mac> \(\backslash\)tMAC address of the module; must
+       be given in following format: 01:23:45:ab:cd:ef"} \},
+  \{ UNKNOWN, 0, \textcolor{stringliteral}{""}, \textcolor{stringliteral}{""}, \hyperlink{structoption_1_1Arg_a7fc01987899c91c6b6a1be5711a46e22}{option::Arg::None},
+ \textcolor{stringliteral}{"\(\backslash\)nExamples:\(\backslash\)n"}
+ \textcolor{stringliteral}{"  ./script -nModule05 -fArm \(\backslash\)n"}
+ \textcolor{stringliteral}{"  ./script -v -pArm|Module05 \(\backslash\)n"}
+ \textcolor{stringliteral}{"  ./script --mac 01:23:45:ab:cd:ef \(\backslash\)n"} \},
+\{ 0, 0, 0, 0, 0, 0 \} \}
+\end{DoxyCode}

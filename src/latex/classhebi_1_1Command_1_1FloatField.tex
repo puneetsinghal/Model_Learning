@@ -1,0 +1,62 @@
+\hypertarget{classhebi_1_1Command_1_1FloatField}{}\section{hebi\+:\+:Command\+:\+:Float\+Field Class Reference}
+\label{classhebi_1_1Command_1_1FloatField}\index{hebi\+::\+Command\+::\+Float\+Field@{hebi\+::\+Command\+::\+Float\+Field}}
+
+
+A message field representable by a single-\/precision floating point value.  
+
+
+
+
+{\ttfamily \#include $<$command.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Float\+Field} (Hebi\+Command\+Ptr internal, Command\+Float\+Field field)\hypertarget{classhebi_1_1Command_1_1FloatField_a4eb2e80bc5c55e9dc87bba49430278c5}{}\label{classhebi_1_1Command_1_1FloatField_a4eb2e80bc5c55e9dc87bba49430278c5}
+
+\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField_ae4983503c21f98ec479cc1bb73390754}{operator bool} () const 
+\begin{DoxyCompactList}\small\item\em Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Command_1_1FloatField_a7220a798fceba4d3256d677b169359f1}{has()}}. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Command_1_1FloatField_a7220a798fceba4d3256d677b169359f1}{has} () const \hypertarget{classhebi_1_1Command_1_1FloatField_a7220a798fceba4d3256d677b169359f1}{}\label{classhebi_1_1Command_1_1FloatField_a7220a798fceba4d3256d677b169359f1}
+
+\begin{DoxyCompactList}\small\item\em True if (and only if) the field has a value. \end{DoxyCompactList}\item 
+float \hyperlink{classhebi_1_1Command_1_1FloatField_a5befd8ced9cb015d80ff144c4592d492}{get} () const \hypertarget{classhebi_1_1Command_1_1FloatField_a5befd8ced9cb015d80ff144c4592d492}{}\label{classhebi_1_1Command_1_1FloatField_a5befd8ced9cb015d80ff144c4592d492}
+
+\begin{DoxyCompactList}\small\item\em If the field has a value, returns that value; otherwise, returns a default. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Command_1_1FloatField_aa69fab0a635374ad6e7408c6bebe9f51}{set} (float value)\hypertarget{classhebi_1_1Command_1_1FloatField_aa69fab0a635374ad6e7408c6bebe9f51}{}\label{classhebi_1_1Command_1_1FloatField_aa69fab0a635374ad6e7408c6bebe9f51}
+
+\begin{DoxyCompactList}\small\item\em Sets the field to a given value. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Command_1_1FloatField_a2ba855477fe5a19a90da2b88ed716f13}{clear} ()\hypertarget{classhebi_1_1Command_1_1FloatField_a2ba855477fe5a19a90da2b88ed716f13}{}\label{classhebi_1_1Command_1_1FloatField_a2ba855477fe5a19a90da2b88ed716f13}
+
+\begin{DoxyCompactList}\small\item\em Removes any currently set value for this field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A message field representable by a single-\/precision floating point value. 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Command\+::\+Float\+Field@{hebi\+::\+Command\+::\+Float\+Field}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!hebi\+::\+Command\+::\+Float\+Field@{hebi\+::\+Command\+::\+Float\+Field}}
+\subsubsection[{\texorpdfstring{operator bool() const }{operator bool() const }}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Command\+::\+Float\+Field\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classhebi_1_1Command_1_1FloatField_ae4983503c21f98ec479cc1bb73390754}{}\label{classhebi_1_1Command_1_1FloatField_ae4983503c21f98ec479cc1bb73390754}
+
+
+Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Command_1_1FloatField_a7220a798fceba4d3256d677b169359f1}{has()}}. 
+
+This can be used as in the following (assuming \textquotesingle{}parent\textquotesingle{} is a parent message, and this field is called \textquotesingle{}my\+Field\textquotesingle{}) 
+\begin{DoxyCode}
+Command::FloatField& f = parent.myField();
+\textcolor{keywordflow}{if} (f)
+  std::cout << \textcolor{stringliteral}{"Field has value: "} << f.get() << std::endl;
+\textcolor{keywordflow}{else}
+  std::cout << \textcolor{stringliteral}{"Field has no value!"} << std::endl;
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+command.\+hpp\item 
+command.\+cpp\end{DoxyCompactItemize}

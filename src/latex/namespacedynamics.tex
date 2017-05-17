@@ -1,0 +1,43 @@
+\hypertarget{namespacedynamics}{}\section{dynamics Namespace Reference}
+\label{namespacedynamics}\index{dynamics@{dynamics}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries gravity\+Comp} (const std\+::vector$<$ double $>$ \&theta, std\+::vector$<$ double $>$ \&torque)\hypertarget{namespacedynamics_a00e914433e77671dac03be0ca7d34e1f}{}\label{namespacedynamics_a00e914433e77671dac03be0ca7d34e1f}
+
+\item 
+void \hyperlink{namespacedynamics_a6f9761c4fbb20c590cfb1ae345e2ff61}{inverse\+Dynamics} (const Eigen\+::\+Vector\+Xd \&theta, const Eigen\+::\+Vector\+Xd \&omega, const Eigen\+::\+Vector\+Xd \&alpha, std\+::vector$<$ double $>$ \&torque)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+File\+: arm\+\_\+dynamics.\+cpp Description\+: Calculate the dynamics equations of a 5-\/\+D\+OF H\+E\+BI manipulator arm used on the Biorobotics Lab Intelligent Mobile Robot (I\+MR) project Header File\+: \hyperlink{arm__dynamics_8hpp_source}{arm\+\_\+dynamics.\+hpp}
+
+\begin{DoxyAuthor}{Author}
+Ky Woodard 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 2/12/2017
+\end{DoxyVersion}
+Functions\+: gravity\+Comp Description\+: Calculate the necessary torque required to cancel gravitational forces on the joints Input\+: theta -\/ current angles of the five joints \mbox{[}rad\mbox{]} Output\+: torque -\/ computed torque on the 5 joints \mbox{[}N-\/m\mbox{]}
+
+inverse\+Dynamics Description\+: Calculate the inverse dynamics of the arm, which includes inertia, corriolis, gravitational, and friction effect Inputs\+: theta -\/ current angle of the 5 joints \mbox{[}rad\mbox{]} omega -\/ current angular velocity of the 5 joints \mbox{[}rad/s\mbox{]} alpha -\/ desired angular acceleration of the 5 joints \mbox{[}rad/s$^\wedge$2\mbox{]} Output\+: torque -\/ computed torque to produce desired acceleration at the 5 joints \mbox{[}N-\/m\mbox{]}
+
+gravity Description\+: Calculate the gravity torque of the inverse dynamics based on the current angle of the joints Inputs\+: theta -\/ current angle of the 5 joints Output\+: torque -\/ computed torque on the 5 joints \mbox{[}N-\/m\mbox{]}
+
+inertia Description\+: Calculate the inertia torque of the inverse dynamics based on the current angle of the joints Inputs\+: theta -\/ current angle of the 5 joints \mbox{[}rad\mbox{]} Output\+: Inertia -\/ inertia matrix (5x5)
+
+corriolis Description\+: Calculate the corriolis torque of the inverse dynamics based on the current angle and angular velocity of the joints Inputs\+: theta -\/ current angle of the 5 joints \mbox{[}rad\mbox{]} omega -\/ current angle of the 5 joints \mbox{[}rad/s\mbox{]} Output\+: Corriolis -\/ Corriolis matrix (5x5) 
+
+\subsection{Function Documentation}
+\index{dynamics@{dynamics}!inverse\+Dynamics@{inverse\+Dynamics}}
+\index{inverse\+Dynamics@{inverse\+Dynamics}!dynamics@{dynamics}}
+\subsubsection[{\texorpdfstring{inverse\+Dynamics(const Eigen\+::\+Vector\+Xd \&theta, const Eigen\+::\+Vector\+Xd \&omega, const Eigen\+::\+Vector\+Xd \&alpha, std\+::vector$<$ double $>$ \&torque)}{inverseDynamics(const Eigen::VectorXd &theta, const Eigen::VectorXd &omega, const Eigen::VectorXd &alpha, std::vector< double > &torque)}}]{\setlength{\rightskip}{0pt plus 5cm}void dynamics\+::inverse\+Dynamics (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{, }
+\item[{const Eigen\+::\+Vector\+Xd \&}]{, }
+\item[{const Eigen\+::\+Vector\+Xd \&}]{, }
+\item[{std\+::vector$<$ double $>$ \&}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacedynamics_a6f9761c4fbb20c590cfb1ae345e2ff61}{}\label{namespacedynamics_a6f9761c4fbb20c590cfb1ae345e2ff61}
+Calculate the inverse dynamics of the arm, which includes inertia, corriolis, gravitational, and friction effect 

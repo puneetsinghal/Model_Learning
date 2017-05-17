@@ -1,0 +1,135 @@
+\hypertarget{classhebi_1_1Command}{}\section{hebi\+:\+:Command Class Reference}
+\label{classhebi_1_1Command}\index{hebi\+::\+Command@{hebi\+::\+Command}}
+
+
+\hyperlink{classhebi_1_1Command}{Command} objects have various fields that can be set; when sent to the module, these fields control internal properties and setpoints.  
+
+
+
+
+{\ttfamily \#include $<$command.\+hpp$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classhebi_1_1Command_1_1Actuator}{Actuator}
+\begin{DoxyCompactList}\small\item\em Actuator-\/specific commands. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1BoolField}{Bool\+Field}
+\begin{DoxyCompactList}\small\item\em A message field representable by a bool value. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1EnumField}{Enum\+Field}
+\begin{DoxyCompactList}\small\item\em A message field representable by an enum of a given type. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1FlagField}{Flag\+Field}
+\begin{DoxyCompactList}\small\item\em A two-\/state message field (either set/true or cleared/false). \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field}
+\begin{DoxyCompactList}\small\item\em A message field representable by a single-\/precision floating point value. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1HighResAngleField}{High\+Res\+Angle\+Field}
+\begin{DoxyCompactList}\small\item\em A message field for an angle measurement which does not lose precision at very high angles. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1LedField}{Led\+Field}
+\begin{DoxyCompactList}\small\item\em A message field for interfacing with an L\+ED. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1NumberedFloatField}{Numbered\+Float\+Field}
+\begin{DoxyCompactList}\small\item\em A message field containing a numbered set of single-\/precision floating point values. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1Settings}{Settings}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classhebi_1_1Module}{Module} settings that are typically changed at a slower rate. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1StringField}{String\+Field}
+\begin{DoxyCompactList}\small\item\em A message field representable by a std\+::string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64a}{Control\+Strategy} \{ \\*
+\hyperlink{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aafe98afde491faf74d257f008c2f68ee9}{Off}, 
+\hyperlink{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aa4caa7bdaeb957f4d606344937eca082f}{Direct\+P\+WM}, 
+\hyperlink{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aa46262e3b8b0440dcad719de382c8adda}{Strategy2}, 
+\hyperlink{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aab04b6dd90ed193382865ff31530508dd}{Strategy3}, 
+\\*
+\hyperlink{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aab95ab30225f22ad6da4d52868a85d8c1}{Strategy4}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhebi_1_1Command_a8d9766d1a77d76854b1964f57f4a8661}{Command} ()\hypertarget{classhebi_1_1Command_a8d9766d1a77d76854b1964f57f4a8661}{}\label{classhebi_1_1Command_a8d9766d1a77d76854b1964f57f4a8661}
+
+\begin{DoxyCompactList}\small\item\em Create a new command object for a single module. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_a8f1e2bbe57e74cac0b3a6adf83634308}{Command} (Hebi\+Command\+Ptr command)
+\begin{DoxyCompactList}\small\item\em Wraps an existing C-\/style command object; object lifetime is assumed to be managed by the caller. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_a08f198d16c0e5c229d86471fadec3049}{Command} (\hyperlink{classhebi_1_1Command}{Command} \&\&other)\hypertarget{classhebi_1_1Command_a08f198d16c0e5c229d86471fadec3049}{}\label{classhebi_1_1Command_a08f198d16c0e5c229d86471fadec3049}
+
+\begin{DoxyCompactList}\small\item\em Move constructor (necessary for containment in S\+TL template classes) \end{DoxyCompactList}\item 
+virtual \hyperlink{classhebi_1_1Command_a3e69178a5c04e295f55cca8c90bc58f4}{$\sim$\+Command} () noexcept\hypertarget{classhebi_1_1Command_a3e69178a5c04e295f55cca8c90bc58f4}{}\label{classhebi_1_1Command_a3e69178a5c04e295f55cca8c90bc58f4}
+
+\begin{DoxyCompactList}\small\item\em Destructor cleans up command object as necessary. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1Settings}{Settings} \& \hyperlink{classhebi_1_1Command_aab5f37fe874acc28889f148bc985b7a5}{settings} ()\hypertarget{classhebi_1_1Command_aab5f37fe874acc28889f148bc985b7a5}{}\label{classhebi_1_1Command_aab5f37fe874acc28889f148bc985b7a5}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{classhebi_1_1Module}{Module} settings that are typically changed at a slower rate. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1Actuator}{Actuator} \& \hyperlink{classhebi_1_1Command_a191430c1056e6cd4566b214342c9c725}{actuator} ()\hypertarget{classhebi_1_1Command_a191430c1056e6cd4566b214342c9c725}{}\label{classhebi_1_1Command_a191430c1056e6cd4566b214342c9c725}
+
+\begin{DoxyCompactList}\small\item\em Actuator-\/specific commands. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1NumberedFloatField}{Numbered\+Float\+Field} \& \hyperlink{classhebi_1_1Command_acbb82c0e3d1d1178abae0ce17e5cb058}{debug} ()\hypertarget{classhebi_1_1Command_acbb82c0e3d1d1178abae0ce17e5cb058}{}\label{classhebi_1_1Command_acbb82c0e3d1d1178abae0ce17e5cb058}
+
+\begin{DoxyCompactList}\small\item\em Values for internal debug functions (channel 1-\/9 available). \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1LedField}{Led\+Field} \& \hyperlink{classhebi_1_1Command_ab39389e955b0d9e5a59091fb1db26eeb}{led} ()\hypertarget{classhebi_1_1Command_ab39389e955b0d9e5a59091fb1db26eeb}{}\label{classhebi_1_1Command_ab39389e955b0d9e5a59091fb1db26eeb}
+
+\begin{DoxyCompactList}\small\item\em The module\textquotesingle{}s L\+ED. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Hebi\+Command\+Ptr const \hyperlink{classhebi_1_1Command_a54791e7ac42129f12d1525df809f3aae}{internal\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classhebi_1_1Command}{Command} objects have various fields that can be set; when sent to the module, these fields control internal properties and setpoints. 
+
+This object has a hierarchical structure -- there are some direct general-\/purpose fields at the top level, and many more specific fields contained in different nested subobjects.
+
+The subobjects contain references to the parent command object, and so should not be used after the parent object has been destroyed.
+
+The fields in the command object are typed; generally, these are optional-\/style read/write fields (i.\+e., have the concept of get/set/has/clear), although the return types and exact interface vary slightly between fields. Where appropriate, the explicit bool operator has been overridden so that you can shortcut {\ttfamily if}(field.\+has()) by calling {\ttfamily if(field)}.
+
+Although this header file can be used to look at the hierarchy of the messages, in general the online documentation at apidocs.\+hebi.\+us presents this information. in a more readable form. 
+
+\subsection{Member Enumeration Documentation}
+\index{hebi\+::\+Command@{hebi\+::\+Command}!Control\+Strategy@{Control\+Strategy}}
+\index{Control\+Strategy@{Control\+Strategy}!hebi\+::\+Command@{hebi\+::\+Command}}
+\subsubsection[{\texorpdfstring{Control\+Strategy}{ControlStrategy}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf hebi\+::\+Command\+::\+Control\+Strategy}}\hypertarget{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64a}{}\label{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64a}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Off@{Off}!hebi\+::\+Command@{hebi\+::\+Command}}\index{hebi\+::\+Command@{hebi\+::\+Command}!Off@{Off}}\item[{\em 
+Off\hypertarget{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aafe98afde491faf74d257f008c2f68ee9}{}\label{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aafe98afde491faf74d257f008c2f68ee9}
+}]The motor is not given power (equivalent to a 0 P\+WM value) \index{Direct\+P\+WM@{Direct\+P\+WM}!hebi\+::\+Command@{hebi\+::\+Command}}\index{hebi\+::\+Command@{hebi\+::\+Command}!Direct\+P\+WM@{Direct\+P\+WM}}\item[{\em 
+Direct\+P\+WM\hypertarget{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aa4caa7bdaeb957f4d606344937eca082f}{}\label{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aa4caa7bdaeb957f4d606344937eca082f}
+}]A direct P\+WM value (-\/1 to 1) can be sent to the motor (subject to onboard safety limiting). \index{Strategy2@{Strategy2}!hebi\+::\+Command@{hebi\+::\+Command}}\index{hebi\+::\+Command@{hebi\+::\+Command}!Strategy2@{Strategy2}}\item[{\em 
+Strategy2\hypertarget{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aa46262e3b8b0440dcad719de382c8adda}{}\label{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aa46262e3b8b0440dcad719de382c8adda}
+}]A combination of the position, velocity, and torque loops with P and V feeding to T; documented on docs.\+hebi.\+us under \char`\"{}\+Control Modes\char`\"{}. \index{Strategy3@{Strategy3}!hebi\+::\+Command@{hebi\+::\+Command}}\index{hebi\+::\+Command@{hebi\+::\+Command}!Strategy3@{Strategy3}}\item[{\em 
+Strategy3\hypertarget{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aab04b6dd90ed193382865ff31530508dd}{}\label{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aab04b6dd90ed193382865ff31530508dd}
+}]A combination of the position, velocity, and torque loops with P, V, and T feeding to P\+WM; documented on docs.\+hebi.\+us under \char`\"{}\+Control Modes\char`\"{}. \index{Strategy4@{Strategy4}!hebi\+::\+Command@{hebi\+::\+Command}}\index{hebi\+::\+Command@{hebi\+::\+Command}!Strategy4@{Strategy4}}\item[{\em 
+Strategy4\hypertarget{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aab95ab30225f22ad6da4d52868a85d8c1}{}\label{classhebi_1_1Command_a0f4b41003c36dee21578caddb605c64aab95ab30225f22ad6da4d52868a85d8c1}
+}]A combination of the position, velocity, and torque loops with P feeding to T and V feeding to P\+WM; documented on docs.\+hebi.\+us under \char`\"{}\+Control Modes\char`\"{}. \end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{hebi\+::\+Command@{hebi\+::\+Command}!Command@{Command}}
+\index{Command@{Command}!hebi\+::\+Command@{hebi\+::\+Command}}
+\subsubsection[{\texorpdfstring{Command(\+Hebi\+Command\+Ptr command)}{Command(HebiCommandPtr command)}}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Command\+::\+Command (
+\begin{DoxyParamCaption}
+\item[{Hebi\+Command\+Ptr}]{command}
+\end{DoxyParamCaption}
+)}\hypertarget{classhebi_1_1Command_a8f1e2bbe57e74cac0b3a6adf83634308}{}\label{classhebi_1_1Command_a8f1e2bbe57e74cac0b3a6adf83634308}
+
+
+Wraps an existing C-\/style command object; object lifetime is assumed to be managed by the caller. 
+
+N\+O\+TE\+: this should not be used except by internal library functions! 
+
+\subsection{Member Data Documentation}
+\index{hebi\+::\+Command@{hebi\+::\+Command}!internal\+\_\+@{internal\+\_\+}}
+\index{internal\+\_\+@{internal\+\_\+}!hebi\+::\+Command@{hebi\+::\+Command}}
+\subsubsection[{\texorpdfstring{internal\+\_\+}{internal_}}]{\setlength{\rightskip}{0pt plus 5cm}Hebi\+Command\+Ptr const hebi\+::\+Command\+::internal\+\_\+}\hypertarget{classhebi_1_1Command_a54791e7ac42129f12d1525df809f3aae}{}\label{classhebi_1_1Command_a54791e7ac42129f12d1525df809f3aae}
+C-\/style command object. N\+O\+TE\+: this should not be used except by internal library functions! 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+command.\+hpp\item 
+command.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,59 @@
+\hypertarget{classhebi_1_1Command_1_1FlagField}{}\section{hebi\+:\+:Command\+:\+:Flag\+Field Class Reference}
+\label{classhebi_1_1Command_1_1FlagField}\index{hebi\+::\+Command\+::\+Flag\+Field@{hebi\+::\+Command\+::\+Flag\+Field}}
+
+
+A two-\/state message field (either set/true or cleared/false).  
+
+
+
+
+{\ttfamily \#include $<$command.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Flag\+Field} (Hebi\+Command\+Ptr internal, Command\+Flag\+Field field)\hypertarget{classhebi_1_1Command_1_1FlagField_a4252702a9af7fe9b656d360d8ff7f14e}{}\label{classhebi_1_1Command_1_1FlagField_a4252702a9af7fe9b656d360d8ff7f14e}
+
+\item 
+\hyperlink{classhebi_1_1Command_1_1FlagField_ae3cc1d47cae8b937512fe2ef62af39c0}{operator bool} () const 
+\begin{DoxyCompactList}\small\item\em Allows casting to a bool to check if the flag is set without directly calling {\ttfamily \hyperlink{classhebi_1_1Command_1_1FlagField_ae39a1f2ae889115442193dd0c04dcc29}{has()}}. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Command_1_1FlagField_ae39a1f2ae889115442193dd0c04dcc29}{has} () const \hypertarget{classhebi_1_1Command_1_1FlagField_ae39a1f2ae889115442193dd0c04dcc29}{}\label{classhebi_1_1Command_1_1FlagField_ae39a1f2ae889115442193dd0c04dcc29}
+
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} if the flag is set, false if it is cleared. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Command_1_1FlagField_a51fa751950973f51359f628b2714b683}{set} ()\hypertarget{classhebi_1_1Command_1_1FlagField_a51fa751950973f51359f628b2714b683}{}\label{classhebi_1_1Command_1_1FlagField_a51fa751950973f51359f628b2714b683}
+
+\begin{DoxyCompactList}\small\item\em Sets this flag. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Command_1_1FlagField_aaf1399b14ddc9052ebbca70df5b638d3}{clear} ()\hypertarget{classhebi_1_1Command_1_1FlagField_aaf1399b14ddc9052ebbca70df5b638d3}{}\label{classhebi_1_1Command_1_1FlagField_aaf1399b14ddc9052ebbca70df5b638d3}
+
+\begin{DoxyCompactList}\small\item\em Clears this flag (e.\+g., sets it to false/off). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A two-\/state message field (either set/true or cleared/false). 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Command\+::\+Flag\+Field@{hebi\+::\+Command\+::\+Flag\+Field}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!hebi\+::\+Command\+::\+Flag\+Field@{hebi\+::\+Command\+::\+Flag\+Field}}
+\subsubsection[{\texorpdfstring{operator bool() const }{operator bool() const }}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Command\+::\+Flag\+Field\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classhebi_1_1Command_1_1FlagField_ae3cc1d47cae8b937512fe2ef62af39c0}{}\label{classhebi_1_1Command_1_1FlagField_ae3cc1d47cae8b937512fe2ef62af39c0}
+
+
+Allows casting to a bool to check if the flag is set without directly calling {\ttfamily \hyperlink{classhebi_1_1Command_1_1FlagField_ae39a1f2ae889115442193dd0c04dcc29}{has()}}. 
+
+This can be used as in the following (assuming \textquotesingle{}parent\textquotesingle{} is a parent message, and this field is called \textquotesingle{}my\+Field\textquotesingle{}) 
+\begin{DoxyCode}
+Command::FlagField& f = parent.myField();
+\textcolor{keywordflow}{if} (f)
+  std::cout << \textcolor{stringliteral}{"Field has value: "} << f.get() << std::endl;
+\textcolor{keywordflow}{else}
+  std::cout << \textcolor{stringliteral}{"Field has no value!"} << std::endl;
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+command.\+hpp\item 
+command.\+cpp\end{DoxyCompactItemize}

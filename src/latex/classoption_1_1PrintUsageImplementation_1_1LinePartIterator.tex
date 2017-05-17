@@ -1,0 +1,91 @@
+\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator}{}\section{option\+:\+:Print\+Usage\+Implementation\+:\+:Line\+Part\+Iterator Class Reference}
+\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator}\index{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a8a61fef9ba907fd4e10ff0fd772ee5e7}{Line\+Part\+Iterator} (const \hyperlink{structoption_1_1Descriptor}{Descriptor} usage\mbox{[}$\,$\mbox{]})\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a8a61fef9ba907fd4e10ff0fd772ee5e7}{}\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a8a61fef9ba907fd4e10ff0fd772ee5e7}
+
+\begin{DoxyCompactList}\small\item\em Creates an iterator for {\ttfamily usage}. \end{DoxyCompactList}\item 
+bool \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_afe43ca12d399ed3c871e4dc5bf63356e}{next\+Table} ()
+\begin{DoxyCompactList}\small\item\em Moves iteration to the next table (if any). Has to be called once on a new \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator}{Line\+Part\+Iterator} to move to the 1st table. \end{DoxyCompactList}\item 
+void \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a0cbe8ed79ab4958a70b957598dd76fa6}{restart\+Table} ()\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a0cbe8ed79ab4958a70b957598dd76fa6}{}\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a0cbe8ed79ab4958a70b957598dd76fa6}
+
+\begin{DoxyCompactList}\small\item\em Reset iteration to the beginning of the current table. \end{DoxyCompactList}\item 
+bool \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a55d5c3e50f9c1d8cd48f518899a5a48c}{next\+Row} ()
+\begin{DoxyCompactList}\small\item\em Moves iteration to the next row (if any). Has to be called once after each call to \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_afe43ca12d399ed3c871e4dc5bf63356e}{next\+Table()} to move to the 1st row of the table. \end{DoxyCompactList}\item 
+void \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a96c448939f33a811174ea7b5addb312e}{restart\+Row} ()\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a96c448939f33a811174ea7b5addb312e}{}\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a96c448939f33a811174ea7b5addb312e}
+
+\begin{DoxyCompactList}\small\item\em Reset iteration to the beginning of the current row. \end{DoxyCompactList}\item 
+bool \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a58b8743da57de2d108472eee60324df6}{next} ()
+\begin{DoxyCompactList}\small\item\em Moves iteration to the next part (if any). Has to be called once after each call to \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a55d5c3e50f9c1d8cd48f518899a5a48c}{next\+Row()} to move to the 1st part of the row. \end{DoxyCompactList}\item 
+int \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_afa41382acabcd37ca70f7e8b9994b8c0}{column} ()\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_afa41382acabcd37ca70f7e8b9994b8c0}{}\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_afa41382acabcd37ca70f7e8b9994b8c0}
+
+\begin{DoxyCompactList}\small\item\em Returns the index (counting from 0) of the column in which the part pointed to by \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_ada26229add63bd479c7877f2f8e32908}{data()} is located. \end{DoxyCompactList}\item 
+int \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a8ad1201d95bf0bd9453a731da8c15a10}{line} ()\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a8ad1201d95bf0bd9453a731da8c15a10}{}\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a8ad1201d95bf0bd9453a731da8c15a10}
+
+\begin{DoxyCompactList}\small\item\em Returns the index (counting from 0) of the line within the current column this part belongs to. \end{DoxyCompactList}\item 
+int \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a557e521cb41e951a34df2737d25f9dce}{length} ()\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a557e521cb41e951a34df2737d25f9dce}{}\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a557e521cb41e951a34df2737d25f9dce}
+
+\begin{DoxyCompactList}\small\item\em Returns the length of the part pointed to by \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_ada26229add63bd479c7877f2f8e32908}{data()} in raw chars (not U\+T\+F-\/8 characters). \end{DoxyCompactList}\item 
+int \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a03b6fedfe805d7fc73216da5cd33270e}{screen\+Length} ()\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a03b6fedfe805d7fc73216da5cd33270e}{}\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a03b6fedfe805d7fc73216da5cd33270e}
+
+\begin{DoxyCompactList}\small\item\em Returns the width in screen columns of the part pointed to by \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_ada26229add63bd479c7877f2f8e32908}{data()}. Takes multi-\/byte U\+T\+F-\/8 sequences and wide characters into account. \end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_ada26229add63bd479c7877f2f8e32908}{data} ()\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_ada26229add63bd479c7877f2f8e32908}{}\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_ada26229add63bd479c7877f2f8e32908}
+
+\begin{DoxyCompactList}\small\item\em Returns the current part of the iteration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator}!next@{next}}
+\index{next@{next}!option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator}}
+\subsubsection[{\texorpdfstring{next()}{next()}}]{\setlength{\rightskip}{0pt plus 5cm}bool option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator\+::next (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a58b8743da57de2d108472eee60324df6}{}\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a58b8743da57de2d108472eee60324df6}
+
+
+Moves iteration to the next part (if any). Has to be called once after each call to \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a55d5c3e50f9c1d8cd48f518899a5a48c}{next\+Row()} to move to the 1st part of the row. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em false} & if moving to next part failed because no further part exists.\\
+\hline
+\end{DoxyRetVals}
+See \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator}{Line\+Part\+Iterator} for details about the iteration. \index{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator}!next\+Row@{next\+Row}}
+\index{next\+Row@{next\+Row}!option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator}}
+\subsubsection[{\texorpdfstring{next\+Row()}{nextRow()}}]{\setlength{\rightskip}{0pt plus 5cm}bool option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator\+::next\+Row (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a55d5c3e50f9c1d8cd48f518899a5a48c}{}\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_a55d5c3e50f9c1d8cd48f518899a5a48c}
+
+
+Moves iteration to the next row (if any). Has to be called once after each call to \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_afe43ca12d399ed3c871e4dc5bf63356e}{next\+Table()} to move to the 1st row of the table. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em false} & if moving to next row failed because no further row exists. \\
+\hline
+\end{DoxyRetVals}
+\index{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator}!next\+Table@{next\+Table}}
+\index{next\+Table@{next\+Table}!option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator@{option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator}}
+\subsubsection[{\texorpdfstring{next\+Table()}{nextTable()}}]{\setlength{\rightskip}{0pt plus 5cm}bool option\+::\+Print\+Usage\+Implementation\+::\+Line\+Part\+Iterator\+::next\+Table (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_afe43ca12d399ed3c871e4dc5bf63356e}{}\label{classoption_1_1PrintUsageImplementation_1_1LinePartIterator_afe43ca12d399ed3c871e4dc5bf63356e}
+
+
+Moves iteration to the next table (if any). Has to be called once on a new \hyperlink{classoption_1_1PrintUsageImplementation_1_1LinePartIterator}{Line\+Part\+Iterator} to move to the 1st table. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em false} & if moving to next table failed because no further table exists. \\
+\hline
+\end{DoxyRetVals}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{optionparser_8h}{optionparser.\+h}\end{DoxyCompactItemize}

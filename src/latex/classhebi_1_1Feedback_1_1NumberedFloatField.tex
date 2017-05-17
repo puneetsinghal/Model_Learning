@@ -1,0 +1,65 @@
+\hypertarget{classhebi_1_1Feedback_1_1NumberedFloatField}{}\section{hebi\+:\+:Feedback\+:\+:Numbered\+Float\+Field Class Reference}
+\label{classhebi_1_1Feedback_1_1NumberedFloatField}\index{hebi\+::\+Feedback\+::\+Numbered\+Float\+Field@{hebi\+::\+Feedback\+::\+Numbered\+Float\+Field}}
+
+
+A message field containing a numbered set of single-\/precision floating point values.  
+
+
+
+
+{\ttfamily \#include $<$feedback.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Numbered\+Float\+Field} (Hebi\+Feedback\+Ptr internal, Feedback\+Numbered\+Float\+Field field)\hypertarget{classhebi_1_1Feedback_1_1NumberedFloatField_ac9d5422a9e1b1eb5ad2a3de5d835f6a4}{}\label{classhebi_1_1Feedback_1_1NumberedFloatField_ac9d5422a9e1b1eb5ad2a3de5d835f6a4}
+
+\item 
+bool \hyperlink{classhebi_1_1Feedback_1_1NumberedFloatField_ae2e53d1949ac7d54fcca94bbad106917}{has} (int field\+Number) const 
+\begin{DoxyCompactList}\small\item\em True if (and only if) the particular numbered subvalue of this field has a value. \end{DoxyCompactList}\item 
+float \hyperlink{classhebi_1_1Feedback_1_1NumberedFloatField_a32b65ae3bb8106155364b4e3a1fc2a1d}{get} (int field\+Number) const 
+\begin{DoxyCompactList}\small\item\em If the particular numbered subvalue of this field has a value, returns that value; otherwise returns a default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A message field containing a numbered set of single-\/precision floating point values. 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Feedback\+::\+Numbered\+Float\+Field@{hebi\+::\+Feedback\+::\+Numbered\+Float\+Field}!get@{get}}
+\index{get@{get}!hebi\+::\+Feedback\+::\+Numbered\+Float\+Field@{hebi\+::\+Feedback\+::\+Numbered\+Float\+Field}}
+\subsubsection[{\texorpdfstring{get(int field\+Number) const }{get(int fieldNumber) const }}]{\setlength{\rightskip}{0pt plus 5cm}float hebi\+::\+Feedback\+::\+Numbered\+Float\+Field\+::get (
+\begin{DoxyParamCaption}
+\item[{int}]{field\+Number}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhebi_1_1Feedback_1_1NumberedFloatField_a32b65ae3bb8106155364b4e3a1fc2a1d}{}\label{classhebi_1_1Feedback_1_1NumberedFloatField_a32b65ae3bb8106155364b4e3a1fc2a1d}
+
+
+If the particular numbered subvalue of this field has a value, returns that value; otherwise returns a default. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field\+Number} & Which subvalue to get; valid values for field\+Number depend on the field type. \\
+\hline
+\end{DoxyParams}
+\index{hebi\+::\+Feedback\+::\+Numbered\+Float\+Field@{hebi\+::\+Feedback\+::\+Numbered\+Float\+Field}!has@{has}}
+\index{has@{has}!hebi\+::\+Feedback\+::\+Numbered\+Float\+Field@{hebi\+::\+Feedback\+::\+Numbered\+Float\+Field}}
+\subsubsection[{\texorpdfstring{has(int field\+Number) const }{has(int fieldNumber) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Feedback\+::\+Numbered\+Float\+Field\+::has (
+\begin{DoxyParamCaption}
+\item[{int}]{field\+Number}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhebi_1_1Feedback_1_1NumberedFloatField_ae2e53d1949ac7d54fcca94bbad106917}{}\label{classhebi_1_1Feedback_1_1NumberedFloatField_ae2e53d1949ac7d54fcca94bbad106917}
+
+
+True if (and only if) the particular numbered subvalue of this field has a value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field\+Number} & Which subvalue to check; valid values for field\+Number depend on the field type. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+feedback.\+hpp\item 
+feedback.\+cpp\end{DoxyCompactItemize}

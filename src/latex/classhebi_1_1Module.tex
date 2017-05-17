@@ -1,0 +1,187 @@
+\hypertarget{classhebi_1_1Module}{}\section{hebi\+:\+:Module Class Reference}
+\label{classhebi_1_1Module}\index{hebi\+::\+Module@{hebi\+::\+Module}}
+
+
+Represents a single physical H\+E\+BI module, and allows \hyperlink{classhebi_1_1Command}{Command}, \hyperlink{classhebi_1_1Feedback}{Feedback}, and \hyperlink{classhebi_1_1Info}{Info} objects to be sent to and recieved from the hardware.  
+
+
+
+
+{\ttfamily \#include $<$module.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhebi_1_1Module_af8192ddf0477c4bc59f0dd2bd009b08e}{Module} (Hebi\+Module\+Ptr module)
+\item 
+virtual \hyperlink{classhebi_1_1Module_a378cb7c5f76bbaa8fa26a084fb8bda5c}{$\sim$\+Module} () noexcept\hypertarget{classhebi_1_1Module_a378cb7c5f76bbaa8fa26a084fb8bda5c}{}\label{classhebi_1_1Module_a378cb7c5f76bbaa8fa26a084fb8bda5c}
+
+\begin{DoxyCompactList}\small\item\em Destructor cleans up module. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Module_a63034ea7310270b62166380aeb10a5cf}{send\+Command} (const \hyperlink{classhebi_1_1Command}{Command} \&command)
+\begin{DoxyCompactList}\small\item\em Send a command to the given module without requesting an acknowledgement. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Module_a51fb07826384f58697a2e276464d83cb}{send\+Command\+With\+Acknowledgement} (const \hyperlink{classhebi_1_1Command}{Command} \&command, int timeout\+\_\+ms=\hyperlink{classhebi_1_1Module_afba0d28ff83c8ddabd8f6490e412c821}{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS})
+\begin{DoxyCompactList}\small\item\em Send a command to the given module, requesting an acknowledgement of transmission to be sent back. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Module_a5a7fa02cdcc5baf34f17c0e3badfc1e8}{request\+Feedback} (\hyperlink{classhebi_1_1Feedback}{Feedback} $\ast$feedback, int timeout\+\_\+ms=\hyperlink{classhebi_1_1Module_afba0d28ff83c8ddabd8f6490e412c821}{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS})
+\begin{DoxyCompactList}\small\item\em Request feedback from the module, and store it in the passed-\/in feedback object. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Module_a90fdca0e2c4d1ebd1cbdd3f1e05adc3c}{request\+Info} (\hyperlink{classhebi_1_1Info}{Info} $\ast$info, int timeout\+\_\+ms=\hyperlink{classhebi_1_1Module_afba0d28ff83c8ddabd8f6490e412c821}{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS})
+\begin{DoxyCompactList}\small\item\em Request info from the module, and store it in the passed-\/in info object. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Module_a2d37eac7776c910ca5d5de47cadec3e3}{set\+Feedback\+Frequency\+Hz} (float frequency)
+\begin{DoxyCompactList}\small\item\em Sets the frequency of the internal feedback request + callback thread. \end{DoxyCompactList}\item 
+float \hyperlink{classhebi_1_1Module_a7c15d50b692a5f92ec41e7b88bab8680}{get\+Feedback\+Frequency\+Hz} ()
+\begin{DoxyCompactList}\small\item\em Gets the frequency of the internal feedback request + callback thread. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Module_aa2d0cb41bbcf3ffd2ea1d86ef98e10aa}{add\+Feedback\+Handler} (Module\+Feedback\+Handler handler)\hypertarget{classhebi_1_1Module_aa2d0cb41bbcf3ffd2ea1d86ef98e10aa}{}\label{classhebi_1_1Module_aa2d0cb41bbcf3ffd2ea1d86ef98e10aa}
+
+\begin{DoxyCompactList}\small\item\em Adds a handler function to be called by the internal feedback request thread. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Module_a4eebac29798f983c8be20498c03b645a}{clear\+Feedback\+Handlers} ()\hypertarget{classhebi_1_1Module_a4eebac29798f983c8be20498c03b645a}{}\label{classhebi_1_1Module_a4eebac29798f983c8be20498c03b645a}
+
+\begin{DoxyCompactList}\small\item\em Removes all feedback handlers presently added. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const int \hyperlink{classhebi_1_1Module_afba0d28ff83c8ddabd8f6490e412c821}{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS} = 500
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classhebi_1_1Module_ad4fe704ddfe93cfcff2d81388c2693c5}{callback\+Wrapper} (Hebi\+Feedback\+Ptr feedback, void $\ast$user\+\_\+data)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents a single physical H\+E\+BI module, and allows \hyperlink{classhebi_1_1Command}{Command}, \hyperlink{classhebi_1_1Feedback}{Feedback}, and \hyperlink{classhebi_1_1Info}{Info} objects to be sent to and recieved from the hardware. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{hebi\+::\+Module@{hebi\+::\+Module}!Module@{Module}}
+\index{Module@{Module}!hebi\+::\+Module@{hebi\+::\+Module}}
+\subsubsection[{\texorpdfstring{Module(\+Hebi\+Module\+Ptr module)}{Module(HebiModulePtr module)}}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Module\+::\+Module (
+\begin{DoxyParamCaption}
+\item[{Hebi\+Module\+Ptr}]{module}
+\end{DoxyParamCaption}
+)}\hypertarget{classhebi_1_1Module_af8192ddf0477c4bc59f0dd2bd009b08e}{}\label{classhebi_1_1Module_af8192ddf0477c4bc59f0dd2bd009b08e}
+Creates a module from the underlying C-\/style module object. This should only be called to create modules from the lookup class, not from user code! 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Module@{hebi\+::\+Module}!get\+Feedback\+Frequency\+Hz@{get\+Feedback\+Frequency\+Hz}}
+\index{get\+Feedback\+Frequency\+Hz@{get\+Feedback\+Frequency\+Hz}!hebi\+::\+Module@{hebi\+::\+Module}}
+\subsubsection[{\texorpdfstring{get\+Feedback\+Frequency\+Hz()}{getFeedbackFrequencyHz()}}]{\setlength{\rightskip}{0pt plus 5cm}float hebi\+::\+Module\+::get\+Feedback\+Frequency\+Hz (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classhebi_1_1Module_a7c15d50b692a5f92ec41e7b88bab8680}{}\label{classhebi_1_1Module_a7c15d50b692a5f92ec41e7b88bab8680}
+
+
+Gets the frequency of the internal feedback request + callback thread. 
+
+\begin{DoxyReturn}{Returns}
+The current feedback request loop frequency (in Hz). 
+\end{DoxyReturn}
+\index{hebi\+::\+Module@{hebi\+::\+Module}!request\+Feedback@{request\+Feedback}}
+\index{request\+Feedback@{request\+Feedback}!hebi\+::\+Module@{hebi\+::\+Module}}
+\subsubsection[{\texorpdfstring{request\+Feedback(\+Feedback $\ast$feedback, int timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+S)}{requestFeedback(Feedback *feedback, int timeout_ms=DEFAULT_TIMEOUT_MS)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Module\+::request\+Feedback (
+\begin{DoxyParamCaption}
+\item[{{\bf Feedback} $\ast$}]{feedback, }
+\item[{int}]{timeout\+\_\+ms = {\ttfamily {\bf D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classhebi_1_1Module_a5a7fa02cdcc5baf34f17c0e3badfc1e8}{}\label{classhebi_1_1Module_a5a7fa02cdcc5baf34f17c0e3badfc1e8}
+
+
+Request feedback from the module, and store it in the passed-\/in feedback object. 
+
+\begin{DoxyReturn}{Returns}
+true if the request was successful within the specified timeout; in this case \textquotesingle{}feedback\textquotesingle{} has been updated. Otherwise, returns false and does not update \textquotesingle{}feedback\textquotesingle{}. 
+\end{DoxyReturn}
+\index{hebi\+::\+Module@{hebi\+::\+Module}!request\+Info@{request\+Info}}
+\index{request\+Info@{request\+Info}!hebi\+::\+Module@{hebi\+::\+Module}}
+\subsubsection[{\texorpdfstring{request\+Info(\+Info $\ast$info, int timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+S)}{requestInfo(Info *info, int timeout_ms=DEFAULT_TIMEOUT_MS)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Module\+::request\+Info (
+\begin{DoxyParamCaption}
+\item[{{\bf Info} $\ast$}]{info, }
+\item[{int}]{timeout\+\_\+ms = {\ttfamily {\bf D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classhebi_1_1Module_a90fdca0e2c4d1ebd1cbdd3f1e05adc3c}{}\label{classhebi_1_1Module_a90fdca0e2c4d1ebd1cbdd3f1e05adc3c}
+
+
+Request info from the module, and store it in the passed-\/in info object. 
+
+\begin{DoxyReturn}{Returns}
+true if the request was successful within the specified timeout; in this case \textquotesingle{}info\textquotesingle{} has been updated. Otherwise, returns false and does not update \textquotesingle{}info\textquotesingle{}. 
+\end{DoxyReturn}
+\index{hebi\+::\+Module@{hebi\+::\+Module}!send\+Command@{send\+Command}}
+\index{send\+Command@{send\+Command}!hebi\+::\+Module@{hebi\+::\+Module}}
+\subsubsection[{\texorpdfstring{send\+Command(const Command \&command)}{sendCommand(const Command &command)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Module\+::send\+Command (
+\begin{DoxyParamCaption}
+\item[{const {\bf Command} \&}]{command}
+\end{DoxyParamCaption}
+)}\hypertarget{classhebi_1_1Module_a63034ea7310270b62166380aeb10a5cf}{}\label{classhebi_1_1Module_a63034ea7310270b62166380aeb10a5cf}
+
+
+Send a command to the given module without requesting an acknowledgement. 
+
+Appropriate for high-\/frequency applications.
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The \hyperlink{classhebi_1_1Command}{Command} object containing information to be sent to the module.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the command was successfully sent, false otherwise. 
+\end{DoxyReturn}
+\index{hebi\+::\+Module@{hebi\+::\+Module}!send\+Command\+With\+Acknowledgement@{send\+Command\+With\+Acknowledgement}}
+\index{send\+Command\+With\+Acknowledgement@{send\+Command\+With\+Acknowledgement}!hebi\+::\+Module@{hebi\+::\+Module}}
+\subsubsection[{\texorpdfstring{send\+Command\+With\+Acknowledgement(const Command \&command, int timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+S)}{sendCommandWithAcknowledgement(const Command &command, int timeout_ms=DEFAULT_TIMEOUT_MS)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Module\+::send\+Command\+With\+Acknowledgement (
+\begin{DoxyParamCaption}
+\item[{const {\bf Command} \&}]{command, }
+\item[{int}]{timeout\+\_\+ms = {\ttfamily {\bf D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classhebi_1_1Module_a51fb07826384f58697a2e276464d83cb}{}\label{classhebi_1_1Module_a51fb07826384f58697a2e276464d83cb}
+
+
+Send a command to the given module, requesting an acknowledgement of transmission to be sent back. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The \hyperlink{classhebi_1_1Command}{Command} object containing information to be sent to the module. \\
+\hline
+{\em timeout\+\_\+ms} & Indicates how many milliseconds to wait for a response after sending a packet. For typical networks, \textquotesingle{}15\textquotesingle{} ms is a value that can be reasonably expected to encompass the time required for a round-\/trip transmission.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if an acknowledgement was successfully received (guaranteeing the module received this command), or a negative number for an error otherwise.
+\end{DoxyReturn}
+Note\+: A non-\/true return does not indicate a specific failure, and may result from an error while sending or simply a timeout/dropped response packet after a successful transmission. \index{hebi\+::\+Module@{hebi\+::\+Module}!set\+Feedback\+Frequency\+Hz@{set\+Feedback\+Frequency\+Hz}}
+\index{set\+Feedback\+Frequency\+Hz@{set\+Feedback\+Frequency\+Hz}!hebi\+::\+Module@{hebi\+::\+Module}}
+\subsubsection[{\texorpdfstring{set\+Feedback\+Frequency\+Hz(float frequency)}{setFeedbackFrequencyHz(float frequency)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Module\+::set\+Feedback\+Frequency\+Hz (
+\begin{DoxyParamCaption}
+\item[{float}]{frequency}
+\end{DoxyParamCaption}
+)}\hypertarget{classhebi_1_1Module_a2d37eac7776c910ca5d5de47cadec3e3}{}\label{classhebi_1_1Module_a2d37eac7776c910ca5d5de47cadec3e3}
+
+
+Sets the frequency of the internal feedback request + callback thread. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the frequency successfully was set, or {\ttfamily false} if the parameter was outside the accepted range (less than zero or faster than supported maximum). 
+\end{DoxyReturn}
+
+
+\subsection{Friends And Related Function Documentation}
+\index{hebi\+::\+Module@{hebi\+::\+Module}!callback\+Wrapper@{callback\+Wrapper}}
+\index{callback\+Wrapper@{callback\+Wrapper}!hebi\+::\+Module@{hebi\+::\+Module}}
+\subsubsection[{\texorpdfstring{callback\+Wrapper}{callbackWrapper}}]{\setlength{\rightskip}{0pt plus 5cm}void callback\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{Hebi\+Feedback\+Ptr}]{feedback, }
+\item[{void $\ast$}]{user\+\_\+data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classhebi_1_1Module_ad4fe704ddfe93cfcff2d81388c2693c5}{}\label{classhebi_1_1Module_ad4fe704ddfe93cfcff2d81388c2693c5}
+Intermediary to convert C-\/style function callbacks to C++ style, and change callback parameter types. 
+
+\subsection{Member Data Documentation}
+\index{hebi\+::\+Module@{hebi\+::\+Module}!D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS@{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}}
+\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS@{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}!hebi\+::\+Module@{hebi\+::\+Module}}
+\subsubsection[{\texorpdfstring{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}{DEFAULT_TIMEOUT_MS}}]{\setlength{\rightskip}{0pt plus 5cm}const int hebi\+::\+Module\+::\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS = 500\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classhebi_1_1Module_afba0d28ff83c8ddabd8f6490e412c821}{}\label{classhebi_1_1Module_afba0d28ff83c8ddabd8f6490e412c821}
+The default timeout for any send-\/with-\/acknowledgement or request operation is 500 ms. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+module.\+hpp\item 
+module.\+cpp\end{DoxyCompactItemize}

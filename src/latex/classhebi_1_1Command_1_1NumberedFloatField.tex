@@ -1,0 +1,102 @@
+\hypertarget{classhebi_1_1Command_1_1NumberedFloatField}{}\section{hebi\+:\+:Command\+:\+:Numbered\+Float\+Field Class Reference}
+\label{classhebi_1_1Command_1_1NumberedFloatField}\index{hebi\+::\+Command\+::\+Numbered\+Float\+Field@{hebi\+::\+Command\+::\+Numbered\+Float\+Field}}
+
+
+A message field containing a numbered set of single-\/precision floating point values.  
+
+
+
+
+{\ttfamily \#include $<$command.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Numbered\+Float\+Field} (Hebi\+Command\+Ptr internal, Command\+Numbered\+Float\+Field field)\hypertarget{classhebi_1_1Command_1_1NumberedFloatField_ae3c9e12a1fd0dfebe8574f5a25c1ddfc}{}\label{classhebi_1_1Command_1_1NumberedFloatField_ae3c9e12a1fd0dfebe8574f5a25c1ddfc}
+
+\item 
+bool \hyperlink{classhebi_1_1Command_1_1NumberedFloatField_a6404aedcca18322fa539f240112f1b92}{has} (int field\+Number) const 
+\begin{DoxyCompactList}\small\item\em True if (and only if) the particular numbered subvalue of this field has a value. \end{DoxyCompactList}\item 
+float \hyperlink{classhebi_1_1Command_1_1NumberedFloatField_a4373e742ee75816e41d8d3335f29f5a1}{get} (int field\+Number) const 
+\begin{DoxyCompactList}\small\item\em If the particular numbered subvalue of this field has a value, returns that value; otherwise returns a default. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Command_1_1NumberedFloatField_ad6ad3a44506da1ae4c274d44184c0123}{set} (int field\+Number, float value)
+\begin{DoxyCompactList}\small\item\em Sets the particular numbered subvalue of this field to a given value. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Command_1_1NumberedFloatField_af70c3b41077806589227f0475b06f12f}{clear} (int field\+Number)
+\begin{DoxyCompactList}\small\item\em Removes any currently set value for the numbered subvalue of this field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A message field containing a numbered set of single-\/precision floating point values. 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Command\+::\+Numbered\+Float\+Field@{hebi\+::\+Command\+::\+Numbered\+Float\+Field}!clear@{clear}}
+\index{clear@{clear}!hebi\+::\+Command\+::\+Numbered\+Float\+Field@{hebi\+::\+Command\+::\+Numbered\+Float\+Field}}
+\subsubsection[{\texorpdfstring{clear(int field\+Number)}{clear(int fieldNumber)}}]{\setlength{\rightskip}{0pt plus 5cm}void hebi\+::\+Command\+::\+Numbered\+Float\+Field\+::clear (
+\begin{DoxyParamCaption}
+\item[{int}]{field\+Number}
+\end{DoxyParamCaption}
+)}\hypertarget{classhebi_1_1Command_1_1NumberedFloatField_af70c3b41077806589227f0475b06f12f}{}\label{classhebi_1_1Command_1_1NumberedFloatField_af70c3b41077806589227f0475b06f12f}
+
+
+Removes any currently set value for the numbered subvalue of this field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field\+Number} & Which subvalue to clear; valid values for field\+Number depend on the field type. \\
+\hline
+\end{DoxyParams}
+\index{hebi\+::\+Command\+::\+Numbered\+Float\+Field@{hebi\+::\+Command\+::\+Numbered\+Float\+Field}!get@{get}}
+\index{get@{get}!hebi\+::\+Command\+::\+Numbered\+Float\+Field@{hebi\+::\+Command\+::\+Numbered\+Float\+Field}}
+\subsubsection[{\texorpdfstring{get(int field\+Number) const }{get(int fieldNumber) const }}]{\setlength{\rightskip}{0pt plus 5cm}float hebi\+::\+Command\+::\+Numbered\+Float\+Field\+::get (
+\begin{DoxyParamCaption}
+\item[{int}]{field\+Number}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhebi_1_1Command_1_1NumberedFloatField_a4373e742ee75816e41d8d3335f29f5a1}{}\label{classhebi_1_1Command_1_1NumberedFloatField_a4373e742ee75816e41d8d3335f29f5a1}
+
+
+If the particular numbered subvalue of this field has a value, returns that value; otherwise returns a default. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field\+Number} & Which subvalue to get; valid values for field\+Number depend on the field type. \\
+\hline
+\end{DoxyParams}
+\index{hebi\+::\+Command\+::\+Numbered\+Float\+Field@{hebi\+::\+Command\+::\+Numbered\+Float\+Field}!has@{has}}
+\index{has@{has}!hebi\+::\+Command\+::\+Numbered\+Float\+Field@{hebi\+::\+Command\+::\+Numbered\+Float\+Field}}
+\subsubsection[{\texorpdfstring{has(int field\+Number) const }{has(int fieldNumber) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Command\+::\+Numbered\+Float\+Field\+::has (
+\begin{DoxyParamCaption}
+\item[{int}]{field\+Number}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhebi_1_1Command_1_1NumberedFloatField_a6404aedcca18322fa539f240112f1b92}{}\label{classhebi_1_1Command_1_1NumberedFloatField_a6404aedcca18322fa539f240112f1b92}
+
+
+True if (and only if) the particular numbered subvalue of this field has a value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field\+Number} & Which subvalue to check; valid values for field\+Number depend on the field type. \\
+\hline
+\end{DoxyParams}
+\index{hebi\+::\+Command\+::\+Numbered\+Float\+Field@{hebi\+::\+Command\+::\+Numbered\+Float\+Field}!set@{set}}
+\index{set@{set}!hebi\+::\+Command\+::\+Numbered\+Float\+Field@{hebi\+::\+Command\+::\+Numbered\+Float\+Field}}
+\subsubsection[{\texorpdfstring{set(int field\+Number, float value)}{set(int fieldNumber, float value)}}]{\setlength{\rightskip}{0pt plus 5cm}void hebi\+::\+Command\+::\+Numbered\+Float\+Field\+::set (
+\begin{DoxyParamCaption}
+\item[{int}]{field\+Number, }
+\item[{float}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{classhebi_1_1Command_1_1NumberedFloatField_ad6ad3a44506da1ae4c274d44184c0123}{}\label{classhebi_1_1Command_1_1NumberedFloatField_ad6ad3a44506da1ae4c274d44184c0123}
+
+
+Sets the particular numbered subvalue of this field to a given value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field\+Number} & Which subvalue to set; valid values for field\+Number depend on the field type. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+command.\+hpp\item 
+command.\+cpp\end{DoxyCompactItemize}

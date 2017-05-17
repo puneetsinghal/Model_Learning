@@ -1,0 +1,55 @@
+\hypertarget{classhebi_1_1GroupCommand}{}\section{hebi\+:\+:Group\+Command Class Reference}
+\label{classhebi_1_1GroupCommand}\index{hebi\+::\+Group\+Command@{hebi\+::\+Group\+Command}}
+
+
+A list of \hyperlink{classhebi_1_1Command}{Command} objects appropriate for sending to a \hyperlink{classhebi_1_1Group}{Group} of modules; the \hyperlink{classhebi_1_1GroupCommand_a75645b28175dde77de35801909d58213}{size()} must match the number of modules in the group.  
+
+
+
+
+{\ttfamily \#include $<$group\+\_\+command.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhebi_1_1GroupCommand_a7a41c0aace3d99b0d7e9dcd9b1063a11}{Group\+Command} (int number\+\_\+of\+\_\+modules)\hypertarget{classhebi_1_1GroupCommand_a7a41c0aace3d99b0d7e9dcd9b1063a11}{}\label{classhebi_1_1GroupCommand_a7a41c0aace3d99b0d7e9dcd9b1063a11}
+
+\begin{DoxyCompactList}\small\item\em Create a group command with the specified number of modules. \end{DoxyCompactList}\item 
+virtual \hyperlink{classhebi_1_1GroupCommand_a382b2ce9d36ab4892a5191407001455c}{$\sim$\+Group\+Command} () noexcept\hypertarget{classhebi_1_1GroupCommand_a382b2ce9d36ab4892a5191407001455c}{}\label{classhebi_1_1GroupCommand_a382b2ce9d36ab4892a5191407001455c}
+
+\begin{DoxyCompactList}\small\item\em Destructor cleans up group command object as necessary. \end{DoxyCompactList}\item 
+int \hyperlink{classhebi_1_1GroupCommand_a75645b28175dde77de35801909d58213}{size} () const \hypertarget{classhebi_1_1GroupCommand_a75645b28175dde77de35801909d58213}{}\label{classhebi_1_1GroupCommand_a75645b28175dde77de35801909d58213}
+
+\begin{DoxyCompactList}\small\item\em Returns the number of module commands in this group command. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command}{Command} \& \hyperlink{classhebi_1_1GroupCommand_afa9edb2ec0c411b4d9ca701350339a90}{operator\mbox{[}$\,$\mbox{]}} (int index)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Hebi\+Group\+Command\+Ptr const \hyperlink{classhebi_1_1GroupCommand_aa3380b0b6c64b2d03df3d5d69a884a12}{internal\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A list of \hyperlink{classhebi_1_1Command}{Command} objects appropriate for sending to a \hyperlink{classhebi_1_1Group}{Group} of modules; the \hyperlink{classhebi_1_1GroupCommand_a75645b28175dde77de35801909d58213}{size()} must match the number of modules in the group. 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Group\+Command@{hebi\+::\+Group\+Command}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!hebi\+::\+Group\+Command@{hebi\+::\+Group\+Command}}
+\subsubsection[{\texorpdfstring{operator[](int index)}{operator[](int index)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Command} \& hebi\+::\+Group\+Command\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{classhebi_1_1GroupCommand_afa9edb2ec0c411b4d9ca701350339a90}{}\label{classhebi_1_1GroupCommand_afa9edb2ec0c411b4d9ca701350339a90}
+brief Access the command for an individual module. 
+
+\subsection{Member Data Documentation}
+\index{hebi\+::\+Group\+Command@{hebi\+::\+Group\+Command}!internal\+\_\+@{internal\+\_\+}}
+\index{internal\+\_\+@{internal\+\_\+}!hebi\+::\+Group\+Command@{hebi\+::\+Group\+Command}}
+\subsubsection[{\texorpdfstring{internal\+\_\+}{internal_}}]{\setlength{\rightskip}{0pt plus 5cm}Hebi\+Group\+Command\+Ptr const hebi\+::\+Group\+Command\+::internal\+\_\+}\hypertarget{classhebi_1_1GroupCommand_aa3380b0b6c64b2d03df3d5d69a884a12}{}\label{classhebi_1_1GroupCommand_aa3380b0b6c64b2d03df3d5d69a884a12}
+C-\/style group command object. N\+O\+TE\+: this should not be used except by library functions! 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+group\+\_\+command.\+hpp\item 
+group\+\_\+command.\+cpp\end{DoxyCompactItemize}

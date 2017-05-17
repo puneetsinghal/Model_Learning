@@ -1,0 +1,62 @@
+\hypertarget{classhebi_1_1Command_1_1StringField}{}\section{hebi\+:\+:Command\+:\+:String\+Field Class Reference}
+\label{classhebi_1_1Command_1_1StringField}\index{hebi\+::\+Command\+::\+String\+Field@{hebi\+::\+Command\+::\+String\+Field}}
+
+
+A message field representable by a std\+::string.  
+
+
+
+
+{\ttfamily \#include $<$command.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries String\+Field} (Hebi\+Command\+Ptr internal, Command\+String\+Field field)\hypertarget{classhebi_1_1Command_1_1StringField_ae7b2fffca27317a938a0915f1c184832}{}\label{classhebi_1_1Command_1_1StringField_ae7b2fffca27317a938a0915f1c184832}
+
+\item 
+\hyperlink{classhebi_1_1Command_1_1StringField_a2ddd1c306a4c8c251002e25912396c23}{operator bool} () const 
+\begin{DoxyCompactList}\small\item\em Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Command_1_1StringField_a41f4d911e4445fc246c185a8b81b3788}{has()}}. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Command_1_1StringField_a41f4d911e4445fc246c185a8b81b3788}{has} () const \hypertarget{classhebi_1_1Command_1_1StringField_a41f4d911e4445fc246c185a8b81b3788}{}\label{classhebi_1_1Command_1_1StringField_a41f4d911e4445fc246c185a8b81b3788}
+
+\begin{DoxyCompactList}\small\item\em True if (and only if) the field has a value. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classhebi_1_1Command_1_1StringField_a266b877cd0b814a51585e42582a450f5}{get} () const \hypertarget{classhebi_1_1Command_1_1StringField_a266b877cd0b814a51585e42582a450f5}{}\label{classhebi_1_1Command_1_1StringField_a266b877cd0b814a51585e42582a450f5}
+
+\begin{DoxyCompactList}\small\item\em If the field has a value, returns a copy of that value; otherwise, returns a default. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Command_1_1StringField_aa5eb648c4d8d97fd8036abdaec0ec9e5}{set} (const std\+::string \&value)\hypertarget{classhebi_1_1Command_1_1StringField_aa5eb648c4d8d97fd8036abdaec0ec9e5}{}\label{classhebi_1_1Command_1_1StringField_aa5eb648c4d8d97fd8036abdaec0ec9e5}
+
+\begin{DoxyCompactList}\small\item\em Sets the field to a given value. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Command_1_1StringField_aaae237fbd2d8a87b101f2687f91ccd0d}{clear} ()\hypertarget{classhebi_1_1Command_1_1StringField_aaae237fbd2d8a87b101f2687f91ccd0d}{}\label{classhebi_1_1Command_1_1StringField_aaae237fbd2d8a87b101f2687f91ccd0d}
+
+\begin{DoxyCompactList}\small\item\em Removes any currently set value for this field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A message field representable by a std\+::string. 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Command\+::\+String\+Field@{hebi\+::\+Command\+::\+String\+Field}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!hebi\+::\+Command\+::\+String\+Field@{hebi\+::\+Command\+::\+String\+Field}}
+\subsubsection[{\texorpdfstring{operator bool() const }{operator bool() const }}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Command\+::\+String\+Field\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classhebi_1_1Command_1_1StringField_a2ddd1c306a4c8c251002e25912396c23}{}\label{classhebi_1_1Command_1_1StringField_a2ddd1c306a4c8c251002e25912396c23}
+
+
+Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Command_1_1StringField_a41f4d911e4445fc246c185a8b81b3788}{has()}}. 
+
+This can be used as in the following (assuming \textquotesingle{}parent\textquotesingle{} is a parent message, and this field is called \textquotesingle{}my\+Field\textquotesingle{}) 
+\begin{DoxyCode}
+Command::StringField& f = parent.myField();
+\textcolor{keywordflow}{if} (f)
+  std::cout << \textcolor{stringliteral}{"Field has value: "} << f.get() << std::endl;
+\textcolor{keywordflow}{else}
+  std::cout << \textcolor{stringliteral}{"Field has no value!"} << std::endl;
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+command.\+hpp\item 
+command.\+cpp\end{DoxyCompactItemize}

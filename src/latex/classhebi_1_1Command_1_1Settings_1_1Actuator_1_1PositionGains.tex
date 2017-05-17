@@ -1,0 +1,67 @@
+\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains}{}\section{hebi\+:\+:Command\+:\+:Settings\+:\+:Actuator\+:\+:Position\+Gains Class Reference}
+\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains}\index{hebi\+::\+Command\+::\+Settings\+::\+Actuator\+::\+Position\+Gains@{hebi\+::\+Command\+::\+Settings\+::\+Actuator\+::\+Position\+Gains}}
+
+
+Controller gains for the position P\+ID loop.  
+
+
+
+
+{\ttfamily \#include $<$command.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Position\+Gains} (Hebi\+Command\+Ptr internal)\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_ac66fc147e71f4d18cdac463840e44295}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_ac66fc147e71f4d18cdac463840e44295}
+
+\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_afc58420b51b0c93de097094233d9ee50}{position\+Kp} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_afc58420b51b0c93de097094233d9ee50}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_afc58420b51b0c93de097094233d9ee50}
+
+\begin{DoxyCompactList}\small\item\em Proportional P\+ID gain for position. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a7e25056d8b5f07ac9327d144efaa0f8c}{position\+Ki} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a7e25056d8b5f07ac9327d144efaa0f8c}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a7e25056d8b5f07ac9327d144efaa0f8c}
+
+\begin{DoxyCompactList}\small\item\em Integral P\+ID gain for position. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a374dffd110adae7a05d2ddabc4d4f21d}{position\+Kd} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a374dffd110adae7a05d2ddabc4d4f21d}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a374dffd110adae7a05d2ddabc4d4f21d}
+
+\begin{DoxyCompactList}\small\item\em Derivative P\+ID gain for position. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_ab8e771ec96b728d1fda38f8d1ecba7dd}{position\+Feed\+Forward} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_ab8e771ec96b728d1fda38f8d1ecba7dd}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_ab8e771ec96b728d1fda38f8d1ecba7dd}
+
+\begin{DoxyCompactList}\small\item\em Feed forward term for position (this term is multiplied by the target and added to the output). \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a074cdcff244cca024fd52d3b2d748e9c}{position\+Dead\+Zone} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a074cdcff244cca024fd52d3b2d748e9c}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a074cdcff244cca024fd52d3b2d748e9c}
+
+\begin{DoxyCompactList}\small\item\em Error values within +/-\/ this value from zero are treated as zero (in terms of computed proportional output, input to numerical derivative, and accumulated integral error). \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a27a970858bd6ca1c4d8b7b99d49c6558}{position\+I\+Clamp} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a27a970858bd6ca1c4d8b7b99d49c6558}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a27a970858bd6ca1c4d8b7b99d49c6558}
+
+\begin{DoxyCompactList}\small\item\em Maximum allowed value for the output of the integral component of the P\+ID loop; the integrated error is not allowed to exceed value that will generate this number. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_ab2a896cf7246703211ae6c5bef75b1c6}{position\+Punch} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_ab2a896cf7246703211ae6c5bef75b1c6}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_ab2a896cf7246703211ae6c5bef75b1c6}
+
+\begin{DoxyCompactList}\small\item\em Constant offset to the position P\+ID output outside of the deadzone; it is added when the error is positive and subtracted when it is negative. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_aeaa99efab55ec3de8cf97ccdee6e0a53}{position\+Min\+Target} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_aeaa99efab55ec3de8cf97ccdee6e0a53}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_aeaa99efab55ec3de8cf97ccdee6e0a53}
+
+\begin{DoxyCompactList}\small\item\em Minimum allowed value for input to the P\+ID controller. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a8e1399e09db0a7b43c4539012d2ac1cb}{position\+Max\+Target} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a8e1399e09db0a7b43c4539012d2ac1cb}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a8e1399e09db0a7b43c4539012d2ac1cb}
+
+\begin{DoxyCompactList}\small\item\em Maximum allowed value for input to the P\+ID controller. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a5e5481f01ae7c708260fac42cdbea5f8}{position\+Target\+Lowpass} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a5e5481f01ae7c708260fac42cdbea5f8}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a5e5481f01ae7c708260fac42cdbea5f8}
+
+\begin{DoxyCompactList}\small\item\em A simple lowpass filter applied to the target set point; needs to be between 0 and 1. At each timestep\+: x\+\_\+t = x\+\_\+t $\ast$ a + x\+\_\+\{t-\/1\} $\ast$ (1 -\/ a). \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a2e0e7d2968222f3274043a315e0eca09}{position\+Min\+Output} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a2e0e7d2968222f3274043a315e0eca09}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a2e0e7d2968222f3274043a315e0eca09}
+
+\begin{DoxyCompactList}\small\item\em Output from the P\+ID controller is limited to a minimum of this value. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_aa828cf2cab9c16748ccbbdb201de1719}{position\+Max\+Output} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_aa828cf2cab9c16748ccbbdb201de1719}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_aa828cf2cab9c16748ccbbdb201de1719}
+
+\begin{DoxyCompactList}\small\item\em Output from the P\+ID controller is limited to a maximum of this value. \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a55a7aa7799b23c147d2ac1be01d27a18}{position\+Output\+Lowpass} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a55a7aa7799b23c147d2ac1be01d27a18}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_a55a7aa7799b23c147d2ac1be01d27a18}
+
+\begin{DoxyCompactList}\small\item\em A simple lowpass filter applied to the controller output; needs to be between 0 and 1. At each timestep\+: x\+\_\+t = x\+\_\+t $\ast$ a + x\+\_\+\{t-\/1\} $\ast$ (1 -\/ a). \end{DoxyCompactList}\item 
+\hyperlink{classhebi_1_1Command_1_1BoolField}{Bool\+Field} \& \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_af2e5fc61e4d8556424f1e6c87c737c91}{position\+D\+On\+Error} ()\hypertarget{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_af2e5fc61e4d8556424f1e6c87c737c91}{}\label{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains_af2e5fc61e4d8556424f1e6c87c737c91}
+
+\begin{DoxyCompactList}\small\item\em Controls whether the Kd term uses the \char`\"{}derivative of error\char`\"{} or \char`\"{}derivative of measurement.\char`\"{} When the setpoints have step inputs or are noisy, setting this to {\ttfamily false} can eliminate corresponding spikes or noise in the output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Controller gains for the position P\+ID loop. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+command.\+hpp\end{DoxyCompactItemize}

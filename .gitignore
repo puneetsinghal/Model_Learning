@@ -29,6 +29,7 @@
 *.sqlite
 *~
 *.swp
+*.pdf
 
 # OS generated files #
 ######################

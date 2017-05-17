@@ -1,11 +1,10 @@
-/**
-    File: arm_dynamics.hpp
-    Description: Calculate the dynamics equations of a 5-DOF HEBI manipulator
+//! Dynamics functions for the HEBI Robotics 5-DOF Manipulator Arm
+/*!Calculate the dynamics equations of a 5-DOF HEBI manipulator
     arm used on the Biorobotics Lab Intelligent Mobile Robot (IMR) project
-    Source File: arm_dynamics.cpp
 
-    @author Ky Woodard
+    @Author Ky Woodard
     @version 1.0 2/12/2017
+ */
 
     Functions:
 		gravityComp
@@ -17,9 +16,7 @@
 				torque - computed torque on the 5 joints [N-m]
 
 		inverseDynamics
-			Description: Calculate the inverse dynamics of the arm, which
-					 	 includes inertia, corriolis, gravitational, and
-					 	 friction effect
+			Description: 
 			Inputs:
 				theta  - current angle of the 5 joints [rad]
 				omega  - current angular velocity of the 5 joints [rad/s]
@@ -29,8 +26,7 @@
 						 at the 5 joints [N-m]
 
 		gravity
-			Description: Calculate the gravity torque of the inverse dynamics
-						 based on the current angle of the joints
+			Description: 
 			Inputs:
 				theta  - current angle of the 5 joints
 			Output:
@@ -61,11 +57,28 @@
 #include <eigen3/Eigen/Eigen>
 
 namespace dynamics {
+	/*! Calculate the necessary torque required to cancel
+						 gravitational forces on the joints
+	*/
 	void gravityComp(const std::vector<double> &, std::vector<double> &);
+	/*!Calculate the inverse dynamics of the arm, which
+					 	 includes inertia, corriolis, gravitational, and
+					 	 friction effect
+	*/
 	void inverseDynamics(const Eigen::VectorXd &,const Eigen::VectorXd &,
 						  const Eigen::VectorXd &,std::vector<double> &);
+	/*!Calculate the gravity torque of the inverse dynamics
+						 based on the current angle of the joints
+	*/
 	static void gravity(const Eigen::VectorXd &,Eigen::VectorXd &);
+	/*!Calculate the inertia torque of the inverse dynamics
+						 based on the current angle of the joints
+	*/
 	static void inertia(const Eigen::VectorXd &,Eigen::MatrixXd &);
+	/*Calculate the corriolis torque of the inverse dynamics
+						 based on the current angle and angular velocity of the
+						 joints
+	*/
 	static void corriolis(const Eigen::VectorXd &,const Eigen::VectorXd &,
 					Eigen::MatrixXd &);
 } //dynamics namespace

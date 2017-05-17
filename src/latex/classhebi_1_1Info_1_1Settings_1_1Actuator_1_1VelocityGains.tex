@@ -1,0 +1,67 @@
+\hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains}{}\section{hebi\+:\+:Info\+:\+:Settings\+:\+:Actuator\+:\+:Velocity\+Gains Class Reference}
+\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains}\index{hebi\+::\+Info\+::\+Settings\+::\+Actuator\+::\+Velocity\+Gains@{hebi\+::\+Info\+::\+Settings\+::\+Actuator\+::\+Velocity\+Gains}}
+
+
+Controller gains for the velocity P\+ID loop.  
+
+
+
+
+{\ttfamily \#include $<$info.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Velocity\+Gains} (Hebi\+Info\+Ptr internal)\hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a68d9acec8debedef74a338a6fd777911}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a68d9acec8debedef74a338a6fd777911}
+
+\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_aa525c85d6afc74d3fe6dd968bada86d8}{velocity\+Kp} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_aa525c85d6afc74d3fe6dd968bada86d8}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_aa525c85d6afc74d3fe6dd968bada86d8}
+
+\begin{DoxyCompactList}\small\item\em Proportional P\+ID gain for velocity. \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_af7a11265d8e8dbe5f538678d1d45bb31}{velocity\+Ki} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_af7a11265d8e8dbe5f538678d1d45bb31}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_af7a11265d8e8dbe5f538678d1d45bb31}
+
+\begin{DoxyCompactList}\small\item\em Integral P\+ID gain for velocity. \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a190ccf8c03a7be011a9de6382b8da7a0}{velocity\+Kd} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a190ccf8c03a7be011a9de6382b8da7a0}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a190ccf8c03a7be011a9de6382b8da7a0}
+
+\begin{DoxyCompactList}\small\item\em Derivative P\+ID gain for velocity. \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_ab91485ba5432152c488c5e12325781ba}{velocity\+Feed\+Forward} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_ab91485ba5432152c488c5e12325781ba}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_ab91485ba5432152c488c5e12325781ba}
+
+\begin{DoxyCompactList}\small\item\em Feed forward term for velocity (this term is multiplied by the target and added to the output). \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_abf91a6e5f99324d0e329834f86bac039}{velocity\+Dead\+Zone} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_abf91a6e5f99324d0e329834f86bac039}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_abf91a6e5f99324d0e329834f86bac039}
+
+\begin{DoxyCompactList}\small\item\em Error values within +/-\/ this value from zero are treated as zero (in terms of computed proportional output, input to numerical derivative, and accumulated integral error). \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a9152d0a51ea8b338943a6886e75f7a23}{velocity\+I\+Clamp} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a9152d0a51ea8b338943a6886e75f7a23}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a9152d0a51ea8b338943a6886e75f7a23}
+
+\begin{DoxyCompactList}\small\item\em Maximum allowed value for the output of the integral component of the P\+ID loop; the integrated error is not allowed to exceed value that will generate this number. \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a22253a114fecc7985bd771fb9b4e905c}{velocity\+Punch} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a22253a114fecc7985bd771fb9b4e905c}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a22253a114fecc7985bd771fb9b4e905c}
+
+\begin{DoxyCompactList}\small\item\em Constant offset to the velocity P\+ID output outside of the deadzone; it is added when the error is positive and subtracted when it is negative. \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a708f0c72f0b1b2269d9c648b7b2d6c89}{velocity\+Min\+Target} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a708f0c72f0b1b2269d9c648b7b2d6c89}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a708f0c72f0b1b2269d9c648b7b2d6c89}
+
+\begin{DoxyCompactList}\small\item\em Minimum allowed value for input to the P\+ID controller. \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_ae950927d151e9f553f96751174cae8ca}{velocity\+Max\+Target} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_ae950927d151e9f553f96751174cae8ca}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_ae950927d151e9f553f96751174cae8ca}
+
+\begin{DoxyCompactList}\small\item\em Maximum allowed value for input to the P\+ID controller. \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_aecb3ce015ca0ca41dccbedf4e4e4b2ba}{velocity\+Target\+Lowpass} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_aecb3ce015ca0ca41dccbedf4e4e4b2ba}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_aecb3ce015ca0ca41dccbedf4e4e4b2ba}
+
+\begin{DoxyCompactList}\small\item\em A simple lowpass filter applied to the target set point; needs to be between 0 and 1. At each timestep\+: x\+\_\+t = x\+\_\+t $\ast$ a + x\+\_\+\{t-\/1\} $\ast$ (1 -\/ a). \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a35e163124b2b0c0d99061a83b23c7447}{velocity\+Min\+Output} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a35e163124b2b0c0d99061a83b23c7447}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a35e163124b2b0c0d99061a83b23c7447}
+
+\begin{DoxyCompactList}\small\item\em Output from the P\+ID controller is limited to a minimum of this value. \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a541acff79a95eea03bfeda88bfc33b14}{velocity\+Max\+Output} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a541acff79a95eea03bfeda88bfc33b14}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a541acff79a95eea03bfeda88bfc33b14}
+
+\begin{DoxyCompactList}\small\item\em Output from the P\+ID controller is limited to a maximum of this value. \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1FloatField}{Float\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a1c21e4265a1970a05d475c5578ecbda8}{velocity\+Output\+Lowpass} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a1c21e4265a1970a05d475c5578ecbda8}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_a1c21e4265a1970a05d475c5578ecbda8}
+
+\begin{DoxyCompactList}\small\item\em A simple lowpass filter applied to the controller output; needs to be between 0 and 1. At each timestep\+: x\+\_\+t = x\+\_\+t $\ast$ a + x\+\_\+\{t-\/1\} $\ast$ (1 -\/ a). \end{DoxyCompactList}\item 
+const \hyperlink{classhebi_1_1Info_1_1BoolField}{Bool\+Field} \& \hyperlink{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_ae9a40f9c3b67495bae30aa20821036aa}{velocity\+D\+On\+Error} () const \hypertarget{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_ae9a40f9c3b67495bae30aa20821036aa}{}\label{classhebi_1_1Info_1_1Settings_1_1Actuator_1_1VelocityGains_ae9a40f9c3b67495bae30aa20821036aa}
+
+\begin{DoxyCompactList}\small\item\em Controls whether the Kd term uses the \char`\"{}derivative of error\char`\"{} or \char`\"{}derivative of measurement.\char`\"{} When the setpoints have step inputs or are noisy, setting this to {\ttfamily false} can eliminate corresponding spikes or noise in the output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Controller gains for the velocity P\+ID loop. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+info.\+hpp\end{DoxyCompactItemize}

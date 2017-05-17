@@ -1,0 +1,68 @@
+\hypertarget{structoption_1_1Parser_1_1Action}{}\section{option\+:\+:Parser\+:\+:Action Struct Reference}
+\label{structoption_1_1Parser_1_1Action}\index{option\+::\+Parser\+::\+Action@{option\+::\+Parser\+::\+Action}}
+
+
+Inheritance diagram for option\+:\+:Parser\+:\+:Action\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structoption_1_1Parser_1_1Action__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{structoption_1_1Parser_1_1Action_a176b5f783bb35eb015b6d2c09422457d}{perform} (\hyperlink{classoption_1_1Option}{Option} \&)
+\begin{DoxyCompactList}\small\item\em Called by Parser\+::workhorse() for each \hyperlink{classoption_1_1Option}{Option} that has been successfully parsed (including unknown options if they have a \hyperlink{structoption_1_1Descriptor}{Descriptor} whose \hyperlink{structoption_1_1Descriptor_aa5d675dba0214a4abd73007ff163cc67}{Descriptor\+::check\+\_\+arg} does not return \hyperlink{namespaceoption_aee8c76a07877335762631491e7a5a1a9a9528e32563b795bd2930b12d0a5e382d}{A\+R\+G\+\_\+\+I\+L\+L\+E\+G\+AL}. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{structoption_1_1Parser_1_1Action_a3ec558b51e34d33d116f14587289e032}{finished} (int numargs, const char $\ast$$\ast$args)
+\begin{DoxyCompactList}\small\item\em Called by Parser\+::workhorse() after finishing the parse. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{option\+::\+Parser\+::\+Action@{option\+::\+Parser\+::\+Action}!finished@{finished}}
+\index{finished@{finished}!option\+::\+Parser\+::\+Action@{option\+::\+Parser\+::\+Action}}
+\subsubsection[{\texorpdfstring{finished(int numargs, const char $\ast$$\ast$args)}{finished(int numargs, const char **args)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool option\+::\+Parser\+::\+Action\+::finished (
+\begin{DoxyParamCaption}
+\item[{int}]{numargs, }
+\item[{const char $\ast$$\ast$}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{structoption_1_1Parser_1_1Action_a3ec558b51e34d33d116f14587289e032}{}\label{structoption_1_1Parser_1_1Action_a3ec558b51e34d33d116f14587289e032}
+
+
+Called by Parser\+::workhorse() after finishing the parse. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em numargs} & the number of non-\/option arguments remaining \\
+\hline
+{\em args} & pointer to the first remaining non-\/option argument (if numargs $>$ 0).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily false} iff a fatal error has occurred. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classoption_1_1Parser_1_1StoreOptionAction_a617f675ef50a72ae36ce91f065bc8441}{option\+::\+Parser\+::\+Store\+Option\+Action}.
+
+\index{option\+::\+Parser\+::\+Action@{option\+::\+Parser\+::\+Action}!perform@{perform}}
+\index{perform@{perform}!option\+::\+Parser\+::\+Action@{option\+::\+Parser\+::\+Action}}
+\subsubsection[{\texorpdfstring{perform(\+Option \&)}{perform(Option &)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool option\+::\+Parser\+::\+Action\+::perform (
+\begin{DoxyParamCaption}
+\item[{{\bf Option} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{structoption_1_1Parser_1_1Action_a176b5f783bb35eb015b6d2c09422457d}{}\label{structoption_1_1Parser_1_1Action_a176b5f783bb35eb015b6d2c09422457d}
+
+
+Called by Parser\+::workhorse() for each \hyperlink{classoption_1_1Option}{Option} that has been successfully parsed (including unknown options if they have a \hyperlink{structoption_1_1Descriptor}{Descriptor} whose \hyperlink{structoption_1_1Descriptor_aa5d675dba0214a4abd73007ff163cc67}{Descriptor\+::check\+\_\+arg} does not return \hyperlink{namespaceoption_aee8c76a07877335762631491e7a5a1a9a9528e32563b795bd2930b12d0a5e382d}{A\+R\+G\+\_\+\+I\+L\+L\+E\+G\+AL}. 
+
+Returns {\ttfamily false} iff a fatal error has occured and the parse should be aborted. 
+
+Reimplemented in \hyperlink{classoption_1_1Parser_1_1StoreOptionAction_a8931919fba5516377c202920db2b2f84}{option\+::\+Parser\+::\+Store\+Option\+Action}, and \hyperlink{classoption_1_1Stats_1_1CountOptionsAction_a29ab8a68d0a30736b99b4d2e5dece489}{option\+::\+Stats\+::\+Count\+Options\+Action}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{optionparser_8h}{optionparser.\+h}\end{DoxyCompactItemize}

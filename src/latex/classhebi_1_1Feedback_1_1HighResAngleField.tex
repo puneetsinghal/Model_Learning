@@ -1,0 +1,91 @@
+\hypertarget{classhebi_1_1Feedback_1_1HighResAngleField}{}\section{hebi\+:\+:Feedback\+:\+:High\+Res\+Angle\+Field Class Reference}
+\label{classhebi_1_1Feedback_1_1HighResAngleField}\index{hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field}}
+
+
+A message field for an angle measurement which does not lose precision at very high angles.  
+
+
+
+
+{\ttfamily \#include $<$feedback.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries High\+Res\+Angle\+Field} (Hebi\+Feedback\+Ptr internal, Feedback\+High\+Res\+Angle\+Field field)\hypertarget{classhebi_1_1Feedback_1_1HighResAngleField_a58cd10f4e873eff00070789de04bcaf2}{}\label{classhebi_1_1Feedback_1_1HighResAngleField_a58cd10f4e873eff00070789de04bcaf2}
+
+\item 
+\hyperlink{classhebi_1_1Feedback_1_1HighResAngleField_a0e5b3a62cbebf87fab67c6b2472a0c95}{operator bool} () const 
+\begin{DoxyCompactList}\small\item\em Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Feedback_1_1HighResAngleField_a770a8c3fd520ed28cdadea60bed7b2d1}{has()}}. \end{DoxyCompactList}\item 
+bool \hyperlink{classhebi_1_1Feedback_1_1HighResAngleField_a770a8c3fd520ed28cdadea60bed7b2d1}{has} () const \hypertarget{classhebi_1_1Feedback_1_1HighResAngleField_a770a8c3fd520ed28cdadea60bed7b2d1}{}\label{classhebi_1_1Feedback_1_1HighResAngleField_a770a8c3fd520ed28cdadea60bed7b2d1}
+
+\begin{DoxyCompactList}\small\item\em True if (and only if) the field has a value. \end{DoxyCompactList}\item 
+double \hyperlink{classhebi_1_1Feedback_1_1HighResAngleField_a7f3beeb902f88bd3956a5d3548d43eec}{get} () const 
+\begin{DoxyCompactList}\small\item\em If the field has a value, returns that value as a double; otherwise, returns a default. \end{DoxyCompactList}\item 
+void \hyperlink{classhebi_1_1Feedback_1_1HighResAngleField_a162ca0cfc811c5e073f90acf5782cc35}{get} (int64\+\_\+t $\ast$revolutions, float $\ast$radian\+\_\+offset) const 
+\begin{DoxyCompactList}\small\item\em If the field has a value, returns that value in the int64 and float parameters passed in; otherwise, returns a default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A message field for an angle measurement which does not lose precision at very high angles. 
+
+This field is represented as an int64\+\_\+t for the number of revolutions and a float for the radian offset from that number of revolutions. 
+
+\subsection{Member Function Documentation}
+\index{hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field}!get@{get}}
+\index{get@{get}!hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field}}
+\subsubsection[{\texorpdfstring{get() const }{get() const }}]{\setlength{\rightskip}{0pt plus 5cm}double hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field\+::get (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhebi_1_1Feedback_1_1HighResAngleField_a7f3beeb902f88bd3956a5d3548d43eec}{}\label{classhebi_1_1Feedback_1_1HighResAngleField_a7f3beeb902f88bd3956a5d3548d43eec}
+
+
+If the field has a value, returns that value as a double; otherwise, returns a default. 
+
+Note that some precision might be lost converting to a double at very high number of revolutions. \index{hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field}!get@{get}}
+\index{get@{get}!hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field}}
+\subsubsection[{\texorpdfstring{get(int64\+\_\+t $\ast$revolutions, float $\ast$radian\+\_\+offset) const }{get(int64_t *revolutions, float *radian_offset) const }}]{\setlength{\rightskip}{0pt plus 5cm}void hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field\+::get (
+\begin{DoxyParamCaption}
+\item[{int64\+\_\+t $\ast$}]{revolutions, }
+\item[{float $\ast$}]{radian\+\_\+offset}
+\end{DoxyParamCaption}
+) const}\hypertarget{classhebi_1_1Feedback_1_1HighResAngleField_a162ca0cfc811c5e073f90acf5782cc35}{}\label{classhebi_1_1Feedback_1_1HighResAngleField_a162ca0cfc811c5e073f90acf5782cc35}
+
+
+If the field has a value, returns that value in the int64 and float parameters passed in; otherwise, returns a default. 
+
+Note that this maintains the full precision of the underlying angle measurement, even for very large numbers of revolutions.
+
+
+\begin{DoxyParams}{Parameters}
+{\em revolutions} & The number of full revolutions\\
+\hline
+{\em radian\+\_\+offset} & The offset from the given number of full revolutions. Note that this is usually between 0 and {\ttfamily 2$\ast$\+M\+\_\+\+PI}, but callers should not assume this. \\
+\hline
+\end{DoxyParams}
+\index{hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field}}
+\subsubsection[{\texorpdfstring{operator bool() const }{operator bool() const }}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Feedback\+::\+High\+Res\+Angle\+Field\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classhebi_1_1Feedback_1_1HighResAngleField_a0e5b3a62cbebf87fab67c6b2472a0c95}{}\label{classhebi_1_1Feedback_1_1HighResAngleField_a0e5b3a62cbebf87fab67c6b2472a0c95}
+
+
+Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Feedback_1_1HighResAngleField_a770a8c3fd520ed28cdadea60bed7b2d1}{has()}}. 
+
+This can be used as in the following (assuming \textquotesingle{}parent\textquotesingle{} is a parent message, and this field is called \textquotesingle{}my\+Field\textquotesingle{}) 
+\begin{DoxyCode}
+Feedback::HighResAngleField& f = parent.myField();
+\textcolor{keywordflow}{if} (f)
+  std::cout << \textcolor{stringliteral}{"Field has value: "} << f.get() << std::endl;
+\textcolor{keywordflow}{else}
+  std::cout << \textcolor{stringliteral}{"Field has no value!"} << std::endl;
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+feedback.\+hpp\item 
+feedback.\+cpp\end{DoxyCompactItemize}
