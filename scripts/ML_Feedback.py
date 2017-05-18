@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import rospy
+import sys
 from geometry_msgs.msg import Pose
 from trajectory_msgs.msg import JointTrajectoryPoint
 from trajectory_msgs.msg import JointTrajectory
@@ -487,6 +488,7 @@ class modelDatabase:
 		self.verify_set_size = 0
 		self.downsample_f = 1000.
 		self.data_cap = 2000
+		self.minimum_f = 50.
 		self.start_time = 0.  #Changed Start time back to 0 from 0.75
 		self.init_position = np.array([0,0,0,0,0])
 		self.joints_ML = np.array([0,1,2,3,4])
@@ -607,7 +609,10 @@ class modelDatabase:
 
 			if self.data_cap<datapoints:
 				limited_f = float(self.data_cap)/float(datapoints)*orig_freq
-				if limited_f<self.downsample_f:
+				if limited_f<self.minimum_f:
+					downsample_f = self.minimum_f
+					print "Minimum",downsample_f,"Frequency Reached"
+				elif limited_f<self.downsample_f:
 					downsample_f = limited_f
 					print "Data Cap Limitting"
 				else:
@@ -641,7 +646,10 @@ class modelDatabase:
 
 			if self.data_cap<datapoints:
 				limited_f = float(self.data_cap)/float(datapoints)*orig_freq
-				if limited_f<self.downsample_f:
+				if limited_f<self.minimum_f:
+					downsample_f = self.minimum_f
+					print "Minimum",downsample_f,"Frequency Reached"
+				elif limited_f<self.downsample_f:
 					downsample_f = limited_f
 					print "Data Cap Limitting"
 				else:
@@ -676,7 +684,10 @@ class modelDatabase:
 
 			if self.data_cap<datapoints:
 				limited_f = float(self.data_cap)/float(datapoints)*orig_freq
-				if limited_f<self.downsample_f:
+				if limited_f<self.minimum_f:
+					downsample_f = self.minimum_f
+					print "Minimum",downsample_f,"Frequency Reached"
+				elif limited_f<self.downsample_f:
 					downsample_f = limited_f
 					print "Data Cap Limitting"
 				else:
@@ -876,15 +887,15 @@ class modelDatabase:
 		self.model = GPy.models.GPRegression(X,Y,self.kernel)
 		self.model.Gaussian_noise = gaus_noise
 		self.model.Gaussian_noise.variance.fix()
-		print self.model
-		print self.model.rbf.lengthscale
+		# print self.model
+		# print self.model.rbf.lengthscale
 		if optimize:
 			if restarts>0:
 				self.model.optimize_restarts(num_restarts=restarts)
 			else:
 				self.model.optimize()
-		print self.model
-		print self.model.rbf.lengthscale
+		# print self.model
+		# print self.model.rbf.lengthscale
 		self.epsOffset = epsOffset
 
 		if len(self.joints_ML) == 1:
@@ -1224,6 +1235,13 @@ if __name__ == '__main__':
 	# 1. = motor on with model learning commands
 	# 2. = motor on without model learning commands
 	try:
+		plotting = 0
+		if len(sys.argv) > 1:
+			if sys.argv[1].lower() == 'minimal':
+				plotting = 1
+			elif sys.argv[1].lower() == 'all':
+				plotting = 2
+
 		motorOn = 2.
 
 		initial_pose = Pose();
@@ -1239,760 +1257,178 @@ if __name__ == '__main__':
 		check_reset = False
 		rospy.init_node('model_learner', anonymous=True)
 
-		cap = [3000]
-		gaus_noise = [1.25]
+		cap = 3000
+		gaus_noise = 1.25
 		nMSE_RBD_array = []
 		nMSE_GP_array = []
 		nMSE_array = []
 		control_info = {}
-		num_of_runs = len(gaus_noise)
-		for j in range(num_of_runs):
-			amp_string = 'pi%18,pi%16'
-			control_info['type'] = "MinJerk"
-			control_info['amp'] = [[np.pi/8,np.pi/10],
-								   [np.pi/16,np.pi/14],
-								   [np.pi/12,np.pi/10],
-								   [np.pi/10,np.pi/6],
-								   [np.pi/8,np.pi/6]]
+		amp_string = 'pi%18,pi%16'
 
-			control_info['freq'] = [[0.3,0.2],
-									[0.3,0.2],
-									[0.3,0.2],
-									[0.3,0.2],
-									[0.3,0.2]]
+		#Setup control struct
+		control_info['type'] = "MinJerk"
+		control_info['amp'] = [[np.pi/8,np.pi/10],
+							   [np.pi/16,np.pi/14],
+							   [np.pi/12,np.pi/10],
+							   [np.pi/10,np.pi/6],
+							   [np.pi/8,np.pi/6]]
+		control_info['p_gain'] = [25.,25.,20.,10.,3.];
+		control_info['v_gain'] = [0.1,0.1,0.1,0.1,0.1];
+		control_info['tf'] = 16.
+		control_info['Set'] = "train"
+		control_info['closedLoop'] = True
+		control_info['feedforward'] = True
+		control_info['ml'] = False
 
-			control_info['phi'] = [[0,0],
-									[-np.pi/2,-np.pi/2],
-									[-np.pi/2,-np.pi/2],
-									[0,0],
-									[0,0]]
+		###### Training the Model ######
+		ps = pubSub(bag=False,control_info=control_info)
+		resetPosition(motorOn,ps)
+		ps.reset()
+		db = modelDatabase(ps)#,deflection=True)
+		db.data_cap = cap
+		db.setJointsToLearn(np.array([0,1,2,3,4]))
 
-			control_info['p_gain'] = [25.,25.,20.,10.,3.];
-  			control_info['v_gain'] = [0.1,0.1,0.1,0.1,0.1];
+		db.controller(motorOn,control_info)
+		resetPosition(motorOn,ps)
+		db.updateSet(New=True,Set="train")
+		db.downSample(Set="train")
 
-			control_info['tf'] = 16.
-			control_info['Set'] = "train"
-			control_info['closedLoop'] = True
-			control_info['feedforward'] = True
-			control_info['ml'] = False
-			# if motorOn:
-			# 	directory_name = control_info['type'] + '-Amp[' + amp_string + ']-Freq' + str(control_info['freq']) + str(datetime.today())
-			# 	os.makedirs(directory_name)
-			# 	ps = pubSub(bag=False,folderName=directory_name,control_info=control_info)
-			# else:
-			# 	ps = pubSub(bag=False,control_info=control_info)
+		#Update and potentially optimize models			
+		db.updateModel(optimize=False,gaus_noise=gaus_noise)
+		ps.unregister()
+		time.sleep(1)
 
+		###### Verifying the Model ######
+		#Update the control_info for the next run
+		control_info['Set'] = "verify"
+		control_info['ml'] = True
 
-			###### Training the Model ######
-			
-			ps = pubSub(bag=False,control_info=control_info)
-			resetPosition(motorOn,ps)
-			ps.reset()
-			db = modelDatabase(ps)#,deflection=True)
-			db.data_cap = cap[0]
-			db.setJointsToLearn(np.array([0,1,2,3,4]))
+		ps = pubSub(bag=False,control_info=control_info)
+		db.ps = ps
+		ps.reset()
+		motorOn = 1.
+		db.data_cap = cap
+		db.setJointsToLearn(np.array([0,1,2,3,4]))
 
-			db.controller(motorOn,control_info)
-			resetPosition(motorOn,ps)
-			db.updateSet(New=True,Set="train")
+		db.controller(motorOn,control_info)
+		resetPosition(motorOn,ps)
+		db.updateSet(New=True,Set="verify")
 
-			control_info['type'] = "MinJerk"
+		###### Testing the Model ######
+		#update the control_info for next run
+		control_info['Set'] = "train"
 
-			# control_info['amp'] = [[np.pi/8,np.pi/10],
-			# 					   [np.pi/16,np.pi/14],
-			# 					   [np.pi/12,np.pi/10],
-			# 					   [np.pi/10,np.pi/6],
-			# 					   [np.pi/8,np.pi/6]]
-			
-			# control_info['freq'] = [[0.4,0.3],
-			# 						[0.4,0.3],
-			# 						[0.4,0.3],
-			# 						[0.4,0.3],
-			# 						[0.4,0.3]]
-			# ps = pubSub(bag=False,control_info=control_info)
-			# ps.reset()
+		ps = pubSub(bag=False,control_info=control_info)
+		db.ps = ps
+		ps.reset()
+		motorOn = 1.
+		db.data_cap = cap
+		db.setJointsToLearn(np.array([0,1,2,3,4]))
 
-			# db.controller(motorOn,control_info)
-			# resetPosition(motorOn,ps)
-			# db.updateSet(New=False,Set="train")
+		db.controller(motorOn,control_info)
+		resetPosition(motorOn,ps)
+		db.updateSet(New=False,Set="train")
+		db.downSample(Set="train")
+		db.updateModel(optimize=False,gaus_noise=gaus_noise)
 
-			# #### BURN IN ####
-			# ps1 = pubSub(bag=False,flush=True,control_info=control_info)
-			# ps1.reset()
-
-			# control_info['freq'] = [[0.7,0.5],
-			# 						[0.7,0.5],
-			# 						[0.7,0.5],
-			# 						[0.7,0.5],
-			# 						[0.7,0.5]]
-
-			# control_info['tf'] = 30.
-			# db.controller(motorOn,control_info)
-			# resetPosition(motorOn,ps1)
-
-			# ### TRAIN AGAIN ####
-			# ps = pubSub(bag=False,control_info=control_info)
-			# resetPosition(motorOn,ps)
-			# ps.reset()
-			# db = modelDatabase(ps)#,deflection=True)
-			# db.data_cap = cap[0]
-			# db.setJointsToLearn(np.array([0,1,2,3,4]))
-
-			# control_info['tf'] = 10.
-			# db.controller(motorOn,control_info)
-			# resetPosition(motorOn,ps)
-			# db.updateSet(New=False,Set="train")
-
-			# control_info['amp'] = [[np.pi/6,np.pi/8],
-			# 					   [np.pi/16,np.pi/14],
-			# 					   [np.pi/12,np.pi/10],
-			# 					   [np.pi/10,np.pi/6],
-			# 					   [np.pi/8,np.pi/6]]
-			
-			# control_info['freq'] = [[0.3,0.1],
-			# 						[0.3,0.1],
-			# 						[0.3,0.1],
-			# 						[0.3,0.1],
-			# 						[0.3,0.1]]
-			# ps = pubSub(bag=False,control_info=control_info)
-			# ps.reset()
-
-			# db.controller(motorOn,control_info)
-			# resetPosition(motorOn,ps)
-			# db.updateSet(New=False,Set="train")
-			# db.downSample(Set="train")
+		##### Testing the Closed Loop Model ######
+		control_info['Set'] = "test"
+		ps = pubSub(bag=False,control_info=control_info)
+		db.ps = ps
+		ps.reset()
+		motorOn = 1.
+		db.controller(motorOn,control_info)
+		resetPosition(motorOn,ps)
+		db.updateSet(New=True,Set="test")
 
 
 
-			
-			#Create Deflection Model
-			# db_def = modelDatabase(ps,deflection=True)
-			# db_def.train_set = db.train_set
-			# db_def.train_mod_set = db.train_mod_set
+		# for j in range(db.train_mod_set.time.size):
+		# 	if db.train_mod_set.time[j]>10.:
+		# 		final_index = j
+		# 		break
 
-			# db_def.joints_ML = db.joints_ML
+		# cross_point = -0.7
 
-			#Update and potaentially optimize Models			
-			db.updateModel(optimize=False,gaus_noise=gaus_noise[j])
-			# db_def.updateModel(optimize=False,gaus_noise=gaus_noise[j])
+		# for i in range(db.test_set.positionCmd[2].size):
+		# 	if db.test_set.positionCmd[2][i] > cross_point:
+		# 		if np.abs(db.test_set.positionCmd[2][i] - 2.0) > np.abs(db.test_set.positionCmd[2][i-1] - 2.0):
+		# 			time_cross_GP = db.test_set.time[i-1]
+		# 		else:
+		# 			time_cross_GP = db.test_set.time[i]
+		# 		break
 
-			ps.unregister()
+		# for i in range(db.verify_set.positionCmd[2].size):
+		# 	if db.verify_set.positionCmd[2][i] > cross_point:
+		# 		if np.abs(db.verify_set.positionCmd[2][i] - 2.0) > np.abs(db.verify_set.positionCmd[2][i-1] - 2.0):
+		# 			time_cross_PD = db.verify_set.time[i-1]
+		# 		else:
+		# 			time_cross_PD = db.verify_set.time[i]
+		# 		break
 
-			######
-			time.sleep(2)
+		# time_offset_PD = time_cross_GP-time_cross_PD
+		# print time_cross_PD
+		# print time_cross_GP
+		# print time_offset_PD
 
-			# control_info['feedforward'] = False
-			# control_info['p_gain'] = [100.,120.,120.,20.,8.] #[60.,80.,80.,20.,8.];
-  	# 		control_info['v_gain'] = [1.,1.,1.,0.1,0.1] #[1.,1.,1.,0.1,0.1]
+		final_index = db.verify_set.time.size
+		time.sleep(2)
 
-  			control_info['Set'] = "verify"
-			control_info['closedLoop'] = True
-			control_info['feedforward'] = True
-			control_info['ml'] = True
-			control_info['freq'] = [[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3]]
-
-			# control_info['p_gain'] = [14.,14.,14.,8.,2.];
-  	# 		control_info['v_gain'] = [0.1,0.1,0.1,0.1,0.1];
-			ps = pubSub(bag=False,control_info=control_info)
-			db.ps = ps
-			ps.reset()
-			motorOn = 1.
-			db.data_cap = cap[0]
-			db.setJointsToLearn(np.array([0,1,2,3,4]))
-
-			db.controller(motorOn,control_info)
-			resetPosition(motorOn,ps)
-			db.updateSet(New=True,Set="verify")
-
-  			control_info['Set'] = "train"
-			control_info['closedLoop'] = True
-			control_info['feedforward'] = True
-			control_info['ml'] = True
-			control_info['freq'] = [[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3]]
-
-			# control_info['p_gain'] = [14.,14.,14.,8.,2.];
-  	# 		control_info['v_gain'] = [0.1,0.1,0.1,0.1,0.1];
-			ps = pubSub(bag=False,control_info=control_info)
-			db.ps = ps
-			ps.reset()
-			motorOn = 1.
-			db.data_cap = cap[0]
-			db.setJointsToLearn(np.array([0,1,2,3,4]))
-
-			db.controller(motorOn,control_info)
-			resetPosition(motorOn,ps)
-			db.updateSet(New=False,Set="train")
-			# db.updateSet(New=False,Set="train")
-
-			db.updateModel(optimize=False,gaus_noise=gaus_noise[j])
-
-			###### Verifying the Model ######
-			# control_info['Set'] = "verify"
-			# control_info['closedLoop'] = True
-			# control_info['ml'] = False
-			# # control_info['amp'] = [[np.pi/8,np.pi/10],
-			# # 					   [np.pi/18,np.pi/16],
-			# # 					   [np.pi/14,np.pi/12],
-			# # 					   [np.pi/14,np.pi/10],
-			# # 					   [np.pi/14,np.pi/10]]
-			# control_info['freq'] = [[0.4,0.3],
-			# 						[0.4,0.3],
-			# 						[0.4,0.3],
-			# 						[0.4,0.3],
-			# 						[0.4,0.3]]
-			# control_info['tf'] = 10.
-
-			# # if motorOn:
-			# # 	ps = pubSub(bag=True,folderName=directory_name,control_info=control_info)
-			# # else:
-			# # 	ps = pubSub(bag=False,control_info=control_info)
-			# ps = pubSub(bag=False,control_info=control_info)
-			# db.ps = ps
-			# ps.reset()
-			
-			# db.controller(motorOn,control_info)
-			# resetPosition(motorOn,ps)
-			# db.updateSet(New=True,Set="verify")
-			# db_def.verify_set = db.verify_set
-			# # db.verifyData(Set="verify")
-			# # db_def.verifyData(Set="verify")
-			######
-
-			##### Testing the Closed Loop Model ######
-			control_info['Set'] = "test"
-			control_info['closedLoop'] = True
-			control_info['feedforward'] = True
-			control_info['ml'] = True
-			control_info['freq'] = [[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3]]
-
-			# control_info['p_gain'] = [14.,14.,14.,8.,2.];
-  	# 		control_info['v_gain'] = [0.1,0.1,0.1,0.1,0.1];
-			# if motorOn:
-			# 	ps = pubSub(bag=True,folderName=directory_name,control_info=control_info)
-			# else:
-			# 	ps = pubSub(bag=False,control_info=control_info)
-			ps = pubSub(bag=False,control_info=control_info)
-			db.ps = ps
-			ps.reset()
-			motorOn = 1.
-			db.controller(motorOn,control_info)
-			resetPosition(motorOn,ps)
-			db.updateSet(New=True,Set="test")
-			# db.updateSet(New=False,Set="train")
-			#####
-
-			##### Verifying the Closed Loop Model ######
-			# control_info['Set'] = "verify"
-			# control_info['closedLoop'] = True
-			# control_info['ml'] = False
-			# control_info['freq'] = [[0.4,0.3],
-			# 						[0.4,0.3],
-			# 						[0.4,0.3],
-			# 						[0.4,0.3],
-			# 						[0.4,0.3]]
-			# # if motorOn:
-			# # 	ps = pubSub(bag=True,folderName=directory_name,control_info=control_info)
-			# # else:
-			# # 	ps = pubSub(bag=False,control_info=control_info)
-			# ps = pubSub(bag=False,control_info=control_info)
-			# db.ps = ps
-			# ps.reset()
-			# motorOn = 2.
-			# db.controller(motorOn,control_info)
-			# resetPosition(motorOn,ps)
-			# db.updateSet(New=True,Set="verify")
-			#####
-
-
-			# for j in range(db.train_mod_set.time.size):
-			# 	if db.train_mod_set.time[j]>10.:
-			# 		final_index = j
-			# 		break
-
-			# cross_point = -0.7
-
-			# for i in range(db.test_set.positionCmd[2].size):
-			# 	if db.test_set.positionCmd[2][i] > cross_point:
-			# 		if np.abs(db.test_set.positionCmd[2][i] - 2.0) > np.abs(db.test_set.positionCmd[2][i-1] - 2.0):
-			# 			time_cross_GP = db.test_set.time[i-1]
-			# 		else:
-			# 			time_cross_GP = db.test_set.time[i]
-			# 		break
-
-			# for i in range(db.verify_set.positionCmd[2].size):
-			# 	if db.verify_set.positionCmd[2][i] > cross_point:
-			# 		if np.abs(db.verify_set.positionCmd[2][i] - 2.0) > np.abs(db.verify_set.positionCmd[2][i-1] - 2.0):
-			# 			time_cross_PD = db.verify_set.time[i-1]
-			# 		else:
-			# 			time_cross_PD = db.verify_set.time[i]
-			# 		break
-
-			# time_offset_PD = time_cross_GP-time_cross_PD
-			# print time_cross_PD
-			# print time_cross_GP
-			# print time_offset_PD
-
-			final_index = db.verify_set.time.size
-			time.sleep(2)
-
-			# time_offset_PD = np.mean(db.train_set.time[100:500]-db.verify_set.time[100:500])
-			
-			for k in range(db.joints_ML.size):
+		# time_offset_PD = np.mean(db.train_set.time[100:500]-db.verify_set.time[100:500])
+		
+		for k in range(db.joints_ML.size):
+			if plotting > 0:
 				plt.figure(30+k)
-				
 				plt.plot(db.train_set.time[:final_index],db.train_set.position[db.joints_ML[k],:final_index],linewidth=3,label='RBD',color='b')
 				plt.plot(db.verify_set.time[:final_index],db.verify_set.position[db.joints_ML[k],:final_index],linewidth=3,label='Task-Based GP Trial 1',color='m')
-				# plt.scatter(db.verify_set.time[:final_index],db.verify_set.position[db.joints_ML[k],:final_index],label='No Learning')
-				# plt.figure(40+k)
-				# plt.plot(db.verify_set.time[:final_index],db.verify_set.velocity[0,:final_index])
-				# plt.scatter(db.verify_set.time[:final_index],db.verify_set.velocity[0,:final_index],label='No Learning')
-
-			####### TESTING 
-
-			# control_info['Set'] = "test"
-			# control_info['closedLoop'] = False
-			# control_info['ml'] = True
 			
-			# if motorOn:
-			# 	ps = pubSub(bag=True,folderName=directory_name,control_info=control_info)
-			# else:
-			# 	ps = pubSub(bag=False,control_info=control_info)
-			# db.ps = ps
-			# ps.reset()
-			
-			# db.controller(motorOn,control_info)
-			# resetPosition(motorOn,ps)
-			# db.updateSet(New=True,Set="test")
-			# db.verifyData(Set="test")
+			if plotting == 2:
+				plt.figure(40+k)
+				plt.plot(db.train_set.time[:final_index],db.train_set.velocityFlt[db.joints_ML[k],:final_index],linewidth=3,label='RBD',color='b')
+				plt.plot(db.verify_set.time[:final_index],db.verify_set.velocityFlt[db.joints_ML[k],:final_index],linewidth=3,label='Task-Based GP Trial 1',color='m')
+		
 
-			# time.sleep(2)
+		#### TRACKING PLOTS #####
+		# time_offset_GP = np.mean(db.train_set.time[100:500]-db.test_set.time[100:500])
+		
+		for k in range(db.joints_ML.size):
+			idx = db.joints_ML[k]
 
-			#######
-
-			#### TRACKING PLOTS #####
-
-			
-
-			N = 10000
-			
-			t0 = db.test_set.time[0]
-			tf = 10.-t0
-			dt = tf/N
-
-			initial_position = db.init_position[db.joints_ML]
-			initial_position.shape = (initial_position.size,1)
-
-			# time_offset_GP = np.mean(db.train_set.time[100:500]-db.test_set.time[100:500])
-			
-			for k in range(db.joints_ML.size):
-				idx = db.joints_ML[k]
-				pos,vel,accel = superpositionSine(t0,amp=control_info['amp'][idx],f=control_info['freq'][idx])
-
-				positionCmd = pos+initial_position[idx]
-				velocityCmd = vel
-				accelCmd = accel
-				timeCmd = np.array(t0)
-				t = t0
-
-				for i in range(N):
-					t += dt
-					pos,vel,accel = (superpositionSine(t,amp=control_info['amp'][idx],f=control_info['freq'][idx]))
-					positionCmd = np.hstack((positionCmd,pos+initial_position[idx]))
-					velocityCmd = np.hstack((velocityCmd,vel))
-					accelCmd = np.hstack((accelCmd,accel))
-					timeCmd = np.hstack((timeCmd,t))
-
-				RMSE_PD_pos = np.sqrt(np.mean(np.square(db.verify_set.positionCmd[db.joints_ML[k],:final_index]-db.verify_set.position[db.joints_ML[k],:final_index])))
-				RMSE_RBD_pos = np.sqrt(np.mean(np.square(db.train_set.positionCmd[db.joints_ML[k],:final_index]-db.train_set.position[db.joints_ML[k],:final_index])))
-				RMSE_GP_pos = np.sqrt(np.mean(np.square(db.test_set.positionCmd[db.joints_ML[k]]-db.test_set.position[db.joints_ML[k]])))
-				print k+1,"Pos_RMSE_RBD: ", RMSE_PD_pos
-				print k+1,"Pos_RMSE_RBD: ", RMSE_RBD_pos
-				print k+1,"Pos_RMSE_GP: ", RMSE_GP_pos
-				print k+1,"Percentage Improvement in Position: ", (RMSE_RBD_pos-RMSE_GP_pos)/RMSE_RBD_pos*100
+			RMSE_PD_pos = np.sqrt(np.mean(np.square(db.verify_set.positionCmd[db.joints_ML[k],:final_index]-db.verify_set.position[db.joints_ML[k],:final_index])))
+			RMSE_RBD_pos = np.sqrt(np.mean(np.square(db.train_set.positionCmd[db.joints_ML[k],:final_index]-db.train_set.position[db.joints_ML[k],:final_index])))
+			RMSE_GP_pos = np.sqrt(np.mean(np.square(db.test_set.positionCmd[db.joints_ML[k]]-db.test_set.position[db.joints_ML[k]])))
+			print "Joint",k+1,"Pos_RMSE_RBD: ", RMSE_PD_pos
+			print "Joint",k+1,"Pos_RMSE_RBD: ", RMSE_RBD_pos
+			print "Joint",k+1,"Pos_RMSE_GP: ", RMSE_GP_pos
+			print "Joint",k+1,"Percentage Improvement in Position: ", (RMSE_RBD_pos-RMSE_GP_pos)/RMSE_RBD_pos*100
+			if plotting > 0:
 				plt.figure(30+k)
 				plt.plot(db.test_set.time,db.test_set.position[db.joints_ML[k]],linewidth=3,color="green",label='Task-Based GP Trial 2')
-				# plt.scatter(db.test_set.time,db.test_set.position[db.joints_ML[k]],color="green",label='Learning')
-				# plt.plot(timeCmd,positionCmd,'r--',linewidth=3,label='Reference')
-				#plt.plot(db.train_set.time,db.train_set.positionCmd[db.joints_ML[k]],'r--',linewidth=3,label='Desired')
 				plt.plot(db.test_set.time,db.test_set.positionCmd[db.joints_ML[k]],'r--',linewidth=3,label='Desired')
-				# plt.plot(db.verify_set.time+time_offset_PD,db.verify_set.positionCmd[db.joints_ML[k]],'m--',linewidth=3,label='Desired')
-				# plt.plot(db.verify_set.time,db.verify_set.positionCmd[db.joints_ML[k]],'m--',linewidth=3,label='Desired')
 				plt.title('Joint Position Tracking Comparison of Unlearned Versus Learned')
 				plt.legend()
 				plt.ylabel('Position [rad]')
 				plt.xlabel('Time [s]')
-			
-				# plt.figure(40+k)
-				# plt.plot(db.test_set.time,db.test_set.velocity[db.joints_ML[k]],color="green")
-				# plt.scatter(db.test_set.time,db.test_set.velocity[db.joints_ML[k]],color="green",label='Learning')
-				# plt.plot(timeCmd,velocityCmd,'r--',linewidth=3,label='Reference')
-				# plt.title('Joint Velocity Tracking Comparison of Unlearned Versus Learned')
-				# plt.legend()
-				# plt.ylabel('Velocity [rad/s]')
-				# plt.xlabel('Time [s]')
+		
+			if plotting == 2:
+				plt.figure(40+k)
+				plt.plot(db.test_set.time,db.test_set.velocityFlt[db.joints_ML[k]],linewidth=3,color="green",label='Task-Based GP Trial 2')
+				plt.plot(db.test_set.time,db.test_set.velocityCmd[db.joints_ML[k]],'r--',linewidth=3,label='Desired')
+				plt.title('Joint Velocity Tracking Comparison of Unlearned Versus Learned')
+				plt.legend()
+				plt.ylabel('Velocity [rad/s]')
+				plt.xlabel('Time [s]')
 
 				plt.figure(50+k)
-				# plt.plot(db.train_set.time,db.train_set.torqueCmd[db.joints_ML[k]],color="cyan",label='Commanded Torque')
 				plt.plot(db.test_set.time,db.test_set.torqueCmd[db.joints_ML[k]],color="green",label='Commanded Torque')
 				plt.plot(db.test_set.time,db.test_set.torqueID[db.joints_ML[k]],color="blue", label='RBD Torque')
 				plt.plot(db.test_set.time,db.test_set.torqueID[db.joints_ML[k]]+db.test_set.epsTau[db.joints_ML[k]],color="red",label='GP Torque')
-				plt.title('Comparison of Commanded Torque with RBD Computed Torque and GP+RBD Torque')
+				plt.title('Comparison of Commanded Torque with RBD Computed Torque and GP+RBD Torque for Trial 2')
 				plt.legend()
 				plt.ylabel('Torque [N-m]')
 				plt.xlabel('Time [s]')
 
-			c_x = 0.0
-			c_y = 0.3
-			c_z = -0.025
-			radius = 0.095
-			tf = 2.5
-
-			N = 1000
-			tim = np.linspace(0,tf,N)
-			ref_x = []
-			ref_y = []
-			for i in range(N):
-				ref_x = np.append(ref_x,c_x + radius*np.cos(2*np.pi*tim[i]/tf))
-				ref_y = np.append(ref_y,c_y + radius*np.sin(2*np.pi*tim[i]/tf))
-
-			ref_z = c_z*np.ones((ref_x.shape))
-
-			verify_position = db.verify_set.position.T
-			T = TG.forwardKinematics(verify_position[0])
-
-			verify_x = T[0][3]
-			verify_y = T[1][3]
-			verify_z = T[2][3]
-
-			for i in range(1,db.verify_set.time.size):
-				T = TG.forwardKinematics(verify_position[i])
-				verify_x = np.append(verify_x,T[0][3])
-				verify_y = np.append(verify_y,T[1][3])
-				verify_z = np.append(verify_z,T[2][3])
-
-
-			test_position = db.test_set.position.T
-			T = TG.forwardKinematics(test_position[0])
-
-			test_x = T[0][3]
-			test_y = T[1][3]
-			test_z = T[2][3]
-
-			for i in range(1,db.test_set.time.size):
-				T = TG.forwardKinematics(test_position[i])
-				test_x = np.append(test_x,T[0][3])
-				test_y = np.append(test_y,T[1][3])
-				test_z = np.append(test_z,T[2][3])
-
-			train_position = db.train_set.position.T
-			T = TG.forwardKinematics(train_position[0])
-
-			train_x = T[0][3]
-			train_y = T[1][3]
-			train_z = T[2][3]
-
-			for i in range(1,db.train_set.time.size):
-				T = TG.forwardKinematics(train_position[i])
-				train_x = np.append(train_x,T[0][3])
-				train_y = np.append(train_y,T[1][3])
-				train_z = np.append(train_z,T[2][3])
-
-
-			plt.figure(99)
-			plt.plot(verify_x,verify_y,'m',linewidth=2,label='PD with Gravity Comp')
-			plt.plot(train_x,train_y,'b',linewidth=2,label='RBD')
-			plt.plot(test_x,test_y,'g',linewidth=2,label='Task-Based GP')
-
-			plt.figure(100)
-			plt.plot(verify_x,verify_z,'m',linewidth=2,label='PD with Gravity Comp')
-			plt.plot(train_x,train_z,'b',linewidth=2,label='RBD')
-			plt.plot(test_x,test_z,'g',linewidth=2,label='Task-Based GP')
-
-			## Relearn
-			# db.updateModel(optimize=True,gaus_noise=gaus_noise[j])
-
-			##### Testing the Closed Loop Model ######
-			control_info['Set'] = "test"
-			control_info['closedLoop'] = True
-			control_info['ml'] = True
-			control_info['freq'] = [[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3],
-									[0.4,0.3]]
-			# # if motorOn:
-			# # 	ps = pubSub(bag=True,folderName=directory_name,control_info=control_info)
-			# # else:
-			# # 	ps = pubSub(bag=False,control_info=control_info)
-			# ps = pubSub(bag=False,control_info=control_info)
-			# db.ps = ps
-			# ps.reset()
-			# motorOn = 1.
-			# db.controller(motorOn,control_info)
-			# resetPosition(motorOn,ps)
-			# db.updateSet(New=True,Set="test")
-			#####
-
-			N = 10000
-			
-			t0 = db.test_set.time[0]
-			tf = 10.-t0
-			dt = tf/N
-
-			initial_position = db.init_position[db.joints_ML]
-			initial_position.shape = (initial_position.size,1)
-
-			
-			# for k in range(db.joints_ML.size):
-			# 	idx = db.joints_ML[k]
-			# 	pos,vel,accel = superpositionSine(t0,amp=control_info['amp'][idx],f=control_info['freq'][idx])
-
-			# 	positionCmd = pos+initial_position[idx]
-			# 	velocityCmd = vel
-			# 	accelCmd = accel
-			# 	timeCmd = np.array(t0)
-			# 	t = t0
-
-			# 	for i in range(N):
-			# 		t += dt
-			# 		pos,vel,accel = (superpositionSine(t,amp=control_info['amp'][idx],f=control_info['freq'][idx]))
-			# 		positionCmd = np.hstack((positionCmd,pos+initial_position[idx]))
-			# 		velocityCmd = np.hstack((velocityCmd,vel))
-			# 		accelCmd = np.hstack((accelCmd,accel))
-			# 		timeCmd = np.hstack((timeCmd,t))
-
-			# 	RMSE_RBD_pos = np.sqrt(np.mean(np.square(db.verify_set.positionCmd[db.joints_ML[k],:final_index]-db.verify_set.position[db.joints_ML[k],:final_index])))
-			# 	RMSE_GP_pos = np.sqrt(np.mean(np.square(db.test_set.positionCmd[db.joints_ML[k]]-db.test_set.position[db.joints_ML[k]])))
-			# 	print k+1,"Pos_RMSE_RBD: ", RMSE_RBD_pos
-			# 	print k+1,"Pos_RMSE_GP: ", RMSE_GP_pos
-			# 	print k+1,"Percentage Improvement in Position: ", (RMSE_RBD_pos-RMSE_GP_pos)/RMSE_RBD_pos*100
-
-			# 	plt.figure(30+k)
-			# 	plt.plot(db.test_set.time,db.test_set.position[db.joints_ML[k]],color="cyan")
-			# 	#plt.scatter(db.test_set.time,db.test_set.position[db.joints_ML[k]],color="cyan",label='ReLearning')
-			# 	#plt.plot(timeCmd,positionCmd,'r--',linewidth=3,label='Reference')
-			# 	#plt.plot(db.verify_set.time,db.verify_set.positionCmd[db.joints_ML[k]],'b--',linewidth=3,label='Reference')
-			# 	plt.plot(db.test_set.time,db.test_set.positionCmd[db.joints_ML[k]],'c--',linewidth=3,label='Reference')
-			# 	plt.title('Joint Position Tracking Comparison of Unlearned Versus Learned')
-			# 	plt.legend()
-			# 	plt.ylabel('Position [rad]')
-			# 	plt.xlabel('Time [s]')
-			
-			# 	plt.figure(40+k)
-			# 	plt.plot(db.test_set.time,db.test_set.velocity[db.joints_ML[k]],color="green")
-			# 	plt.scatter(db.test_set.time,db.test_set.velocity[db.joints_ML[k]],color="green",label='Learning')
-			# 	plt.plot(timeCmd,velocityCmd,'r--',linewidth=3,label='Reference')
-			# 	plt.title('Joint Velocity Tracking Comparison of Unlearned Versus Learned')
-			# 	plt.legend()
-			# 	plt.ylabel('Velocity [rad/s]')
-			# 	plt.xlabel('Time [s]')
-
-			# 	plt.figure(50+k)
-			# 	# plt.plot(db.train_set.time,db.train_set.torqueCmd[db.joints_ML[k]],color="cyan",label='Commanded Torque')
-			# 	plt.plot(db.test_set.time,db.test_set.torqueCmd[db.joints_ML[k]],color="cyan",label='Commanded Torque')
-			# 	#plt.plot(db.test_set.time,db.test_set.torqueID[db.joints_ML[k]],color="blue", label='RBD Torque')
-			# 	#plt.plot(db.test_set.time,db.test_set.torqueID[db.joints_ML[k]]+db.test_set.epsTau[db.joints_ML[k]],color="red",label='GP Torque')
-			# 	plt.title('Comparison of Commanded Torque with RBD Computed Torque and GP+RBD Torque')
-			# 	plt.legend()
-			# 	plt.ylabel('Torque [N-m]')
-			# 	plt.xlabel('Time [s]')
-
-			
-
-			
-
-			test_position = db.test_set.position.T
-			T = TG.forwardKinematics(test_position[0])
-
-			test_x = T[0][3]
-			test_y = T[1][3]
-			test_z = T[2][3]
-
-			for i in range(1,db.test_set.time.size):
-				T = TG.forwardKinematics(test_position[i])
-				test_x = np.append(test_x,T[0][3])
-				test_y = np.append(test_y,T[1][3])
-				test_z = np.append(test_z,T[2][3])
-
-			plt.figure(99)
-			plt.plot(ref_x,ref_y,'r--',linewidth=2,label='Desired')
-			# .plot(test_x,test_y,'c',linewidth=2,label='With Relearning')
-			plt.axis('equal')
-			plt.legend()
-			plt.xlabel('X [m]')
-			plt.ylabel('Y [m]')
-
-			plt.figure(100)
-			plt.plot(ref_x,ref_z,'r--',linewidth=2,label='Desired')
-			# .plot(test_x,test_y,'c',linewidth=2,label='With Relearning')
-			plt.axis('equal')
-			plt.legend()
-			plt.xlabel('X [m]')
-			plt.ylabel('Z [m]')
-
-			#### TRACKING PLOTS #####
-			plt.show()
-			
-
-			#### COMMENTED IMPORTANT SECTION
-				# cmd_variance = np.var(db.test_set.torqueCmd[db.joints_ML[k]])
-				# nMSE_RBD = np.mean(np.square(db.test_set.torqueCmd[db.joints_ML[k]]-db.test_set.torqueID[db.joints_ML[k]]))/cmd_variance
-				# nMSE_GP = np.mean(np.square(db.test_set.torqueCmd[db.joints_ML[k]]-(db.test_set.torqueID[db.joints_ML[k]]+db.test_set.epsTau[db.joints_ML[k]])))/cmd_variance
-
-				# # for j in range(db.verify_set.time.size):
-				# # 	if db.verify_set.time[j]>10.:
-				# # 		final_index = j
-				# # 		break
-				
-				# print k+1,"nMSE_RBD: ", nMSE_RBD
-				# print k+1,"nMSE_GP: ", nMSE_GP
-				# print k+1,"Percentage Improvement: ", (nMSE_RBD-nMSE_GP)/nMSE_RBD*100
-				
-				# nMSE_RBD_array.append(nMSE_RBD)
-				# nMSE_GP_array.append(nMSE_GP)
-				# nMSE_array.append((nMSE_RBD-nMSE_GP)/nMSE_RBD*100)
-
-
-				
-
-					# RMSE_RBD_vel = np.sqrt(np.mean(np.square(db.verify_set.velocityCmd[db.joints_ML[k],:final_index]-db.verify_set.velocity[db.joints_ML[k],:final_index])))
-					# RMSE_GP_vel = np.sqrt(np.mean(np.square(db.test_set.velocityCmd[db.joints_ML[k]]-db.test_set.velocity[db.joints_ML[k]])))
-					# print k+1,"Vel_RMSE_RBD: ", RMSE_RBD_vel
-					# print k+1,"Vel_RMSE_GP :", RMSE_GP_vel
-					# print k+1,"Percentage Improvement in Velocity: ", (RMSE_RBD_vel-RMSE_GP_vel)/RMSE_RBD_vel*100
-			
-				# print j/float(num_of_runs)*100., " Percent Done"
-
-
-				#### COMMENTED IMPORTANT SECTION
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	# print nMSE_RBD_array
-	# print nMSE_GP_array
-	# print nMSE_array
-	# plt.plot(cap,nMSE_array)
-	# plt.title('Percent Improvement on Predicted Torque nMSE Over Data Points in Training Set')
-	# plt.ylabel('Percent Improvement [%]')
-	# plt.xlabel('Data Points in Training Set')
-
-	# fig, ax = plt.subplots()
-	# index = np.arange(len(cap))
-	# bar_width = 0.25
-	# opacity = 0.5
-	 
-	# rects1 = plt.bar(index, nMSE_RBD_array, bar_width,
-	#					alpha=opacity,
-	#					color='b',
-	#					label='RBD Model')
-	 
-	# rects2 = plt.bar(index + bar_width, nMSE_GP_array, bar_width,
-	#					alpha=opacity,
-	#					color='g',
-	#					abel='RBD+GP Model')
-	 
-	# plt.title('Prediction nMSE Over DataPoints in Training Set')
-	# plt.ylabel('Torque nMSE')
-	# plt.xlabel('Data Points in Training Set')
-	# plt.xticks(index + bar_width, cap)
-	# plt.legend()
-	 
-	# plt.tight_layout()
-
-
-
-	# plt.figure()
-	# plt.plot(db.train_mod_set.time,db.train_mod_set.torqueCmd[0],color="cyan")
-	# plt.scatter(db.verify_set.time,db.verify_set.torqueID[0])
-	# # plt.scatter(db.train_mod_set.time,db.train_mod_set.torqueID[0],color="red")
-	# plt.plot(db.test_set.time,db.test_set.torqueCmd[0],color="red")
-	# plt.scatter(db.test_set.time,db.test_set.torqueID[0],color="green")
-
-	# plt.figure()
-	# plt.scatter(db1.verify_set.time,db1.verify_set.position[0],color="cyan")
-	# plt.scatter(db1.train_mod_set.time,db1.train_mod_set.position[0])
-	# plt.title('Full Sample Frequency versus Downsampled Frequency of Data Points')
-	# plt.ylabel('Position [rad]')
-	# plt.xlabel('Time [s]')
-
-	# plt.figure()
-	# plt.scatter(db.verify_set.time,db.verify_set.position[0],color="cyan")
-	# plt.scatter(db.train_mod_set.time,db.train_mod_set.position[0])
-	# plt.title('Full Sample Frequency versus Downsampled Frequency of Data Points')
-	# plt.ylabel('Position [rad]')
-	# plt.xlabel('Time [s]')
+		plt.show()
 	
 	except:
 		ps = pubSub()

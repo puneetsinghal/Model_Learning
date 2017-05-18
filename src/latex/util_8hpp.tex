@@ -1,0 +1,52 @@
+\hypertarget{util_8hpp}{}\section{util.\+hpp File Reference}
+\label{util_8hpp}\index{util.\+hpp@{util.\+hpp}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{util_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{util_8hpp_abf37e44be3754a1f293808756b307673}{H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+P\+Y\+\_\+\+M\+O\+VE}(Class)
+\item 
+\#define \hyperlink{util_8hpp_a2e1ab9148688df20e3ba3399d558cc36}{H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+PY}(Class)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{util.\+hpp@{util.\+hpp}!H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+PY@{H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+PY}}
+\index{H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+PY@{H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+PY}!util.\+hpp@{util.\+hpp}}
+\subsubsection[{\texorpdfstring{H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+PY}{HEBI_DISABLE_COPY}}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+PY(
+\begin{DoxyParamCaption}
+\item[{}]{Class}
+\end{DoxyParamCaption}
+)}\hypertarget{util_8hpp_a2e1ab9148688df20e3ba3399d558cc36}{}\label{util_8hpp_a2e1ab9148688df20e3ba3399d558cc36}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{comment}{/* Disable copy constructor. */} \(\backslash\)
+Class(\textcolor{keyword}{const} Class& other) = \textcolor{keyword}{delete}; \(\backslash\)
+\textcolor{comment}{/* Disable copy assigment operator. */} \(\backslash\)
+Class& operator= (\textcolor{keyword}{const} Class& other) = \textcolor{keyword}{delete}; \(\backslash\)
+\end{DoxyCode}
+\index{util.\+hpp@{util.\+hpp}!H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+P\+Y\+\_\+\+M\+O\+VE@{H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+P\+Y\+\_\+\+M\+O\+VE}}
+\index{H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+P\+Y\+\_\+\+M\+O\+VE@{H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+P\+Y\+\_\+\+M\+O\+VE}!util.\+hpp@{util.\+hpp}}
+\subsubsection[{\texorpdfstring{H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+P\+Y\+\_\+\+M\+O\+VE}{HEBI_DISABLE_COPY_MOVE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\+E\+B\+I\+\_\+\+D\+I\+S\+A\+B\+L\+E\+\_\+\+C\+O\+P\+Y\+\_\+\+M\+O\+VE(
+\begin{DoxyParamCaption}
+\item[{}]{Class}
+\end{DoxyParamCaption}
+)}\hypertarget{util_8hpp_abf37e44be3754a1f293808756b307673}{}\label{util_8hpp_abf37e44be3754a1f293808756b307673}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{comment}{/* Disable copy constructor. */} \(\backslash\)
+Class(\textcolor{keyword}{const} Class& other) = \textcolor{keyword}{delete}; \(\backslash\)
+\textcolor{comment}{/* Disable move constructor. */} \(\backslash\)
+Class(\textcolor{keyword}{const} Class&& other) = \textcolor{keyword}{delete}; \(\backslash\)
+\textcolor{comment}{/* Disable copy assigment operator. */} \(\backslash\)
+Class& operator= (\textcolor{keyword}{const} Class& other) = \textcolor{keyword}{delete}; \(\backslash\)
+\textcolor{comment}{/* Disable move assigment operator. */} \(\backslash\)
+Class& operator= (\textcolor{keyword}{const} Class&& other) = \textcolor{keyword}{delete};
+\end{DoxyCode}
+This file defines helper macros to make the other files more readable. 

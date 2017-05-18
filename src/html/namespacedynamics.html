@@ -88,52 +88,141 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">dynamics Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Dynamics functions for the HEBI Robotics 5-DOF Manipulator Arm.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a00e914433e77671dac03be0ca7d34e1f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00e914433e77671dac03be0ca7d34e1f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gravityComp</b> (const std::vector&lt; double &gt; &amp;theta, std::vector&lt; double &gt; &amp;torque)</td></tr>
+<tr class="memitem:a00e914433e77671dac03be0ca7d34e1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedynamics.html#a00e914433e77671dac03be0ca7d34e1f">gravityComp</a> (const std::vector&lt; double &gt; &amp;theta, std::vector&lt; double &gt; &amp;torque)</td></tr>
 <tr class="separator:a00e914433e77671dac03be0ca7d34e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f9761c4fbb20c590cfb1ae345e2ff61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedynamics.html#a6f9761c4fbb20c590cfb1ae345e2ff61">inverseDynamics</a> (const Eigen::VectorXd &amp;theta, const Eigen::VectorXd &amp;omega, const Eigen::VectorXd &amp;alpha, std::vector&lt; double &gt; &amp;torque)</td></tr>
 <tr class="separator:a6f9761c4fbb20c590cfb1ae345e2ff61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a826b52a5f1fc2dd61ea69a771c8eec94"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a826b52a5f1fc2dd61ea69a771c8eec94"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>gravity</b> (const Eigen::VectorXd &amp;theta, Eigen::VectorXd &amp;torque)</td></tr>
+<tr class="separator:a826b52a5f1fc2dd61ea69a771c8eec94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fc7ae178c0d08f46bd2b18dd86d36ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9fc7ae178c0d08f46bd2b18dd86d36ae"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>inertia</b> (const Eigen::VectorXd &amp;theta, Eigen::MatrixXd &amp;Inertia)</td></tr>
+<tr class="separator:a9fc7ae178c0d08f46bd2b18dd86d36ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64347919700ac9a683912de6f2b141fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64347919700ac9a683912de6f2b141fb"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>corriolis</b> (const Eigen::VectorXd &amp;theta, const Eigen::VectorXd &amp;omega, Eigen::MatrixXd &amp;Corriolis)</td></tr>
+<tr class="separator:a64347919700ac9a683912de6f2b141fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a826b52a5f1fc2dd61ea69a771c8eec94"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedynamics.html#a826b52a5f1fc2dd61ea69a771c8eec94">gravity</a> (const Eigen::VectorXd &amp;theta, Eigen::VectorXd &amp;torque)</td></tr>
+<tr class="separator:a826b52a5f1fc2dd61ea69a771c8eec94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fc7ae178c0d08f46bd2b18dd86d36ae"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedynamics.html#a9fc7ae178c0d08f46bd2b18dd86d36ae">inertia</a> (const Eigen::VectorXd &amp;theta, Eigen::MatrixXd &amp;Inertia)</td></tr>
+<tr class="separator:a9fc7ae178c0d08f46bd2b18dd86d36ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09facde2bbc78b9a537aa3b03fffec5f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedynamics.html#a09facde2bbc78b9a537aa3b03fffec5f">corriolis</a> (const Eigen::VectorXd &amp;theta, const Eigen::VectorXd &amp;omega, Eigen::MatrixXd &amp;corrioslis)</td></tr>
+<tr class="separator:a09facde2bbc78b9a537aa3b03fffec5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>File: arm_dynamics.cpp Description: Calculate the dynamics equations of a 5-DOF HEBI manipulator arm used on the Biorobotics Lab Intelligent Mobile Robot (IMR) project Header File: <a class="el" href="arm__dynamics_8hpp_source.html">arm_dynamics.hpp</a></p>
-<dl class="section author"><dt>Author</dt><dd>Ky Woodard </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>1.0 2/12/2017</dd></dl>
-<p>Functions: gravityComp Description: Calculate the necessary torque required to cancel gravitational forces on the joints Input: theta - current angles of the five joints [rad] Output: torque - computed torque on the 5 joints [N-m]</p>
-<p>inverseDynamics Description: Calculate the inverse dynamics of the arm, which includes inertia, corriolis, gravitational, and friction effect Inputs: theta - current angle of the 5 joints [rad] omega - current angular velocity of the 5 joints [rad/s] alpha - desired angular acceleration of the 5 joints [rad/s^2] Output: torque - computed torque to produce desired acceleration at the 5 joints [N-m]</p>
-<p>gravity Description: Calculate the gravity torque of the inverse dynamics based on the current angle of the joints Inputs: theta - current angle of the 5 joints Output: torque - computed torque on the 5 joints [N-m]</p>
-<p>inertia Description: Calculate the inertia torque of the inverse dynamics based on the current angle of the joints Inputs: theta - current angle of the 5 joints [rad] Output: Inertia - inertia matrix (5x5)</p>
-<p>corriolis Description: Calculate the corriolis torque of the inverse dynamics based on the current angle and angular velocity of the joints Inputs: theta - current angle of the 5 joints [rad] omega - current angle of the 5 joints [rad/s] Output: Corriolis - Corriolis matrix (5x5) </p>
+<div class="textblock"><p>Dynamics functions for the HEBI Robotics 5-DOF Manipulator Arm. </p>
+<p>Calculate the dynamics equations of a 5-DOF HEBI manipulator arm used on the Biorobotics Lab Intelligent Mobile Robot (IMR) project</p>
+<p>Ky Woodard </p><dl class="section version"><dt>Version</dt><dd>1.0 2/12/2017 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a6f9761c4fbb20c590cfb1ae345e2ff61"></a>
+<a class="anchor" id="a09facde2bbc78b9a537aa3b03fffec5f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void dynamics::corriolis </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>theta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>omega</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>corrioslis</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Calculate the corriolis torque of the inverse dynamics based on the current angle and angular velocity of the joints </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">theta</td><td>current angle of the 5 joints [rad] </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">omega</td><td>current angle of the 5 joints [rad/s] </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">Corriolis</td><td>corriolis matrix (5x5) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a826b52a5f1fc2dd61ea69a771c8eec94"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void dynamics::gravity </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>theta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>torque</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Calculate the gravity torque of the inverse dynamics based on the current angle of the joints </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">theta</td><td>current angle of the 5 joints [rad] </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">torque</td><td>computed torque on the 5 joints [N-m] </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a00e914433e77671dac03be0ca7d34e1f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void dynamics::inverseDynamics </td>
+          <td class="memname">void dynamics::gravityComp </td>
           <td>(</td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>theta</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramname"><em>torque</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -142,7 +231,101 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>gravityComp</b> (cons
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Calculate the inverse dynamics of the arm, which includes inertia, corriolis, gravitational, and friction effect </p>
+<p>Calculate the necessary torque required to cancel gravitational forces on the joints </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">theta</td><td>current angles of the five joints [rad] </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">torque</td><td>computed torque on the 5 joints [N-m] </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9fc7ae178c0d08f46bd2b18dd86d36ae"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void dynamics::inertia </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>theta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>Inertia</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Calculate the inertia torque of the inverse dynamics based on the current angle of the joints </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">theta</td><td>current angle of the 5 joints [rad] </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">Inertia</td><td>inertia matrix (5x5) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6f9761c4fbb20c590cfb1ae345e2ff61"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void dynamics::inverseDynamics </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>theta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>omega</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>torque</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Calculate the inverse dynamics of the arm, which includes inertia, corriolis, gravitational, and friction effect </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">theta</td><td>current angle of the 5 joints [rad] </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">omega</td><td>current angular velocity of the 5 joints [rad/s] </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td>desired angular acceleration of the 5 joints [rad/s^2] </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">torque</td><td>computed torque to produce desired acceleration at the 5 joints [N-m] </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -1,0 +1,54 @@
+\hypertarget{namespacekinematics}{}\section{kinematics Namespace Reference}
+\label{namespacekinematics}\index{kinematics@{kinematics}}
+
+
+Kinematics functions for the H\+E\+BI Robotics 5-\/\+D\+OF Manipulator Arm.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespacekinematics_a5a3e9ea9b4ee18137b3c909038cf57c3}{inverse\+Kinematics} (const geometry\+\_\+msgs\+::\+Pose \&pose, std\+::vector$<$ double $>$ \&alpha)
+\item 
+void \hyperlink{namespacekinematics_a86c140821059c3c30f2b8051f381cdd3}{forward\+Kinematics} (const std\+::vector$<$ double $>$ \&alpha, Eigen\+::\+Matrix4d \&g1i6)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Kinematics functions for the H\+E\+BI Robotics 5-\/\+D\+OF Manipulator Arm. 
+
+Calculate the kinematic equations of a 5-\/\+D\+OF H\+E\+BI manipulator arm used on the Biorobotics Lab Intelligent Mobile Robot (I\+MR) project
+
+Chaohui Gong (updated\+: Ky Woodard) 
+
+\subsection{Function Documentation}
+\index{kinematics@{kinematics}!forward\+Kinematics@{forward\+Kinematics}}
+\index{forward\+Kinematics@{forward\+Kinematics}!kinematics@{kinematics}}
+\subsubsection[{\texorpdfstring{forward\+Kinematics(const std\+::vector$<$ double $>$ \&alpha, Eigen\+::\+Matrix4d \&g1i6)}{forwardKinematics(const std::vector< double > &alpha, Eigen::Matrix4d &g1i6)}}]{\setlength{\rightskip}{0pt plus 5cm}bool kinematics\+::forward\+Kinematics (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ double $>$ \&}]{alpha, }
+\item[{Eigen\+::\+Matrix4d \&}]{g1i6}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacekinematics_a86c140821059c3c30f2b8051f381cdd3}{}\label{namespacekinematics_a86c140821059c3c30f2b8051f381cdd3}
+Compute the forward kinematics of the robotic arm for the given joint angles 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em alpha} & current angles of the five joints \mbox{[}rad\mbox{]} \\
+\hline
+\mbox{\tt out}  & {\em gli6} & homogenous transformation from the base to the end effector(4x4) \\
+\hline
+\end{DoxyParams}
+\index{kinematics@{kinematics}!inverse\+Kinematics@{inverse\+Kinematics}}
+\index{inverse\+Kinematics@{inverse\+Kinematics}!kinematics@{kinematics}}
+\subsubsection[{\texorpdfstring{inverse\+Kinematics(const geometry\+\_\+msgs\+::\+Pose \&pose, std\+::vector$<$ double $>$ \&alpha)}{inverseKinematics(const geometry_msgs::Pose &pose, std::vector< double > &alpha)}}]{\setlength{\rightskip}{0pt plus 5cm}void kinematics\+::inverse\+Kinematics (
+\begin{DoxyParamCaption}
+\item[{const geometry\+\_\+msgs\+::\+Pose \&}]{pose, }
+\item[{std\+::vector$<$ double $>$ \&}]{alpha}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacekinematics_a5a3e9ea9b4ee18137b3c909038cf57c3}{}\label{namespacekinematics_a5a3e9ea9b4ee18137b3c909038cf57c3}
+Compute the inverse kinematics of the robotic arm for the given joint angles 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pose} & desired pose of the end effector in the base frame \mbox{[}Pose\mbox{]} \\
+\hline
+\mbox{\tt out}  & {\em alpha} & joint angles of the five joints \mbox{[}rad\mbox{]} \\
+\hline
+\end{DoxyParams}

@@ -11,7 +11,8 @@ var searchData=
   ['command',['Command',['../classhebi_1_1Command.html',1,'hebi']]],
   ['command',['Command',['../classhebi_1_1Command.html#a8d9766d1a77d76854b1964f57f4a8661',1,'hebi::Command::Command()'],['../classhebi_1_1Command.html#a8f1e2bbe57e74cac0b3a6adf83634308',1,'hebi::Command::Command(HebiCommandPtr command)'],['../classhebi_1_1Command.html#a08f198d16c0e5c229d86471fadec3049',1,'hebi::Command::Command(Command &amp;&amp;other)']]],
   ['controlstrategy',['controlStrategy',['../classhebi_1_1Command_1_1Settings_1_1Actuator.html#a7c08db380c5c7920255626de10bdca6d',1,'hebi::Command::Settings::Actuator::controlStrategy()'],['../classhebi_1_1Info_1_1Settings_1_1Actuator.html#aaa17c720329614ca2c15083645ed9037',1,'hebi::Info::Settings::Actuator::controlStrategy()'],['../classhebi_1_1Command.html#a0f4b41003c36dee21578caddb605c64a',1,'hebi::Command::ControlStrategy()'],['../classhebi_1_1Info.html#a154026587295ad17a3e1460f32dab668',1,'hebi::Info::ControlStrategy()']]],
+  ['corriolis',['corriolis',['../namespacedynamics.html#a09facde2bbc78b9a537aa3b03fffec5f',1,'dynamics']]],
   ['count',['count',['../classoption_1_1Option.html#a8a632dcd89af60fe0806deb756c08f14',1,'option::Option']]],
-  ['countoptionsaction',['CountOptionsAction',['../classoption_1_1Stats_1_1CountOptionsAction.html',1,'option::Stats']]],
-  ['countoptionsaction',['CountOptionsAction',['../classoption_1_1Stats_1_1CountOptionsAction.html#a24a38b87ad129b0e12660bd2019ba284',1,'option::Stats::CountOptionsAction']]]
+  ['countoptionsaction',['CountOptionsAction',['../classoption_1_1Stats_1_1CountOptionsAction.html#a24a38b87ad129b0e12660bd2019ba284',1,'option::Stats::CountOptionsAction']]],
+  ['countoptionsaction',['CountOptionsAction',['../classoption_1_1Stats_1_1CountOptionsAction.html',1,'option::Stats']]]
 ];

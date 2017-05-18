@@ -1,0 +1,39 @@
+\hypertarget{module_8hpp}{}\section{module.\+hpp File Reference}
+\label{module_8hpp}\index{module.\+hpp@{module.\+hpp}}
+{\ttfamily \#include \char`\"{}hebi\+\_\+module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}command.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}feedback.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}info.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}util.\+hpp\char`\"{}}\\*
+{\ttfamily \#include $<$functional$>$}\\*
+{\ttfamily \#include $<$mutex$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+Include dependency graph for module.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{module_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{module_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classhebi_1_1Module}{hebi\+::\+Module}
+\begin{DoxyCompactList}\small\item\em Represents a single physical H\+E\+BI module, and allows \hyperlink{classhebi_1_1Command}{Command}, \hyperlink{classhebi_1_1Feedback}{Feedback}, and \hyperlink{classhebi_1_1Info}{Info} objects to be sent to and recieved from the hardware. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacehebi}{hebi}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::function$<$ void(const Feedback $\ast$)$>$ \hyperlink{namespacehebi_acce4dce21ce8c5055ba13532c2355b67}{hebi\+::\+Module\+Feedback\+Handler}
+\begin{DoxyCompactList}\small\item\em Definition of a callback function for \hyperlink{classhebi_1_1Feedback}{Feedback} returned from a \hyperlink{classhebi_1_1Module}{Module}. \end{DoxyCompactList}\end{DoxyCompactItemize}

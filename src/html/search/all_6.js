@@ -18,13 +18,15 @@ var searchData=
   ['getx',['getX',['../structhebi_1_1Vector3f.html#addc31da9b56506c51bd56e7f6db5deda',1,'hebi::Vector3f']]],
   ['gety',['getY',['../structhebi_1_1Vector3f.html#a8564aa2ab2f815fa077a61d2705b1693',1,'hebi::Vector3f']]],
   ['getz',['getZ',['../structhebi_1_1Vector3f.html#a1e507447c4b55d14b137aa50c8f0bbf3',1,'hebi::Vector3f']]],
+  ['gravity',['gravity',['../namespacedynamics.html#a826b52a5f1fc2dd61ea69a771c8eec94',1,'dynamics']]],
+  ['gravitycomp',['gravityComp',['../namespacedynamics.html#a00e914433e77671dac03be0ca7d34e1f',1,'dynamics']]],
   ['group',['Group',['../classhebi_1_1Group.html#a52041e4d07d6d0767c52bb896d125e84',1,'hebi::Group']]],
   ['group',['Group',['../classhebi_1_1Group.html',1,'hebi']]],
-  ['groupcommand',['GroupCommand',['../classhebi_1_1GroupCommand.html#a7a41c0aace3d99b0d7e9dcd9b1063a11',1,'hebi::GroupCommand']]],
   ['groupcommand',['GroupCommand',['../classhebi_1_1GroupCommand.html',1,'hebi']]],
+  ['groupcommand',['GroupCommand',['../classhebi_1_1GroupCommand.html#a7a41c0aace3d99b0d7e9dcd9b1063a11',1,'hebi::GroupCommand']]],
   ['groupfeedback',['GroupFeedback',['../classhebi_1_1GroupFeedback.html#af0a41119c345d68c6ae390ff39be77fc',1,'hebi::GroupFeedback::GroupFeedback(int number_of_modules)'],['../classhebi_1_1GroupFeedback.html#ac12b1f1320eb14943d1b2600b0eecb1b',1,'hebi::GroupFeedback::GroupFeedback(HebiGroupFeedbackPtr group_feedback)']]],
   ['groupfeedback',['GroupFeedback',['../classhebi_1_1GroupFeedback.html',1,'hebi']]],
-  ['groupinfo',['GroupInfo',['../classhebi_1_1GroupInfo.html#adb2618d3baaadb15328d04427e64d9fc',1,'hebi::GroupInfo']]],
   ['groupinfo',['GroupInfo',['../classhebi_1_1GroupInfo.html',1,'hebi']]],
+  ['groupinfo',['GroupInfo',['../classhebi_1_1GroupInfo.html#adb2618d3baaadb15328d04427e64d9fc',1,'hebi::GroupInfo']]],
   ['gyro',['gyro',['../classhebi_1_1Feedback_1_1Imu.html#ae3164a7baa8fd3ecdd3792023f5f4182',1,'hebi::Feedback::Imu']]]
 ];

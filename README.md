@@ -15,8 +15,27 @@ Ubuntu 16.04
 ### C++ (Standard 11)
 1. [Eigen 3](http://eigen.tuxfamily.org/index.php?title=Main_Page)
 ```
-sudo apt install libeigen3-dev
+	sudo apt install libeigen3-dev
 ```
+
+## Running the Code
+After the catkin package has been build, the first step is to start a terminal and run:
+```
+	roscore
+```
+
+There are two executables to run in ROS in order to implement the code. The first is the arm controller in C++ that handles all the communication to the HEBI modules. This executable can be launched and run and launched in the background without closing out until all the tests are finisthed:
+```
+	rosrun model_learning arm_controller
+```
+IMPORTANT: If "Modules Fully Initialized" does not show up, the modules did not connect properly and this executable needs to be rerun. There are extreme cases where it may take >5 tries to get this to show up. The issue is only some of the modules are connected and feedback messages will all fail. The tag "Modules Fully Initialized" lets the user know that feedback is being received properly.
+
+The second half of the code is a Python script, which does the actual learning as well as passes commands to the arm_controller. This script can be run with the following command:
+```
+	rosrun model_learning ML_Feedback.py
+```
+Additionally, plots of the position, velocity, and torque tracking can be displayed via the input argument. The input argument "minimial" (no quotes) will result in the position tracking plots only while the "all" (no quotes) arguement will result in all three sets of plots being displayed. By default, all of the plots are not displayed. 
+
 ## Implementation Specifics
 In this section, I cover some of the specific things which to be aware of when using this code.
 ### Torque Control

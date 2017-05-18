@@ -1,15 +1,13 @@
 var searchData=
 [
-  ['name',['name',['../classoption_1_1Option.html#a02a76b4896abd22d0ba8514362261de9',1,'option::Option::name()'],['../classhebi_1_1Command_1_1Settings.html#a86561f33ef1ceaa4e0e50e125433a4f7',1,'hebi::Command::Settings::name()'],['../classhebi_1_1Info_1_1Settings.html#ac69041bf666cb7746936efe9da3a2d48',1,'hebi::Info::Settings::name()']]],
-  ['namelen',['namelen',['../classoption_1_1Option.html#a3aa2957b19ad5815873441b415d56050',1,'option::Option']]],
-  ['next',['next',['../classoption_1_1Option.html#a59ae9aed505f4d410633bb36478a32be',1,'option::Option::next()'],['../classoption_1_1PrintUsageImplementation_1_1LinePartIterator.html#a58b8743da57de2d108472eee60324df6',1,'option::PrintUsageImplementation::LinePartIterator::next()']]],
-  ['nextrow',['nextRow',['../classoption_1_1PrintUsageImplementation_1_1LinePartIterator.html#a55d5c3e50f9c1d8cd48f518899a5a48c',1,'option::PrintUsageImplementation::LinePartIterator']]],
-  ['nexttable',['nextTable',['../classoption_1_1PrintUsageImplementation_1_1LinePartIterator.html#afe43ca12d399ed3c871e4dc5bf63356e',1,'option::PrintUsageImplementation::LinePartIterator']]],
-  ['nextwrap',['nextwrap',['../classoption_1_1Option.html#ae8d8c058af3c781cb1d444998df48fef',1,'option::Option']]],
-  ['none',['None',['../structoption_1_1Arg.html#a7fc01987899c91c6b6a1be5711a46e22',1,'option::Arg']]],
-  ['nonoption',['nonOption',['../classoption_1_1Parser.html#aeeafbf2892a5aca90b89803b2b1cb031',1,'option::Parser']]],
-  ['nonoptions',['nonOptions',['../classoption_1_1Parser.html#a2c11b050f4248d71758dda52c5f9154d',1,'option::Parser']]],
-  ['nonoptionscount',['nonOptionsCount',['../classoption_1_1Parser.html#aa64a6a7c196993a1b20d48e8ddd12a34',1,'option::Parser']]],
-  ['numberedfloatfield',['NumberedFloatField',['../classhebi_1_1Feedback_1_1NumberedFloatField.html',1,'hebi::Feedback']]],
-  ['numberedfloatfield',['NumberedFloatField',['../classhebi_1_1Command_1_1NumberedFloatField.html',1,'hebi::Command']]]
+  ['macaddress',['MacAddress',['../classhebi_1_1MacAddress.html',1,'hebi']]],
+  ['macaddress',['MacAddress',['../classhebi_1_1MacAddress.html#a5d943aac7186bba333a443e84e26aacd',1,'hebi::MacAddress']]],
+  ['module',['Module',['../classhebi_1_1Module.html',1,'hebi']]],
+  ['module',['Module',['../classhebi_1_1Module.html#af8192ddf0477c4bc59f0dd2bd009b08e',1,'hebi::Module']]],
+  ['motorcurrent',['motorCurrent',['../classhebi_1_1Feedback_1_1Actuator.html#a2498e878bc9ae35d4dcb1c6833ea85d1',1,'hebi::Feedback::Actuator']]],
+  ['motorhousingtemperature',['motorHousingTemperature',['../classhebi_1_1Feedback_1_1Actuator.html#adbef94f87e10202b4e99929ac22a2366',1,'hebi::Feedback::Actuator']]],
+  ['motorsensortemperature',['motorSensorTemperature',['../classhebi_1_1Feedback_1_1Actuator.html#a9fb8e42b79c5e3d85db630f0cd9a9134',1,'hebi::Feedback::Actuator']]],
+  ['motorvelocity',['motorVelocity',['../classhebi_1_1Feedback_1_1Actuator.html#ad11fa9011f1d9a3adc23bdd34a2d27fe',1,'hebi::Feedback::Actuator']]],
+  ['motorwindingcurrent',['motorWindingCurrent',['../classhebi_1_1Feedback_1_1Actuator.html#ade35912800a6b72dc6b1dd84730427de',1,'hebi::Feedback::Actuator']]],
+  ['motorwindingtemperature',['motorWindingTemperature',['../classhebi_1_1Feedback_1_1Actuator.html#a22076de7cdfacd6499a9dc119e2bdfdb',1,'hebi::Feedback::Actuator']]]
 ];

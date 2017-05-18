@@ -1,0 +1,58 @@
+\hypertarget{command_8hpp}{}\section{command.\+hpp File Reference}
+\label{command_8hpp}\index{command.\+hpp@{command.\+hpp}}
+{\ttfamily \#include \char`\"{}hebi\+\_\+command.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}color.\+hpp\char`\"{}}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}util.\+hpp\char`\"{}}\\*
+Include dependency graph for command.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{command_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{command_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classhebi_1_1Command}{hebi\+::\+Command}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classhebi_1_1Command}{Command} objects have various fields that can be set; when sent to the module, these fields control internal properties and setpoints. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1FloatField}{hebi\+::\+Command\+::\+Float\+Field}
+\begin{DoxyCompactList}\small\item\em A message field representable by a single-\/precision floating point value. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1HighResAngleField}{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field}
+\begin{DoxyCompactList}\small\item\em A message field for an angle measurement which does not lose precision at very high angles. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1NumberedFloatField}{hebi\+::\+Command\+::\+Numbered\+Float\+Field}
+\begin{DoxyCompactList}\small\item\em A message field containing a numbered set of single-\/precision floating point values. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1BoolField}{hebi\+::\+Command\+::\+Bool\+Field}
+\begin{DoxyCompactList}\small\item\em A message field representable by a bool value. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1StringField}{hebi\+::\+Command\+::\+String\+Field}
+\begin{DoxyCompactList}\small\item\em A message field representable by a std\+::string. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1FlagField}{hebi\+::\+Command\+::\+Flag\+Field}
+\begin{DoxyCompactList}\small\item\em A two-\/state message field (either set/true or cleared/false). \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1EnumField}{hebi\+::\+Command\+::\+Enum\+Field$<$ T $>$}
+\begin{DoxyCompactList}\small\item\em A message field representable by an enum of a given type. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1LedField}{hebi\+::\+Command\+::\+Led\+Field}
+\begin{DoxyCompactList}\small\item\em A message field for interfacing with an L\+ED. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1Settings}{hebi\+::\+Command\+::\+Settings}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classhebi_1_1Module}{Module} settings that are typically changed at a slower rate. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator}{hebi\+::\+Command\+::\+Settings\+::\+Actuator}
+\begin{DoxyCompactList}\small\item\em Actuator-\/specific settings, such as controller gains. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1PositionGains}{hebi\+::\+Command\+::\+Settings\+::\+Actuator\+::\+Position\+Gains}
+\begin{DoxyCompactList}\small\item\em Controller gains for the position P\+ID loop. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1VelocityGains}{hebi\+::\+Command\+::\+Settings\+::\+Actuator\+::\+Velocity\+Gains}
+\begin{DoxyCompactList}\small\item\em Controller gains for the velocity P\+ID loop. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1Settings_1_1Actuator_1_1TorqueGains}{hebi\+::\+Command\+::\+Settings\+::\+Actuator\+::\+Torque\+Gains}
+\begin{DoxyCompactList}\small\item\em Controller gains for the torque P\+ID loop. \end{DoxyCompactList}\item 
+class \hyperlink{classhebi_1_1Command_1_1Actuator}{hebi\+::\+Command\+::\+Actuator}
+\begin{DoxyCompactList}\small\item\em Actuator-\/specific commands. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacehebi}{hebi}
+\end{DoxyCompactItemize}
