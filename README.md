@@ -1,25 +1,35 @@
 # Model_Learning
 This is a GP model learning package for the HEBI Robotics 5-DOF manipulator arm in the Biorobotics Lab. It mainly consists of a python script ML_Feedback.py which handles the database management and GP learning along with the arm_controller.cpp file which communicates to the modules directly as well as computes the rigid body dynamic torques.
 ## Dependencies
-### OS
-Ubuntu 16.04
-### ROS
-[ROS Kinetic Kame](http://wiki.ros.org/kinetic/Installation/Ubuntu)
-### Python (2.7.12)
-1. [GPy](https://github.com/SheffieldML/GPy)
-- Install GPy with Pip
+### OS/ROS
+Ubuntu 16.04 with [ROS Kinetic Kame](http://wiki.ros.org/kinetic/Installation/Ubuntu)
+Ubuntu 14.04 with [ROS Indigo Igloo](http://wiki.ros.org/indigo/Installation/Ubuntu)
+
+### Python (2.7.6 or greater)
+1. [GPy](https://github.com/SheffieldML/GPy)(1.6.1 or greater)
+- Easiest Install with Pip
 ```
 	sudo apt install python-pip
 	pip install gpy
 ```
+2. numpy (1.8.2 or greater)
+3. Tkinter (8.6 or greater)
+- Easiest Install with apt-get
+```
+	sudo apt-get install python-tk
+```
+4. matplotlib (1.3.1 or greater)
+5. scipy (0.19.0 or greater
+
 ### C++ (Standard 11)
-1. [Eigen 3](http://eigen.tuxfamily.org/index.php?title=Main_Page)
+1. [Eigen 3](http://eigen.tuxfamily.org/index.php?title=Main_Page) (3.2.0 or greater)
+- Easiest Install with apt-get
 ```
 	sudo apt install libeigen3-dev
 ```
 
 ## Running the Code
-After the catkin package has been build, the first step is to start a terminal and run:
+After the catkin package has been built and the setup.bash file sourced, the first step is to start a terminal and run:
 ```
 	roscore
 ```
