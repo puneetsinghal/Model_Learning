@@ -3,6 +3,7 @@ This is a GP model learning package for the HEBI Robotics 5-DOF manipulator arm 
 ## Dependencies
 ### OS/ROS
 Ubuntu 16.04 with [ROS Kinetic Kame](http://wiki.ros.org/kinetic/Installation/Ubuntu)
+
 Ubuntu 14.04 with [ROS Indigo Igloo](http://wiki.ros.org/indigo/Installation/Ubuntu)
 
 ### Python (2.7.6 or greater)
