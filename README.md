@@ -44,7 +44,16 @@ The second half of the code is a Python script, which does the actual learning a
 ```
 	rosrun model_learning ML_Feedback.py
 ```
-Additionally, plots of the position, velocity, and torque tracking can be displayed via the input argument. The input argument "minimial" (no quotes) will result in the position tracking plots only while the "all" (no quotes) arguement will result in all three sets of plots being displayed. By default, all of the plots are not displayed. 
+Python Script ML_Feedback.py Additional Parameters:
+* plot (default="none","minimal","all") [shorthand -p]
+	* none 	= no plots
+	* minimal = joint position tracking plots
+	* all	= joint position, velocity, and torque tracking plots
+* traj (default="pnp","circle") [shorthand -t]
+	* pnp	= follows a minimum jerk pick and place trajectory
+	* circle	= follows a planar circular trajectory
+
+Example Call: rosrun model_learning ML_Feedback.py --plot all -t circle
 
 ## Implementation Specifics
 In this section, I cover some of the specific things which to be aware of when using this code.
