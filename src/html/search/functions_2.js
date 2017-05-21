@@ -5,7 +5,8 @@ var searchData=
   ['color',['Color',['../structhebi_1_1Color.html#aa7cad37a99b993eea058d455bbcc4a82',1,'hebi::Color']]],
   ['column',['column',['../classoption_1_1PrintUsageImplementation_1_1LinePartIterator.html#afa41382acabcd37ca70f7e8b9994b8c0',1,'option::PrintUsageImplementation::LinePartIterator']]],
   ['command',['Command',['../classhebi_1_1Command.html#a8d9766d1a77d76854b1964f57f4a8661',1,'hebi::Command::Command()'],['../classhebi_1_1Command.html#a8f1e2bbe57e74cac0b3a6adf83634308',1,'hebi::Command::Command(HebiCommandPtr command)'],['../classhebi_1_1Command.html#a08f198d16c0e5c229d86471fadec3049',1,'hebi::Command::Command(Command &amp;&amp;other)']]],
-  ['controlstrategy',['controlStrategy',['../classhebi_1_1Command_1_1Settings_1_1Actuator.html#a7c08db380c5c7920255626de10bdca6d',1,'hebi::Command::Settings::Actuator::controlStrategy()'],['../classhebi_1_1Info_1_1Settings_1_1Actuator.html#aaa17c720329614ca2c15083645ed9037',1,'hebi::Info::Settings::Actuator::controlStrategy()']]],
+  ['controller',['controller',['../classarmcontroller.html#ab2a040d42baac477ccc328d03b8c8903',1,'armcontroller']]],
+  ['controlstrategy',['controlStrategy',['../classhebi_1_1Command_1_1Settings_1_1Actuator.html#a7c08db380c5c7920255626de10bdca6d',1,'hebi::Command::Settings::Actuator::controlStrategy()'],['../classhebi_1_1Info_1_1Settings_1_1Actuator.html#a604e1fdf4ff6ea9a6350d7c8f853ccdd',1,'hebi::Info::Settings::Actuator::controlStrategy()']]],
   ['corriolis',['corriolis',['../namespacedynamics.html#a09facde2bbc78b9a537aa3b03fffec5f',1,'dynamics']]],
   ['count',['count',['../classoption_1_1Option.html#a8a632dcd89af60fe0806deb756c08f14',1,'option::Option']]],
   ['countoptionsaction',['CountOptionsAction',['../classoption_1_1Stats_1_1CountOptionsAction.html#a24a38b87ad129b0e12660bd2019ba284',1,'option::Stats::CountOptionsAction']]]

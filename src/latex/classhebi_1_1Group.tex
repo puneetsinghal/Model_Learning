@@ -14,11 +14,11 @@ Represents a group of physical H\+E\+BI modules, and allows \hyperlink{classhebi
 \item 
 \hyperlink{classhebi_1_1Group_a52041e4d07d6d0767c52bb896d125e84}{Group} (Hebi\+Group\+Ptr group)
 \item 
-virtual \hyperlink{classhebi_1_1Group_affa9e3421af94d40a670112e53acaa1d}{$\sim$\+Group} () noexcept\hypertarget{classhebi_1_1Group_affa9e3421af94d40a670112e53acaa1d}{}\label{classhebi_1_1Group_affa9e3421af94d40a670112e53acaa1d}
-
+\mbox{\Hypertarget{classhebi_1_1Group_affa9e3421af94d40a670112e53acaa1d}\label{classhebi_1_1Group_affa9e3421af94d40a670112e53acaa1d}} 
+virtual \hyperlink{classhebi_1_1Group_affa9e3421af94d40a670112e53acaa1d}{$\sim$\+Group} () noexcept
 \begin{DoxyCompactList}\small\item\em Destructor cleans up group. \end{DoxyCompactList}\item 
-int \hyperlink{classhebi_1_1Group_a3cc170c50e51cfc25bc73ae5680bd115}{size} ()\hypertarget{classhebi_1_1Group_a3cc170c50e51cfc25bc73ae5680bd115}{}\label{classhebi_1_1Group_a3cc170c50e51cfc25bc73ae5680bd115}
-
+\mbox{\Hypertarget{classhebi_1_1Group_a3cc170c50e51cfc25bc73ae5680bd115}\label{classhebi_1_1Group_a3cc170c50e51cfc25bc73ae5680bd115}} 
+int \hyperlink{classhebi_1_1Group_a3cc170c50e51cfc25bc73ae5680bd115}{size} ()
 \begin{DoxyCompactList}\small\item\em Returns the number of modules in the group. \end{DoxyCompactList}\item 
 bool \hyperlink{classhebi_1_1Group_a3645f8c1019e6949dc64fbdec7f73442}{send\+Command} (const \hyperlink{classhebi_1_1GroupCommand}{Group\+Command} \&group\+\_\+command)
 \begin{DoxyCompactList}\small\item\em Send a command to the given group without requesting an acknowledgement. \end{DoxyCompactList}\item 
@@ -36,17 +36,17 @@ bool \hyperlink{classhebi_1_1Group_a4c2dce41b42dc0d318e220098c4d05e4}{set\+Feedb
 \begin{DoxyCompactList}\small\item\em Sets the frequency of the internal feedback request + callback thread. \end{DoxyCompactList}\item 
 float \hyperlink{classhebi_1_1Group_a5f8e63952136f4d0fc3b847c838985b9}{get\+Feedback\+Frequency\+Hz} ()
 \begin{DoxyCompactList}\small\item\em Gets the frequency of the internal feedback request + callback thread. \end{DoxyCompactList}\item 
-void \hyperlink{classhebi_1_1Group_a9b428b5d5cf774f0dddc3b50b5daf90e}{add\+Feedback\+Handler} (Group\+Feedback\+Handler handler)\hypertarget{classhebi_1_1Group_a9b428b5d5cf774f0dddc3b50b5daf90e}{}\label{classhebi_1_1Group_a9b428b5d5cf774f0dddc3b50b5daf90e}
-
+\mbox{\Hypertarget{classhebi_1_1Group_a9b428b5d5cf774f0dddc3b50b5daf90e}\label{classhebi_1_1Group_a9b428b5d5cf774f0dddc3b50b5daf90e}} 
+void \hyperlink{classhebi_1_1Group_a9b428b5d5cf774f0dddc3b50b5daf90e}{add\+Feedback\+Handler} (Group\+Feedback\+Handler handler)
 \begin{DoxyCompactList}\small\item\em Adds a handler function to be called by the internal feedback request thread. \end{DoxyCompactList}\item 
-void \hyperlink{classhebi_1_1Group_a54c23fbada200539f7f0d84d97b40f9b}{clear\+Feedback\+Handlers} ()\hypertarget{classhebi_1_1Group_a54c23fbada200539f7f0d84d97b40f9b}{}\label{classhebi_1_1Group_a54c23fbada200539f7f0d84d97b40f9b}
-
+\mbox{\Hypertarget{classhebi_1_1Group_a54c23fbada200539f7f0d84d97b40f9b}\label{classhebi_1_1Group_a54c23fbada200539f7f0d84d97b40f9b}} 
+void \hyperlink{classhebi_1_1Group_a54c23fbada200539f7f0d84d97b40f9b}{clear\+Feedback\+Handlers} ()
 \begin{DoxyCompactList}\small\item\em Removes all feedback handlers presently added. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static const int \hyperlink{classhebi_1_1Group_a3d01ca6dbd28ec984cda196a77056dd4}{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS} = 500\hypertarget{classhebi_1_1Group_a3d01ca6dbd28ec984cda196a77056dd4}{}\label{classhebi_1_1Group_a3d01ca6dbd28ec984cda196a77056dd4}
-
+\mbox{\Hypertarget{classhebi_1_1Group_a3d01ca6dbd28ec984cda196a77056dd4}\label{classhebi_1_1Group_a3d01ca6dbd28ec984cda196a77056dd4}} 
+static const int \hyperlink{classhebi_1_1Group_a3d01ca6dbd28ec984cda196a77056dd4}{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS} = 500
 \begin{DoxyCompactList}\small\item\em The default timeout for any send-\/with-\/acknowledgement or request operation is 500 ms. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -59,23 +59,21 @@ void \hyperlink{classhebi_1_1Group_a895e36298e0e77c27c644c4e3edea356}{callback\+
 Represents a group of physical H\+E\+BI modules, and allows \hyperlink{classhebi_1_1Command}{Command}, \hyperlink{classhebi_1_1Feedback}{Feedback}, and \hyperlink{classhebi_1_1Info}{Info} objects to be sent to and recieved from the hardware. 
 
 \subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classhebi_1_1Group_a52041e4d07d6d0767c52bb896d125e84}\label{classhebi_1_1Group_a52041e4d07d6d0767c52bb896d125e84}} 
 \index{hebi\+::\+Group@{hebi\+::\+Group}!Group@{Group}}
 \index{Group@{Group}!hebi\+::\+Group@{hebi\+::\+Group}}
-\subsubsection[{\texorpdfstring{Group(\+Hebi\+Group\+Ptr group)}{Group(HebiGroupPtr group)}}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Group\+::\+Group (
-\begin{DoxyParamCaption}
-\item[{Hebi\+Group\+Ptr}]{group}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Group_a52041e4d07d6d0767c52bb896d125e84}{}\label{classhebi_1_1Group_a52041e4d07d6d0767c52bb896d125e84}
+\subsubsection{\texorpdfstring{Group()}{Group()}}
+{\footnotesize\ttfamily hebi\+::\+Group\+::\+Group (\begin{DoxyParamCaption}\item[{Hebi\+Group\+Ptr}]{group }\end{DoxyParamCaption})}
+
 Creates a group from the underlying C-\/style group object. This should only be called to create groups from the lookup class, not from user code! 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhebi_1_1Group_a5f8e63952136f4d0fc3b847c838985b9}\label{classhebi_1_1Group_a5f8e63952136f4d0fc3b847c838985b9}} 
 \index{hebi\+::\+Group@{hebi\+::\+Group}!get\+Feedback\+Frequency\+Hz@{get\+Feedback\+Frequency\+Hz}}
 \index{get\+Feedback\+Frequency\+Hz@{get\+Feedback\+Frequency\+Hz}!hebi\+::\+Group@{hebi\+::\+Group}}
-\subsubsection[{\texorpdfstring{get\+Feedback\+Frequency\+Hz()}{getFeedbackFrequencyHz()}}]{\setlength{\rightskip}{0pt plus 5cm}float hebi\+::\+Group\+::get\+Feedback\+Frequency\+Hz (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Group_a5f8e63952136f4d0fc3b847c838985b9}{}\label{classhebi_1_1Group_a5f8e63952136f4d0fc3b847c838985b9}
+\subsubsection{\texorpdfstring{get\+Feedback\+Frequency\+Hz()}{getFeedbackFrequencyHz()}}
+{\footnotesize\ttfamily float hebi\+::\+Group\+::get\+Feedback\+Frequency\+Hz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 
 
 Gets the frequency of the internal feedback request + callback thread. 
@@ -83,14 +81,12 @@ Gets the frequency of the internal feedback request + callback thread.
 \begin{DoxyReturn}{Returns}
 The current feedback request loop frequency (in Hz). 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Group_a191170df8c2b64e039063e89449b4587}\label{classhebi_1_1Group_a191170df8c2b64e039063e89449b4587}} 
 \index{hebi\+::\+Group@{hebi\+::\+Group}!request\+Feedback@{request\+Feedback}}
 \index{request\+Feedback@{request\+Feedback}!hebi\+::\+Group@{hebi\+::\+Group}}
-\subsubsection[{\texorpdfstring{request\+Feedback(\+Group\+Feedback $\ast$feedback, int timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+S)}{requestFeedback(GroupFeedback *feedback, int timeout_ms=DEFAULT_TIMEOUT_MS)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Group\+::request\+Feedback (
-\begin{DoxyParamCaption}
-\item[{{\bf Group\+Feedback} $\ast$}]{feedback, }
-\item[{int}]{timeout\+\_\+ms = {\ttfamily {\bf D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}}}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Group_a191170df8c2b64e039063e89449b4587}{}\label{classhebi_1_1Group_a191170df8c2b64e039063e89449b4587}
+\subsubsection{\texorpdfstring{request\+Feedback()}{requestFeedback()}}
+{\footnotesize\ttfamily bool hebi\+::\+Group\+::request\+Feedback (\begin{DoxyParamCaption}\item[{\hyperlink{classhebi_1_1GroupFeedback}{Group\+Feedback} $\ast$}]{feedback,  }\item[{int}]{timeout\+\_\+ms = {\ttfamily \hyperlink{classhebi_1_1Group_a3d01ca6dbd28ec984cda196a77056dd4}{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}} }\end{DoxyParamCaption})}
+
 
 
 Request feedback from the group, and store it in the passed-\/in feedback object. 
@@ -98,14 +94,12 @@ Request feedback from the group, and store it in the passed-\/in feedback object
 \begin{DoxyReturn}{Returns}
 true if the request was successful within the specified timeout; in this case \textquotesingle{}feedback\textquotesingle{} has been updated. Otherwise, returns false and does not update \textquotesingle{}feedback\textquotesingle{}. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Group_a1065ad12a649d135758c1b6a95df650e}\label{classhebi_1_1Group_a1065ad12a649d135758c1b6a95df650e}} 
 \index{hebi\+::\+Group@{hebi\+::\+Group}!request\+Info@{request\+Info}}
 \index{request\+Info@{request\+Info}!hebi\+::\+Group@{hebi\+::\+Group}}
-\subsubsection[{\texorpdfstring{request\+Info(\+Group\+Info $\ast$info, int timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+S)}{requestInfo(GroupInfo *info, int timeout_ms=DEFAULT_TIMEOUT_MS)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Group\+::request\+Info (
-\begin{DoxyParamCaption}
-\item[{{\bf Group\+Info} $\ast$}]{info, }
-\item[{int}]{timeout\+\_\+ms = {\ttfamily {\bf D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}}}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Group_a1065ad12a649d135758c1b6a95df650e}{}\label{classhebi_1_1Group_a1065ad12a649d135758c1b6a95df650e}
+\subsubsection{\texorpdfstring{request\+Info()}{requestInfo()}}
+{\footnotesize\ttfamily bool hebi\+::\+Group\+::request\+Info (\begin{DoxyParamCaption}\item[{\hyperlink{classhebi_1_1GroupInfo}{Group\+Info} $\ast$}]{info,  }\item[{int}]{timeout\+\_\+ms = {\ttfamily \hyperlink{classhebi_1_1Group_a3d01ca6dbd28ec984cda196a77056dd4}{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}} }\end{DoxyParamCaption})}
+
 
 
 Request info from the group, and store it in the passed-\/in info object. 
@@ -113,13 +107,12 @@ Request info from the group, and store it in the passed-\/in info object.
 \begin{DoxyReturn}{Returns}
 true if the request was successful within the specified timeout; in this case \textquotesingle{}info\textquotesingle{} has been updated. Otherwise, returns false and does not update \textquotesingle{}info\textquotesingle{}. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Group_a3645f8c1019e6949dc64fbdec7f73442}\label{classhebi_1_1Group_a3645f8c1019e6949dc64fbdec7f73442}} 
 \index{hebi\+::\+Group@{hebi\+::\+Group}!send\+Command@{send\+Command}}
 \index{send\+Command@{send\+Command}!hebi\+::\+Group@{hebi\+::\+Group}}
-\subsubsection[{\texorpdfstring{send\+Command(const Group\+Command \&group\+\_\+command)}{sendCommand(const GroupCommand &group_command)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Group\+::send\+Command (
-\begin{DoxyParamCaption}
-\item[{const {\bf Group\+Command} \&}]{group\+\_\+command}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Group_a3645f8c1019e6949dc64fbdec7f73442}{}\label{classhebi_1_1Group_a3645f8c1019e6949dc64fbdec7f73442}
+\subsubsection{\texorpdfstring{send\+Command()}{sendCommand()}}
+{\footnotesize\ttfamily bool hebi\+::\+Group\+::send\+Command (\begin{DoxyParamCaption}\item[{const \hyperlink{classhebi_1_1GroupCommand}{Group\+Command} \&}]{group\+\_\+command }\end{DoxyParamCaption})}
+
 
 
 Send a command to the given group without requesting an acknowledgement. 
@@ -134,14 +127,12 @@ Appropriate for high-\/frequency applications.
 \begin{DoxyReturn}{Returns}
 true if the command was successfully sent, false otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Group_a992aad2873e2d108c2d4deb3f824a538}\label{classhebi_1_1Group_a992aad2873e2d108c2d4deb3f824a538}} 
 \index{hebi\+::\+Group@{hebi\+::\+Group}!send\+Command\+With\+Acknowledgement@{send\+Command\+With\+Acknowledgement}}
 \index{send\+Command\+With\+Acknowledgement@{send\+Command\+With\+Acknowledgement}!hebi\+::\+Group@{hebi\+::\+Group}}
-\subsubsection[{\texorpdfstring{send\+Command\+With\+Acknowledgement(const Group\+Command \&group\+\_\+command, int timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+S)}{sendCommandWithAcknowledgement(const GroupCommand &group_command, int timeout_ms=DEFAULT_TIMEOUT_MS)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Group\+::send\+Command\+With\+Acknowledgement (
-\begin{DoxyParamCaption}
-\item[{const {\bf Group\+Command} \&}]{group\+\_\+command, }
-\item[{int}]{timeout\+\_\+ms = {\ttfamily {\bf D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}}}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Group_a992aad2873e2d108c2d4deb3f824a538}{}\label{classhebi_1_1Group_a992aad2873e2d108c2d4deb3f824a538}
+\subsubsection{\texorpdfstring{send\+Command\+With\+Acknowledgement()}{sendCommandWithAcknowledgement()}}
+{\footnotesize\ttfamily bool hebi\+::\+Group\+::send\+Command\+With\+Acknowledgement (\begin{DoxyParamCaption}\item[{const \hyperlink{classhebi_1_1GroupCommand}{Group\+Command} \&}]{group\+\_\+command,  }\item[{int}]{timeout\+\_\+ms = {\ttfamily \hyperlink{classhebi_1_1Group_a3d01ca6dbd28ec984cda196a77056dd4}{D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+MS}} }\end{DoxyParamCaption})}
+
 
 
 Send a command to the given group, requesting an acknowledgement of transmission to be sent back. 
@@ -156,13 +147,12 @@ Send a command to the given group, requesting an acknowledgement of transmission
 \begin{DoxyReturn}{Returns}
 true if an acknowledgement was successfully received (guaranteeing the group received this command), or a negative number for an error otherwise.
 \end{DoxyReturn}
-Note\+: A non-\/true return does not indicate a specific failure, and may result from an error while sending or simply a timeout/dropped response packet after a successful transmission. \index{hebi\+::\+Group@{hebi\+::\+Group}!set\+Feedback\+Frequency\+Hz@{set\+Feedback\+Frequency\+Hz}}
+Note\+: A non-\/true return does not indicate a specific failure, and may result from an error while sending or simply a timeout/dropped response packet after a successful transmission. \mbox{\Hypertarget{classhebi_1_1Group_a4c2dce41b42dc0d318e220098c4d05e4}\label{classhebi_1_1Group_a4c2dce41b42dc0d318e220098c4d05e4}} 
+\index{hebi\+::\+Group@{hebi\+::\+Group}!set\+Feedback\+Frequency\+Hz@{set\+Feedback\+Frequency\+Hz}}
 \index{set\+Feedback\+Frequency\+Hz@{set\+Feedback\+Frequency\+Hz}!hebi\+::\+Group@{hebi\+::\+Group}}
-\subsubsection[{\texorpdfstring{set\+Feedback\+Frequency\+Hz(float frequency)}{setFeedbackFrequencyHz(float frequency)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Group\+::set\+Feedback\+Frequency\+Hz (
-\begin{DoxyParamCaption}
-\item[{float}]{frequency}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Group_a4c2dce41b42dc0d318e220098c4d05e4}{}\label{classhebi_1_1Group_a4c2dce41b42dc0d318e220098c4d05e4}
+\subsubsection{\texorpdfstring{set\+Feedback\+Frequency\+Hz()}{setFeedbackFrequencyHz()}}
+{\footnotesize\ttfamily bool hebi\+::\+Group\+::set\+Feedback\+Frequency\+Hz (\begin{DoxyParamCaption}\item[{float}]{frequency }\end{DoxyParamCaption})}
+
 
 
 Sets the frequency of the internal feedback request + callback thread. 
@@ -170,13 +160,12 @@ Sets the frequency of the internal feedback request + callback thread.
 \begin{DoxyReturn}{Returns}
 {\ttfamily true} if the frequency successfully was set, or {\ttfamily false} if the parameter was outside the accepted range (less than zero or faster than supported maximum). 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Group_ac3760e72c22a47f365e8c23d9a6dcfb7}\label{classhebi_1_1Group_ac3760e72c22a47f365e8c23d9a6dcfb7}} 
 \index{hebi\+::\+Group@{hebi\+::\+Group}!start\+Log@{start\+Log}}
 \index{start\+Log@{start\+Log}!hebi\+::\+Group@{hebi\+::\+Group}}
-\subsubsection[{\texorpdfstring{start\+Log()}{startLog()}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Group\+::start\+Log (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Group_ac3760e72c22a47f365e8c23d9a6dcfb7}{}\label{classhebi_1_1Group_ac3760e72c22a47f365e8c23d9a6dcfb7}
+\subsubsection{\texorpdfstring{start\+Log()}{startLog()}}
+{\footnotesize\ttfamily bool hebi\+::\+Group\+::start\+Log (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 
 
 Starts log (stopping any active log). W\+A\+R\+N\+I\+NG\+: interface not yet stable! 
@@ -186,13 +175,12 @@ N\+O\+TE\+: E\+X\+P\+E\+R\+I\+M\+E\+N\+T\+AL U\+SE O\+N\+LY -\/ F\+U\+N\+C\+T\+I
 \begin{DoxyReturn}{Returns}
 true on success. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Group_adbbbbe95f600cb2843c1b51281a74744}\label{classhebi_1_1Group_adbbbbe95f600cb2843c1b51281a74744}} 
 \index{hebi\+::\+Group@{hebi\+::\+Group}!stop\+Log@{stop\+Log}}
 \index{stop\+Log@{stop\+Log}!hebi\+::\+Group@{hebi\+::\+Group}}
-\subsubsection[{\texorpdfstring{stop\+Log()}{stopLog()}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Group\+::stop\+Log (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Group_adbbbbe95f600cb2843c1b51281a74744}{}\label{classhebi_1_1Group_adbbbbe95f600cb2843c1b51281a74744}
+\subsubsection{\texorpdfstring{stop\+Log()}{stopLog()}}
+{\footnotesize\ttfamily bool hebi\+::\+Group\+::stop\+Log (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 
 
 Stops any active log. W\+A\+R\+N\+I\+NG\+: interface not yet stable! 
@@ -205,14 +193,12 @@ true if a log was running and was successfully stopped, false otherwise.
 
 
 \subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classhebi_1_1Group_a895e36298e0e77c27c644c4e3edea356}\label{classhebi_1_1Group_a895e36298e0e77c27c644c4e3edea356}} 
 \index{hebi\+::\+Group@{hebi\+::\+Group}!callback\+Wrapper@{callback\+Wrapper}}
 \index{callback\+Wrapper@{callback\+Wrapper}!hebi\+::\+Group@{hebi\+::\+Group}}
-\subsubsection[{\texorpdfstring{callback\+Wrapper}{callbackWrapper}}]{\setlength{\rightskip}{0pt plus 5cm}void callback\+Wrapper (
-\begin{DoxyParamCaption}
-\item[{Hebi\+Group\+Feedback\+Ptr}]{group\+\_\+feedback, }
-\item[{void $\ast$}]{user\+\_\+data}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classhebi_1_1Group_a895e36298e0e77c27c644c4e3edea356}{}\label{classhebi_1_1Group_a895e36298e0e77c27c644c4e3edea356}
+\subsubsection{\texorpdfstring{callback\+Wrapper}{callbackWrapper}}
+{\footnotesize\ttfamily void callback\+Wrapper (\begin{DoxyParamCaption}\item[{Hebi\+Group\+Feedback\+Ptr}]{group\+\_\+feedback,  }\item[{void $\ast$}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
 Intermediary to convert C-\/style function callbacks to C++ style, and change callback parameter types. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

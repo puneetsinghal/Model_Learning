@@ -1,3 +1,12 @@
+/*! \mainpage Arm Controller C++ Source Code
+ * The main subsections of this code are the kinematics and dynamics namespaces, 
+ * which have classes for calculating kinematics and dynamics respectively, as well
+ * as the arm_controller class, which is the main executable and performs both
+ * communication with the HEBI modules as well as message passing to the model
+ * learning script. Since the HEBI documentation is also based in doxygen notation,
+ * the HEBI comments are included although this was not desired to be the case.
+ */
+
 //! Arm Controller Node for the HEBI Robotics 5-DOF Manipulator Arm
 /*! Run the arm controller node that receives feedback from
 	and sends commands to the HEBI modules
@@ -93,76 +102,76 @@ public:
 	*/
 	void init();
 	/*! Asks for feedback from the modules and if received, updates the current
-		controller feedback state.  It additionally calls the filtering and
-		dynamics computation functions.
+	*	controller feedback state.  It additionally calls the filtering and
+	*	dynamics computation functions.
 	*/
 	bool updateFeedback();
 	/*! Getter function for the feedback to pull the most recent feedback call
-		@param[out] jointState_fbk ROS standard JointState message
-		@param[out] trajectoryCmd_fbk ROS standard JointTrajectory message
-		@param[out] armcontroller_fbk Custom message encapsilating jointState
-					JointTrajectory and all custom inputs
-		@return flag signifying if the Feedback was update successfully
+	*	@param[out] jointState_fbk ROS standard JointState message
+	*	@param[out] trajectoryCmd_fbk ROS standard JointTrajectory message
+	*	@param[out] armcontroller_fbk Custom message encapsilating jointState
+	*				JointTrajectory and all custom inputs
+	*	@return flag signifying if the Feedback was update successfully
 	*/
 	void getFeedbackMsg(sensor_msgs::JointState &jointState_fbk,
 				trajectory_msgs::JointTrajectoryPoint &trajectoryCmd_fbk,
 				model_learning::FeedbackML &armcontroller_fbk);
 	/*! Generates the torque command based off the feedback and feedforward
-		control components
-		@param[in] positionCmd desired joint position commands [rad]
-		@param[in] velocityCmd desired joint velocity commands [rad/s]
-		@param[in] accelCmd desired joint acceleration commands [rad/s^s]
-		@param[out] torque module input torques [N-m]
+	*	control components
+	*	@param[in] positionCmd desired joint position commands [rad]
+	*	@param[in] velocityCmd desired joint velocity commands [rad/s]
+	*	@param[in] accelCmd desired joint acceleration commands [rad/s^s]
+	*	@param[out] torque module input torques [N-m]
 	*/
 	void controller(const Eigen::VectorXd &positionCmd,
 		   const Eigen::VectorXd &velocityCmd, const Eigen::VectorXd &accelCmd,
 			std::vector<double> &torque);
 	/*! Linear feedback controller on position and velocity
-		@param[in] error_pos joint position errors [rad]
-		@param[in] error_vel joint velocity errors [rad/s]
-		@param[out] torque joint control torques [N-m]
+	*	@param[in] error_pos joint position errors [rad]
+	*	@param[in] error_vel joint velocity errors [rad/s]
+	*	@param[out] torque joint control torques [N-m]
 	*/
 	void feedbackControl(const Eigen::VectorXd &error_pos,
 				const Eigen::VectorXd &error_vel,std::vector<double> &torque);
 	/*! Sends position and torque commands to the modules
-		@param[in] alpha joint position signal [rad]
-		@param[in] torque joint torque signal [N-m]
-		@return flag signifying if the command was sent
-		(does not verify the module got it)
+	*	@param[in] alpha joint position signal [rad]
+	*	@param[in] torque joint torque signal [N-m]
+	*	@return flag signifying if the command was sent
+	*	(does not verify the module got it)
 	*/
 	bool sendCommand(const std::vector<double> &alpha,
 					 const std::vector<double> &torque);
 	/*! Sends torque commands to the modules
-		@param[in] torque joint torque signal [N-m]
-		@return flag signifying if the command was sent
-		(does not verify the module got it)
+	*	@param[in] torque joint torque signal [N-m]
+	*	@return flag signifying if the command was sent
+	*	(does not verify the module got it)
 	*/
 	bool sendTorqueCommand(const std::vector<double> &torque);
 	/*! Weighted moving average filter for velocity and temperature
-		@param[in] velocity unfiltered velocity signal [rad/s]
-		@param[in] motorTemp unfiltered motor temperature [C]
-		@param[out] velocityFlt filtered velocity signal [rad/s]
-		@param[out] motorTempFlt filtered motor temperature [C]
+	*	@param[in] velocity unfiltered velocity signal [rad/s]
+	*	@param[in] motorTemp unfiltered motor temperature [C]
+	*	@param[out] velocityFlt filtered velocity signal [rad/s]
+	*	@param[out] motorTempFlt filtered motor temperature [C]
 	*/
 	void WMAFilter(const std::vector<double> &velocity,
 				   const std::vector<double> &motorTemp,
 				   std::vector<double> &velocityFlt,
 				   std::vector<double> &motorTempFlt);
 	/*! Weighted moving average filter
-		@param[in] data_vector unfiltered signal
-		@param[in] num number of past points to filter
-		@param[in] vec_sum sum of all the weighting values
-		@param[in,out] WMA weighted moving average (incrementally updated)
-		@param[in,out] numerator sum of all the ponit multiplied by their
-					   respective weights (incrementally updated)
-		@param[in,out] total sum of all the points (incrementatlly updated)
+	*	@param[in] data_vector unfiltered signal
+	*	@param[in] num number of past points to filter
+	*	@param[in] vec_sum sum of all the weighting values
+	*	@param[in,out] WMA weighted moving average (incrementally updated)
+	*	@param[in,out] numerator sum of all the ponit multiplied by their
+	*				   respective weights (incrementally updated)
+	*	@param[in,out] total sum of all the points (incrementatlly updated)
 	*/
 	void movingAverage(const std::vector<double> &data_vector,const int &num,
 					   const int &vec_sum,double &WMA,double &numerator,
 					   double &total) const;
 	/*! Callback function for getting the commands from the CommandML ros topic
-		and performing the control actions
-		@param[in] cmd custom command message from ROS topic callback
+	*	and performing the control actions
+	*	@param[in] cmd custom command message from ROS topic callback
 	*/
 	void subscriberCallback(const model_learning::CommandML &cmd);
 };
@@ -237,15 +246,6 @@ void armcontroller::init()
 
 	hebi::Lookup lookup;
 	std::vector<hebi::MacAddress> macs;
-	
-	// IMR Arm 1 Mac Addresses
-	/*
-	std::vector<std::string> modules = {"d8:80:39:65:ae:44",
-											"d8:80:39:9d:64:fd",
-											"d8:80:39:9d:59:c7",
-											"d8:80:39:9d:4b:cd",
-											"d8:80:39:9c:d7:0d"};
-	*/
 
 	// Lab Research Arm's Mac Addresses
 	std::vector<std::string> modules = {"D8:80:39:E8:B3:3C",
@@ -819,8 +819,7 @@ int main(int argc, char* argv[])
 		ros::spinOnce(); 
 		loop_rate.sleep();  // Necessary to control the
 	}
-
-// 	return 0;
+ 	return 0;
 
 }
 

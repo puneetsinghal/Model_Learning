@@ -14,8 +14,8 @@ Maintains a registry of network-\/connected modules and returns \hyperlink{class
 \item 
 \hyperlink{classhebi_1_1Lookup_acdfa87d652dd197ff578e5ea0f25128c}{Lookup} ()
 \begin{DoxyCompactList}\small\item\em Creates a \hyperlink{classhebi_1_1Lookup}{Lookup} object which can create \hyperlink{classhebi_1_1Module}{Module} and \hyperlink{classhebi_1_1Group}{Group} references. Typically, only one \hyperlink{classhebi_1_1Lookup}{Lookup} object should exist at a time. \end{DoxyCompactList}\item 
-virtual \hyperlink{classhebi_1_1Lookup_a7d9e38f258c85bedfd63c71c41d1bd8b}{$\sim$\+Lookup} () noexcept\hypertarget{classhebi_1_1Lookup_a7d9e38f258c85bedfd63c71c41d1bd8b}{}\label{classhebi_1_1Lookup_a7d9e38f258c85bedfd63c71c41d1bd8b}
-
+\mbox{\Hypertarget{classhebi_1_1Lookup_a7d9e38f258c85bedfd63c71c41d1bd8b}\label{classhebi_1_1Lookup_a7d9e38f258c85bedfd63c71c41d1bd8b}} 
+virtual \hyperlink{classhebi_1_1Lookup_a7d9e38f258c85bedfd63c71c41d1bd8b}{$\sim$\+Lookup} () noexcept
 \begin{DoxyCompactList}\small\item\em Destructor frees all resources created by \hyperlink{classhebi_1_1Lookup}{Lookup} object, and stops the background query thread. \end{DoxyCompactList}\item 
 void \hyperlink{classhebi_1_1Lookup_a52e3d10c45ac8b6c47a7944fee1d7189}{print\+Table} ()
 \begin{DoxyCompactList}\small\item\em Displays the current contents of the module registry on stdout -- i.\+e., which modules have been found by the lookup. \end{DoxyCompactList}\item 
@@ -49,13 +49,12 @@ Matthew Tesch $<$ matt @ hebirobotics.\+com $>$
 
 
 \subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classhebi_1_1Lookup_acdfa87d652dd197ff578e5ea0f25128c}\label{classhebi_1_1Lookup_acdfa87d652dd197ff578e5ea0f25128c}} 
 \index{hebi\+::\+Lookup@{hebi\+::\+Lookup}!Lookup@{Lookup}}
 \index{Lookup@{Lookup}!hebi\+::\+Lookup@{hebi\+::\+Lookup}}
-\subsubsection[{\texorpdfstring{Lookup()}{Lookup()}}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Lookup\+::\+Lookup (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Lookup_acdfa87d652dd197ff578e5ea0f25128c}{}\label{classhebi_1_1Lookup_acdfa87d652dd197ff578e5ea0f25128c}
+\subsubsection{\texorpdfstring{Lookup()}{Lookup()}}
+{\footnotesize\ttfamily hebi\+::\+Lookup\+::\+Lookup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 
 
 Creates a \hyperlink{classhebi_1_1Lookup}{Lookup} object which can create \hyperlink{classhebi_1_1Module}{Module} and \hyperlink{classhebi_1_1Group}{Group} references. Typically, only one \hyperlink{classhebi_1_1Lookup}{Lookup} object should exist at a time. 
@@ -63,14 +62,12 @@ Creates a \hyperlink{classhebi_1_1Lookup}{Lookup} object which can create \hyper
 Note that this call invokes a background thread to query the network for modules at regular intervals. 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhebi_1_1Lookup_ad77bc157e336ee526157d5b31eb6bc22}\label{classhebi_1_1Lookup_ad77bc157e336ee526157d5b31eb6bc22}} 
 \index{hebi\+::\+Lookup@{hebi\+::\+Lookup}!get\+Connected\+Group\+From\+Mac@{get\+Connected\+Group\+From\+Mac}}
 \index{get\+Connected\+Group\+From\+Mac@{get\+Connected\+Group\+From\+Mac}!hebi\+::\+Lookup@{hebi\+::\+Lookup}}
-\subsubsection[{\texorpdfstring{get\+Connected\+Group\+From\+Mac(const Mac\+Address \&address, long timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T)}{getConnectedGroupFromMac(const MacAddress &address, long timeout_ms=DEFAULT_TIMEOUT)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ {\bf Group} $>$ hebi\+::\+Lookup\+::get\+Connected\+Group\+From\+Mac (
-\begin{DoxyParamCaption}
-\item[{const {\bf Mac\+Address} \&}]{address, }
-\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT}}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Lookup_ad77bc157e336ee526157d5b31eb6bc22}{}\label{classhebi_1_1Lookup_ad77bc157e336ee526157d5b31eb6bc22}
+\subsubsection{\texorpdfstring{get\+Connected\+Group\+From\+Mac()}{getConnectedGroupFromMac()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \hyperlink{classhebi_1_1Group}{Group} $>$ hebi\+::\+Lookup\+::get\+Connected\+Group\+From\+Mac (\begin{DoxyParamCaption}\item[{const \hyperlink{classhebi_1_1MacAddress}{Mac\+Address} \&}]{address,  }\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT} }\end{DoxyParamCaption})}
+
 
 
 Get a group from all modules known to connect to a module with the given mac address. 
@@ -87,15 +84,12 @@ Blocking call which returns a reference to a \hyperlink{classhebi_1_1Group}{Grou
 \begin{DoxyReturn}{Returns}
 A unique\+\_\+ptr with no reference if no group found in allotted time, or reference to a newly allocated group object corresponding to the given parameters otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Lookup_afb22de42b4310292bd9a0a5848e3f3e6}\label{classhebi_1_1Lookup_afb22de42b4310292bd9a0a5848e3f3e6}} 
 \index{hebi\+::\+Lookup@{hebi\+::\+Lookup}!get\+Connected\+Group\+From\+Name@{get\+Connected\+Group\+From\+Name}}
 \index{get\+Connected\+Group\+From\+Name@{get\+Connected\+Group\+From\+Name}!hebi\+::\+Lookup@{hebi\+::\+Lookup}}
-\subsubsection[{\texorpdfstring{get\+Connected\+Group\+From\+Name(const std\+::string \&name, const std\+::string \&family, long timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T)}{getConnectedGroupFromName(const std::string &name, const std::string &family, long timeout_ms=DEFAULT_TIMEOUT)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ {\bf Group} $>$ hebi\+::\+Lookup\+::get\+Connected\+Group\+From\+Name (
-\begin{DoxyParamCaption}
-\item[{const std\+::string \&}]{name, }
-\item[{const std\+::string \&}]{family, }
-\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT}}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Lookup_afb22de42b4310292bd9a0a5848e3f3e6}{}\label{classhebi_1_1Lookup_afb22de42b4310292bd9a0a5848e3f3e6}
+\subsubsection{\texorpdfstring{get\+Connected\+Group\+From\+Name()}{getConnectedGroupFromName()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \hyperlink{classhebi_1_1Group}{Group} $>$ hebi\+::\+Lookup\+::get\+Connected\+Group\+From\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{family,  }\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT} }\end{DoxyParamCaption})}
+
 
 
 Get a group from all modules known to connect to a module with the given name and family. 
@@ -114,14 +108,12 @@ Blocking call which returns a reference to a \hyperlink{classhebi_1_1Group}{Grou
 \begin{DoxyReturn}{Returns}
 A unique\+\_\+ptr with no reference if no group found in allotted time, or reference to a newly allocated group object corresponding to the given parameters otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Lookup_a61243d9e23909ecc5511258452d4396f}\label{classhebi_1_1Lookup_a61243d9e23909ecc5511258452d4396f}} 
 \index{hebi\+::\+Lookup@{hebi\+::\+Lookup}!get\+Group\+From\+Family@{get\+Group\+From\+Family}}
 \index{get\+Group\+From\+Family@{get\+Group\+From\+Family}!hebi\+::\+Lookup@{hebi\+::\+Lookup}}
-\subsubsection[{\texorpdfstring{get\+Group\+From\+Family(const std\+::string \&family, long timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T)}{getGroupFromFamily(const std::string &family, long timeout_ms=DEFAULT_TIMEOUT)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ {\bf Group} $>$ hebi\+::\+Lookup\+::get\+Group\+From\+Family (
-\begin{DoxyParamCaption}
-\item[{const std\+::string \&}]{family, }
-\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT}}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Lookup_a61243d9e23909ecc5511258452d4396f}{}\label{classhebi_1_1Lookup_a61243d9e23909ecc5511258452d4396f}
+\subsubsection{\texorpdfstring{get\+Group\+From\+Family()}{getGroupFromFamily()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \hyperlink{classhebi_1_1Group}{Group} $>$ hebi\+::\+Lookup\+::get\+Group\+From\+Family (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{family,  }\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT} }\end{DoxyParamCaption})}
+
 
 
 Get a group from all known modules with the given family. 
@@ -138,14 +130,12 @@ Blocking call which returns a reference to a \hyperlink{classhebi_1_1Group}{Grou
 \begin{DoxyReturn}{Returns}
 A unique\+\_\+ptr with no reference if no group found in allotted time, or reference to a newly allocated group object corresponding to the given parameters otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Lookup_aad6bf0015b82dbce0b4dde06e1b10f52}\label{classhebi_1_1Lookup_aad6bf0015b82dbce0b4dde06e1b10f52}} 
 \index{hebi\+::\+Lookup@{hebi\+::\+Lookup}!get\+Group\+From\+Macs@{get\+Group\+From\+Macs}}
 \index{get\+Group\+From\+Macs@{get\+Group\+From\+Macs}!hebi\+::\+Lookup@{hebi\+::\+Lookup}}
-\subsubsection[{\texorpdfstring{get\+Group\+From\+Macs(const std\+::vector$<$ Mac\+Address $>$ \&addresses, long timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T)}{getGroupFromMacs(const std::vector< MacAddress > &addresses, long timeout_ms=DEFAULT_TIMEOUT)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ {\bf Group} $>$ hebi\+::\+Lookup\+::get\+Group\+From\+Macs (
-\begin{DoxyParamCaption}
-\item[{const std\+::vector$<$ {\bf Mac\+Address} $>$ \&}]{addresses, }
-\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT}}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Lookup_aad6bf0015b82dbce0b4dde06e1b10f52}{}\label{classhebi_1_1Lookup_aad6bf0015b82dbce0b4dde06e1b10f52}
+\subsubsection{\texorpdfstring{get\+Group\+From\+Macs()}{getGroupFromMacs()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \hyperlink{classhebi_1_1Group}{Group} $>$ hebi\+::\+Lookup\+::get\+Group\+From\+Macs (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \hyperlink{classhebi_1_1MacAddress}{Mac\+Address} $>$ \&}]{addresses,  }\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT} }\end{DoxyParamCaption})}
+
 
 
 Get a group from modules with the given mac addresses. 
@@ -162,15 +152,12 @@ Blocking call which returns a reference to a \hyperlink{classhebi_1_1Group}{Grou
 \begin{DoxyReturn}{Returns}
 A unique\+\_\+ptr with no reference if no group found in allotted time, or reference to a newly allocated group object corresponding to the given parameters otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Lookup_adae9314e23d17ad53e26f146f4c256bf}\label{classhebi_1_1Lookup_adae9314e23d17ad53e26f146f4c256bf}} 
 \index{hebi\+::\+Lookup@{hebi\+::\+Lookup}!get\+Group\+From\+Names@{get\+Group\+From\+Names}}
 \index{get\+Group\+From\+Names@{get\+Group\+From\+Names}!hebi\+::\+Lookup@{hebi\+::\+Lookup}}
-\subsubsection[{\texorpdfstring{get\+Group\+From\+Names(const std\+::vector$<$ std\+::string $>$ \&names, const std\+::vector$<$ std\+::string $>$ \&families, long timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T)}{getGroupFromNames(const std::vector< std::string > &names, const std::vector< std::string > &families, long timeout_ms=DEFAULT_TIMEOUT)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ {\bf Group} $>$ hebi\+::\+Lookup\+::get\+Group\+From\+Names (
-\begin{DoxyParamCaption}
-\item[{const std\+::vector$<$ std\+::string $>$ \&}]{names, }
-\item[{const std\+::vector$<$ std\+::string $>$ \&}]{families, }
-\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT}}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Lookup_adae9314e23d17ad53e26f146f4c256bf}{}\label{classhebi_1_1Lookup_adae9314e23d17ad53e26f146f4c256bf}
+\subsubsection{\texorpdfstring{get\+Group\+From\+Names()}{getGroupFromNames()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \hyperlink{classhebi_1_1Group}{Group} $>$ hebi\+::\+Lookup\+::get\+Group\+From\+Names (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{names,  }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{families,  }\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT} }\end{DoxyParamCaption})}
+
 
 
 Get a group from modules with the given names and families. 
@@ -191,14 +178,12 @@ Blocking call which returns a reference to a \hyperlink{classhebi_1_1Group}{Grou
 \begin{DoxyReturn}{Returns}
 A unique\+\_\+ptr with no reference if no module found in allotted time, or reference to a newly allocated module object corresponding to the given parameters otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Lookup_ad4078193d720554b57bfd47a46d35231}\label{classhebi_1_1Lookup_ad4078193d720554b57bfd47a46d35231}} 
 \index{hebi\+::\+Lookup@{hebi\+::\+Lookup}!get\+Module\+From\+Mac@{get\+Module\+From\+Mac}}
 \index{get\+Module\+From\+Mac@{get\+Module\+From\+Mac}!hebi\+::\+Lookup@{hebi\+::\+Lookup}}
-\subsubsection[{\texorpdfstring{get\+Module\+From\+Mac(const Mac\+Address \&address, long timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T)}{getModuleFromMac(const MacAddress &address, long timeout_ms=DEFAULT_TIMEOUT)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ {\bf Module} $>$ hebi\+::\+Lookup\+::get\+Module\+From\+Mac (
-\begin{DoxyParamCaption}
-\item[{const {\bf Mac\+Address} \&}]{address, }
-\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT}}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Lookup_ad4078193d720554b57bfd47a46d35231}{}\label{classhebi_1_1Lookup_ad4078193d720554b57bfd47a46d35231}
+\subsubsection{\texorpdfstring{get\+Module\+From\+Mac()}{getModuleFromMac()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \hyperlink{classhebi_1_1Module}{Module} $>$ hebi\+::\+Lookup\+::get\+Module\+From\+Mac (\begin{DoxyParamCaption}\item[{const \hyperlink{classhebi_1_1MacAddress}{Mac\+Address} \&}]{address,  }\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT} }\end{DoxyParamCaption})}
+
 
 
 Get a module with the given mac address. 
@@ -213,15 +198,12 @@ Blocking call which returns a reference to a \hyperlink{classhebi_1_1Module}{Mod
 \begin{DoxyReturn}{Returns}
 A unique\+\_\+ptr with no reference if no module found in allotted time, or reference to a newly allocated module object corresponding to the given parameters otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Lookup_aaee883fe7e060f0ea0638a09bc49f54b}\label{classhebi_1_1Lookup_aaee883fe7e060f0ea0638a09bc49f54b}} 
 \index{hebi\+::\+Lookup@{hebi\+::\+Lookup}!get\+Module\+From\+Name@{get\+Module\+From\+Name}}
 \index{get\+Module\+From\+Name@{get\+Module\+From\+Name}!hebi\+::\+Lookup@{hebi\+::\+Lookup}}
-\subsubsection[{\texorpdfstring{get\+Module\+From\+Name(const std\+::string \&name, const std\+::string \&family, long timeout\+\_\+ms=\+D\+E\+F\+A\+U\+L\+T\+\_\+\+T\+I\+M\+E\+O\+U\+T)}{getModuleFromName(const std::string &name, const std::string &family, long timeout_ms=DEFAULT_TIMEOUT)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ {\bf Module} $>$ hebi\+::\+Lookup\+::get\+Module\+From\+Name (
-\begin{DoxyParamCaption}
-\item[{const std\+::string \&}]{name, }
-\item[{const std\+::string \&}]{family, }
-\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT}}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Lookup_aaee883fe7e060f0ea0638a09bc49f54b}{}\label{classhebi_1_1Lookup_aaee883fe7e060f0ea0638a09bc49f54b}
+\subsubsection{\texorpdfstring{get\+Module\+From\+Name()}{getModuleFromName()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \hyperlink{classhebi_1_1Module}{Module} $>$ hebi\+::\+Lookup\+::get\+Module\+From\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{family,  }\item[{long}]{timeout\+\_\+ms = {\ttfamily DEFAULT\+\_\+TIMEOUT} }\end{DoxyParamCaption})}
+
 
 
 Get a module with the given name and family. 
@@ -240,13 +222,12 @@ Blocking call which returns a reference to a \hyperlink{classhebi_1_1Module}{Mod
 \begin{DoxyReturn}{Returns}
 A unique\+\_\+ptr with no reference if no module found in allotted time, or reference to a newly allocated module object corresponding to the given parameters otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1Lookup_a52e3d10c45ac8b6c47a7944fee1d7189}\label{classhebi_1_1Lookup_a52e3d10c45ac8b6c47a7944fee1d7189}} 
 \index{hebi\+::\+Lookup@{hebi\+::\+Lookup}!print\+Table@{print\+Table}}
 \index{print\+Table@{print\+Table}!hebi\+::\+Lookup@{hebi\+::\+Lookup}}
-\subsubsection[{\texorpdfstring{print\+Table()}{printTable()}}]{\setlength{\rightskip}{0pt plus 5cm}void hebi\+::\+Lookup\+::print\+Table (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1Lookup_a52e3d10c45ac8b6c47a7944fee1d7189}{}\label{classhebi_1_1Lookup_a52e3d10c45ac8b6c47a7944fee1d7189}
+\subsubsection{\texorpdfstring{print\+Table()}{printTable()}}
+{\footnotesize\ttfamily void hebi\+::\+Lookup\+::print\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 
 
 Displays the current contents of the module registry on stdout -- i.\+e., which modules have been found by the lookup. 

@@ -15,7 +15,7 @@ Describes an option, its help text (usage) and how it should be parsed.
 const unsigned \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{index}
 \begin{DoxyCompactList}\small\item\em Index of this option\textquotesingle{}s linked list in the array filled in by the parser. \end{DoxyCompactList}\item 
 const int \hyperlink{structoption_1_1Descriptor_a1b220dabd8aad075fa441a80f9b9343c}{type}
-\begin{DoxyCompactList}\small\item\em Used to distinguish between options with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{index}. See \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{index} for details. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Used to distinguish between options with the same \hyperlink{index}{Arm Controller C++ Source Code}. See \hyperlink{index}{Arm Controller C++ Source Code} for details. \end{DoxyCompactList}\item 
 const char $\ast$const \hyperlink{structoption_1_1Descriptor_a0dba4ccca59c19d6ed4081391fca5adb}{shortopt}
 \begin{DoxyCompactList}\small\item\em Each char in this string will be accepted as a short option character. \end{DoxyCompactList}\item 
 const char $\ast$const \hyperlink{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}{longopt}
@@ -53,18 +53,24 @@ The main input when constructing an \hyperlink{classoption_1_1Parser}{option\+::
 
 
 \subsection{Member Data Documentation}
+\mbox{\Hypertarget{structoption_1_1Descriptor_aa5d675dba0214a4abd73007ff163cc67}\label{structoption_1_1Descriptor_aa5d675dba0214a4abd73007ff163cc67}} 
 \index{option\+::\+Descriptor@{option\+::\+Descriptor}!check\+\_\+arg@{check\+\_\+arg}}
 \index{check\+\_\+arg@{check\+\_\+arg}!option\+::\+Descriptor@{option\+::\+Descriptor}}
-\subsubsection[{\texorpdfstring{check\+\_\+arg}{check_arg}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Check\+Arg} option\+::\+Descriptor\+::check\+\_\+arg}\hypertarget{structoption_1_1Descriptor_aa5d675dba0214a4abd73007ff163cc67}{}\label{structoption_1_1Descriptor_aa5d675dba0214a4abd73007ff163cc67}
+\subsubsection{\texorpdfstring{check\+\_\+arg}{check\_arg}}
+{\footnotesize\ttfamily const \hyperlink{namespaceoption_a4cdf403efae65e18bf850e2001b12a2a}{Check\+Arg} option\+::\+Descriptor\+::check\+\_\+arg}
+
 
 
 For each option that matches \hyperlink{structoption_1_1Descriptor_a0dba4ccca59c19d6ed4081391fca5adb}{shortopt} or \hyperlink{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}{longopt} this function will be called to check a potential argument to the option. 
 
 This function will be called even if there is no potential argument. In that case it will be passed {\ttfamily N\+U\+LL} as {\ttfamily arg} parameter. Do not confuse this with the empty string.
 
-See \hyperlink{namespaceoption_a4cdf403efae65e18bf850e2001b12a2a}{Check\+Arg} for more information. \index{option\+::\+Descriptor@{option\+::\+Descriptor}!help@{help}}
+See \hyperlink{namespaceoption_a4cdf403efae65e18bf850e2001b12a2a}{Check\+Arg} for more information. \mbox{\Hypertarget{structoption_1_1Descriptor_a9045b19311533e1b8a08645d57149c79}\label{structoption_1_1Descriptor_a9045b19311533e1b8a08645d57149c79}} 
+\index{option\+::\+Descriptor@{option\+::\+Descriptor}!help@{help}}
 \index{help@{help}!option\+::\+Descriptor@{option\+::\+Descriptor}}
-\subsubsection[{\texorpdfstring{help}{help}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ option\+::\+Descriptor\+::help}\hypertarget{structoption_1_1Descriptor_a9045b19311533e1b8a08645d57149c79}{}\label{structoption_1_1Descriptor_a9045b19311533e1b8a08645d57149c79}
+\subsubsection{\texorpdfstring{help}{help}}
+{\footnotesize\ttfamily const char$\ast$ option\+::\+Descriptor\+::help}
+
 
 
 The usage text associated with the options in this \hyperlink{structoption_1_1Descriptor}{Descriptor}. 
@@ -76,9 +82,12 @@ See \hyperlink{namespaceoption_afc8bb7e040a98a0b33ff1ce9da1be0d1}{option\+::prin
 \begin{DoxyAttention}{Attention}
 Must be U\+T\+F-\/8-\/encoded. If your compiler supports C++11 you can use the \char`\"{}u8\char`\"{} prefix to make sure string literals are properly encoded. 
 \end{DoxyAttention}
+\mbox{\Hypertarget{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}\label{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}} 
 \index{option\+::\+Descriptor@{option\+::\+Descriptor}!index@{index}}
 \index{index@{index}!option\+::\+Descriptor@{option\+::\+Descriptor}}
-\subsubsection[{\texorpdfstring{index}{index}}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned option\+::\+Descriptor\+::index}\hypertarget{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{}\label{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}
+\subsubsection{\texorpdfstring{index}{index}}
+{\footnotesize\ttfamily const unsigned option\+::\+Descriptor\+::index}
+
 
 
 Index of this option\textquotesingle{}s linked list in the array filled in by the parser. 
@@ -90,16 +99,19 @@ If you have options that mean exactly opposite things (e.\+g. {\ttfamily --enabl
 \begin{DoxyParagraph}{Tip\+:}
 Use an enum rather than plain ints for better readability, as shown in the example at \hyperlink{structoption_1_1Descriptor}{Descriptor}. 
 \end{DoxyParagraph}
+\mbox{\Hypertarget{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}\label{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}} 
 \index{option\+::\+Descriptor@{option\+::\+Descriptor}!longopt@{longopt}}
 \index{longopt@{longopt}!option\+::\+Descriptor@{option\+::\+Descriptor}}
-\subsubsection[{\texorpdfstring{longopt}{longopt}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ const option\+::\+Descriptor\+::longopt}\hypertarget{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}{}\label{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}
+\subsubsection{\texorpdfstring{longopt}{longopt}}
+{\footnotesize\ttfamily const char$\ast$ const option\+::\+Descriptor\+::longopt}
+
 
 
 The long option name (without the leading {\ttfamily --} ). 
 
 If this \hyperlink{structoption_1_1Descriptor}{Descriptor} should not have a long option name, use the empty string \char`\"{}\char`\"{}. N\+U\+LL is not permitted here!
 
-While \hyperlink{structoption_1_1Descriptor_a0dba4ccca59c19d6ed4081391fca5adb}{shortopt} allows multiple short option characters, each \hyperlink{structoption_1_1Descriptor}{Descriptor} can have only a single long option name. If you have multiple long option names referring to the same option use separate Descriptors that have the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{index} and \hyperlink{structoption_1_1Descriptor_a1b220dabd8aad075fa441a80f9b9343c}{type}. You may repeat short option characters in such an alias \hyperlink{structoption_1_1Descriptor}{Descriptor} but there\textquotesingle{}s no need to.
+While \hyperlink{structoption_1_1Descriptor_a0dba4ccca59c19d6ed4081391fca5adb}{shortopt} allows multiple short option characters, each \hyperlink{structoption_1_1Descriptor}{Descriptor} can have only a single long option name. If you have multiple long option names referring to the same option use separate Descriptors that have the same \hyperlink{index}{Arm Controller C++ Source Code} and \hyperlink{structoption_1_1Descriptor_a1b220dabd8aad075fa441a80f9b9343c}{type}. You may repeat short option characters in such an alias \hyperlink{structoption_1_1Descriptor}{Descriptor} but there\textquotesingle{}s no need to.
 
 \begin{DoxyParagraph}{Dummy Descriptors\+:}
 You can use dummy Descriptors with an empty string for both \hyperlink{structoption_1_1Descriptor_a0dba4ccca59c19d6ed4081391fca5adb}{shortopt} and \hyperlink{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}{longopt} to add text to the usage that is not related to a specific option. See \hyperlink{structoption_1_1Descriptor_a9045b19311533e1b8a08645d57149c79}{help}. The first dummy \hyperlink{structoption_1_1Descriptor}{Descriptor} will be used for unknown options (see below).
@@ -107,12 +119,15 @@ You can use dummy Descriptors with an empty string for both \hyperlink{structopt
 \begin{DoxyParagraph}{Unknown Option Descriptor\+:}
 The first dummy \hyperlink{structoption_1_1Descriptor}{Descriptor} in the list of Descriptors, whose \hyperlink{structoption_1_1Descriptor_a0dba4ccca59c19d6ed4081391fca5adb}{shortopt} and \hyperlink{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}{longopt} are both the empty string, will be used as the \hyperlink{structoption_1_1Descriptor}{Descriptor} for unknown options. An unknown option is a string in the argument vector that is not a lone minus {\ttfamily \textquotesingle{}-\/\textquotesingle{}} but starts with a minus character and does not match any \hyperlink{structoption_1_1Descriptor}{Descriptor}\textquotesingle{}s \hyperlink{structoption_1_1Descriptor_a0dba4ccca59c19d6ed4081391fca5adb}{shortopt} or \hyperlink{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}{longopt}. ~\newline
 Note that the dummy descriptor\textquotesingle{}s \hyperlink{structoption_1_1Descriptor_aa5d675dba0214a4abd73007ff163cc67}{check\+\_\+arg} function {\itshape will} be called and its return value will be evaluated as usual. I.\+e. if it returns \hyperlink{namespaceoption_aee8c76a07877335762631491e7a5a1a9a9528e32563b795bd2930b12d0a5e382d}{A\+R\+G\+\_\+\+I\+L\+L\+E\+G\+AL} the parsing will be aborted with {\ttfamily \hyperlink{classoption_1_1Parser_a2caa149140067b4d13e4d7a104bb3090}{Parser\+::error()}==true}. ~\newline
-if {\ttfamily check\+\_\+arg} does not return \hyperlink{namespaceoption_aee8c76a07877335762631491e7a5a1a9a9528e32563b795bd2930b12d0a5e382d}{A\+R\+G\+\_\+\+I\+L\+L\+E\+G\+AL} the descriptor\textquotesingle{}s \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{index} {\itshape will} be used to pick the linked list into which to put the unknown option. ~\newline
+if {\ttfamily check\+\_\+arg} does not return \hyperlink{namespaceoption_aee8c76a07877335762631491e7a5a1a9a9528e32563b795bd2930b12d0a5e382d}{A\+R\+G\+\_\+\+I\+L\+L\+E\+G\+AL} the descriptor\textquotesingle{}s \hyperlink{index}{Arm Controller C++ Source Code} {\itshape will} be used to pick the linked list into which to put the unknown option. ~\newline
 If there is no dummy descriptor, unknown options will be dropped silently. 
 \end{DoxyParagraph}
+\mbox{\Hypertarget{structoption_1_1Descriptor_a0dba4ccca59c19d6ed4081391fca5adb}\label{structoption_1_1Descriptor_a0dba4ccca59c19d6ed4081391fca5adb}} 
 \index{option\+::\+Descriptor@{option\+::\+Descriptor}!shortopt@{shortopt}}
 \index{shortopt@{shortopt}!option\+::\+Descriptor@{option\+::\+Descriptor}}
-\subsubsection[{\texorpdfstring{shortopt}{shortopt}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ const option\+::\+Descriptor\+::shortopt}\hypertarget{structoption_1_1Descriptor_a0dba4ccca59c19d6ed4081391fca5adb}{}\label{structoption_1_1Descriptor_a0dba4ccca59c19d6ed4081391fca5adb}
+\subsubsection{\texorpdfstring{shortopt}{shortopt}}
+{\footnotesize\ttfamily const char$\ast$ const option\+::\+Descriptor\+::shortopt}
+
 
 
 Each char in this string will be accepted as a short option character. 
@@ -121,12 +136,15 @@ The string must not include the minus character {\ttfamily \textquotesingle{}-\/
 
 If this \hyperlink{structoption_1_1Descriptor}{Descriptor} should not have short option characters, use the empty string \char`\"{}\char`\"{}. N\+U\+LL is not permitted here!
 
-See \hyperlink{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}{longopt} for more information. \index{option\+::\+Descriptor@{option\+::\+Descriptor}!type@{type}}
+See \hyperlink{structoption_1_1Descriptor_a470c449dfa894c9bfda2dae026142b4b}{longopt} for more information. \mbox{\Hypertarget{structoption_1_1Descriptor_a1b220dabd8aad075fa441a80f9b9343c}\label{structoption_1_1Descriptor_a1b220dabd8aad075fa441a80f9b9343c}} 
+\index{option\+::\+Descriptor@{option\+::\+Descriptor}!type@{type}}
 \index{type@{type}!option\+::\+Descriptor@{option\+::\+Descriptor}}
-\subsubsection[{\texorpdfstring{type}{type}}]{\setlength{\rightskip}{0pt plus 5cm}const int option\+::\+Descriptor\+::type}\hypertarget{structoption_1_1Descriptor_a1b220dabd8aad075fa441a80f9b9343c}{}\label{structoption_1_1Descriptor_a1b220dabd8aad075fa441a80f9b9343c}
+\subsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily const int option\+::\+Descriptor\+::type}
 
 
-Used to distinguish between options with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{index}. See \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{index} for details. 
+
+Used to distinguish between options with the same \hyperlink{index}{Arm Controller C++ Source Code}. See \hyperlink{index}{Arm Controller C++ Source Code} for details. 
 
 It is recommended that you use an enum rather than a plain int to make your code more readable. 
 

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name',['name',['../classhebi_1_1Command_1_1Settings.html#a86561f33ef1ceaa4e0e50e125433a4f7',1,'hebi::Command::Settings::name()'],['../classhebi_1_1Info_1_1Settings.html#ac69041bf666cb7746936efe9da3a2d48',1,'hebi::Info::Settings::name()']]],
+  ['name',['name',['../classhebi_1_1Command_1_1Settings.html#a86561f33ef1ceaa4e0e50e125433a4f7',1,'hebi::Command::Settings::name()'],['../classhebi_1_1Info_1_1Settings.html#a4bfe9d2443d8cfad6e4934110aa21784',1,'hebi::Info::Settings::name()']]],
   ['next',['next',['../classoption_1_1Option.html#a59ae9aed505f4d410633bb36478a32be',1,'option::Option::next()'],['../classoption_1_1PrintUsageImplementation_1_1LinePartIterator.html#a58b8743da57de2d108472eee60324df6',1,'option::PrintUsageImplementation::LinePartIterator::next()']]],
   ['nextrow',['nextRow',['../classoption_1_1PrintUsageImplementation_1_1LinePartIterator.html#a55d5c3e50f9c1d8cd48f518899a5a48c',1,'option::PrintUsageImplementation::LinePartIterator']]],
   ['nexttable',['nextTable',['../classoption_1_1PrintUsageImplementation_1_1LinePartIterator.html#afe43ca12d399ed3c871e4dc5bf63356e',1,'option::PrintUsageImplementation::LinePartIterator']]],

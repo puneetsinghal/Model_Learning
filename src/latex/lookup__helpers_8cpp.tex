@@ -1,11 +1,11 @@
 \hypertarget{lookup__helpers_8cpp}{}\section{lookup\+\_\+helpers.\+cpp File Reference}
 \label{lookup__helpers_8cpp}\index{lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}}
-{\ttfamily \#include \char`\"{}lookup.\+hpp\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}module.\+hpp\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}group.\+hpp\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}mac\+\_\+address.\+hpp\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}optionparser.\+h\char`\"{}}\\*
-{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include \char`\"{}lookup.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}module.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}group.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mac\+\_\+address.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}optionparser.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
 Include dependency graph for lookup\+\_\+helpers.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -21,22 +21,22 @@ struct \hyperlink{structArg}{Arg}
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum {\bfseries option\+Index} \{ \\*
+\mbox{\Hypertarget{lookup__helpers_8cpp_a0ba79095c558cb72ea2e8b277be1da39}\label{lookup__helpers_8cpp_a0ba79095c558cb72ea2e8b277be1da39}} 
+enum {\bfseries option\+Index} \{ \newline
 {\bfseries U\+N\+K\+N\+O\+WN}, 
 {\bfseries H\+E\+LP}, 
 {\bfseries V\+E\+R\+B\+O\+SE}, 
 {\bfseries N\+A\+ME}, 
-\\*
+\newline
 {\bfseries F\+A\+M\+I\+LY}, 
 {\bfseries P\+A\+IR}, 
 {\bfseries M\+AC}, 
 {\bfseries N\+A\+M\+ES}, 
-\\*
+\newline
 {\bfseries F\+A\+M\+I\+L\+I\+ES}, 
 {\bfseries P\+A\+I\+RS}, 
 {\bfseries M\+A\+CS}
- \}\hypertarget{lookup__helpers_8cpp_a0ba79095c558cb72ea2e8b277be1da39}{}\label{lookup__helpers_8cpp_a0ba79095c558cb72ea2e8b277be1da39}
-
+ \}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -66,14 +66,12 @@ Matthew Tesch $<$ matt @ hebirobotics.\+com $>$
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{lookup__helpers_8cpp_a6db32406bd0d0eac1eebcf2fd261af8e}\label{lookup__helpers_8cpp_a6db32406bd0d0eac1eebcf2fd261af8e}} 
 \index{lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}!get\+Group\+From\+Args@{get\+Group\+From\+Args}}
 \index{get\+Group\+From\+Args@{get\+Group\+From\+Args}!lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}}
-\subsubsection[{\texorpdfstring{get\+Group\+From\+Args(int argc, char $\ast$argv[])}{getGroupFromArgs(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf hebi\+::\+Group}$>$ get\+Group\+From\+Args (
-\begin{DoxyParamCaption}
-\item[{int}]{argc, }
-\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
-\end{DoxyParamCaption}
-)}\hypertarget{lookup__helpers_8cpp_a6db32406bd0d0eac1eebcf2fd261af8e}{}\label{lookup__helpers_8cpp_a6db32406bd0d0eac1eebcf2fd261af8e}
+\subsubsection{\texorpdfstring{get\+Group\+From\+Args()}{getGroupFromArgs()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classhebi_1_1Group}{hebi\+::\+Group}$>$ get\+Group\+From\+Args (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
 Parse the given arguments, and look up group based on the given arguments.
 
 \begin{DoxyAuthor}{Author}
@@ -82,14 +80,12 @@ Matthew Tesch $<$ matt @ hebirobotics.\+com $>$
 \begin{DoxySince}{Since}
 22 Jan 2016 
 \end{DoxySince}
+\mbox{\Hypertarget{lookup__helpers_8cpp_a4eaf3947ef42501a94b2c32913176f57}\label{lookup__helpers_8cpp_a4eaf3947ef42501a94b2c32913176f57}} 
 \index{lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}!get\+Module\+From\+Args@{get\+Module\+From\+Args}}
 \index{get\+Module\+From\+Args@{get\+Module\+From\+Args}!lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}}
-\subsubsection[{\texorpdfstring{get\+Module\+From\+Args(int argc, char $\ast$argv[])}{getModuleFromArgs(int argc, char *argv[])}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<${\bf hebi\+::\+Module}$>$ get\+Module\+From\+Args (
-\begin{DoxyParamCaption}
-\item[{int}]{argc, }
-\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
-\end{DoxyParamCaption}
-)}\hypertarget{lookup__helpers_8cpp_a4eaf3947ef42501a94b2c32913176f57}{}\label{lookup__helpers_8cpp_a4eaf3947ef42501a94b2c32913176f57}
+\subsubsection{\texorpdfstring{get\+Module\+From\+Args()}{getModuleFromArgs()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classhebi_1_1Module}{hebi\+::\+Module}$>$ get\+Module\+From\+Args (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
 Parse the given arguments, and look up module based on the given arguments.
 
 \begin{DoxyAuthor}{Author}
@@ -101,9 +97,12 @@ Matthew Tesch $<$ matt @ hebirobotics.\+com $>$
 
 
 \subsection{Variable Documentation}
+\mbox{\Hypertarget{lookup__helpers_8cpp_a801705ccfc80f1cad2bc748bc7367755}\label{lookup__helpers_8cpp_a801705ccfc80f1cad2bc748bc7367755}} 
 \index{lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}!group\+Usage@{group\+Usage}}
 \index{group\+Usage@{group\+Usage}!lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}}
-\subsubsection[{\texorpdfstring{group\+Usage}{groupUsage}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf option\+::\+Descriptor} group\+Usage\mbox{[}$\,$\mbox{]}}\hypertarget{lookup__helpers_8cpp_a801705ccfc80f1cad2bc748bc7367755}{}\label{lookup__helpers_8cpp_a801705ccfc80f1cad2bc748bc7367755}
+\subsubsection{\texorpdfstring{group\+Usage}{groupUsage}}
+{\footnotesize\ttfamily const \hyperlink{structoption_1_1Descriptor}{option\+::\+Descriptor} group\+Usage\mbox{[}$\,$\mbox{]}}
+
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 =
@@ -151,9 +150,12 @@ Matthew Tesch $<$ matt @ hebirobotics.\+com $>$
  \textcolor{stringliteral}{"  ./script -M 01:ab:23:4b:cd:4f --macs 0f:a4:25:a4:fe:3d \(\backslash\)n"} \},
 \{ 0, 0, 0, 0, 0, 0 \} \}
 \end{DoxyCode}
+\mbox{\Hypertarget{lookup__helpers_8cpp_ad9cfe639d447c892c4c31e186c0cd2e7}\label{lookup__helpers_8cpp_ad9cfe639d447c892c4c31e186c0cd2e7}} 
 \index{lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}!module\+Usage@{module\+Usage}}
 \index{module\+Usage@{module\+Usage}!lookup\+\_\+helpers.\+cpp@{lookup\+\_\+helpers.\+cpp}}
-\subsubsection[{\texorpdfstring{module\+Usage}{moduleUsage}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf option\+::\+Descriptor} module\+Usage\mbox{[}$\,$\mbox{]}}\hypertarget{lookup__helpers_8cpp_ad9cfe639d447c892c4c31e186c0cd2e7}{}\label{lookup__helpers_8cpp_ad9cfe639d447c892c4c31e186c0cd2e7}
+\subsubsection{\texorpdfstring{module\+Usage}{moduleUsage}}
+{\footnotesize\ttfamily const \hyperlink{structoption_1_1Descriptor}{option\+::\+Descriptor} module\+Usage\mbox{[}$\,$\mbox{]}}
+
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 =
