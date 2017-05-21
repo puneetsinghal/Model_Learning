@@ -8,6 +8,8 @@ from sensor_msgs.msg import JointState
 from std_msgs.msg import Header
 import std_msgs.msg
 
+import argparse
+from collections import namedtuple
 import numpy as np
 import matplotlib.pyplot as plt
 import GPy
@@ -238,7 +240,7 @@ def AverageDataSet(fbk,index_set):
 
 	return data
 
-def resetPosition(motorOn,ps):
+def resetPosition(motorOn,ps,position):
 	tf = 4.
 	start_time = rospy.Time.now()
 	time_from_start = 0.
@@ -246,12 +248,7 @@ def resetPosition(motorOn,ps):
 	cmd = model_learning.msg.CommandML()
 	point = JointTrajectoryPoint()
 
-	c_x = 0.0
-	c_y = 0.3
-	c_z = 0.1
-	radius = 0.095
-	point.positions = TG.inverseKinematics(c_x,c_y+radius,c_z,0)
-	#point.positions = [1.68437,-0.445017,1.18675,4.7561,1.62]#7.94885]
+	point.positions = TG.inverseKinematics(position.c_x,position.c_y,position.c_z,position.theta)
 	point.velocities = [0.,0.,0.,0.,0.]
 	cmd.epsTau = [0.,0.,0.,0.,0.]
 	cmd.jointTrajectory.points.append(point)
@@ -489,7 +486,7 @@ class modelDatabase:
 		self.downsample_f = 1000.
 		self.data_cap = 2000
 		self.minimum_f = 50.
-		self.start_time = 0.  #Changed Start time back to 0 from 0.75
+		self.start_time = 0.
 		self.init_position = np.array([0,0,0,0,0])
 		self.joints_ML = np.array([0,1,2,3,4])
 
@@ -1556,13 +1553,22 @@ if __name__ == '__main__':
 	# 1. = motor on with model learning commands
 	# 2. = motor on without model learning commands
 
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-p", "--plot", type=str,default="none")
+	parser.add_argument("-t", "--traj", type=str,default="pnp")
+	args = parser.parse_args()
+
+	plotting = args.plot.lower()
+	traj_type = args.traj.lower()
+
+	position = namedtuple('Position', ['c_x', 'c_y','c_z','theta'])
+
+	position.c_x = 0.0
+	position.c_y = 0.395
+	position.c_z = 0.1
+	position.theta = 0.
+
 	try:
-		plotting = 0
-		if len(sys.argv) > 1:
-			if sys.argv[1].lower() == 'minimal':
-				plotting = 1
-			elif sys.argv[1].lower() == 'all':
-				plotting = 2
 
 		motorOn = 2.
 
@@ -1588,15 +1594,22 @@ if __name__ == '__main__':
 		amp_string = 'pi%18,pi%16'
 
 		#Setup control struct
-		control_info['type'] = "MinJerk"
-		control_info['amp'] = [[np.pi/8,np.pi/10],
-							   [np.pi/16,np.pi/14],
-							   [np.pi/12,np.pi/10],
-							   [np.pi/10,np.pi/6],
-							   [np.pi/8,np.pi/6]]
+		if traj_type == "circle":
+			control_info['type'] = "Circle"
+			position.c_x = 0.0
+			position.c_y = 0.395
+			position.c_z = 0.0
+			position.theta = 0
+			control_info['tf'] = 10.
+		else:
+			control_info['type'] = "MinJerk"
+			position.c_x = 0.0
+			position.c_y = 0.395
+			position.c_z = 0.1
+			position.theta = 0
+			control_info['tf'] = 16.
 		control_info['p_gain'] = [25.,25.,20.,10.,3.];
 		control_info['v_gain'] = [0.1,0.1,0.1,0.1,0.1];
-		control_info['tf'] = 16.
 		control_info['Set'] = "train"
 		control_info['closedLoop'] = True
 		control_info['feedforward'] = True
@@ -1604,19 +1617,19 @@ if __name__ == '__main__':
 
 		###### Training the Model ######
 		ps = pubSub(bag=False,control_info=control_info)
-		resetPosition(motorOn,ps)
+		resetPosition(motorOn,ps,position)
 		ps.reset()
 		db = modelDatabase(ps)#,deflection=True)
 		db.data_cap = cap
 		db.setJointsToLearn(np.array([0,1,2,3,4]))
 
 		db.controller(motorOn,control_info)
-		resetPosition(motorOn,ps)
+		resetPosition(motorOn,ps,position)
 		db.updateSet(New=True,Set="train")
 		db.downSample(Set="train")
 
 		#Update and potentially optimize models			
-		db.updateModel(optimize=False,gaus_noise=gaus_noise)
+		db.updateModel(optimize=True,gaus_noise=gaus_noise)
 		ps.unregister()
 		time.sleep(1)
 
@@ -1633,11 +1646,13 @@ if __name__ == '__main__':
 		db.setJointsToLearn(np.array([0,1,2,3,4]))
 
 		db.controller(motorOn,control_info)
-		resetPosition(motorOn,ps)
+		resetPosition(motorOn,ps,position)
 		db.updateSet(New=True,Set="verify")
+		ps.unregister()
 
 
-		###### Testing the Model ######
+		###### Retraining the Model ######
+
 		#update the control_info for next run
 		control_info['Set'] = "train"
 		ps = pubSub(bag=False,control_info=control_info)
@@ -1648,10 +1663,11 @@ if __name__ == '__main__':
 		db.setJointsToLearn(np.array([0,1,2,3,4]))
 
 		db.controller(motorOn,control_info)
-		resetPosition(motorOn,ps)
+		resetPosition(motorOn,ps,position)
 		db.updateSet(New=False,Set="train")
 		db.downSample(Set="train")
 		db.updateModel(optimize=False,gaus_noise=gaus_noise)
+		ps.unregister()
 
 		##### Testing the Closed Loop Model ######
 		control_info['Set'] = "test"
@@ -1660,37 +1676,10 @@ if __name__ == '__main__':
 		ps.reset()
 		motorOn = 1.
 		db.controller(motorOn,control_info)
-		resetPosition(motorOn,ps)
+		resetPosition(motorOn,ps,position)
 		db.updateSet(New=True,Set="test")
 
-
-		# for j in range(db.train_mod_set.time.size):
-		# 	if db.train_mod_set.time[j]>10.:
-		# 		final_index = j
-		# 		break
-
-		# cross_point = -0.7
-
-		# for i in range(db.test_set.positionCmd[2].size):
-		# 	if db.test_set.positionCmd[2][i] > cross_point:
-		# 		if np.abs(db.test_set.positionCmd[2][i] - 2.0) > np.abs(db.test_set.positionCmd[2][i-1] - 2.0):
-		# 			time_cross_GP = db.test_set.time[i-1]
-		# 		else:
-		# 			time_cross_GP = db.test_set.time[i]
-		# 		break
-
-		# for i in range(db.verify_set.positionCmd[2].size):
-		# 	if db.verify_set.positionCmd[2][i] > cross_point:
-		# 		if np.abs(db.verify_set.positionCmd[2][i] - 2.0) > np.abs(db.verify_set.positionCmd[2][i-1] - 2.0):
-		# 			time_cross_PD = db.verify_set.time[i-1]
-		# 		else:
-		# 			time_cross_PD = db.verify_set.time[i]
-		# 		break
-
-		# time_offset_PD = time_cross_GP-time_cross_PD
-		# print time_cross_PD
-		# print time_cross_GP
-		# print time_offset_PD
+		ps.unregister()
 
 		final_index = db.verify_set.time.size
 		time.sleep(2)
@@ -1698,12 +1687,12 @@ if __name__ == '__main__':
 		# time_offset_PD = np.mean(db.train_set.time[100:500]-db.verify_set.time[100:500])
 		
 		for k in range(db.joints_ML.size):
-			if plotting > 0:
+			if plotting == "miminal" or plotting == "all":
 				plt.figure(30+k)
 				plt.plot(db.train_set.time[:final_index],db.train_set.position[db.joints_ML[k],:final_index],linewidth=3,label='RBD',color='b')
 				plt.plot(db.verify_set.time[:final_index],db.verify_set.position[db.joints_ML[k],:final_index],linewidth=3,label='Task-Based GP Trial 1',color='m')
 			
-			if plotting == 2:
+			if plotting == "all":
 				plt.figure(40+k)
 				plt.plot(db.train_set.time[:final_index],db.train_set.velocityFlt[db.joints_ML[k],:final_index],linewidth=3,label='RBD',color='b')
 				plt.plot(db.verify_set.time[:final_index],db.verify_set.velocityFlt[db.joints_ML[k],:final_index],linewidth=3,label='Task-Based GP Trial 1',color='m')
@@ -1715,36 +1704,37 @@ if __name__ == '__main__':
 		for k in range(db.joints_ML.size):
 			idx = db.joints_ML[k]
 
-			RMSE_PD_pos = np.sqrt(np.mean(np.square(db.verify_set.positionCmd[db.joints_ML[k],:final_index]-db.verify_set.position[db.joints_ML[k],:final_index])))
 			RMSE_RBD_pos = np.sqrt(np.mean(np.square(db.train_set.positionCmd[db.joints_ML[k],:final_index]-db.train_set.position[db.joints_ML[k],:final_index])))
-			RMSE_GP_pos = np.sqrt(np.mean(np.square(db.test_set.positionCmd[db.joints_ML[k]]-db.test_set.position[db.joints_ML[k]])))
-			print "Joint",k+1,"Pos_RMSE_RBD: ", RMSE_PD_pos
+			RMSE_GP1_pos = np.sqrt(np.mean(np.square(db.verify_set.positionCmd[db.joints_ML[k],:final_index]-db.verify_set.position[db.joints_ML[k],:final_index])))
+			RMSE_GP2_pos = np.sqrt(np.mean(np.square(db.test_set.positionCmd[db.joints_ML[k]]-db.test_set.position[db.joints_ML[k]])))
 			print "Joint",k+1,"Pos_RMSE_RBD: ", RMSE_RBD_pos
-			print "Joint",k+1,"Pos_RMSE_GP: ", RMSE_GP_pos
-			print "Joint",k+1,"Percentage Improvement in Position: ", (RMSE_RBD_pos-RMSE_GP_pos)/RMSE_RBD_pos*100
-			if plotting > 0:
+			print "Joint",k+1,"Pos_RMSE_GP1: ", RMSE_GP1_pos
+			print "Joint",k+1,"Pos_RMSE_GP2: ", RMSE_GP2_pos
+			print "Joint",k+1,"Percentage Improvement in Position GP1: ", (RMSE_RBD_pos-RMSE_GP1_pos)/RMSE_RBD_pos*100
+			print "Joint",k+1,"Percentage Improvement in Position GP2: ", (RMSE_RBD_pos-RMSE_GP2_pos)/RMSE_RBD_pos*100
+			if plotting == "miminal" or plotting == "all":
 				plt.figure(30+k)
 				plt.plot(db.test_set.time,db.test_set.position[db.joints_ML[k]],linewidth=3,color="green",label='Task-Based GP Trial 2')
 				plt.plot(db.test_set.time,db.test_set.positionCmd[db.joints_ML[k]],'r--',linewidth=3,label='Desired')
-				plt.title('Joint Position Tracking Comparison of Unlearned Versus Learned')
+				plt.title('Joint Position Tracking Comparison for Task-Based GP')
 				plt.legend()
 				plt.ylabel('Position [rad]')
 				plt.xlabel('Time [s]')
 		
-			if plotting == 2:
+			if plotting == "all":
 				plt.figure(40+k)
 				plt.plot(db.test_set.time,db.test_set.velocityFlt[db.joints_ML[k]],linewidth=3,color="green",label='Task-Based GP Trial 2')
 				plt.plot(db.test_set.time,db.test_set.velocityCmd[db.joints_ML[k]],'r--',linewidth=3,label='Desired')
-				plt.title('Joint Velocity Tracking Comparison of Unlearned Versus Learned')
+				plt.title('Joint Velocity Tracking Comparison for Task-Based GP')
 				plt.legend()
 				plt.ylabel('Velocity [rad/s]')
 				plt.xlabel('Time [s]')
 
 				plt.figure(50+k)
-				plt.plot(db.test_set.time,db.test_set.torqueCmd[db.joints_ML[k]],color="green",label='Commanded Torque')
-				plt.plot(db.test_set.time,db.test_set.torqueID[db.joints_ML[k]],color="blue", label='RBD Torque')
-				plt.plot(db.test_set.time,db.test_set.torqueID[db.joints_ML[k]]+db.test_set.epsTau[db.joints_ML[k]],color="red",label='GP Torque')
-				plt.title('Comparison of Commanded Torque with RBD Computed Torque and GP+RBD Torque for Trial 2')
+				plt.plot(db.test_set.time,db.test_set.torqueCmd[db.joints_ML[k]],color="green",label='Commanded Torque (GP Trial 2)')
+				plt.plot(db.test_set.time,db.test_set.torqueID[db.joints_ML[k]],color="blue", label='RBD Torque  (GP Trial 2)')
+				plt.plot(db.test_set.time,db.test_set.torqueID[db.joints_ML[k]]+db.test_set.epsTau[db.joints_ML[k]],color="red",label='GP Torque (GP Trial 2)')
+				plt.title('Joint Torque Tracking Comparison for Task-Based GP Trial 2')
 				plt.legend()
 				plt.ylabel('Torque [N-m]')
 				plt.xlabel('Time [s]')
@@ -1753,5 +1743,5 @@ if __name__ == '__main__':
 	
 	except:
 		ps = pubSub()
-		resetPosition(motorOn,ps)
+		resetPosition(motorOn,ps,position)
 		raise
