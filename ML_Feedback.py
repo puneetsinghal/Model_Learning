@@ -1556,10 +1556,12 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-p", "--plot", type=str,default="none")
 	parser.add_argument("-t", "--traj", type=str,default="pnp")
+	parser.add_argument("-s", "--save", type=str,default="no")
 	args = parser.parse_args()
 
 	plotting = args.plot.lower()
 	traj_type = args.traj.lower()
+	saving = (args.save.lower()=="yes")
 
 	position = namedtuple('Position', ['c_x', 'c_y','c_z','theta'])
 
@@ -1678,6 +1680,10 @@ if __name__ == '__main__':
 		db.controller(motorOn,control_info)
 		resetPosition(motorOn,ps,position)
 		db.updateSet(New=True,Set="test")
+
+		if saving:
+			db.saveDatabase()
+			print "HERE"
 
 		ps.unregister()
 
