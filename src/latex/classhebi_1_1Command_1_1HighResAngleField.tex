@@ -12,26 +12,26 @@ A message field for an angle measurement which does not lose precision at very h
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries High\+Res\+Angle\+Field} (Hebi\+Command\+Ptr internal, Command\+High\+Res\+Angle\+Field field)\hypertarget{classhebi_1_1Command_1_1HighResAngleField_aaf8bed01fb55cacfc0d2e9965469c8f0}{}\label{classhebi_1_1Command_1_1HighResAngleField_aaf8bed01fb55cacfc0d2e9965469c8f0}
-
+\mbox{\Hypertarget{classhebi_1_1Command_1_1HighResAngleField_aaf8bed01fb55cacfc0d2e9965469c8f0}\label{classhebi_1_1Command_1_1HighResAngleField_aaf8bed01fb55cacfc0d2e9965469c8f0}} 
+{\bfseries High\+Res\+Angle\+Field} (Hebi\+Command\+Ptr internal, Command\+High\+Res\+Angle\+Field field)
 \item 
-\hyperlink{classhebi_1_1Command_1_1HighResAngleField_a2cc4e740bd11af44140a446164b49d81}{operator bool} () const 
-\begin{DoxyCompactList}\small\item\em Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Command_1_1HighResAngleField_aa8015d3d55a4205021f42a354e2b84a9}{has()}}. \end{DoxyCompactList}\item 
-bool \hyperlink{classhebi_1_1Command_1_1HighResAngleField_aa8015d3d55a4205021f42a354e2b84a9}{has} () const \hypertarget{classhebi_1_1Command_1_1HighResAngleField_aa8015d3d55a4205021f42a354e2b84a9}{}\label{classhebi_1_1Command_1_1HighResAngleField_aa8015d3d55a4205021f42a354e2b84a9}
-
+\hyperlink{classhebi_1_1Command_1_1HighResAngleField_a8af360ea241e9c61b77d029242489269}{operator bool} () const
+\begin{DoxyCompactList}\small\item\em Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Command_1_1HighResAngleField_ae52c768ae24a84a181963dafa8f21d3b}{has()}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhebi_1_1Command_1_1HighResAngleField_ae52c768ae24a84a181963dafa8f21d3b}\label{classhebi_1_1Command_1_1HighResAngleField_ae52c768ae24a84a181963dafa8f21d3b}} 
+bool \hyperlink{classhebi_1_1Command_1_1HighResAngleField_ae52c768ae24a84a181963dafa8f21d3b}{has} () const
 \begin{DoxyCompactList}\small\item\em True if (and only if) the field has a value. \end{DoxyCompactList}\item 
-double \hyperlink{classhebi_1_1Command_1_1HighResAngleField_aa6be447c47691c4f1d5edb3797a99025}{get} () const 
+double \hyperlink{classhebi_1_1Command_1_1HighResAngleField_ae05cea46d5ec4bbc632aea9b3a5c7598}{get} () const
 \begin{DoxyCompactList}\small\item\em If the field has a value, returns that value as a double; otherwise, returns a default. \end{DoxyCompactList}\item 
-void \hyperlink{classhebi_1_1Command_1_1HighResAngleField_ac00b4014c5b81ce1e44da92bb5989953}{get} (int64\+\_\+t $\ast$revolutions, float $\ast$radian\+\_\+offset) const 
+void \hyperlink{classhebi_1_1Command_1_1HighResAngleField_a4d2e6a23fce48eee2aa28803077cd1f0}{get} (int64\+\_\+t $\ast$revolutions, float $\ast$radian\+\_\+offset) const
 \begin{DoxyCompactList}\small\item\em If the field has a value, returns that value in the int64 and float parameters passed in; otherwise, returns a default. \end{DoxyCompactList}\item 
-void \hyperlink{classhebi_1_1Command_1_1HighResAngleField_aa166a76f8a6ea47b62dd53bee853fe90}{set} (double radians)\hypertarget{classhebi_1_1Command_1_1HighResAngleField_aa166a76f8a6ea47b62dd53bee853fe90}{}\label{classhebi_1_1Command_1_1HighResAngleField_aa166a76f8a6ea47b62dd53bee853fe90}
-
+\mbox{\Hypertarget{classhebi_1_1Command_1_1HighResAngleField_aa166a76f8a6ea47b62dd53bee853fe90}\label{classhebi_1_1Command_1_1HighResAngleField_aa166a76f8a6ea47b62dd53bee853fe90}} 
+void \hyperlink{classhebi_1_1Command_1_1HighResAngleField_aa166a76f8a6ea47b62dd53bee853fe90}{set} (double radians)
 \begin{DoxyCompactList}\small\item\em Sets the field to a given double value (in radians). Note that double precision floating point numbers cannot represent the same angular resolution at very high magnitudes as they can at lower magnitudes. \end{DoxyCompactList}\item 
-void \hyperlink{classhebi_1_1Command_1_1HighResAngleField_ad70b3a6cb991a2096466fb04d3973429}{set} (int64\+\_\+t revolutions, float radian\+\_\+offset)\hypertarget{classhebi_1_1Command_1_1HighResAngleField_ad70b3a6cb991a2096466fb04d3973429}{}\label{classhebi_1_1Command_1_1HighResAngleField_ad70b3a6cb991a2096466fb04d3973429}
-
+\mbox{\Hypertarget{classhebi_1_1Command_1_1HighResAngleField_ad70b3a6cb991a2096466fb04d3973429}\label{classhebi_1_1Command_1_1HighResAngleField_ad70b3a6cb991a2096466fb04d3973429}} 
+void \hyperlink{classhebi_1_1Command_1_1HighResAngleField_ad70b3a6cb991a2096466fb04d3973429}{set} (int64\+\_\+t revolutions, float radian\+\_\+offset)
 \begin{DoxyCompactList}\small\item\em Sets the field to a given integer number of revolutions and a floating point offset from this number of revolutions. The offset does not specifically need to fall within a certain range (i.\+e., can add more than a single revolution to the integer value), but should be kept relatively small (e.\+g., below 10,000) to avoid potential loss of precision. \end{DoxyCompactList}\item 
-void \hyperlink{classhebi_1_1Command_1_1HighResAngleField_a2a7485482fbf0311d992c0db4036d5c1}{clear} ()\hypertarget{classhebi_1_1Command_1_1HighResAngleField_a2a7485482fbf0311d992c0db4036d5c1}{}\label{classhebi_1_1Command_1_1HighResAngleField_a2a7485482fbf0311d992c0db4036d5c1}
-
+\mbox{\Hypertarget{classhebi_1_1Command_1_1HighResAngleField_a2a7485482fbf0311d992c0db4036d5c1}\label{classhebi_1_1Command_1_1HighResAngleField_a2a7485482fbf0311d992c0db4036d5c1}} 
+void \hyperlink{classhebi_1_1Command_1_1HighResAngleField_a2a7485482fbf0311d992c0db4036d5c1}{clear} ()
 \begin{DoxyCompactList}\small\item\em Removes any currently set value for this field. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -41,25 +41,22 @@ A message field for an angle measurement which does not lose precision at very h
 This field is represented as an int64\+\_\+t for the number of revolutions and a float for the radian offset from that number of revolutions. 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhebi_1_1Command_1_1HighResAngleField_ae05cea46d5ec4bbc632aea9b3a5c7598}\label{classhebi_1_1Command_1_1HighResAngleField_ae05cea46d5ec4bbc632aea9b3a5c7598}} 
 \index{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field}!get@{get}}
 \index{get@{get}!hebi\+::\+Command\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field}}
-\subsubsection[{\texorpdfstring{get() const }{get() const }}]{\setlength{\rightskip}{0pt plus 5cm}double hebi\+::\+Command\+::\+High\+Res\+Angle\+Field\+::get (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\hypertarget{classhebi_1_1Command_1_1HighResAngleField_aa6be447c47691c4f1d5edb3797a99025}{}\label{classhebi_1_1Command_1_1HighResAngleField_aa6be447c47691c4f1d5edb3797a99025}
+\subsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double hebi\+::\+Command\+::\+High\+Res\+Angle\+Field\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
 
 
 If the field has a value, returns that value as a double; otherwise, returns a default. 
 
-Note that some precision might be lost converting to a double at very high number of revolutions. \index{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field}!get@{get}}
+Note that some precision might be lost converting to a double at very high number of revolutions. \mbox{\Hypertarget{classhebi_1_1Command_1_1HighResAngleField_a4d2e6a23fce48eee2aa28803077cd1f0}\label{classhebi_1_1Command_1_1HighResAngleField_a4d2e6a23fce48eee2aa28803077cd1f0}} 
+\index{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field}!get@{get}}
 \index{get@{get}!hebi\+::\+Command\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field}}
-\subsubsection[{\texorpdfstring{get(int64\+\_\+t $\ast$revolutions, float $\ast$radian\+\_\+offset) const }{get(int64_t *revolutions, float *radian_offset) const }}]{\setlength{\rightskip}{0pt plus 5cm}void hebi\+::\+Command\+::\+High\+Res\+Angle\+Field\+::get (
-\begin{DoxyParamCaption}
-\item[{int64\+\_\+t $\ast$}]{revolutions, }
-\item[{float $\ast$}]{radian\+\_\+offset}
-\end{DoxyParamCaption}
-) const}\hypertarget{classhebi_1_1Command_1_1HighResAngleField_ac00b4014c5b81ce1e44da92bb5989953}{}\label{classhebi_1_1Command_1_1HighResAngleField_ac00b4014c5b81ce1e44da92bb5989953}
+\subsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void hebi\+::\+Command\+::\+High\+Res\+Angle\+Field\+::get (\begin{DoxyParamCaption}\item[{int64\+\_\+t $\ast$}]{revolutions,  }\item[{float $\ast$}]{radian\+\_\+offset }\end{DoxyParamCaption}) const}
+
 
 
 If the field has a value, returns that value in the int64 and float parameters passed in; otherwise, returns a default. 
@@ -73,16 +70,15 @@ Note that this maintains the full precision of the underlying angle measurement,
 {\em radian\+\_\+offset} & The offset from the given number of full revolutions. Note that this is usually between 0 and {\ttfamily 2$\ast$\+M\+\_\+\+PI}, but callers should not assume this. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classhebi_1_1Command_1_1HighResAngleField_a8af360ea241e9c61b77d029242489269}\label{classhebi_1_1Command_1_1HighResAngleField_a8af360ea241e9c61b77d029242489269}} 
 \index{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field}!operator bool@{operator bool}}
 \index{operator bool@{operator bool}!hebi\+::\+Command\+::\+High\+Res\+Angle\+Field@{hebi\+::\+Command\+::\+High\+Res\+Angle\+Field}}
-\subsubsection[{\texorpdfstring{operator bool() const }{operator bool() const }}]{\setlength{\rightskip}{0pt plus 5cm}hebi\+::\+Command\+::\+High\+Res\+Angle\+Field\+::operator bool (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classhebi_1_1Command_1_1HighResAngleField_a2cc4e740bd11af44140a446164b49d81}{}\label{classhebi_1_1Command_1_1HighResAngleField_a2cc4e740bd11af44140a446164b49d81}
+\subsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily hebi\+::\+Command\+::\+High\+Res\+Angle\+Field\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
-Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Command_1_1HighResAngleField_aa8015d3d55a4205021f42a354e2b84a9}{has()}}. 
+
+Allows casting to a bool to check if the field has a value without directly calling {\ttfamily \hyperlink{classhebi_1_1Command_1_1HighResAngleField_ae52c768ae24a84a181963dafa8f21d3b}{has()}}. 
 
 This can be used as in the following (assuming \textquotesingle{}parent\textquotesingle{} is a parent message, and this field is called \textquotesingle{}my\+Field\textquotesingle{}) 
 \begin{DoxyCode}

@@ -117,7 +117,7 @@ def generateJointTrajectory_now(time,traj_type='circle',tf=2.5):
 	if traj_type == 'circle':
 		c_x = 0.0
 		c_y = 0.3
-		c_z = -0.025
+		c_z = 0.
 		radius = 0.095
 
 		for i in range(5):

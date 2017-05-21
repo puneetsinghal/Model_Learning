@@ -1,15 +1,15 @@
 <map id="lookup_helpers.cpp" name="lookup_helpers.cpp">
 <area shape="rect" id="node2" href="$lookup_8hpp_source.html" title="lookup.hpp" alt="" coords="492,80,577,107"/>
 <area shape="rect" id="node4" href="$mac__address_8hpp_source.html" title="mac_address.hpp" alt="" coords="201,155,327,181"/>
-<area shape="rect" id="node7" href="$module_8hpp_source.html" title="module.hpp" alt="" coords="371,229,461,256"/>
-<area shape="rect" id="node24" href="$group_8hpp_source.html" title="group.hpp" alt="" coords="494,155,573,181"/>
+<area shape="rect" id="node7" href="$module_8hpp_source.html" title="module.hpp" alt="" coords="371,229,460,256"/>
+<area shape="rect" id="node24" href="$group_8hpp_source.html" title="group.hpp" alt="" coords="494,155,572,181"/>
 <area shape="rect" id="node33" href="$optionparser_8h.html" title="This is the only file required to use The Lean Mean C++ Option Parser. Just #include it and you&#39;re se..." alt="" coords="601,80,705,107"/>
 <area shape="rect" id="node9" href="$command_8hpp_source.html" title="command.hpp" alt="" coords="927,304,1031,331"/>
 <area shape="rect" id="node14" href="$util_8hpp_source.html" title="util.hpp" alt="" coords="611,379,675,405"/>
-<area shape="rect" id="node15" href="$feedback_8hpp_source.html" title="feedback.hpp" alt="" coords="478,304,578,331"/>
-<area shape="rect" id="node19" href="$info_8hpp_source.html" title="info.hpp" alt="" coords="834,304,902,331"/>
-<area shape="rect" id="node11" href="$color_8hpp_source.html" title="color.hpp" alt="" coords="831,379,905,405"/>
-<area shape="rect" id="node17" href="$vector__3__f_8hpp_source.html" title="vector_3_f.hpp" alt="" coords="337,379,445,405"/>
+<area shape="rect" id="node15" href="$feedback_8hpp_source.html" title="feedback.hpp" alt="" coords="478,304,577,331"/>
+<area shape="rect" id="node19" href="$info_8hpp_source.html" title="info.hpp" alt="" coords="834,304,901,331"/>
+<area shape="rect" id="node11" href="$color_8hpp_source.html" title="color.hpp" alt="" coords="831,379,904,405"/>
+<area shape="rect" id="node17" href="$vector__3__f_8hpp_source.html" title="vector_3_f.hpp" alt="" coords="337,379,444,405"/>
 <area shape="rect" id="node26" href="$group__command_8hpp_source.html" title="group_command.hpp" alt="" coords="1025,229,1167,256"/>
 <area shape="rect" id="node28" href="$group__feedback_8hpp_source.html" title="group_feedback.hpp" alt="" coords="660,229,799,256"/>
 <area shape="rect" id="node30" href="$group__info_8hpp_source.html" title="group_info.hpp" alt="" coords="869,229,976,256"/>

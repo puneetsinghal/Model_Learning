@@ -12,14 +12,14 @@ void \hyperlink{namespacedynamics_a00e914433e77671dac03be0ca7d34e1f}{gravity\+Co
 \item 
 void \hyperlink{namespacedynamics_a6f9761c4fbb20c590cfb1ae345e2ff61}{inverse\+Dynamics} (const Eigen\+::\+Vector\+Xd \&theta, const Eigen\+::\+Vector\+Xd \&omega, const Eigen\+::\+Vector\+Xd \&alpha, std\+::vector$<$ double $>$ \&torque)
 \item 
-static void {\bfseries gravity} (const Eigen\+::\+Vector\+Xd \&theta, Eigen\+::\+Vector\+Xd \&torque)\hypertarget{namespacedynamics_a826b52a5f1fc2dd61ea69a771c8eec94}{}\label{namespacedynamics_a826b52a5f1fc2dd61ea69a771c8eec94}
-
+\mbox{\Hypertarget{namespacedynamics_a826b52a5f1fc2dd61ea69a771c8eec94}\label{namespacedynamics_a826b52a5f1fc2dd61ea69a771c8eec94}} 
+static void {\bfseries gravity} (const Eigen\+::\+Vector\+Xd \&theta, Eigen\+::\+Vector\+Xd \&torque)
 \item 
-static void {\bfseries inertia} (const Eigen\+::\+Vector\+Xd \&theta, Eigen\+::\+Matrix\+Xd \&Inertia)\hypertarget{namespacedynamics_a9fc7ae178c0d08f46bd2b18dd86d36ae}{}\label{namespacedynamics_a9fc7ae178c0d08f46bd2b18dd86d36ae}
-
+\mbox{\Hypertarget{namespacedynamics_a9fc7ae178c0d08f46bd2b18dd86d36ae}\label{namespacedynamics_a9fc7ae178c0d08f46bd2b18dd86d36ae}} 
+static void {\bfseries inertia} (const Eigen\+::\+Vector\+Xd \&theta, Eigen\+::\+Matrix\+Xd \&Inertia)
 \item 
-static void {\bfseries corriolis} (const Eigen\+::\+Vector\+Xd \&theta, const Eigen\+::\+Vector\+Xd \&omega, Eigen\+::\+Matrix\+Xd \&Corriolis)\hypertarget{namespacedynamics_a64347919700ac9a683912de6f2b141fb}{}\label{namespacedynamics_a64347919700ac9a683912de6f2b141fb}
-
+\mbox{\Hypertarget{namespacedynamics_a64347919700ac9a683912de6f2b141fb}\label{namespacedynamics_a64347919700ac9a683912de6f2b141fb}} 
+static void {\bfseries corriolis} (const Eigen\+::\+Vector\+Xd \&theta, const Eigen\+::\+Vector\+Xd \&omega, Eigen\+::\+Matrix\+Xd \&Corriolis)
 \item 
 static void \hyperlink{namespacedynamics_a826b52a5f1fc2dd61ea69a771c8eec94}{gravity} (const Eigen\+::\+Vector\+Xd \&theta, Eigen\+::\+Vector\+Xd \&torque)
 \item 
@@ -40,15 +40,12 @@ Ky Woodard \begin{DoxyVersion}{Version}
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{namespacedynamics_a09facde2bbc78b9a537aa3b03fffec5f}\label{namespacedynamics_a09facde2bbc78b9a537aa3b03fffec5f}} 
 \index{dynamics@{dynamics}!corriolis@{corriolis}}
 \index{corriolis@{corriolis}!dynamics@{dynamics}}
-\subsubsection[{\texorpdfstring{corriolis(const Eigen\+::\+Vector\+Xd \&theta, const Eigen\+::\+Vector\+Xd \&omega, Eigen\+::\+Matrix\+Xd \&corrioslis)}{corriolis(const Eigen::VectorXd &theta, const Eigen::VectorXd &omega, Eigen::MatrixXd &corrioslis)}}]{\setlength{\rightskip}{0pt plus 5cm}static void dynamics\+::corriolis (
-\begin{DoxyParamCaption}
-\item[{const Eigen\+::\+Vector\+Xd \&}]{theta, }
-\item[{const Eigen\+::\+Vector\+Xd \&}]{omega, }
-\item[{Eigen\+::\+Matrix\+Xd \&}]{corrioslis}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{namespacedynamics_a09facde2bbc78b9a537aa3b03fffec5f}{}\label{namespacedynamics_a09facde2bbc78b9a537aa3b03fffec5f}
+\subsubsection{\texorpdfstring{corriolis()}{corriolis()}}
+{\footnotesize\ttfamily static void dynamics\+::corriolis (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector\+Xd \&}]{theta,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{omega,  }\item[{Eigen\+::\+Matrix\+Xd \&}]{corrioslis }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
 Calculate the corriolis torque of the inverse dynamics based on the current angle and angular velocity of the joints 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em theta} & current angle of the 5 joints \mbox{[}rad\mbox{]} \\
@@ -58,14 +55,12 @@ Calculate the corriolis torque of the inverse dynamics based on the current angl
 \mbox{\tt out}  & {\em Corriolis} & corriolis matrix (5x5) \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{namespacedynamics_a826b52a5f1fc2dd61ea69a771c8eec94}\label{namespacedynamics_a826b52a5f1fc2dd61ea69a771c8eec94}} 
 \index{dynamics@{dynamics}!gravity@{gravity}}
 \index{gravity@{gravity}!dynamics@{dynamics}}
-\subsubsection[{\texorpdfstring{gravity(const Eigen\+::\+Vector\+Xd \&theta, Eigen\+::\+Vector\+Xd \&torque)}{gravity(const Eigen::VectorXd &theta, Eigen::VectorXd &torque)}}]{\setlength{\rightskip}{0pt plus 5cm}static void dynamics\+::gravity (
-\begin{DoxyParamCaption}
-\item[{const Eigen\+::\+Vector\+Xd \&}]{theta, }
-\item[{Eigen\+::\+Vector\+Xd \&}]{torque}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{namespacedynamics_a826b52a5f1fc2dd61ea69a771c8eec94}{}\label{namespacedynamics_a826b52a5f1fc2dd61ea69a771c8eec94}
+\subsubsection{\texorpdfstring{gravity()}{gravity()}}
+{\footnotesize\ttfamily static void dynamics\+::gravity (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector\+Xd \&}]{theta,  }\item[{Eigen\+::\+Vector\+Xd \&}]{torque }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
 Calculate the gravity torque of the inverse dynamics based on the current angle of the joints 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em theta} & current angle of the 5 joints \mbox{[}rad\mbox{]} \\
@@ -73,14 +68,12 @@ Calculate the gravity torque of the inverse dynamics based on the current angle 
 \mbox{\tt out}  & {\em torque} & computed torque on the 5 joints \mbox{[}N-\/m\mbox{]} \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{namespacedynamics_a00e914433e77671dac03be0ca7d34e1f}\label{namespacedynamics_a00e914433e77671dac03be0ca7d34e1f}} 
 \index{dynamics@{dynamics}!gravity\+Comp@{gravity\+Comp}}
 \index{gravity\+Comp@{gravity\+Comp}!dynamics@{dynamics}}
-\subsubsection[{\texorpdfstring{gravity\+Comp(const std\+::vector$<$ double $>$ \&theta, std\+::vector$<$ double $>$ \&torque)}{gravityComp(const std::vector< double > &theta, std::vector< double > &torque)}}]{\setlength{\rightskip}{0pt plus 5cm}void dynamics\+::gravity\+Comp (
-\begin{DoxyParamCaption}
-\item[{const std\+::vector$<$ double $>$ \&}]{theta, }
-\item[{std\+::vector$<$ double $>$ \&}]{torque}
-\end{DoxyParamCaption}
-)}\hypertarget{namespacedynamics_a00e914433e77671dac03be0ca7d34e1f}{}\label{namespacedynamics_a00e914433e77671dac03be0ca7d34e1f}
+\subsubsection{\texorpdfstring{gravity\+Comp()}{gravityComp()}}
+{\footnotesize\ttfamily void dynamics\+::gravity\+Comp (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{theta,  }\item[{std\+::vector$<$ double $>$ \&}]{torque }\end{DoxyParamCaption})}
+
 Calculate the necessary torque required to cancel gravitational forces on the joints 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em theta} & current angles of the five joints \mbox{[}rad\mbox{]} \\
@@ -88,14 +81,12 @@ Calculate the necessary torque required to cancel gravitational forces on the jo
 \mbox{\tt out}  & {\em torque} & computed torque on the 5 joints \mbox{[}N-\/m\mbox{]} \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{namespacedynamics_a9fc7ae178c0d08f46bd2b18dd86d36ae}\label{namespacedynamics_a9fc7ae178c0d08f46bd2b18dd86d36ae}} 
 \index{dynamics@{dynamics}!inertia@{inertia}}
 \index{inertia@{inertia}!dynamics@{dynamics}}
-\subsubsection[{\texorpdfstring{inertia(const Eigen\+::\+Vector\+Xd \&theta, Eigen\+::\+Matrix\+Xd \&\+Inertia)}{inertia(const Eigen::VectorXd &theta, Eigen::MatrixXd &Inertia)}}]{\setlength{\rightskip}{0pt plus 5cm}static void dynamics\+::inertia (
-\begin{DoxyParamCaption}
-\item[{const Eigen\+::\+Vector\+Xd \&}]{theta, }
-\item[{Eigen\+::\+Matrix\+Xd \&}]{Inertia}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{namespacedynamics_a9fc7ae178c0d08f46bd2b18dd86d36ae}{}\label{namespacedynamics_a9fc7ae178c0d08f46bd2b18dd86d36ae}
+\subsubsection{\texorpdfstring{inertia()}{inertia()}}
+{\footnotesize\ttfamily static void dynamics\+::inertia (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector\+Xd \&}]{theta,  }\item[{Eigen\+::\+Matrix\+Xd \&}]{Inertia }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
 Calculate the inertia torque of the inverse dynamics based on the current angle of the joints 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em theta} & current angle of the 5 joints \mbox{[}rad\mbox{]} \\
@@ -103,16 +94,12 @@ Calculate the inertia torque of the inverse dynamics based on the current angle 
 \mbox{\tt out}  & {\em Inertia} & inertia matrix (5x5) \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{namespacedynamics_a6f9761c4fbb20c590cfb1ae345e2ff61}\label{namespacedynamics_a6f9761c4fbb20c590cfb1ae345e2ff61}} 
 \index{dynamics@{dynamics}!inverse\+Dynamics@{inverse\+Dynamics}}
 \index{inverse\+Dynamics@{inverse\+Dynamics}!dynamics@{dynamics}}
-\subsubsection[{\texorpdfstring{inverse\+Dynamics(const Eigen\+::\+Vector\+Xd \&theta, const Eigen\+::\+Vector\+Xd \&omega, const Eigen\+::\+Vector\+Xd \&alpha, std\+::vector$<$ double $>$ \&torque)}{inverseDynamics(const Eigen::VectorXd &theta, const Eigen::VectorXd &omega, const Eigen::VectorXd &alpha, std::vector< double > &torque)}}]{\setlength{\rightskip}{0pt plus 5cm}void dynamics\+::inverse\+Dynamics (
-\begin{DoxyParamCaption}
-\item[{const Eigen\+::\+Vector\+Xd \&}]{theta, }
-\item[{const Eigen\+::\+Vector\+Xd \&}]{omega, }
-\item[{const Eigen\+::\+Vector\+Xd \&}]{alpha, }
-\item[{std\+::vector$<$ double $>$ \&}]{torque}
-\end{DoxyParamCaption}
-)}\hypertarget{namespacedynamics_a6f9761c4fbb20c590cfb1ae345e2ff61}{}\label{namespacedynamics_a6f9761c4fbb20c590cfb1ae345e2ff61}
+\subsubsection{\texorpdfstring{inverse\+Dynamics()}{inverseDynamics()}}
+{\footnotesize\ttfamily void dynamics\+::inverse\+Dynamics (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector\+Xd \&}]{theta,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{omega,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{alpha,  }\item[{std\+::vector$<$ double $>$ \&}]{torque }\end{DoxyParamCaption})}
+
 Calculate the inverse dynamics of the arm, which includes inertia, corriolis, gravitational, and friction effect 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em theta} & current angle of the 5 joints \mbox{[}rad\mbox{]} \\

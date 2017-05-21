@@ -19,14 +19,12 @@ virtual bool \hyperlink{structoption_1_1Parser_1_1Action_a3ec558b51e34d33d116f14
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{structoption_1_1Parser_1_1Action_a3ec558b51e34d33d116f14587289e032}\label{structoption_1_1Parser_1_1Action_a3ec558b51e34d33d116f14587289e032}} 
 \index{option\+::\+Parser\+::\+Action@{option\+::\+Parser\+::\+Action}!finished@{finished}}
 \index{finished@{finished}!option\+::\+Parser\+::\+Action@{option\+::\+Parser\+::\+Action}}
-\subsubsection[{\texorpdfstring{finished(int numargs, const char $\ast$$\ast$args)}{finished(int numargs, const char **args)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool option\+::\+Parser\+::\+Action\+::finished (
-\begin{DoxyParamCaption}
-\item[{int}]{numargs, }
-\item[{const char $\ast$$\ast$}]{args}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{structoption_1_1Parser_1_1Action_a3ec558b51e34d33d116f14587289e032}{}\label{structoption_1_1Parser_1_1Action_a3ec558b51e34d33d116f14587289e032}
+\subsubsection{\texorpdfstring{finished()}{finished()}}
+{\footnotesize\ttfamily virtual bool option\+::\+Parser\+::\+Action\+::finished (\begin{DoxyParamCaption}\item[{int}]{numargs,  }\item[{const char $\ast$$\ast$}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
 
 
 Called by Parser\+::workhorse() after finishing the parse. 
@@ -45,13 +43,12 @@ Called by Parser\+::workhorse() after finishing the parse.
 
 Reimplemented in \hyperlink{classoption_1_1Parser_1_1StoreOptionAction_a617f675ef50a72ae36ce91f065bc8441}{option\+::\+Parser\+::\+Store\+Option\+Action}.
 
+\mbox{\Hypertarget{structoption_1_1Parser_1_1Action_a176b5f783bb35eb015b6d2c09422457d}\label{structoption_1_1Parser_1_1Action_a176b5f783bb35eb015b6d2c09422457d}} 
 \index{option\+::\+Parser\+::\+Action@{option\+::\+Parser\+::\+Action}!perform@{perform}}
 \index{perform@{perform}!option\+::\+Parser\+::\+Action@{option\+::\+Parser\+::\+Action}}
-\subsubsection[{\texorpdfstring{perform(\+Option \&)}{perform(Option &)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool option\+::\+Parser\+::\+Action\+::perform (
-\begin{DoxyParamCaption}
-\item[{{\bf Option} \&}]{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{structoption_1_1Parser_1_1Action_a176b5f783bb35eb015b6d2c09422457d}{}\label{structoption_1_1Parser_1_1Action_a176b5f783bb35eb015b6d2c09422457d}
+\subsubsection{\texorpdfstring{perform()}{perform()}}
+{\footnotesize\ttfamily virtual bool option\+::\+Parser\+::\+Action\+::perform (\begin{DoxyParamCaption}\item[{\hyperlink{classoption_1_1Option}{Option} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
 
 
 Called by Parser\+::workhorse() for each \hyperlink{classoption_1_1Option}{Option} that has been successfully parsed (including unknown options if they have a \hyperlink{structoption_1_1Descriptor}{Descriptor} whose \hyperlink{structoption_1_1Descriptor_aa5d675dba0214a4abd73007ff163cc67}{Descriptor\+::check\+\_\+arg} does not return \hyperlink{namespaceoption_aee8c76a07877335762631491e7a5a1a9a9528e32563b795bd2930b12d0a5e382d}{A\+R\+G\+\_\+\+I\+L\+L\+E\+G\+AL}. 

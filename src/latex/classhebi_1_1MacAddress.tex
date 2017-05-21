@@ -12,16 +12,16 @@ A simple wrapper class for internal C-\/\+A\+PI Hebi\+Mac\+Address objects to al
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classhebi_1_1MacAddress_a5d943aac7186bba333a443e84e26aacd}{Mac\+Address} ()\hypertarget{classhebi_1_1MacAddress_a5d943aac7186bba333a443e84e26aacd}{}\label{classhebi_1_1MacAddress_a5d943aac7186bba333a443e84e26aacd}
-
+\mbox{\Hypertarget{classhebi_1_1MacAddress_a5d943aac7186bba333a443e84e26aacd}\label{classhebi_1_1MacAddress_a5d943aac7186bba333a443e84e26aacd}} 
+\hyperlink{classhebi_1_1MacAddress_a5d943aac7186bba333a443e84e26aacd}{Mac\+Address} ()
 \begin{DoxyCompactList}\small\item\em Creates M\+AC address 00\+:00\+:00\+:00\+:00\+:00. \end{DoxyCompactList}\item 
 bool \hyperlink{classhebi_1_1MacAddress_a3e661d4efb84ca1743f5fe6acfd8ed8c}{set\+To\+Hex\+String} (std\+::string mac\+\_\+str)
 \begin{DoxyCompactList}\small\item\em Sets the value of the current \hyperlink{classhebi_1_1MacAddress}{Mac\+Address} to the value given in \textquotesingle{}mac\+\_\+str\textquotesingle{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \hyperlink{classhebi_1_1MacAddress}{Mac\+Address} \hyperlink{classhebi_1_1MacAddress_a478b629e48265e1a77afbc3feec03e35}{from\+Bytes} (uint8\+\_\+t a, uint8\+\_\+t b, uint8\+\_\+t c, uint8\+\_\+t d, uint8\+\_\+t e, uint8\+\_\+t f)\hypertarget{classhebi_1_1MacAddress_a478b629e48265e1a77afbc3feec03e35}{}\label{classhebi_1_1MacAddress_a478b629e48265e1a77afbc3feec03e35}
-
+\mbox{\Hypertarget{classhebi_1_1MacAddress_a478b629e48265e1a77afbc3feec03e35}\label{classhebi_1_1MacAddress_a478b629e48265e1a77afbc3feec03e35}} 
+static \hyperlink{classhebi_1_1MacAddress}{Mac\+Address} \hyperlink{classhebi_1_1MacAddress_a478b629e48265e1a77afbc3feec03e35}{from\+Bytes} (uint8\+\_\+t a, uint8\+\_\+t b, uint8\+\_\+t c, uint8\+\_\+t d, uint8\+\_\+t e, uint8\+\_\+t f)
 \begin{DoxyCompactList}\small\item\em Creates a \hyperlink{classhebi_1_1MacAddress}{Mac\+Address} from individual bytes. \end{DoxyCompactList}\item 
 static bool \hyperlink{classhebi_1_1MacAddress_a3ac1c53a3f850f0228788d93482dcb57}{is\+Hex\+String\+Valid} (std\+::string mac\+\_\+str)
 \begin{DoxyCompactList}\small\item\em Is mac\+\_\+str a valid string of format dd\+:dd\+:dd\+:dd\+:dd\+:dd, where \textquotesingle{}d\textquotesingle{} is a hex digit 0-\/F. Lowercase values accepted. 1 if yes, 0 if no. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -36,13 +36,12 @@ Hebi\+Mac\+Address \hyperlink{classhebi_1_1MacAddress_ad199d2d2ce7c50825f8d75ade
 A simple wrapper class for internal C-\/\+A\+PI Hebi\+Mac\+Address objects to allow interfacing with A\+PI calls that use M\+AC addresses. 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhebi_1_1MacAddress_a3ac1c53a3f850f0228788d93482dcb57}\label{classhebi_1_1MacAddress_a3ac1c53a3f850f0228788d93482dcb57}} 
 \index{hebi\+::\+Mac\+Address@{hebi\+::\+Mac\+Address}!is\+Hex\+String\+Valid@{is\+Hex\+String\+Valid}}
 \index{is\+Hex\+String\+Valid@{is\+Hex\+String\+Valid}!hebi\+::\+Mac\+Address@{hebi\+::\+Mac\+Address}}
-\subsubsection[{\texorpdfstring{is\+Hex\+String\+Valid(std\+::string mac\+\_\+str)}{isHexStringValid(std::string mac_str)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Mac\+Address\+::is\+Hex\+String\+Valid (
-\begin{DoxyParamCaption}
-\item[{std\+::string}]{mac\+\_\+str}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classhebi_1_1MacAddress_a3ac1c53a3f850f0228788d93482dcb57}{}\label{classhebi_1_1MacAddress_a3ac1c53a3f850f0228788d93482dcb57}
+\subsubsection{\texorpdfstring{is\+Hex\+String\+Valid()}{isHexStringValid()}}
+{\footnotesize\ttfamily bool hebi\+::\+Mac\+Address\+::is\+Hex\+String\+Valid (\begin{DoxyParamCaption}\item[{std\+::string}]{mac\+\_\+str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
 
 
 Is mac\+\_\+str a valid string of format dd\+:dd\+:dd\+:dd\+:dd\+:dd, where \textquotesingle{}d\textquotesingle{} is a hex digit 0-\/F. Lowercase values accepted. 1 if yes, 0 if no. 
@@ -50,13 +49,12 @@ Is mac\+\_\+str a valid string of format dd\+:dd\+:dd\+:dd\+:dd\+:dd, where \tex
 \begin{DoxyReturn}{Returns}
 \textquotesingle{}true\textquotesingle{} if mac\+\_\+str is valid, \textquotesingle{}false\textquotesingle{} otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhebi_1_1MacAddress_a3e661d4efb84ca1743f5fe6acfd8ed8c}\label{classhebi_1_1MacAddress_a3e661d4efb84ca1743f5fe6acfd8ed8c}} 
 \index{hebi\+::\+Mac\+Address@{hebi\+::\+Mac\+Address}!set\+To\+Hex\+String@{set\+To\+Hex\+String}}
 \index{set\+To\+Hex\+String@{set\+To\+Hex\+String}!hebi\+::\+Mac\+Address@{hebi\+::\+Mac\+Address}}
-\subsubsection[{\texorpdfstring{set\+To\+Hex\+String(std\+::string mac\+\_\+str)}{setToHexString(std::string mac_str)}}]{\setlength{\rightskip}{0pt plus 5cm}bool hebi\+::\+Mac\+Address\+::set\+To\+Hex\+String (
-\begin{DoxyParamCaption}
-\item[{std\+::string}]{mac\+\_\+str}
-\end{DoxyParamCaption}
-)}\hypertarget{classhebi_1_1MacAddress_a3e661d4efb84ca1743f5fe6acfd8ed8c}{}\label{classhebi_1_1MacAddress_a3e661d4efb84ca1743f5fe6acfd8ed8c}
+\subsubsection{\texorpdfstring{set\+To\+Hex\+String()}{setToHexString()}}
+{\footnotesize\ttfamily bool hebi\+::\+Mac\+Address\+::set\+To\+Hex\+String (\begin{DoxyParamCaption}\item[{std\+::string}]{mac\+\_\+str }\end{DoxyParamCaption})}
+
 
 
 Sets the value of the current \hyperlink{classhebi_1_1MacAddress}{Mac\+Address} to the value given in \textquotesingle{}mac\+\_\+str\textquotesingle{}. 
@@ -69,9 +67,12 @@ This value must be a valid string of format dd\+:dd\+:dd\+:dd\+:dd\+:dd, where \
 
 
 \subsection{Member Data Documentation}
+\mbox{\Hypertarget{classhebi_1_1MacAddress_ad199d2d2ce7c50825f8d75ade88dd4e7}\label{classhebi_1_1MacAddress_ad199d2d2ce7c50825f8d75ade88dd4e7}} 
 \index{hebi\+::\+Mac\+Address@{hebi\+::\+Mac\+Address}!internal\+\_\+@{internal\+\_\+}}
 \index{internal\+\_\+@{internal\+\_\+}!hebi\+::\+Mac\+Address@{hebi\+::\+Mac\+Address}}
-\subsubsection[{\texorpdfstring{internal\+\_\+}{internal_}}]{\setlength{\rightskip}{0pt plus 5cm}Hebi\+Mac\+Address hebi\+::\+Mac\+Address\+::internal\+\_\+}\hypertarget{classhebi_1_1MacAddress_ad199d2d2ce7c50825f8d75ade88dd4e7}{}\label{classhebi_1_1MacAddress_ad199d2d2ce7c50825f8d75ade88dd4e7}
+\subsubsection{\texorpdfstring{internal\+\_\+}{internal\_}}
+{\footnotesize\ttfamily Hebi\+Mac\+Address hebi\+::\+Mac\+Address\+::internal\+\_\+}
+
 C-\/style mac address object; this is a plain struct, so it is OK to rely on default copy/move constructors. N\+O\+TE\+: this should not be used except by library functions! 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

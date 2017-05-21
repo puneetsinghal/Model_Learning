@@ -21,16 +21,16 @@ Collaboration diagram for option\+:\+:Option\+:\nopagebreak
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{classoption_1_1Option_a6560fa0526e2affd87d5a10622336af4}{type} () const 
+int \hyperlink{classoption_1_1Option_a5268a69e1a91137186ab772574296da0}{type} () const
 \begin{DoxyCompactList}\small\item\em Returns \hyperlink{structoption_1_1Descriptor_a1b220dabd8aad075fa441a80f9b9343c}{Descriptor\+::type} of this \hyperlink{classoption_1_1Option}{Option}\textquotesingle{}s \hyperlink{structoption_1_1Descriptor}{Descriptor}, or 0 if this \hyperlink{classoption_1_1Option}{Option} is invalid (unused). \end{DoxyCompactList}\item 
-int \hyperlink{classoption_1_1Option_ac0acba91bbfcca0c35cfc54f197b15d2}{index} () const \hypertarget{classoption_1_1Option_ac0acba91bbfcca0c35cfc54f197b15d2}{}\label{classoption_1_1Option_ac0acba91bbfcca0c35cfc54f197b15d2}
-
+\mbox{\Hypertarget{classoption_1_1Option_a847d12e8e76add769fbd01c703e48682}\label{classoption_1_1Option_a847d12e8e76add769fbd01c703e48682}} 
+int \hyperlink{classoption_1_1Option_a847d12e8e76add769fbd01c703e48682}{index} () const
 \begin{DoxyCompactList}\small\item\em Returns \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} of this \hyperlink{classoption_1_1Option}{Option}\textquotesingle{}s \hyperlink{structoption_1_1Descriptor}{Descriptor}, or -\/1 if this \hyperlink{classoption_1_1Option}{Option} is invalid (unused). \end{DoxyCompactList}\item 
 int \hyperlink{classoption_1_1Option_a8a632dcd89af60fe0806deb756c08f14}{count} ()
 \begin{DoxyCompactList}\small\item\em Returns the number of times this \hyperlink{classoption_1_1Option}{Option} (or others with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index}) occurs in the argument vector. \end{DoxyCompactList}\item 
-bool \hyperlink{classoption_1_1Option_aee7a11f90cf4b70f65fb6bdf4db2c922}{is\+First} () const 
+bool \hyperlink{classoption_1_1Option_af51f53a553ef46110e36008a58466a2e}{is\+First} () const
 \begin{DoxyCompactList}\small\item\em Returns true iff this is the first element of the linked list. \end{DoxyCompactList}\item 
-bool \hyperlink{classoption_1_1Option_ad60789506c3df60dedd4a006af56ece9}{is\+Last} () const 
+bool \hyperlink{classoption_1_1Option_a36fa8fde6fce89462ded79ab56180ff7}{is\+Last} () const
 \begin{DoxyCompactList}\small\item\em Returns true iff this is the last element of the linked list. \end{DoxyCompactList}\item 
 \hyperlink{classoption_1_1Option}{Option} $\ast$ \hyperlink{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{first} ()
 \begin{DoxyCompactList}\small\item\em Returns a pointer to the first element of the linked list. \end{DoxyCompactList}\item 
@@ -46,12 +46,12 @@ bool \hyperlink{classoption_1_1Option_ad60789506c3df60dedd4a006af56ece9}{is\+Las
 \begin{DoxyCompactList}\small\item\em Returns a pointer to the next element of the linked list with wrap-\/around from \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()} to \hyperlink{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{first()}. \end{DoxyCompactList}\item 
 void \hyperlink{classoption_1_1Option_a59030822a1ec4e667e6c288d7e5ec961}{append} (\hyperlink{classoption_1_1Option}{Option} $\ast$new\+\_\+last)
 \begin{DoxyCompactList}\small\item\em Makes {\ttfamily new\+\_\+last} the new \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()} by chaining it into the list after \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()}. \end{DoxyCompactList}\item 
-\hyperlink{classoption_1_1Option_aaaeedf023bc3f5eee0b199c64d8fe1ec}{operator const Option $\ast$} () const 
+\hyperlink{classoption_1_1Option_a3c0504baaa809c622d59c2c09f83e25b}{operator const Option $\ast$} () const
 \begin{DoxyCompactList}\small\item\em Casts from \hyperlink{classoption_1_1Option}{Option} to const Option$\ast$ but only if this \hyperlink{classoption_1_1Option}{Option} is valid. \end{DoxyCompactList}\item 
 \hyperlink{classoption_1_1Option_ac5b9235d79208035d97e41fe17ba04d6}{operator Option $\ast$} ()
 \begin{DoxyCompactList}\small\item\em Casts from \hyperlink{classoption_1_1Option}{Option} to Option$\ast$ but only if this \hyperlink{classoption_1_1Option}{Option} is valid. \end{DoxyCompactList}\item 
-\hyperlink{classoption_1_1Option_aa2810152fc23b14175b115d1a7d38095}{Option} ()\hypertarget{classoption_1_1Option_aa2810152fc23b14175b115d1a7d38095}{}\label{classoption_1_1Option_aa2810152fc23b14175b115d1a7d38095}
-
+\mbox{\Hypertarget{classoption_1_1Option_aa2810152fc23b14175b115d1a7d38095}\label{classoption_1_1Option_aa2810152fc23b14175b115d1a7d38095}} 
+\hyperlink{classoption_1_1Option_aa2810152fc23b14175b115d1a7d38095}{Option} ()
 \begin{DoxyCompactList}\small\item\em Creates a new \hyperlink{classoption_1_1Option}{Option} that is a one-\/element linked list and has N\+U\+LL \hyperlink{classoption_1_1Option_af8d664a7b5de1425008b1812a90a0c23}{desc}, \hyperlink{classoption_1_1Option_a02a76b4896abd22d0ba8514362261de9}{name}, \hyperlink{classoption_1_1Option_a402be734987458364b0f473acae36238}{arg} and \hyperlink{classoption_1_1Option_a3aa2957b19ad5815873441b415d56050}{namelen}. \end{DoxyCompactList}\item 
 \hyperlink{classoption_1_1Option_a385221e2a8f37c548f0d5777bfddb216}{Option} (const \hyperlink{structoption_1_1Descriptor}{Descriptor} $\ast$desc\+\_\+, const char $\ast$name\+\_\+, const char $\ast$arg\+\_\+)
 \begin{DoxyCompactList}\small\item\em Creates a new \hyperlink{classoption_1_1Option}{Option} that is a one-\/element linked list and has the given values for \hyperlink{classoption_1_1Option_af8d664a7b5de1425008b1812a90a0c23}{desc}, \hyperlink{classoption_1_1Option_a02a76b4896abd22d0ba8514362261de9}{name} and \hyperlink{classoption_1_1Option_a402be734987458364b0f473acae36238}{arg}. \end{DoxyCompactList}\item 
@@ -84,7 +84,7 @@ The \hyperlink{classoption_1_1Parser}{Parser} chains all parsed options with the
 \end{DoxyCode}
  \item Evaluate --enable-\/foo/--disable-\/foo pair where the last one used wins\+: 
 \begin{DoxyCode}
-\textcolor{keywordflow}{if} ( options[FOO].\hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last}()->\hyperlink{classoption_1_1Option_a6560fa0526e2affd87d5a10622336af4}{type}() == DISABLE ) ... 
+\textcolor{keywordflow}{if} ( options[FOO].\hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last}()->\hyperlink{classoption_1_1Option_a5268a69e1a91137186ab772574296da0}{type}() == DISABLE ) ... 
 \end{DoxyCode}
  \item Cumulative option (-\/v verbose, -\/vv more verbose, -\/vvv even more verbose)\+: 
 \begin{DoxyCode}
@@ -99,26 +99,22 @@ The \hyperlink{classoption_1_1Parser}{Parser} chains all parsed options with the
 
 
 \subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoption_1_1Option_a385221e2a8f37c548f0d5777bfddb216}\label{classoption_1_1Option_a385221e2a8f37c548f0d5777bfddb216}} 
 \index{option\+::\+Option@{option\+::\+Option}!Option@{Option}}
 \index{Option@{Option}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{Option(const Descriptor $\ast$desc\+\_\+, const char $\ast$name\+\_\+, const char $\ast$arg\+\_\+)}{Option(const Descriptor *desc_, const char *name_, const char *arg_)}}]{\setlength{\rightskip}{0pt plus 5cm}option\+::\+Option\+::\+Option (
-\begin{DoxyParamCaption}
-\item[{const {\bf Descriptor} $\ast$}]{desc\+\_\+, }
-\item[{const char $\ast$}]{name\+\_\+, }
-\item[{const char $\ast$}]{arg\+\_\+}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_a385221e2a8f37c548f0d5777bfddb216}{}\label{classoption_1_1Option_a385221e2a8f37c548f0d5777bfddb216}
+\subsubsection{\texorpdfstring{Option()}{Option()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily option\+::\+Option\+::\+Option (\begin{DoxyParamCaption}\item[{const \hyperlink{structoption_1_1Descriptor}{Descriptor} $\ast$}]{desc\+\_\+,  }\item[{const char $\ast$}]{name\+\_\+,  }\item[{const char $\ast$}]{arg\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Creates a new \hyperlink{classoption_1_1Option}{Option} that is a one-\/element linked list and has the given values for \hyperlink{classoption_1_1Option_af8d664a7b5de1425008b1812a90a0c23}{desc}, \hyperlink{classoption_1_1Option_a02a76b4896abd22d0ba8514362261de9}{name} and \hyperlink{classoption_1_1Option_a402be734987458364b0f473acae36238}{arg}. 
 
-If {\ttfamily name\+\_\+} points at a character other than \textquotesingle{}-\/\textquotesingle{} it will be assumed to refer to a short option and \hyperlink{classoption_1_1Option_a3aa2957b19ad5815873441b415d56050}{namelen} will be set to 1. Otherwise the length will extend to the first \textquotesingle{}=\textquotesingle{} character or the string\textquotesingle{}s 0-\/terminator. \index{option\+::\+Option@{option\+::\+Option}!Option@{Option}}
+If {\ttfamily name\+\_\+} points at a character other than \textquotesingle{}-\/\textquotesingle{} it will be assumed to refer to a short option and \hyperlink{classoption_1_1Option_a3aa2957b19ad5815873441b415d56050}{namelen} will be set to 1. Otherwise the length will extend to the first \textquotesingle{}=\textquotesingle{} character or the string\textquotesingle{}s 0-\/terminator. \mbox{\Hypertarget{classoption_1_1Option_a4053240fecad1a3b1d8e4dc06b7aa8c4}\label{classoption_1_1Option_a4053240fecad1a3b1d8e4dc06b7aa8c4}} 
+\index{option\+::\+Option@{option\+::\+Option}!Option@{Option}}
 \index{Option@{Option}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{Option(const Option \&orig)}{Option(const Option &orig)}}]{\setlength{\rightskip}{0pt plus 5cm}option\+::\+Option\+::\+Option (
-\begin{DoxyParamCaption}
-\item[{const {\bf Option} \&}]{orig}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_a4053240fecad1a3b1d8e4dc06b7aa8c4}{}\label{classoption_1_1Option_a4053240fecad1a3b1d8e4dc06b7aa8c4}
+\subsubsection{\texorpdfstring{Option()}{Option()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily option\+::\+Option\+::\+Option (\begin{DoxyParamCaption}\item[{const \hyperlink{classoption_1_1Option}{Option} \&}]{orig }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Makes {\ttfamily $\ast$this} a copy of {\ttfamily orig} except for the linked list pointers. 
@@ -126,13 +122,12 @@ Makes {\ttfamily $\ast$this} a copy of {\ttfamily orig} except for the linked li
 After this operation {\ttfamily $\ast$this} will be a one-\/element linked list. 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classoption_1_1Option_a59030822a1ec4e667e6c288d7e5ec961}\label{classoption_1_1Option_a59030822a1ec4e667e6c288d7e5ec961}} 
 \index{option\+::\+Option@{option\+::\+Option}!append@{append}}
 \index{append@{append}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{append(\+Option $\ast$new\+\_\+last)}{append(Option *new_last)}}]{\setlength{\rightskip}{0pt plus 5cm}void option\+::\+Option\+::append (
-\begin{DoxyParamCaption}
-\item[{{\bf Option} $\ast$}]{new\+\_\+last}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_a59030822a1ec4e667e6c288d7e5ec961}{}\label{classoption_1_1Option_a59030822a1ec4e667e6c288d7e5ec961}
+\subsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily void option\+::\+Option\+::append (\begin{DoxyParamCaption}\item[{\hyperlink{classoption_1_1Option}{Option} $\ast$}]{new\+\_\+last }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Makes {\ttfamily new\+\_\+last} the new \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()} by chaining it into the list after \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()}. 
@@ -142,13 +137,12 @@ It doesn\textquotesingle{}t matter which element you call \hyperlink{classoption
 \begin{DoxyAttention}{Attention}
 {\ttfamily new\+\_\+last} must not yet be part of a list, or that list will become corrupted, because this method does not unchain {\ttfamily new\+\_\+last} from an existing list. 
 \end{DoxyAttention}
+\mbox{\Hypertarget{classoption_1_1Option_a8a632dcd89af60fe0806deb756c08f14}\label{classoption_1_1Option_a8a632dcd89af60fe0806deb756c08f14}} 
 \index{option\+::\+Option@{option\+::\+Option}!count@{count}}
 \index{count@{count}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{count()}{count()}}]{\setlength{\rightskip}{0pt plus 5cm}int option\+::\+Option\+::count (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_a8a632dcd89af60fe0806deb756c08f14}{}\label{classoption_1_1Option_a8a632dcd89af60fe0806deb756c08f14}
+\subsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily int option\+::\+Option\+::count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Returns the number of times this \hyperlink{classoption_1_1Option}{Option} (or others with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index}) occurs in the argument vector. 
@@ -157,13 +151,12 @@ This corresponds to the number of elements in the linked list this \hyperlink{cl
 
 Use this to implement cumulative options, such as -\/v, -\/vv, -\/vvv for different verbosity levels.
 
-Returns 0 when called for an unused/invalid option. \index{option\+::\+Option@{option\+::\+Option}!first@{first}}
+Returns 0 when called for an unused/invalid option. \mbox{\Hypertarget{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}\label{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}} 
+\index{option\+::\+Option@{option\+::\+Option}!first@{first}}
 \index{first@{first}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{first()}{first()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Option}$\ast$ option\+::\+Option\+::first (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{}\label{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}
+\subsubsection{\texorpdfstring{first()}{first()}}
+{\footnotesize\ttfamily \hyperlink{classoption_1_1Option}{Option}$\ast$ option\+::\+Option\+::first (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Returns a pointer to the first element of the linked list. 
@@ -173,39 +166,36 @@ Use this when you want the first occurrence of an option on the command line to 
 \begin{DoxyNote}{Note}
 This method may be called on an unused/invalid option and will return a pointer to the option itself. 
 \end{DoxyNote}
+\mbox{\Hypertarget{classoption_1_1Option_af51f53a553ef46110e36008a58466a2e}\label{classoption_1_1Option_af51f53a553ef46110e36008a58466a2e}} 
 \index{option\+::\+Option@{option\+::\+Option}!is\+First@{is\+First}}
 \index{is\+First@{is\+First}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{is\+First() const }{isFirst() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool option\+::\+Option\+::is\+First (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_aee7a11f90cf4b70f65fb6bdf4db2c922}{}\label{classoption_1_1Option_aee7a11f90cf4b70f65fb6bdf4db2c922}
+\subsubsection{\texorpdfstring{is\+First()}{isFirst()}}
+{\footnotesize\ttfamily bool option\+::\+Option\+::is\+First (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Returns true iff this is the first element of the linked list. 
 
 The first element in the linked list is the first option on the command line that has the respective \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} value.
 
-Returns true for an unused/invalid option. \index{option\+::\+Option@{option\+::\+Option}!is\+Last@{is\+Last}}
+Returns true for an unused/invalid option. \mbox{\Hypertarget{classoption_1_1Option_a36fa8fde6fce89462ded79ab56180ff7}\label{classoption_1_1Option_a36fa8fde6fce89462ded79ab56180ff7}} 
+\index{option\+::\+Option@{option\+::\+Option}!is\+Last@{is\+Last}}
 \index{is\+Last@{is\+Last}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{is\+Last() const }{isLast() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool option\+::\+Option\+::is\+Last (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_ad60789506c3df60dedd4a006af56ece9}{}\label{classoption_1_1Option_ad60789506c3df60dedd4a006af56ece9}
+\subsubsection{\texorpdfstring{is\+Last()}{isLast()}}
+{\footnotesize\ttfamily bool option\+::\+Option\+::is\+Last (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Returns true iff this is the last element of the linked list. 
 
 The last element in the linked list is the last option on the command line that has the respective \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} value.
 
-Returns true for an unused/invalid option. \index{option\+::\+Option@{option\+::\+Option}!last@{last}}
+Returns true for an unused/invalid option. \mbox{\Hypertarget{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}\label{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}} 
+\index{option\+::\+Option@{option\+::\+Option}!last@{last}}
 \index{last@{last}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{last()}{last()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Option}$\ast$ option\+::\+Option\+::last (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{}\label{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}
+\subsubsection{\texorpdfstring{last()}{last()}}
+{\footnotesize\ttfamily \hyperlink{classoption_1_1Option}{Option}$\ast$ option\+::\+Option\+::last (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Returns a pointer to the last element of the linked list. 
@@ -216,37 +206,34 @@ Use this when you want the last occurrence of an option on the command line to t
 This method may be called on an unused/invalid option and will return a pointer to the option itself.
 \end{DoxyNote}
 \begin{DoxyParagraph}{Tip\+:}
-If you have options with opposite meanings (e.\+g. {\ttfamily --enable-\/foo} and {\ttfamily --disable-\/foo}), you can assign them the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} to get them into the same list. Distinguish them by \hyperlink{structoption_1_1Descriptor_a1b220dabd8aad075fa441a80f9b9343c}{Descriptor\+::type} and all you have to do is check {\ttfamily  \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()}-\/$>$\hyperlink{classoption_1_1Option_a6560fa0526e2affd87d5a10622336af4}{type()} } to get the state listed last on the command line. 
+If you have options with opposite meanings (e.\+g. {\ttfamily --enable-\/foo} and {\ttfamily --disable-\/foo}), you can assign them the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} to get them into the same list. Distinguish them by \hyperlink{structoption_1_1Descriptor_a1b220dabd8aad075fa441a80f9b9343c}{Descriptor\+::type} and all you have to do is check {\ttfamily  \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()}-\/$>$\hyperlink{classoption_1_1Option_a5268a69e1a91137186ab772574296da0}{type()} } to get the state listed last on the command line. 
 \end{DoxyParagraph}
+\mbox{\Hypertarget{classoption_1_1Option_a59ae9aed505f4d410633bb36478a32be}\label{classoption_1_1Option_a59ae9aed505f4d410633bb36478a32be}} 
 \index{option\+::\+Option@{option\+::\+Option}!next@{next}}
 \index{next@{next}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{next()}{next()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Option}$\ast$ option\+::\+Option\+::next (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_a59ae9aed505f4d410633bb36478a32be}{}\label{classoption_1_1Option_a59ae9aed505f4d410633bb36478a32be}
+\subsubsection{\texorpdfstring{next()}{next()}}
+{\footnotesize\ttfamily \hyperlink{classoption_1_1Option}{Option}$\ast$ option\+::\+Option\+::next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Returns a pointer to the next element of the linked list or N\+U\+LL if called on \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()}. 
 
-If called on \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()} this method returns N\+U\+LL. Otherwise it will return the option with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} that follows this option on the command line. \index{option\+::\+Option@{option\+::\+Option}!nextwrap@{nextwrap}}
+If called on \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()} this method returns N\+U\+LL. Otherwise it will return the option with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} that follows this option on the command line. \mbox{\Hypertarget{classoption_1_1Option_ae8d8c058af3c781cb1d444998df48fef}\label{classoption_1_1Option_ae8d8c058af3c781cb1d444998df48fef}} 
+\index{option\+::\+Option@{option\+::\+Option}!nextwrap@{nextwrap}}
 \index{nextwrap@{nextwrap}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{nextwrap()}{nextwrap()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Option}$\ast$ option\+::\+Option\+::nextwrap (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_ae8d8c058af3c781cb1d444998df48fef}{}\label{classoption_1_1Option_ae8d8c058af3c781cb1d444998df48fef}
+\subsubsection{\texorpdfstring{nextwrap()}{nextwrap()}}
+{\footnotesize\ttfamily \hyperlink{classoption_1_1Option}{Option}$\ast$ option\+::\+Option\+::nextwrap (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Returns a pointer to the next element of the linked list with wrap-\/around from \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()} to \hyperlink{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{first()}. 
 
-If called on \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()} this method returns \hyperlink{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{first()}. Otherwise it will return the option with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} that follows this option on the command line. \index{option\+::\+Option@{option\+::\+Option}!operator const Option $\ast$@{operator const Option $\ast$}}
+If called on \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()} this method returns \hyperlink{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{first()}. Otherwise it will return the option with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} that follows this option on the command line. \mbox{\Hypertarget{classoption_1_1Option_a3c0504baaa809c622d59c2c09f83e25b}\label{classoption_1_1Option_a3c0504baaa809c622d59c2c09f83e25b}} 
+\index{option\+::\+Option@{option\+::\+Option}!operator const Option $\ast$@{operator const Option $\ast$}}
 \index{operator const Option $\ast$@{operator const Option $\ast$}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{operator const Option $\ast$() const }{operator const Option *() const }}]{\setlength{\rightskip}{0pt plus 5cm}option\+::\+Option\+::operator const {\bf Option} $\ast$ (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_aaaeedf023bc3f5eee0b199c64d8fe1ec}{}\label{classoption_1_1Option_aaaeedf023bc3f5eee0b199c64d8fe1ec}
+\subsubsection{\texorpdfstring{operator const Option $\ast$()}{operator const Option *()}}
+{\footnotesize\ttfamily option\+::\+Option\+::operator const \hyperlink{classoption_1_1Option}{Option} $\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Casts from \hyperlink{classoption_1_1Option}{Option} to const Option$\ast$ but only if this \hyperlink{classoption_1_1Option}{Option} is valid. 
@@ -263,13 +250,12 @@ If this \hyperlink{classoption_1_1Option}{Option} is valid (i.\+e. {\ttfamily de
 \textcolor{keywordflow}{for} (\hyperlink{classoption_1_1Option_aa2810152fc23b14175b115d1a7d38095}{Option}* opt = options[FILE]; opt; opt = opt->\hyperlink{classoption_1_1Option_a59ae9aed505f4d410633bb36478a32be}{next}())
  fname = opt->arg; ... 
 \end{DoxyCode}
- \index{option\+::\+Option@{option\+::\+Option}!operator Option $\ast$@{operator Option $\ast$}}
+ \mbox{\Hypertarget{classoption_1_1Option_ac5b9235d79208035d97e41fe17ba04d6}\label{classoption_1_1Option_ac5b9235d79208035d97e41fe17ba04d6}} 
+\index{option\+::\+Option@{option\+::\+Option}!operator Option $\ast$@{operator Option $\ast$}}
 \index{operator Option $\ast$@{operator Option $\ast$}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{operator Option $\ast$()}{operator Option *()}}]{\setlength{\rightskip}{0pt plus 5cm}option\+::\+Option\+::operator {\bf Option} $\ast$ (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_ac5b9235d79208035d97e41fe17ba04d6}{}\label{classoption_1_1Option_ac5b9235d79208035d97e41fe17ba04d6}
+\subsubsection{\texorpdfstring{operator Option $\ast$()}{operator Option *()}}
+{\footnotesize\ttfamily option\+::\+Option\+::operator \hyperlink{classoption_1_1Option}{Option} $\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Casts from \hyperlink{classoption_1_1Option}{Option} to Option$\ast$ but only if this \hyperlink{classoption_1_1Option}{Option} is valid. 
@@ -286,51 +272,47 @@ If this \hyperlink{classoption_1_1Option}{Option} is valid (i.\+e. {\ttfamily de
 \textcolor{keywordflow}{for} (\hyperlink{classoption_1_1Option_aa2810152fc23b14175b115d1a7d38095}{Option}* opt = options[FILE]; opt; opt = opt->\hyperlink{classoption_1_1Option_a59ae9aed505f4d410633bb36478a32be}{next}())
  fname = opt->arg; ... 
 \end{DoxyCode}
- \index{option\+::\+Option@{option\+::\+Option}!operator=@{operator=}}
+ \mbox{\Hypertarget{classoption_1_1Option_adb4b44f3778df8f28a04c48bd1b4a72b}\label{classoption_1_1Option_adb4b44f3778df8f28a04c48bd1b4a72b}} 
+\index{option\+::\+Option@{option\+::\+Option}!operator=@{operator=}}
 \index{operator=@{operator=}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{operator=(const Option \&orig)}{operator=(const Option &orig)}}]{\setlength{\rightskip}{0pt plus 5cm}void option\+::\+Option\+::operator= (
-\begin{DoxyParamCaption}
-\item[{const {\bf Option} \&}]{orig}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_adb4b44f3778df8f28a04c48bd1b4a72b}{}\label{classoption_1_1Option_adb4b44f3778df8f28a04c48bd1b4a72b}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void option\+::\+Option\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{classoption_1_1Option}{Option} \&}]{orig }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Makes {\ttfamily $\ast$this} a copy of {\ttfamily orig} except for the linked list pointers. 
 
-After this operation {\ttfamily $\ast$this} will be a one-\/element linked list. \index{option\+::\+Option@{option\+::\+Option}!prev@{prev}}
+After this operation {\ttfamily $\ast$this} will be a one-\/element linked list. \mbox{\Hypertarget{classoption_1_1Option_a4d12001a91b0b35cf47437d0c60d2b52}\label{classoption_1_1Option_a4d12001a91b0b35cf47437d0c60d2b52}} 
+\index{option\+::\+Option@{option\+::\+Option}!prev@{prev}}
 \index{prev@{prev}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{prev()}{prev()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Option}$\ast$ option\+::\+Option\+::prev (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_a4d12001a91b0b35cf47437d0c60d2b52}{}\label{classoption_1_1Option_a4d12001a91b0b35cf47437d0c60d2b52}
+\subsubsection{\texorpdfstring{prev()}{prev()}}
+{\footnotesize\ttfamily \hyperlink{classoption_1_1Option}{Option}$\ast$ option\+::\+Option\+::prev (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Returns a pointer to the previous element of the linked list or N\+U\+LL if called on \hyperlink{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{first()}. 
 
-If called on \hyperlink{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{first()} this method returns N\+U\+LL. Otherwise it will return the option with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} that precedes this option on the command line. \index{option\+::\+Option@{option\+::\+Option}!prevwrap@{prevwrap}}
+If called on \hyperlink{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{first()} this method returns N\+U\+LL. Otherwise it will return the option with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} that precedes this option on the command line. \mbox{\Hypertarget{classoption_1_1Option_a1226e45dc2de30f269b2aff1784bbee7}\label{classoption_1_1Option_a1226e45dc2de30f269b2aff1784bbee7}} 
+\index{option\+::\+Option@{option\+::\+Option}!prevwrap@{prevwrap}}
 \index{prevwrap@{prevwrap}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{prevwrap()}{prevwrap()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Option}$\ast$ option\+::\+Option\+::prevwrap (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_a1226e45dc2de30f269b2aff1784bbee7}{}\label{classoption_1_1Option_a1226e45dc2de30f269b2aff1784bbee7}
+\subsubsection{\texorpdfstring{prevwrap()}{prevwrap()}}
+{\footnotesize\ttfamily \hyperlink{classoption_1_1Option}{Option}$\ast$ option\+::\+Option\+::prevwrap (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Returns a pointer to the previous element of the linked list with wrap-\/around from \hyperlink{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{first()} to \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()}. 
 
-If called on \hyperlink{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{first()} this method returns \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()}. Otherwise it will return the option with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} that precedes this option on the command line. \index{option\+::\+Option@{option\+::\+Option}!type@{type}}
+If called on \hyperlink{classoption_1_1Option_abb4e13cd7c90999c8a6b1f871cece283}{first()} this method returns \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()}. Otherwise it will return the option with the same \hyperlink{structoption_1_1Descriptor_a1fee8ac44f529c99ac2b1149b4c391b1}{Descriptor\+::index} that precedes this option on the command line. \mbox{\Hypertarget{classoption_1_1Option_a5268a69e1a91137186ab772574296da0}\label{classoption_1_1Option_a5268a69e1a91137186ab772574296da0}} 
+\index{option\+::\+Option@{option\+::\+Option}!type@{type}}
 \index{type@{type}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{type() const }{type() const }}]{\setlength{\rightskip}{0pt plus 5cm}int option\+::\+Option\+::type (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classoption_1_1Option_a6560fa0526e2affd87d5a10622336af4}{}\label{classoption_1_1Option_a6560fa0526e2affd87d5a10622336af4}
+\subsubsection{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily int option\+::\+Option\+::type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 Returns \hyperlink{structoption_1_1Descriptor_a1b220dabd8aad075fa441a80f9b9343c}{Descriptor\+::type} of this \hyperlink{classoption_1_1Option}{Option}\textquotesingle{}s \hyperlink{structoption_1_1Descriptor}{Descriptor}, or 0 if this \hyperlink{classoption_1_1Option}{Option} is invalid (unused). 
 
-Because this method (and \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()}, too) can be used even on unused Options with desc==0, you can (provided you arrange your types properly) switch on \hyperlink{classoption_1_1Option_a6560fa0526e2affd87d5a10622336af4}{type()} without testing validity first. 
+Because this method (and \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last()}, too) can be used even on unused Options with desc==0, you can (provided you arrange your types properly) switch on \hyperlink{classoption_1_1Option_a5268a69e1a91137186ab772574296da0}{type()} without testing validity first. 
 \begin{DoxyCode}
 \textcolor{keyword}{enum} OptionType \{ UNUSED=0, DISABLED=0, ENABLED=1 \};
 \textcolor{keyword}{enum} OptionIndex \{ FOO \};
@@ -339,7 +321,7 @@ Because this method (and \hyperlink{classoption_1_1Option_afe2aff68191e55b59c53f
   \{ FOO, DISABLED, \textcolor{stringliteral}{""}, \textcolor{stringliteral}{"disable-foo"}, \hyperlink{structoption_1_1Arg_a7fc01987899c91c6b6a1be5711a46e22}{Arg::None}, 0 \},
   \{ 0, 0, 0, 0, 0, 0 \} \};
 ...
-switch(options[FOO].\hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last}()->\hyperlink{classoption_1_1Option_a6560fa0526e2affd87d5a10622336af4}{type}()) \textcolor{comment}{// no validity check required!}
+switch(options[FOO].\hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3dbbcd7c3}{last}()->\hyperlink{classoption_1_1Option_a5268a69e1a91137186ab772574296da0}{type}()) \textcolor{comment}{// no validity check required!}
 \{
   \textcolor{keywordflow}{case} ENABLED: ...
   \textcolor{keywordflow}{case} DISABLED: ...  \textcolor{comment}{// UNUSED==DISABLED !}
@@ -348,16 +330,22 @@ switch(options[FOO].\hyperlink{classoption_1_1Option_afe2aff68191e55b59c53fac3db
  
 
 \subsection{Member Data Documentation}
+\mbox{\Hypertarget{classoption_1_1Option_a402be734987458364b0f473acae36238}\label{classoption_1_1Option_a402be734987458364b0f473acae36238}} 
 \index{option\+::\+Option@{option\+::\+Option}!arg@{arg}}
 \index{arg@{arg}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{arg}{arg}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ option\+::\+Option\+::arg}\hypertarget{classoption_1_1Option_a402be734987458364b0f473acae36238}{}\label{classoption_1_1Option_a402be734987458364b0f473acae36238}
+\subsubsection{\texorpdfstring{arg}{arg}}
+{\footnotesize\ttfamily const char$\ast$ option\+::\+Option\+::arg}
+
 
 
 Pointer to this \hyperlink{classoption_1_1Option}{Option}\textquotesingle{}s argument (if any). 
 
-N\+U\+LL if this option has no argument. Do not confuse this with the empty string which is a valid argument. \index{option\+::\+Option@{option\+::\+Option}!desc@{desc}}
+N\+U\+LL if this option has no argument. Do not confuse this with the empty string which is a valid argument. \mbox{\Hypertarget{classoption_1_1Option_af8d664a7b5de1425008b1812a90a0c23}\label{classoption_1_1Option_af8d664a7b5de1425008b1812a90a0c23}} 
+\index{option\+::\+Option@{option\+::\+Option}!desc@{desc}}
 \index{desc@{desc}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{desc}{desc}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Descriptor}$\ast$ option\+::\+Option\+::desc}\hypertarget{classoption_1_1Option_af8d664a7b5de1425008b1812a90a0c23}{}\label{classoption_1_1Option_af8d664a7b5de1425008b1812a90a0c23}
+\subsubsection{\texorpdfstring{desc}{desc}}
+{\footnotesize\ttfamily const \hyperlink{structoption_1_1Descriptor}{Descriptor}$\ast$ option\+::\+Option\+::desc}
+
 
 
 Pointer to this \hyperlink{classoption_1_1Option}{Option}\textquotesingle{}s \hyperlink{structoption_1_1Descriptor}{Descriptor}. 
@@ -374,9 +362,12 @@ Remember that the first dummy descriptor (see \hyperlink{structoption_1_1Descrip
 \end{DoxyCode}
  This works because of {\ttfamily  operator const Option$\ast$() }. 
 \end{DoxyAttention}
+\mbox{\Hypertarget{classoption_1_1Option_a02a76b4896abd22d0ba8514362261de9}\label{classoption_1_1Option_a02a76b4896abd22d0ba8514362261de9}} 
 \index{option\+::\+Option@{option\+::\+Option}!name@{name}}
 \index{name@{name}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{name}{name}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ option\+::\+Option\+::name}\hypertarget{classoption_1_1Option_a02a76b4896abd22d0ba8514362261de9}{}\label{classoption_1_1Option_a02a76b4896abd22d0ba8514362261de9}
+\subsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily const char$\ast$ option\+::\+Option\+::name}
+
 
 
 The name of the option as used on the command line. 
@@ -385,9 +376,12 @@ The main purpose of this string is to be presented to the user in messages.
 
 In the case of a long option, this is the actual {\ttfamily argv} pointer, i.\+e. the first character is a \textquotesingle{}-\/\textquotesingle{}. In the case of a short option this points to the option character within the {\ttfamily argv} string.
 
-Note that in the case of a short option group or an attached option argument, this string will contain additional characters following the actual name. Use \hyperlink{classoption_1_1Option_a3aa2957b19ad5815873441b415d56050}{namelen} to filter out the actual option name only. \index{option\+::\+Option@{option\+::\+Option}!namelen@{namelen}}
+Note that in the case of a short option group or an attached option argument, this string will contain additional characters following the actual name. Use \hyperlink{classoption_1_1Option_a3aa2957b19ad5815873441b415d56050}{namelen} to filter out the actual option name only. \mbox{\Hypertarget{classoption_1_1Option_a3aa2957b19ad5815873441b415d56050}\label{classoption_1_1Option_a3aa2957b19ad5815873441b415d56050}} 
+\index{option\+::\+Option@{option\+::\+Option}!namelen@{namelen}}
 \index{namelen@{namelen}!option\+::\+Option@{option\+::\+Option}}
-\subsubsection[{\texorpdfstring{namelen}{namelen}}]{\setlength{\rightskip}{0pt plus 5cm}int option\+::\+Option\+::namelen}\hypertarget{classoption_1_1Option_a3aa2957b19ad5815873441b415d56050}{}\label{classoption_1_1Option_a3aa2957b19ad5815873441b415d56050}
+\subsubsection{\texorpdfstring{namelen}{namelen}}
+{\footnotesize\ttfamily int option\+::\+Option\+::namelen}
+
 
 
 The length of the option \hyperlink{classoption_1_1Option_a02a76b4896abd22d0ba8514362261de9}{name}. 

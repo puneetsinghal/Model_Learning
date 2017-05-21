@@ -1,182 +1,260 @@
 \hypertarget{classarmcontroller}{}\section{armcontroller Class Reference}
 \label{classarmcontroller}\index{armcontroller@{armcontroller}}
+
+
+Arm Controller Node for the H\+E\+BI Robotics 5-\/\+D\+OF Manipulator Arm.  
+
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries init} ()\hypertarget{classarmcontroller_a45794311f7ab89c67fe7423e07ea19d7}{}\label{classarmcontroller_a45794311f7ab89c67fe7423e07ea19d7}
-
+\hyperlink{classarmcontroller_a7e2b5cd80851fced3e54641422fb04dd}{armcontroller} ()
 \item 
-bool {\bfseries update\+Feedback} ()\hypertarget{classarmcontroller_a3cba85249ae1746aeac14d12b68becdc}{}\label{classarmcontroller_a3cba85249ae1746aeac14d12b68becdc}
-
+void \hyperlink{classarmcontroller_a45794311f7ab89c67fe7423e07ea19d7}{init} ()
 \item 
-void {\bfseries get\+Feedback\+Msg} (sensor\+\_\+msgs\+::\+Joint\+State \&, trajectory\+\_\+msgs\+::\+Joint\+Trajectory\+Point \&, model\+\_\+learning\+::\+Feedback\+ML \&)\hypertarget{classarmcontroller_af1970af350bf0902f57bdbf4089f3b13}{}\label{classarmcontroller_af1970af350bf0902f57bdbf4089f3b13}
-
+bool \hyperlink{classarmcontroller_a3cba85249ae1746aeac14d12b68becdc}{update\+Feedback} ()
 \item 
-void {\bfseries controller} (const Eigen\+::\+Vector\+Xd \&, const Eigen\+::\+Vector\+Xd \&, const Eigen\+::\+Vector\+Xd \&, std\+::vector$<$ double $>$ \&)\hypertarget{classarmcontroller_a5d9414eb9b6c92b3f19f177c44f9f6f1}{}\label{classarmcontroller_a5d9414eb9b6c92b3f19f177c44f9f6f1}
-
+void \hyperlink{classarmcontroller_af8bbda9cbee82997b7429ecda7c5412b}{get\+Feedback\+Msg} (sensor\+\_\+msgs\+::\+Joint\+State \&joint\+State\+\_\+fbk, trajectory\+\_\+msgs\+::\+Joint\+Trajectory\+Point \&trajectory\+Cmd\+\_\+fbk, model\+\_\+learning\+::\+Feedback\+ML \&armcontroller\+\_\+fbk)
 \item 
-void {\bfseries feedback\+Control} (const Eigen\+::\+Vector\+Xd \&, const Eigen\+::\+Vector\+Xd \&, std\+::vector$<$ double $>$ \&)\hypertarget{classarmcontroller_a2385c8f95fd011e1206d2730615a4fad}{}\label{classarmcontroller_a2385c8f95fd011e1206d2730615a4fad}
-
+void \hyperlink{classarmcontroller_ab2a040d42baac477ccc328d03b8c8903}{controller} (const Eigen\+::\+Vector\+Xd \&position\+Cmd, const Eigen\+::\+Vector\+Xd \&velocity\+Cmd, const Eigen\+::\+Vector\+Xd \&accel\+Cmd, std\+::vector$<$ double $>$ \&torque)
 \item 
-bool {\bfseries send\+Command} (const std\+::vector$<$ double $>$ \&, const std\+::vector$<$ double $>$ \&)\hypertarget{classarmcontroller_a146f6d320cd7641c9fbc8c7b014a7ceb}{}\label{classarmcontroller_a146f6d320cd7641c9fbc8c7b014a7ceb}
-
+void \hyperlink{classarmcontroller_aa96c09e059c416f996774d4bf4b80619}{feedback\+Control} (const Eigen\+::\+Vector\+Xd \&error\+\_\+pos, const Eigen\+::\+Vector\+Xd \&error\+\_\+vel, std\+::vector$<$ double $>$ \&torque)
 \item 
-bool {\bfseries send\+Torque\+Command} (const std\+::vector$<$ double $>$ \&)\hypertarget{classarmcontroller_adb671e988673c3750f3c846cac593eba}{}\label{classarmcontroller_adb671e988673c3750f3c846cac593eba}
-
+bool \hyperlink{classarmcontroller_aeefa5bf9839dd31ba78b33cfe092505c}{send\+Command} (const std\+::vector$<$ double $>$ \&alpha, const std\+::vector$<$ double $>$ \&torque)
 \item 
-void {\bfseries subscriber\+Callback} (const model\+\_\+learning\+::\+Command\+ML \&)\hypertarget{classarmcontroller_a9f48bad4ba4c88f294d1dd78df260fc7}{}\label{classarmcontroller_a9f48bad4ba4c88f294d1dd78df260fc7}
-
+bool \hyperlink{classarmcontroller_a124397944174948c82524f6632e21371}{send\+Torque\+Command} (const std\+::vector$<$ double $>$ \&torque)
 \item 
-void {\bfseries W\+M\+A\+Filter} (const std\+::vector$<$ double $>$ \&, const std\+::vector$<$ double $>$ \&, std\+::vector$<$ double $>$ \&, std\+::vector$<$ double $>$ \&)\hypertarget{classarmcontroller_ac707c804ed04bcbf212c3c5456f4dffe}{}\label{classarmcontroller_ac707c804ed04bcbf212c3c5456f4dffe}
-
+void \hyperlink{classarmcontroller_ae16ff33ed407aabe5694da11807d8142}{W\+M\+A\+Filter} (const std\+::vector$<$ double $>$ \&velocity, const std\+::vector$<$ double $>$ \&motor\+Temp, std\+::vector$<$ double $>$ \&velocity\+Flt, std\+::vector$<$ double $>$ \&motor\+Temp\+Flt)
 \item 
-void {\bfseries moving\+Average} (const std\+::vector$<$ double $>$ \&, const int \&, const int \&, double \&, double \&, double \&) const \hypertarget{classarmcontroller_a0d755c82b60a3da6935dd9ce4968adcf}{}\label{classarmcontroller_a0d755c82b60a3da6935dd9ce4968adcf}
-
+void \hyperlink{classarmcontroller_a26e78647cafc275e2c633f8e115c28c7}{moving\+Average} (const std\+::vector$<$ double $>$ \&data\+\_\+vector, const int \&num, const int \&vec\+\_\+sum, double \&W\+MA, double \&numerator, double \&total) const
 \item 
-void {\bfseries init} ()\hypertarget{classarmcontroller_a45794311f7ab89c67fe7423e07ea19d7}{}\label{classarmcontroller_a45794311f7ab89c67fe7423e07ea19d7}
-
+void \hyperlink{classarmcontroller_a53acf57dd669cb3d2634b3d508a0d439}{subscriber\+Callback} (const model\+\_\+learning\+::\+Command\+ML \&cmd)
 \item 
-bool {\bfseries update\+Feedback} ()\hypertarget{classarmcontroller_a3cba85249ae1746aeac14d12b68becdc}{}\label{classarmcontroller_a3cba85249ae1746aeac14d12b68becdc}
-
+\mbox{\Hypertarget{classarmcontroller_a45794311f7ab89c67fe7423e07ea19d7}\label{classarmcontroller_a45794311f7ab89c67fe7423e07ea19d7}} 
+void {\bfseries init} ()
 \item 
-void {\bfseries get\+Feedback\+Msg} (sensor\+\_\+msgs\+::\+Joint\+State \&, trajectory\+\_\+msgs\+::\+Joint\+Trajectory\+Point \&, model\+\_\+learning\+::\+Feedback\+ML \&)\hypertarget{classarmcontroller_af1970af350bf0902f57bdbf4089f3b13}{}\label{classarmcontroller_af1970af350bf0902f57bdbf4089f3b13}
-
+\mbox{\Hypertarget{classarmcontroller_a3cba85249ae1746aeac14d12b68becdc}\label{classarmcontroller_a3cba85249ae1746aeac14d12b68becdc}} 
+bool {\bfseries update\+Feedback} ()
 \item 
-void {\bfseries controller} (const Eigen\+::\+Vector\+Xd \&, const Eigen\+::\+Vector\+Xd \&, const Eigen\+::\+Vector\+Xd \&, std\+::vector$<$ double $>$ \&)\hypertarget{classarmcontroller_a5d9414eb9b6c92b3f19f177c44f9f6f1}{}\label{classarmcontroller_a5d9414eb9b6c92b3f19f177c44f9f6f1}
-
+\mbox{\Hypertarget{classarmcontroller_af1970af350bf0902f57bdbf4089f3b13}\label{classarmcontroller_af1970af350bf0902f57bdbf4089f3b13}} 
+void {\bfseries get\+Feedback\+Msg} (sensor\+\_\+msgs\+::\+Joint\+State \&, trajectory\+\_\+msgs\+::\+Joint\+Trajectory\+Point \&, model\+\_\+learning\+::\+Feedback\+ML \&)
 \item 
-void {\bfseries feedback\+Control} (const Eigen\+::\+Vector\+Xd \&, const Eigen\+::\+Vector\+Xd \&, std\+::vector$<$ double $>$ \&)\hypertarget{classarmcontroller_a2385c8f95fd011e1206d2730615a4fad}{}\label{classarmcontroller_a2385c8f95fd011e1206d2730615a4fad}
-
+\mbox{\Hypertarget{classarmcontroller_a5d9414eb9b6c92b3f19f177c44f9f6f1}\label{classarmcontroller_a5d9414eb9b6c92b3f19f177c44f9f6f1}} 
+void {\bfseries controller} (const Eigen\+::\+Vector\+Xd \&, const Eigen\+::\+Vector\+Xd \&, const Eigen\+::\+Vector\+Xd \&, std\+::vector$<$ double $>$ \&)
 \item 
-bool {\bfseries send\+Command} (const std\+::vector$<$ double $>$ \&, const std\+::vector$<$ double $>$ \&)\hypertarget{classarmcontroller_a146f6d320cd7641c9fbc8c7b014a7ceb}{}\label{classarmcontroller_a146f6d320cd7641c9fbc8c7b014a7ceb}
-
+\mbox{\Hypertarget{classarmcontroller_a2385c8f95fd011e1206d2730615a4fad}\label{classarmcontroller_a2385c8f95fd011e1206d2730615a4fad}} 
+void {\bfseries feedback\+Control} (const Eigen\+::\+Vector\+Xd \&, const Eigen\+::\+Vector\+Xd \&, std\+::vector$<$ double $>$ \&)
 \item 
-bool {\bfseries send\+Torque\+Command} (const std\+::vector$<$ double $>$ \&)\hypertarget{classarmcontroller_adb671e988673c3750f3c846cac593eba}{}\label{classarmcontroller_adb671e988673c3750f3c846cac593eba}
-
+\mbox{\Hypertarget{classarmcontroller_a146f6d320cd7641c9fbc8c7b014a7ceb}\label{classarmcontroller_a146f6d320cd7641c9fbc8c7b014a7ceb}} 
+bool {\bfseries send\+Command} (const std\+::vector$<$ double $>$ \&, const std\+::vector$<$ double $>$ \&)
 \item 
-void {\bfseries subscriber\+Callback} (const model\+\_\+learning\+::\+Command\+ML \&)\hypertarget{classarmcontroller_a9f48bad4ba4c88f294d1dd78df260fc7}{}\label{classarmcontroller_a9f48bad4ba4c88f294d1dd78df260fc7}
-
+\mbox{\Hypertarget{classarmcontroller_adb671e988673c3750f3c846cac593eba}\label{classarmcontroller_adb671e988673c3750f3c846cac593eba}} 
+bool {\bfseries send\+Torque\+Command} (const std\+::vector$<$ double $>$ \&)
 \item 
-void {\bfseries W\+M\+A\+Filter} (const std\+::vector$<$ double $>$ \&, const std\+::vector$<$ double $>$ \&, std\+::vector$<$ double $>$ \&, std\+::vector$<$ double $>$ \&)\hypertarget{classarmcontroller_ac707c804ed04bcbf212c3c5456f4dffe}{}\label{classarmcontroller_ac707c804ed04bcbf212c3c5456f4dffe}
-
+\mbox{\Hypertarget{classarmcontroller_a9f48bad4ba4c88f294d1dd78df260fc7}\label{classarmcontroller_a9f48bad4ba4c88f294d1dd78df260fc7}} 
+void {\bfseries subscriber\+Callback} (const model\+\_\+learning\+::\+Command\+ML \&)
 \item 
-void {\bfseries moving\+Average} (const std\+::vector$<$ double $>$ \&, const int \&, const int \&, double \&, double \&, double \&) const \hypertarget{classarmcontroller_a0d755c82b60a3da6935dd9ce4968adcf}{}\label{classarmcontroller_a0d755c82b60a3da6935dd9ce4968adcf}
-
+\mbox{\Hypertarget{classarmcontroller_ac707c804ed04bcbf212c3c5456f4dffe}\label{classarmcontroller_ac707c804ed04bcbf212c3c5456f4dffe}} 
+void {\bfseries W\+M\+A\+Filter} (const std\+::vector$<$ double $>$ \&, const std\+::vector$<$ double $>$ \&, std\+::vector$<$ double $>$ \&, std\+::vector$<$ double $>$ \&)
+\item 
+\mbox{\Hypertarget{classarmcontroller_adbe2ad7337bc5ac6c31502def583ed3a}\label{classarmcontroller_adbe2ad7337bc5ac6c31502def583ed3a}} 
+void {\bfseries moving\+Average} (const std\+::vector$<$ double $>$ \&, const int \&, const int \&, double \&, double \&, double \&) const
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-long {\bfseries timeout\+Fbk\+\_\+ms} = 10\hypertarget{classarmcontroller_a78f7a3b674725073c109e330da297e0f}{}\label{classarmcontroller_a78f7a3b674725073c109e330da297e0f}
-
+\mbox{\Hypertarget{classarmcontroller_a874e5713e57b27d8bd2411a8489f7866}\label{classarmcontroller_a874e5713e57b27d8bd2411a8489f7866}} 
+std\+::deque$<$ double $>$ {\bfseries single\+\_\+vel\+\_\+que1}
 \item 
-double {\bfseries control\+Type} = 0\hypertarget{classarmcontroller_a3e976e7013c9800f7e7c4cbeb897ff9f}{}\label{classarmcontroller_a3e976e7013c9800f7e7c4cbeb897ff9f}
-
+\mbox{\Hypertarget{classarmcontroller_a81cbec8fd65f32026d45d39261c0dda2}\label{classarmcontroller_a81cbec8fd65f32026d45d39261c0dda2}} 
+std\+::deque$<$ double $>$ {\bfseries single\+\_\+vel\+\_\+que2}
 \item 
-double {\bfseries max\+Dt} = 0\hypertarget{classarmcontroller_adc3f62b4ca8f4665be0d895cfe90d5e5}{}\label{classarmcontroller_adc3f62b4ca8f4665be0d895cfe90d5e5}
-
+\mbox{\Hypertarget{classarmcontroller_aec26a722458e61e1d19bb2792727ba76}\label{classarmcontroller_aec26a722458e61e1d19bb2792727ba76}} 
+std\+::deque$<$ double $>$ {\bfseries single\+\_\+vel\+\_\+que3}
 \item 
-double {\bfseries fbksuccess\+\_\+count} = 1\hypertarget{classarmcontroller_a4893f1563d325e4483933239686cd1af}{}\label{classarmcontroller_a4893f1563d325e4483933239686cd1af}
-
+\mbox{\Hypertarget{classarmcontroller_af9ea47e211011bd1b1e0d99d98073e58}\label{classarmcontroller_af9ea47e211011bd1b1e0d99d98073e58}} 
+std\+::deque$<$ double $>$ {\bfseries single\+\_\+vel\+\_\+que4}
 \item 
-double {\bfseries fbkfailure\+\_\+count} = 1\hypertarget{classarmcontroller_a1b2fc37dfd0c502c3ced7115d11c99bb}{}\label{classarmcontroller_a1b2fc37dfd0c502c3ced7115d11c99bb}
-
+\mbox{\Hypertarget{classarmcontroller_aa15c4f2ae51f44ca935c3625211155e9}\label{classarmcontroller_aa15c4f2ae51f44ca935c3625211155e9}} 
+std\+::deque$<$ double $>$ {\bfseries single\+\_\+vel\+\_\+que5}
 \item 
-model\+\_\+learning\+::\+Command\+ML {\bfseries current\+Cmd}\hypertarget{classarmcontroller_a6f645096fbb56f5856ba7372faf8f6ee}{}\label{classarmcontroller_a6f645096fbb56f5856ba7372faf8f6ee}
-
+\mbox{\Hypertarget{classarmcontroller_acfb8b7af9f3b36d81b3a94559c6a2e28}\label{classarmcontroller_acfb8b7af9f3b36d81b3a94559c6a2e28}} 
+std\+::deque$<$ double $>$ {\bfseries single\+\_\+temp\+\_\+que1}
 \item 
-model\+\_\+learning\+::\+Feedback\+ML {\bfseries current\+Fbk}\hypertarget{classarmcontroller_a0403b6deaea205c1f33768307e0b121e}{}\label{classarmcontroller_a0403b6deaea205c1f33768307e0b121e}
-
+\mbox{\Hypertarget{classarmcontroller_af2ade00ba55165258195ea263150cdf4}\label{classarmcontroller_af2ade00ba55165258195ea263150cdf4}} 
+std\+::deque$<$ double $>$ {\bfseries single\+\_\+temp\+\_\+que2}
 \item 
-sensor\+\_\+msgs\+::\+Joint\+State {\bfseries joint\+State}\hypertarget{classarmcontroller_a7da9e0e8c6228e5cbce003cb40c5170e}{}\label{classarmcontroller_a7da9e0e8c6228e5cbce003cb40c5170e}
-
+\mbox{\Hypertarget{classarmcontroller_a0b0fa6095474fdfd30742967f04c5825}\label{classarmcontroller_a0b0fa6095474fdfd30742967f04c5825}} 
+std\+::deque$<$ double $>$ {\bfseries single\+\_\+temp\+\_\+que3}
 \item 
-trajectory\+\_\+msgs\+::\+Joint\+Trajectory\+Point {\bfseries trajectory\+Cmd}\hypertarget{classarmcontroller_ac67171ad306ca94cb45a807673c16a03}{}\label{classarmcontroller_ac67171ad306ca94cb45a807673c16a03}
-
+\mbox{\Hypertarget{classarmcontroller_aad87315185a3143531b44fc88ea36bb7}\label{classarmcontroller_aad87315185a3143531b44fc88ea36bb7}} 
+std\+::deque$<$ double $>$ {\bfseries single\+\_\+temp\+\_\+que4}
 \item 
-std\+::deque$<$ double $>$ {\bfseries single\+\_\+vel\+\_\+que1}\hypertarget{classarmcontroller_ad629cc8e6a0177e926c47d4a23b388df}{}\label{classarmcontroller_ad629cc8e6a0177e926c47d4a23b388df}
-
+\mbox{\Hypertarget{classarmcontroller_a02fb1470c7f547094592fa8589d96f82}\label{classarmcontroller_a02fb1470c7f547094592fa8589d96f82}} 
+std\+::deque$<$ double $>$ {\bfseries single\+\_\+temp\+\_\+que5}
 \item 
-std\+::deque$<$ double $>$ {\bfseries single\+\_\+vel\+\_\+que2}\hypertarget{classarmcontroller_a95b6f66fe3fd62059924f1f984f723e8}{}\label{classarmcontroller_a95b6f66fe3fd62059924f1f984f723e8}
-
-\item 
-std\+::deque$<$ double $>$ {\bfseries single\+\_\+vel\+\_\+que3}\hypertarget{classarmcontroller_a88bb6f3ee7936724bad03efb2e3315de}{}\label{classarmcontroller_a88bb6f3ee7936724bad03efb2e3315de}
-
-\item 
-std\+::deque$<$ double $>$ {\bfseries single\+\_\+vel\+\_\+que4}\hypertarget{classarmcontroller_aa57f18692d6930aea9b7c5c1b474558f}{}\label{classarmcontroller_aa57f18692d6930aea9b7c5c1b474558f}
-
-\item 
-std\+::deque$<$ double $>$ {\bfseries single\+\_\+vel\+\_\+que5}\hypertarget{classarmcontroller_aeaac8e9d0b683822e342dfd1de9944e8}{}\label{classarmcontroller_aeaac8e9d0b683822e342dfd1de9944e8}
-
-\item 
-std\+::deque$<$ double $>$ {\bfseries single\+\_\+temp\+\_\+que1}\hypertarget{classarmcontroller_acf0bb07b704a124457fe78c1a15ff0e3}{}\label{classarmcontroller_acf0bb07b704a124457fe78c1a15ff0e3}
-
-\item 
-std\+::deque$<$ double $>$ {\bfseries single\+\_\+temp\+\_\+que2}\hypertarget{classarmcontroller_ac291f6d6886826502944b22d5c80e701}{}\label{classarmcontroller_ac291f6d6886826502944b22d5c80e701}
-
-\item 
-std\+::deque$<$ double $>$ {\bfseries single\+\_\+temp\+\_\+que3}\hypertarget{classarmcontroller_aea72854a6b714e41e1dc2c1fb7d937b0}{}\label{classarmcontroller_aea72854a6b714e41e1dc2c1fb7d937b0}
-
-\item 
-std\+::deque$<$ double $>$ {\bfseries single\+\_\+temp\+\_\+que4}\hypertarget{classarmcontroller_a976d6a446eaa6df8f42d94043aae5328}{}\label{classarmcontroller_a976d6a446eaa6df8f42d94043aae5328}
-
-\item 
-std\+::deque$<$ double $>$ {\bfseries single\+\_\+temp\+\_\+que5}\hypertarget{classarmcontroller_a8d47c3b16a7b6e0d12f044de46f8b450}{}\label{classarmcontroller_a8d47c3b16a7b6e0d12f044de46f8b450}
-
-\item 
-std\+::vector$<$ double $>$ {\bfseries W\+M\+A\+\_\+vel\+\_\+single}\hypertarget{classarmcontroller_a206484d820d2b7e1d6b551743a932509}{}\label{classarmcontroller_a206484d820d2b7e1d6b551743a932509}
-
-\item 
-std\+::vector$<$ double $>$ {\bfseries numerator\+\_\+vel\+\_\+single}\hypertarget{classarmcontroller_a9f3263fbca6d767f360eb3b06e36510a}{}\label{classarmcontroller_a9f3263fbca6d767f360eb3b06e36510a}
-
-\item 
-std\+::vector$<$ double $>$ {\bfseries total\+\_\+vel\+\_\+single}\hypertarget{classarmcontroller_aa678f9b58952330fe44e2264196cf308}{}\label{classarmcontroller_aa678f9b58952330fe44e2264196cf308}
-
-\item 
-std\+::vector$<$ double $>$ {\bfseries W\+M\+A\+\_\+temp\+\_\+single}\hypertarget{classarmcontroller_aabfce7e38904bee74e270344bf42f21d}{}\label{classarmcontroller_aabfce7e38904bee74e270344bf42f21d}
-
-\item 
-std\+::vector$<$ double $>$ {\bfseries numerator\+\_\+temp\+\_\+single}\hypertarget{classarmcontroller_a49a3e0ee66d7d79e84be4c90e3d90157}{}\label{classarmcontroller_a49a3e0ee66d7d79e84be4c90e3d90157}
-
-\item 
-std\+::vector$<$ double $>$ {\bfseries total\+\_\+temp\+\_\+single}\hypertarget{classarmcontroller_a4a209f5bdc654e6693497f3ba37e4774}{}\label{classarmcontroller_a4a209f5bdc654e6693497f3ba37e4774}
-
-\item 
-ros\+::\+Wall\+Time {\bfseries prev\+Time}\hypertarget{classarmcontroller_ad38d99ac9e379ba23eecc4fb27c553ab}{}\label{classarmcontroller_ad38d99ac9e379ba23eecc4fb27c553ab}
-
-\item 
-std\+::vector$<$ double $>$ {\bfseries prev\+Vel\+Flt}\hypertarget{classarmcontroller_a77444777c9d52b3f10a0341596f0d9d8}{}\label{classarmcontroller_a77444777c9d52b3f10a0341596f0d9d8}
-
-\item 
-std\+::vector$<$ double $>$ {\bfseries prev\+Deflection}\hypertarget{classarmcontroller_a8ee33251dc2ef4e4a2a9f21ca64ee125}{}\label{classarmcontroller_a8ee33251dc2ef4e4a2a9f21ca64ee125}
-
-\item 
-int {\bfseries num\+\_\+vel\+\_\+filt} = 20\hypertarget{classarmcontroller_aeaa654264f35cd0c718f256d0d9e4fa0}{}\label{classarmcontroller_aeaa654264f35cd0c718f256d0d9e4fa0}
-
-\item 
-int {\bfseries num\+\_\+temp\+\_\+filt} = 10\hypertarget{classarmcontroller_ac94be58df36d6609bbfe853e74993d7b}{}\label{classarmcontroller_ac94be58df36d6609bbfe853e74993d7b}
-
-\item 
-std\+::unique\+\_\+ptr$<$ \hyperlink{classhebi_1_1Group}{hebi\+::\+Group} $>$ {\bfseries arm\+\_\+group}\hypertarget{classarmcontroller_a4e1dce1703d8e68c372452231d60f2f0}{}\label{classarmcontroller_a4e1dce1703d8e68c372452231d60f2f0}
-
-\item 
-double {\bfseries last\+\_\+alpha4}\hypertarget{classarmcontroller_a98c171b07686d075da4c32b27e0920bd}{}\label{classarmcontroller_a98c171b07686d075da4c32b27e0920bd}
-
-\item 
-bool {\bfseries prelim\+\_\+setup}\hypertarget{classarmcontroller_ac58cebe1c8bc73c36bb2a9ffedeb6bec}{}\label{classarmcontroller_ac58cebe1c8bc73c36bb2a9ffedeb6bec}
-
-\item 
-bool {\bfseries initialize}\hypertarget{classarmcontroller_aab71e362590a95503d49b7250e03e582}{}\label{classarmcontroller_aab71e362590a95503d49b7250e03e582}
-
-\item 
-bool {\bfseries initialize\+Position}\hypertarget{classarmcontroller_a561ca355d83c1bba6ec7b3c6340109df}{}\label{classarmcontroller_a561ca355d83c1bba6ec7b3c6340109df}
-
-\item 
-std\+::vector$<$ double $>$ {\bfseries initial\+\_\+position}\hypertarget{classarmcontroller_a5dd1f731a514ad046ecd3324c9f83e02}{}\label{classarmcontroller_a5dd1f731a514ad046ecd3324c9f83e02}
-
-\item 
-ros\+::\+Wall\+Time {\bfseries last\+Command\+\_\+time}\hypertarget{classarmcontroller_acff5dcbe547461958f7a4b5e43b6c646}{}\label{classarmcontroller_acff5dcbe547461958f7a4b5e43b6c646}
-
+\mbox{\Hypertarget{classarmcontroller_a98c171b07686d075da4c32b27e0920bd}\label{classarmcontroller_a98c171b07686d075da4c32b27e0920bd}} 
+double {\bfseries last\+\_\+alpha4}
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Arm Controller Node for the H\+E\+BI Robotics 5-\/\+D\+OF Manipulator Arm. 
+
+Run the arm controller node that receives feedback from and sends commands to the H\+E\+BI modules \begin{DoxyVerb}@Author Ky Woodard\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classarmcontroller_a7e2b5cd80851fced3e54641422fb04dd}\label{classarmcontroller_a7e2b5cd80851fced3e54641422fb04dd}} 
+\index{armcontroller@{armcontroller}!armcontroller@{armcontroller}}
+\index{armcontroller@{armcontroller}!armcontroller@{armcontroller}}
+\subsubsection{\texorpdfstring{armcontroller()}{armcontroller()}}
+{\footnotesize\ttfamily armcontroller\+::armcontroller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructor for the arm controller, which initializes values used 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classarmcontroller_ab2a040d42baac477ccc328d03b8c8903}\label{classarmcontroller_ab2a040d42baac477ccc328d03b8c8903}} 
+\index{armcontroller@{armcontroller}!controller@{controller}}
+\index{controller@{controller}!armcontroller@{armcontroller}}
+\subsubsection{\texorpdfstring{controller()}{controller()}}
+{\footnotesize\ttfamily void armcontroller\+::controller (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector\+Xd \&}]{position\+Cmd,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{velocity\+Cmd,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{accel\+Cmd,  }\item[{std\+::vector$<$ double $>$ \&}]{torque }\end{DoxyParamCaption})}
+
+Generates the torque command based off the feedback and feedforward control components 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em position\+Cmd} & desired joint position commands \mbox{[}rad\mbox{]} \\
+\hline
+\mbox{\tt in}  & {\em velocity\+Cmd} & desired joint velocity commands \mbox{[}rad/s\mbox{]} \\
+\hline
+\mbox{\tt in}  & {\em accel\+Cmd} & desired joint acceleration commands \mbox{[}rad/s$^\wedge$s\mbox{]} \\
+\hline
+\mbox{\tt out}  & {\em torque} & module input torques \mbox{[}N-\/m\mbox{]} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classarmcontroller_aa96c09e059c416f996774d4bf4b80619}\label{classarmcontroller_aa96c09e059c416f996774d4bf4b80619}} 
+\index{armcontroller@{armcontroller}!feedback\+Control@{feedback\+Control}}
+\index{feedback\+Control@{feedback\+Control}!armcontroller@{armcontroller}}
+\subsubsection{\texorpdfstring{feedback\+Control()}{feedbackControl()}}
+{\footnotesize\ttfamily void armcontroller\+::feedback\+Control (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector\+Xd \&}]{error\+\_\+pos,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{error\+\_\+vel,  }\item[{std\+::vector$<$ double $>$ \&}]{torque }\end{DoxyParamCaption})}
+
+Linear feedback controller on position and velocity 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em error\+\_\+pos} & joint position errors \mbox{[}rad\mbox{]} \\
+\hline
+\mbox{\tt in}  & {\em error\+\_\+vel} & joint velocity errors \mbox{[}rad/s\mbox{]} \\
+\hline
+\mbox{\tt out}  & {\em torque} & joint control torques \mbox{[}N-\/m\mbox{]} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classarmcontroller_af8bbda9cbee82997b7429ecda7c5412b}\label{classarmcontroller_af8bbda9cbee82997b7429ecda7c5412b}} 
+\index{armcontroller@{armcontroller}!get\+Feedback\+Msg@{get\+Feedback\+Msg}}
+\index{get\+Feedback\+Msg@{get\+Feedback\+Msg}!armcontroller@{armcontroller}}
+\subsubsection{\texorpdfstring{get\+Feedback\+Msg()}{getFeedbackMsg()}}
+{\footnotesize\ttfamily void armcontroller\+::get\+Feedback\+Msg (\begin{DoxyParamCaption}\item[{sensor\+\_\+msgs\+::\+Joint\+State \&}]{joint\+State\+\_\+fbk,  }\item[{trajectory\+\_\+msgs\+::\+Joint\+Trajectory\+Point \&}]{trajectory\+Cmd\+\_\+fbk,  }\item[{model\+\_\+learning\+::\+Feedback\+ML \&}]{armcontroller\+\_\+fbk }\end{DoxyParamCaption})}
+
+Getter function for the feedback to pull the most recent feedback call 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em joint\+State\+\_\+fbk} & R\+OS standard Joint\+State message \\
+\hline
+\mbox{\tt out}  & {\em trajectory\+Cmd\+\_\+fbk} & R\+OS standard Joint\+Trajectory message \\
+\hline
+\mbox{\tt out}  & {\em armcontroller\+\_\+fbk} & Custom message encapsilating joint\+State Joint\+Trajectory and all custom inputs \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+flag signifying if the Feedback was update successfully 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classarmcontroller_a45794311f7ab89c67fe7423e07ea19d7}\label{classarmcontroller_a45794311f7ab89c67fe7423e07ea19d7}} 
+\index{armcontroller@{armcontroller}!init@{init}}
+\index{init@{init}!armcontroller@{armcontroller}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void armcontroller\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Initialization function sets up the communication with the modules \mbox{\Hypertarget{classarmcontroller_a26e78647cafc275e2c633f8e115c28c7}\label{classarmcontroller_a26e78647cafc275e2c633f8e115c28c7}} 
+\index{armcontroller@{armcontroller}!moving\+Average@{moving\+Average}}
+\index{moving\+Average@{moving\+Average}!armcontroller@{armcontroller}}
+\subsubsection{\texorpdfstring{moving\+Average()}{movingAverage()}}
+{\footnotesize\ttfamily void armcontroller\+::moving\+Average (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{data\+\_\+vector,  }\item[{const int \&}]{num,  }\item[{const int \&}]{vec\+\_\+sum,  }\item[{double \&}]{W\+MA,  }\item[{double \&}]{numerator,  }\item[{double \&}]{total }\end{DoxyParamCaption}) const}
+
+Weighted moving average filter 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em data\+\_\+vector} & unfiltered signal \\
+\hline
+\mbox{\tt in}  & {\em num} & number of past points to filter \\
+\hline
+\mbox{\tt in}  & {\em vec\+\_\+sum} & sum of all the weighting values \\
+\hline
+\mbox{\tt in,out}  & {\em W\+MA} & weighted moving average (incrementally updated) \\
+\hline
+\mbox{\tt in,out}  & {\em numerator} & sum of all the ponit multiplied by their respective weights (incrementally updated) \\
+\hline
+\mbox{\tt in,out}  & {\em total} & sum of all the points (incrementatlly updated) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classarmcontroller_aeefa5bf9839dd31ba78b33cfe092505c}\label{classarmcontroller_aeefa5bf9839dd31ba78b33cfe092505c}} 
+\index{armcontroller@{armcontroller}!send\+Command@{send\+Command}}
+\index{send\+Command@{send\+Command}!armcontroller@{armcontroller}}
+\subsubsection{\texorpdfstring{send\+Command()}{sendCommand()}}
+{\footnotesize\ttfamily bool armcontroller\+::send\+Command (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{alpha,  }\item[{const std\+::vector$<$ double $>$ \&}]{torque }\end{DoxyParamCaption})}
+
+Sends position and torque commands to the modules 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em alpha} & joint position signal \mbox{[}rad\mbox{]} \\
+\hline
+\mbox{\tt in}  & {\em torque} & joint torque signal \mbox{[}N-\/m\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+flag signifying if the command was sent (does not verify the module got it) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classarmcontroller_a124397944174948c82524f6632e21371}\label{classarmcontroller_a124397944174948c82524f6632e21371}} 
+\index{armcontroller@{armcontroller}!send\+Torque\+Command@{send\+Torque\+Command}}
+\index{send\+Torque\+Command@{send\+Torque\+Command}!armcontroller@{armcontroller}}
+\subsubsection{\texorpdfstring{send\+Torque\+Command()}{sendTorqueCommand()}}
+{\footnotesize\ttfamily bool armcontroller\+::send\+Torque\+Command (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{torque }\end{DoxyParamCaption})}
+
+Sends torque commands to the modules 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em torque} & joint torque signal \mbox{[}N-\/m\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+flag signifying if the command was sent (does not verify the module got it) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classarmcontroller_a53acf57dd669cb3d2634b3d508a0d439}\label{classarmcontroller_a53acf57dd669cb3d2634b3d508a0d439}} 
+\index{armcontroller@{armcontroller}!subscriber\+Callback@{subscriber\+Callback}}
+\index{subscriber\+Callback@{subscriber\+Callback}!armcontroller@{armcontroller}}
+\subsubsection{\texorpdfstring{subscriber\+Callback()}{subscriberCallback()}}
+{\footnotesize\ttfamily void armcontroller\+::subscriber\+Callback (\begin{DoxyParamCaption}\item[{const model\+\_\+learning\+::\+Command\+ML \&}]{cmd }\end{DoxyParamCaption})}
+
+Callback function for getting the commands from the Command\+ML ros topic and performing the control actions 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cmd} & custom command message from R\+OS topic callback \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classarmcontroller_a3cba85249ae1746aeac14d12b68becdc}\label{classarmcontroller_a3cba85249ae1746aeac14d12b68becdc}} 
+\index{armcontroller@{armcontroller}!update\+Feedback@{update\+Feedback}}
+\index{update\+Feedback@{update\+Feedback}!armcontroller@{armcontroller}}
+\subsubsection{\texorpdfstring{update\+Feedback()}{updateFeedback()}}
+{\footnotesize\ttfamily bool armcontroller\+::update\+Feedback (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Asks for feedback from the modules and if received, updates the current controller feedback state. It additionally calls the filtering and dynamics computation functions. \mbox{\Hypertarget{classarmcontroller_ae16ff33ed407aabe5694da11807d8142}\label{classarmcontroller_ae16ff33ed407aabe5694da11807d8142}} 
+\index{armcontroller@{armcontroller}!W\+M\+A\+Filter@{W\+M\+A\+Filter}}
+\index{W\+M\+A\+Filter@{W\+M\+A\+Filter}!armcontroller@{armcontroller}}
+\subsubsection{\texorpdfstring{W\+M\+A\+Filter()}{WMAFilter()}}
+{\footnotesize\ttfamily void armcontroller\+::\+W\+M\+A\+Filter (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{velocity,  }\item[{const std\+::vector$<$ double $>$ \&}]{motor\+Temp,  }\item[{std\+::vector$<$ double $>$ \&}]{velocity\+Flt,  }\item[{std\+::vector$<$ double $>$ \&}]{motor\+Temp\+Flt }\end{DoxyParamCaption})}
+
+Weighted moving average filter for velocity and temperature 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em velocity} & unfiltered velocity signal \mbox{[}rad/s\mbox{]} \\
+\hline
+\mbox{\tt in}  & {\em motor\+Temp} & unfiltered motor temperature \mbox{[}C\mbox{]} \\
+\hline
+\mbox{\tt out}  & {\em velocity\+Flt} & filtered velocity signal \mbox{[}rad/s\mbox{]} \\
+\hline
+\mbox{\tt out}  & {\em motor\+Temp\+Flt} & filtered motor temperature \mbox{[}C\mbox{]} \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
