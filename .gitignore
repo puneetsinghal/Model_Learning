@@ -30,6 +30,7 @@
 *~
 *.swp
 *.pdf
+*.csv
 
 # OS generated files #
 ######################
