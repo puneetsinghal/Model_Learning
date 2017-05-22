@@ -283,6 +283,8 @@ class dataStruct:
 		self.epsTau = np.empty(shape=(5,1))
 
 class pubSub:
+	#Publisher and subscriber class for communicating with the C++ arm_controller
+	#via custom ROS messages (FeedbackML and CommandML)
 	def __init__(self,bag=False,folderName=None,flush=False,control_info={}):
 		self.queue = dataStruct()
 		self.restart_joint = True
@@ -299,13 +301,18 @@ class pubSub:
 
 		self.traj_pub = rospy.Publisher("ml_publisher",
 										model_learning.msg.CommandML,queue_size=1)
-		self.fbk_sub = rospy.Subscriber("armcontroller_fbk",
-							model_learning.msg.FeedbackML,self.armControlCallback,
-							queue_size=5000)
 		self.path1_pub = rospy.Publisher("/path1/color",
 							std_msgs.msg.ColorRGBA,queue_size=1)
 		self.path2_pub = rospy.Publisher("/path2/color",
 							std_msgs.msg.ColorRGBA,queue_size=1)
+		#Create a ROS subscriber for collecting the arm controller feedback into a queue to be potentially
+		#input into one of the modeldatabase datasets
+		#Queue size is large since Python is substantially slower at processing the data than the arm
+		#controller
+		self.fbk_sub = rospy.Subscriber("armcontroller_fbk",
+							model_learning.msg.FeedbackML,self.armControlCallback,
+							queue_size=5000)
+		
 
 		if bag:
 			self.startBag = True
@@ -318,34 +325,7 @@ class pubSub:
 			else:
 				raise ValueError('If bagging data, a folderName must be given')
 			self.bag = rosbag.Bag(self.bag_name, 'w')
-		# self.state_sub = rospy.Subscriber("jointState_fbk",
-		# 								JointState,self.jointStateCallback,
-		# 								queue_size=1000)
-		# self.cmd_sub = rospy.Subscriber("trajectoryCmd_fbk",
-		# 								JointTrajectoryPoint,
-		# 								self.trajectoryCmdCallback,
-										# queue_size=1000)
-
-
-	# def jointStateCallback(self,ros_data):
-	# 	if self.restart_joint or self.restart_traj or self.restart_arm:
-	# 		self.addToQueue(ros_data,New=True,fbk_type="jointState")
-	# 		self.restart_joint = False
-	# 	else:
-	# 		self.addToQueue(ros_data,New=False,fbk_type="jointState")
-	# 		self.count[0] += 1
-	# 	self.minimum = min(self.count)-1
 		
-	# def trajectoryCmdCallback(self,ros_data):
-	# 	if self.restart_joint or self.restart_traj or self.restart_arm:
-	# 		self.addToQueue(ros_data,New=True,fbk_type="trajectoryCmd")
-	# 		self.restart_traj = False
-	# 	else:
-	# 		self.addToQueue(ros_data,New=False,fbk_type="trajectoryCmd")
-	# 		self.count[1] += 1
-	# 		print self.count
-	# 	self.minimum = min(self.count)-1
-
 	def armControlCallback(self,ros_data):
 		if self.restart_arm:
 			self.addToQueue(ros_data,New=True,fbk_type="armControl")
