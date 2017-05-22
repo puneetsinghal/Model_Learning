@@ -1162,14 +1162,23 @@ class modelDatabase:
 
 	def saveDatabase(self,train_label='train',test_label='test',
 						verify_label ='verify'):
+		#Save the database files to a csv, which is easier to work with
+		#than a rosbag
+		#	train_label [in]  = label to change the name of the saved train_set
+		#	verify_label [in] = label to change the name of the saved verify_set
+		#	test_label [in]   = label to change the name of the saved test_set
 		train_label = train_label + '.csv'
 		test_label = test_label + '.csv'
 		verify_label = verify_label + '.csv'
 
+		#Check if the database has a training set
 		if hasattr(self,'train_set'):
+			#Open a csvfile to write to
 			with open(train_label, 'wb') as csvfile:
+				#Create a csv writer with comma delimitation
 				writer = csv.writer(csvfile, delimiter=',',
 				                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
+				#Create the column headers for all of the feedback data
 				writer.writerow(['time',
 				'position1','position2','position3','position4','position5',
 				'positionCmd1','positionCmd2','positionCmd3','positionCmd4','positionCmd5',
@@ -1188,6 +1197,9 @@ class modelDatabase:
 				'windingTempFlt1','windingTempFlt2','windingTempFlt3','windingTempFlt4','windingTempFlt5',
 				'epsTau1','epsTau2','epsTau3','epsTau4','epsTau5'])
 
+				#TODO: Find a way to iterate over values instead of calling each individually
+				#TODO: Make into a separate function so it does not take up 3x the space
+				#Add all of the data into the respecitve column
 				for i in range(self.train_set.time.size):
 					writer.writerow([self.train_set.time[i],
 						self.train_set.position[0,i],
@@ -1271,10 +1283,14 @@ class modelDatabase:
 						self.train_set.epsTau[3,i],
 						self.train_set.epsTau[4,i]])
 
+		#Check if the database has a training set
 		if hasattr(self,'test_set'):
+			#Open a csvfile to write to
 			with open(test_label, 'wb') as csvfile:
+				#Create a csv writer with comma delimitation
 				writer = csv.writer(csvfile, delimiter=',',
 				                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
+				#Create the column headers for all of the feedback data
 				writer.writerow(['time',
 				'position1','position2','position3','position4','position5',
 				'positionCmd1','positionCmd2','positionCmd3','positionCmd4','positionCmd5',
@@ -1293,6 +1309,7 @@ class modelDatabase:
 				'windingTempFlt1','windingTempFlt2','windingTempFlt3','windingTempFlt4','windingTempFlt5',
 				'epsTau1','epsTau2','epsTau3','epsTau4','epsTau5'])
 
+				#Add all of the data into the respecitve column
 				for i in range(self.test_set.time.size):
 					writer.writerow([self.test_set.time[i],
 						self.test_set.position[0,i],
@@ -1376,10 +1393,14 @@ class modelDatabase:
 						self.test_set.epsTau[3,i],
 						self.test_set.epsTau[4,i]])
 
+		#Check if the database has a training set
 		if hasattr(self,'verify_set'):
+			#Open a csvfile to write to
 			with open(verify_label, 'wb') as csvfile:
+				#Create a csv writer with comma delimitation
 				writer = csv.writer(csvfile, delimiter=',',
 				                        quotechar='|', quoting=csv.QUOTE_MINIMAL)
+				#Create the column headers for all of the feedback data
 				writer.writerow(['time',
 				'position1','position2','position3','position4','position5',
 				'positionCmd1','positionCmd2','positionCmd3','positionCmd4','positionCmd5',
@@ -1398,6 +1419,7 @@ class modelDatabase:
 				'windingTempFlt1','windingTempFlt2','windingTempFlt3','windingTempFlt4','windingTempFlt5',
 				'epsTau1','epsTau2','epsTau3','epsTau4','epsTau5'])
 
+				#Add all of the data into the respecitve column
 				for i in range(self.verify_set.time.size):
 					writer.writerow([self.verify_set.time[i],
 						self.verify_set.position[0,i],
@@ -1482,53 +1504,36 @@ class modelDatabase:
 						self.verify_set.epsTau[4,i]])
 
 if __name__ == '__main__':
-	# 0. = motor off but code runs
-	# 1. = motor on with model learning commands
-	# 2. = motor on without model learning commands
-
+	#Parsing inputs for plotting, trajectory generation, and saving options
 	parser = argparse.ArgumentParser()
-	parser.add_argument("-p", "--plot", type=str,default="none")
-	parser.add_argument("-t", "--traj", type=str,default="pnp")
-	parser.add_argument("-s", "--save", type=str,default="no")
+	parser.add_argument("-p", "--plot", type=str,default="none",help="plots to run (default: none)")
+	parser.add_argument("-t", "--traj", type=str,default="pnp",help="trajectory to run (default: PnP)")
+	parser.add_argument("-s", "--save", type=str,default="no",help="save sets to csv files (default: no)")
 	args = parser.parse_args()
-
 	plotting = args.plot.lower()
 	traj_type = args.traj.lower()
 	saving = (args.save.lower()=="yes")
 
+	#Creating a start position namedtuple
 	position = namedtuple('Position', ['c_x', 'c_y','c_z','theta'])
 
-	position.c_x = 0.0
-	position.c_y = 0.395
-	position.c_z = 0.1
-	position.theta = 0.
-
 	try:
-
+		#MotorOn is a convenience variable for testing the code with/without motor
+		#commands or the model learning process
+		# 0. = motor off but code runs
+		# 1. = motor on with model learning commands
+		# 2. = motor on without model learning commands
 		motorOn = 2.
 
-		initial_pose = Pose();
-
-		initial_pose.position.x = 0.;
-		initial_pose.position.y = 0.4;
-		initial_pose.position.z = 0.21;
-		initial_pose.orientation.x = 0.0;
-		initial_pose.orientation.y = 1.0;
-		initial_pose.orientation.z = 0.0;
-		initial_pose.orientation.w = 0.0;
-
-		check_reset = False
+		#Initialize the ros node
 		rospy.init_node('model_learner', anonymous=True)
-
-		cap = 3000
-		gaus_noise = 1.25
-		nMSE_RBD_array = []
-		nMSE_GP_array = []
-		nMSE_array = []
-		control_info = {}
-		amp_string = 'pi%18,pi%16'
+		check_reset = False
+		
+		cap = 3000 #number of datapoints to cap at
+		gaus_noise = 1.25 #fixed gaussian noise parameter for the GP model
 
 		#Setup control struct
+		control_info = {}
 		if traj_type == "circle":
 			control_info['type'] = "Circle"
 			position.c_x = 0.0
@@ -1557,7 +1562,6 @@ if __name__ == '__main__':
 		db = modelDatabase(ps)#,deflection=True)
 		db.data_cap = cap
 		db.setJointsToLearn(np.array([0,1,2,3,4]))
-
 		db.controller(motorOn,control_info)
 		resetPosition(motorOn,ps,position)
 		db.updateSet(New=True,Set="train")
@@ -1572,23 +1576,31 @@ if __name__ == '__main__':
 		#Update the control_info for the next run
 		control_info['Set'] = "verify"
 		control_info['ml'] = True
-
 		ps = pubSub(bag=False,control_info=control_info)
 		db.ps = ps
 		ps.reset()
 		motorOn = 1.
 		db.data_cap = cap
 		db.setJointsToLearn(np.array([0,1,2,3,4]))
-
 		db.controller(motorOn,control_info)
 		resetPosition(motorOn,ps,position)
 		db.updateSet(New=True,Set="verify")
 		ps.unregister()
 
+		#Plotting the train and verify set before relearning occcurs
+		for k in range(db.joints_ML.size):
+			if plotting == "miminal" or plotting == "all": #Minimal plotting is only position
+				plt.figure(10+k) #Plots in the 10's range designate position
+				plt.plot(db.train_set.time,db.train_set.position[db.joints_ML[k]],linewidth=3,label='RBD',color='b')
+				plt.plot(db.verify_set.time,db.verify_set.position[db.joints_ML[k]],linewidth=3,label='Task-Based GP Trial 1',color='m')
+			
+			if plotting == "all": #All plotting is position, velocity, and torque
+				plt.figure(20+k) #Plots in the 20's range designate velocity
+				plt.plot(db.train_set.time,db.train_set.velocityFlt[db.joints_ML[k]],linewidth=3,label='RBD',color='b')
+				plt.plot(db.verify_set.time,db.verify_set.velocityFlt[db.joints_ML[k]],linewidth=3,label='Task-Based GP Trial 1',color='m')
+		
 
 		###### Retraining the Model ######
-
-		#update the control_info for next run
 		control_info['Set'] = "train"
 		ps = pubSub(bag=False,control_info=control_info)
 		db.ps = ps
@@ -1596,7 +1608,6 @@ if __name__ == '__main__':
 		motorOn = 1.
 		db.data_cap = cap
 		db.setJointsToLearn(np.array([0,1,2,3,4]))
-
 		db.controller(motorOn,control_info)
 		resetPosition(motorOn,ps,position)
 		db.updateSet(New=False,Set="train")
@@ -1616,52 +1627,52 @@ if __name__ == '__main__':
 
 		if saving:
 			db.saveDatabase()
-			print "HERE"
+			print "Data sets saved"
 
 		ps.unregister()
 
-		final_index = db.verify_set.time.size
-		time.sleep(2)
-
-		# time_offset_PD = np.mean(db.train_set.time[100:500]-db.verify_set.time[100:500])
-		
-		for k in range(db.joints_ML.size):
-			if plotting == "miminal" or plotting == "all":
-				plt.figure(30+k)
-				plt.plot(db.train_set.time[:final_index],db.train_set.position[db.joints_ML[k],:final_index],linewidth=3,label='RBD',color='b')
-				plt.plot(db.verify_set.time[:final_index],db.verify_set.position[db.joints_ML[k],:final_index],linewidth=3,label='Task-Based GP Trial 1',color='m')
-			
-			if plotting == "all":
-				plt.figure(40+k)
-				plt.plot(db.train_set.time[:final_index],db.train_set.velocityFlt[db.joints_ML[k],:final_index],linewidth=3,label='RBD',color='b')
-				plt.plot(db.verify_set.time[:final_index],db.verify_set.velocityFlt[db.joints_ML[k],:final_index],linewidth=3,label='Task-Based GP Trial 1',color='m')
 		
 
 		#### TRACKING PLOTS #####
-		# time_offset_GP = np.mean(db.train_set.time[100:500]-db.test_set.time[100:500])
-		
+		#Tracking plots and RMSE for each one of the learned joints
 		for k in range(db.joints_ML.size):
-			idx = db.joints_ML[k]
-
-			RMSE_RBD_pos = np.sqrt(np.mean(np.square(db.train_set.positionCmd[db.joints_ML[k],:final_index]-db.train_set.position[db.joints_ML[k],:final_index])))
-			RMSE_GP1_pos = np.sqrt(np.mean(np.square(db.verify_set.positionCmd[db.joints_ML[k],:final_index]-db.verify_set.position[db.joints_ML[k],:final_index])))
-			RMSE_GP2_pos = np.sqrt(np.mean(np.square(db.test_set.positionCmd[db.joints_ML[k]]-db.test_set.position[db.joints_ML[k]])))
-			print "Joint",k+1,"Pos_RMSE_RBD: ", RMSE_RBD_pos
-			print "Joint",k+1,"Pos_RMSE_GP1: ", RMSE_GP1_pos
-			print "Joint",k+1,"Pos_RMSE_GP2: ", RMSE_GP2_pos
-			print "Joint",k+1,"Percentage Improvement in Position GP1: ", (RMSE_RBD_pos-RMSE_GP1_pos)/RMSE_RBD_pos*100
-			print "Joint",k+1,"Percentage Improvement in Position GP2: ", (RMSE_RBD_pos-RMSE_GP2_pos)/RMSE_RBD_pos*100
+			idx = db.joints_ML[k] #Index corresponding with the joint number
+			#Minimal plotting is only position
 			if plotting == "miminal" or plotting == "all":
-				plt.figure(30+k)
+				#Compute the position tracking RMSE for the three tasks: RBD, Task-Based GP Trial 1 (GP1),
+				#Task-Based GP Trial 2 (GP2)			
+				RMSE_RBD_pos = np.sqrt(np.mean(np.square(db.train_set.positionCmd[db.joints_ML[k],:final_index]-db.train_set.position[db.joints_ML[k],:final_index])))
+				RMSE_GP1_pos = np.sqrt(np.mean(np.square(db.verify_set.positionCmd[db.joints_ML[k],:final_index]-db.verify_set.position[db.joints_ML[k],:final_index])))
+				RMSE_GP2_pos = np.sqrt(np.mean(np.square(db.test_set.positionCmd[db.joints_ML[k]]-db.test_set.position[db.joints_ML[k]])))
+				#Print to the screen the Position RMSE and the percent imporvement
+				print "Joint",k+1,"Pos_RMSE_RBD: ", RMSE_RBD_pos
+				print "Joint",k+1,"Pos_RMSE_GP1: ", RMSE_GP1_pos
+				print "Joint",k+1,"Pos_RMSE_GP2: ", RMSE_GP2_pos
+				print "Joint",k+1,"Percentage Improvement in Position GP1: ", (RMSE_RBD_pos-RMSE_GP1_pos)/RMSE_RBD_pos*100
+				print "Joint",k+1,"Percentage Improvement in Position GP2: ", (RMSE_RBD_pos-RMSE_GP2_pos)/RMSE_RBD_pos*100
+				
+				plt.figure(10+k) #Plots in the 10's range designate position
 				plt.plot(db.test_set.time,db.test_set.position[db.joints_ML[k]],linewidth=3,color="green",label='Task-Based GP Trial 2')
 				plt.plot(db.test_set.time,db.test_set.positionCmd[db.joints_ML[k]],'r--',linewidth=3,label='Desired')
 				plt.title('Joint Position Tracking Comparison for Task-Based GP')
 				plt.legend()
 				plt.ylabel('Position [rad]')
 				plt.xlabel('Time [s]')
-		
+			#All plotting is position, velocity, and torque
 			if plotting == "all":
-				plt.figure(40+k)
+				#Compute the velocity tracking RMSE for the three tasks: RBD, Task-Based GP Trial 1 (GP1),
+				#Task-Based GP Trial 2 (GP2)			
+				RMSE_RBD_vel = np.sqrt(np.mean(np.square(db.train_set.velocityCmd[db.joints_ML[k],:final_index]-db.train_set.velocityFlt[db.joints_ML[k],:final_index])))
+				RMSE_GP1_vel = np.sqrt(np.mean(np.square(db.verify_set.velocityCmd[db.joints_ML[k],:final_index]-db.verify_set.velocityFlt[db.joints_ML[k],:final_index])))
+				RMSE_GP2_vel = np.sqrt(np.mean(np.square(db.test_set.velocityCmd[db.joints_ML[k]]-db.test_set.velocityFlt[db.joints_ML[k]])))
+				#Print to the screen the velocity RMSE and the percent imporvement
+				print "Joint",k+1,"Vel_RMSE_RBD: ", RMSE_RBD_vel
+				print "Joint",k+1,"Vel_RMSE_GP1: ", RMSE_GP1_vel
+				print "Joint",k+1,"Vel_RMSE_GP2: ", RMSE_GP2_vel
+				print "Joint",k+1,"Percentage Improvement in Velocity GP1: ", (RMSE_RBD_vel-RMSE_GP1_vel)/RMSE_RBD_vel*100
+				print "Joint",k+1,"Percentage Improvement in Velocity GP2: ", (RMSE_RBD_vel-RMSE_GP2_vel)/RMSE_RBD_vel*100
+				
+				plt.figure(20+k) #Plots in the 20's range designate velocity
 				plt.plot(db.test_set.time,db.test_set.velocityFlt[db.joints_ML[k]],linewidth=3,color="green",label='Task-Based GP Trial 2')
 				plt.plot(db.test_set.time,db.test_set.velocityCmd[db.joints_ML[k]],'r--',linewidth=3,label='Desired')
 				plt.title('Joint Velocity Tracking Comparison for Task-Based GP')
@@ -1669,7 +1680,7 @@ if __name__ == '__main__':
 				plt.ylabel('Velocity [rad/s]')
 				plt.xlabel('Time [s]')
 
-				plt.figure(50+k)
+				plt.figure(30+k) #Plots in the 30's range designate torque
 				plt.plot(db.test_set.time,db.test_set.torqueCmd[db.joints_ML[k]],color="green",label='Commanded Torque (GP Trial 2)')
 				plt.plot(db.test_set.time,db.test_set.torqueID[db.joints_ML[k]],color="blue", label='RBD Torque  (GP Trial 2)')
 				plt.plot(db.test_set.time,db.test_set.torqueID[db.joints_ML[k]]+db.test_set.epsTau[db.joints_ML[k]],color="red",label='GP Torque (GP Trial 2)')
@@ -1680,7 +1691,15 @@ if __name__ == '__main__':
 
 		plt.show()
 	
+	#If Python exception thrown, reset the arm position using position
+	#control before raising the error again to be caught by the system
 	except:
-		ps = pubSub()
+		#Specify the desired namedtuple position to move to
+		position.c_x = 0.0
+		position.c_y = 0.395
+		position.c_z = 0.1
+		position.theta = 0.
+		#Recreating pubSub class in case the error comes befor this step
+		ps = pubSub()	
 		resetPosition(motorOn,ps,position)
 		raise
