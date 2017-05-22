@@ -48,13 +48,16 @@ The second half of the code is a Python script, which does the actual learning a
 Python Script ML_Feedback.py Additional Parameters:
 * plot (default="none","minimal","all") [shorthand -p]
 	* none 	= no plots
-	* minimal = joint position tracking plots
-	* all	= joint position, velocity, and torque tracking plots
+	* minimal 	= joint position tracking plots
+	* all		= joint position, velocity, and torque tracking plots
 * traj (default="pnp","circle") [shorthand -t]
-	* pnp	= follows a minimum jerk pick and place trajectory
+	* pnp		= follows a minimum jerk pick and place trajectory
 	* circle	= follows a planar circular trajectory
+* save (default="no","yes") [shorthand -s]
+	* no		= do not save
+	* yes		= saves the sets as csv files
 
-Example Call: rosrun model_learning ML_Feedback.py --plot all -t circle
+Example Call: rosrun model_learning ML_Feedback.py --plot all -t circle -s yes
 
 ## Implementation Specifics
 In this section, I cover some of the specific things which to be aware of when using this code.
