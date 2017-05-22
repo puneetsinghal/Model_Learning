@@ -1,59 +1,60 @@
 #!/usr/bin/env python
+
+#ROS
 import rospy
-import sys
 from geometry_msgs.msg import Pose
 from trajectory_msgs.msg import JointTrajectoryPoint
 from trajectory_msgs.msg import JointTrajectory
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Header
 import std_msgs.msg
+import rosbag
+import model_learning.msg
 
-import argparse
-from collections import namedtuple
-import numpy as np
-import matplotlib.pyplot as plt
-import GPy
+#Standard Python Libraries
+import sys
 import csv
 import math
 from datetime import datetime
 import time
+import argparse
+from collections import namedtuple
+
+#Third Party Software
+import numpy as np
 from numpy.linalg import inv
-import rosbag
+import matplotlib.pyplot as plt
+import GPy
+
 import os
+
+#Python Script
 import TrajectoryGenerartor as TG
 
-import model_learning.msg
-
-def minJerkSetup(x0,t0,tf):
-	A = np.array([[1,t0, t0**2, t0**3, t0**4, t0**5],
-					[0,1, 2*t0, 3*t0**2, 4*t0**3, 5*t0**4],
-					[0,0, 2, 6*t0, 12*t0**2, 20*t0**3],
-					[1,tf, tf**2, tf**3, tf**4, tf**5],
-					[0,1, 2*tf, 3*tf**2, 4*tf**3, 5*tf**4],
-					[0,0, 2, 6*tf, 12*tf**2, 20*tf**3]])
-	constants = np.dot(inv(A),x0)
-	return constants
-
-def minJerkStep(t,constants):
-	pos = np.dot(np.array([1,t, t**2, t**3, t**4, t**5]),constants)
-	vel = np.dot(np.array([0,1, 2*t, 3*t**2, 4*t**3, 5*t**4]),constants)
-	accel = np.dot(np.array([0,0, 2, 6*t, 12*t**2, 20*t**3]),constants)
-	return pos,vel,accel
-
-def superpositionSine(t,amp=[np.pi/16,np.pi/12],f=[0.6,0.4],phi=[0,0]):
-
-	pos = (amp[0]*np.sin(2.*np.pi*f[0]*t+phi[0])-
-			amp[0]*np.sin(phi[0])+
-			amp[1]*np.sin(2.*np.pi*f[1]*t+phi[1])-
-			amp[1]*np.sin(phi[1]))
-	vel = (2.*np.pi*(amp[0]*f[0]*np.cos(2.*np.pi*f[0]*t+phi[0])
-			+amp[1]*f[1]*np.cos(2*np.pi*f[1]*t+phi[1])))
-	accel = (-4.*np.pi**2*(amp[0]*f[0]**2*np.sin(2.*np.pi*f[0]*t+phi[0])
-			+amp[1]*f[1]**2*np.sin(2.*np.pi*f[1]*t+phi[1])))
-
-	return pos,vel,accel
+class dataStruct:
+	#Class for the initialization of a dataset struct with numpy
+	#array members
+	def __init__(self):
+		self.time = np.empty(shape=(1,))
+		self.position = np.empty(shape=(5,1))
+		self.positionCmd = np.empty(shape=(5,1))
+		self.velocity = np.empty(shape=(5,1))
+		self.velocityCmd = np.empty(shape=(5,1))
+		self.velocityFlt = np.empty(shape=(5,1))
+		self.accel = np.empty(shape=(5,1))
+		self.accelCmd = np.empty(shape=(5,1))
+		self.torque = np.empty(shape=(5,1))
+		self.torqueCmd = np.empty(shape=(5,1))
+		self.torqueID = np.empty(shape=(5,1))
+		self.deflection = np.empty(shape=(5,1))
+		self.deflection_vel = np.empty(shape=(5,1))
+		self.motorSensorTemperature = np.empty(shape=(5,1))
+		self.windingTemp = np.empty(shape=(5,1))
+		self.windingTempFlt = np.empty(shape=(5,1))
+		self.epsTau = np.empty(shape=(5,1))
 
 def checkMinMax(Min,Max,Test):
+	# Checks the minimum and maximum values against a test point
 	if Min > Test:
 		Min = Test
 	if Max < Test:
@@ -64,6 +65,13 @@ def checkMinMax(Min,Max,Test):
 	return Min, Max
 
 def UpdateDataSet(data,fbk,New=True,min_limit=0):
+	#Updates the database with the feedback queue
+	#	fbk [in]		= dataStruct to be appended to the dataset
+	#	New [in]		= flag to specify if this is a new dataset
+	# 	min_limit [in]	= start point of data indexing
+	#	data [in,out]	= datStruct of the existing dataset
+
+	#Determine the minimum and maximum length of the dataset
 	Min = fbk.time.size
 	Max = fbk.time.size
 	Min,Max = checkMinMax(Min,Max,fbk.position.size/5)
@@ -80,23 +88,24 @@ def UpdateDataSet(data,fbk,New=True,min_limit=0):
 	Min,Max = checkMinMax(Min,Max,fbk.windingTemp.size/5)
 	Min,Max = checkMinMax(Min,Max,fbk.windingTempFlt.size/5)
 	Min,Max = checkMinMax(Min,Max,fbk.torqueCmd.size/5)
-
 	Min,Max = checkMinMax(Min,Max,fbk.torqueID.size/5)
+
+	#Print to the screen number of data points dropped to equalize set
 	if Max-Min>10:
 		print Max-Min, "samples had to be dropped to equalize set"
 	max_limit = Min
+
+	#Create new arrays for the dataStruct no data already exists
 	if New:
-		if max_limit>0:
+		if max_limit>min_limit:
 			data.time = np.array(fbk.time[min_limit:max_limit])
 
 			data.position = np.asarray((fbk.position[:,min_limit:max_limit]))
 			data.velocity = np.asarray((fbk.velocity[:,min_limit:max_limit]))
 			data.torque = np.asarray((fbk.torque[:,min_limit:max_limit]))
-
 			data.positionCmd = np.asarray((fbk.positionCmd[:,min_limit:max_limit]))
 			data.velocityCmd = np.asarray((fbk.velocityCmd[:,min_limit:max_limit]))
 			data.accelCmd = np.asarray((fbk.accelCmd[:,min_limit:max_limit]))
-
 			data.deflection = np.asarray((fbk.deflection[:,min_limit:max_limit]))
 			data.deflection_vel = np.asarray((fbk.deflection_vel[:,min_limit:max_limit]))
 			data.velocityFlt = np.asarray((fbk.velocityFlt[:,min_limit:max_limit]))
@@ -109,26 +118,8 @@ def UpdateDataSet(data,fbk,New=True,min_limit=0):
 			data.accel = np.asarray((fbk.accel[:,min_limit:max_limit]))
 
 		else:
-			data.time = np.array(fbk.time)
-			data.position = np.asarray((fbk.position))
-			data.velocity = np.asarray((fbk.velocity))
-			data.torque = np.asarray((fbk.torque))
-
-			data.positionCmd = np.asarray((fbk.positionCmd))
-			data.velocityCmd = np.asarray((fbk.velocityCmd))
-			data.accelCmd = np.asarray((fbk.accelCmd))
-
-			data.deflection = np.asarray((fbk.deflection))
-			data.deflection_vel = np.asarray((fbk.deflection_vel))
-			data.velocityFlt = np.asarray((fbk.velocityFlt))
-			data.motorSensorTemperature = np.asarray((fbk.motorSensorTemperature))
-			data.windingTemp = np.asarray((fbk.windingTemp))
-			data.windingTempFlt = np.asarray((fbk.windingTempFlt))
-			data.torqueCmd = np.asarray((fbk.torqueCmd))
-			data.torqueID = np.asarray((fbk.torqueID))
-			data.epsTau = np.asarray((fbk.epsTau))
-			data.accel = np.asarray((fbk.accel))
-						
+			print "Minimum limit cannot be creater than the size of the smallest dataStruct element"
+	#Append the fbk arrays to the data arrays to combine the two datasets
 	else:
 		if max_limit>min_limit:
 			data.time = np.hstack((data.time,fbk.time[min_limit:max_limit]))
@@ -151,39 +142,26 @@ def UpdateDataSet(data,fbk,New=True,min_limit=0):
 			data.epsTau = np.hstack((data.epsTau,np.asarray((fbk.epsTau[:,min_limit:max_limit]))))
 			data.accel = np.hstack((data.accel,np.asarray((fbk.accel[:,min_limit:max_limit]))))
 		else:
-			data.time = np.hstack((data.time,fbk.time))
-			data.position = np.hstack((data.position,np.asarray((fbk.position))))
-			data.velocity = np.hstack((data.velocity,np.asarray((fbk.velocity))))
-			data.torque = np.hstack((data.torque,np.asarray((fbk.torque))))
-
-			data.positionCmd = np.hstack((data.positionCmd,np.asarray((fbk.positionCmd))))
-			data.velocityCmd = np.hstack((data.velocityCmd,np.asarray((fbk.velocityCmd))))
-			data.accelCmd = np.hstack((data.accelCmd,np.asarray((fbk.trajectoryCmd.accelCmd))))
-
-			data.deflection = np.hstack((data.deflection,np.asarray((fbk.deflection))))
-			data.deflection_vel = np.hstack((data.deflection_vel,np.asarray((fbk.deflection_vel))))
-			data.velocityFlt = np.hstack((data.velocityFlt,np.asarray((fbk.velocityFlt))))
-			data.motorSensorTemperature = np.hstack((data.motorSensorTemperature,np.asarray((fbk.motorSensorTemperature))))
-			data.windingTemp = np.hstack((data.windingTemp,np.asarray((fbk.windingTemp))))
-			data.windingTempFlt = np.hstack((data.windingTempFlt,np.asarray((fbk.windingTempFlt))))
-			data.torqueCmd = np.hstack((data.torqueCmd,np.asarray((fbk.torqueCmd))))
-			data.torqueID = np.hstack((data.torqueID,np.asarray((fbk.torqueID))))
-			data.epsTau = np.hstack((data.epsTau,np.asarray((fbk.epsTau))))
-			data.accel = np.hstack((data.accel,np.asarray((fbk.accel))))
+			print "Minimum limit cannot be creater than the size of the smallest dataStruct element"
 
 	return data
 
 def AverageDataSet(fbk,index_set):
+	#Downsamples the dataset based on the index array passed to the function
+	#	fbk [in]		= datStruct of the existing dataset
+	#	index_set[in]	= array of index values representing a specific sampling frequency
+	# 	data [in,out]	= datStruct of the downsampled dataset
+
+	#Initialize the first point in the dataStruct by taking the mean of all values between
+	#the zeroth and first index_set value
 	data = dataStruct()
 	data.time = np.mean(fbk.time[index_set[0]:index_set[1]])
 	data.position = np.mean(fbk.position[:,index_set[0]:index_set[1]],axis=1,keepdims=True)
 	data.velocity = np.mean(fbk.velocity[:,index_set[0]:index_set[1]],axis=1,keepdims=True)
 	data.torque = np.mean(fbk.torque[:,index_set[0]:index_set[1]],axis=1,keepdims=True)
-
 	data.positionCmd = np.mean(fbk.positionCmd[:,index_set[0]:index_set[1]],axis=1,keepdims=True)
 	data.velocityCmd = np.mean(fbk.velocityCmd[:,index_set[0]:index_set[1]],axis=1,keepdims=True)
 	data.accelCmd = np.mean(fbk.accelCmd[:,index_set[0]:index_set[1]],axis=1,keepdims=True)
-
 	data.deflection = np.mean(fbk.deflection[:,index_set[0]:index_set[1]],axis=1,keepdims=True)
 	data.deflection_vel = np.mean(fbk.deflection_vel[:,index_set[0]:index_set[1]],axis=1,keepdims=True)
 	data.velocityFlt = np.mean(fbk.velocityFlt[:,index_set[0]:index_set[1]],axis=1,keepdims=True)
@@ -194,21 +172,20 @@ def AverageDataSet(fbk,index_set):
 	data.torqueID = np.mean(fbk.torqueID[:,index_set[0]:index_set[1]],axis=1,keepdims=True)
 	data.accel = np.mean(fbk.accel[:,index_set[0]:index_set[1]],axis=1,keepdims=True)
 
+	# Append additional points to data following the same averaging procedure as on the first
+	# point
 	length = len(index_set)
-	for i in range(2,length):
+	for i in range(1,length):
 		data.time = np.hstack((data.time,np.mean(fbk.time[index_set[i-1]:index_set[i]])))
 		data.position = np.hstack((data.position,np.mean(fbk.position[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
 		data.velocity = np.hstack((data.velocity,np.mean(fbk.velocity[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
 		data.torque = np.hstack((data.torque,np.mean(fbk.torque[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
-
 		data.positionCmd = np.hstack((data.positionCmd,np.mean(fbk.positionCmd[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
 		data.velocityCmd = np.hstack((data.velocityCmd,np.mean(fbk.velocityCmd[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
 		data.accelCmd = np.hstack((data.accelCmd,np.mean(fbk.accelCmd[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
-
 		data.deflection = np.hstack((data.deflection,np.mean(fbk.deflection[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
 		data.deflection_vel = np.hstack((data.deflection_vel,np.mean(fbk.deflection_vel[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
 		data.velocityFlt = np.hstack((data.velocityFlt,np.mean(fbk.velocityFlt[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
-		
 		data.motorSensorTemperature = np.hstack((data.motorSensorTemperature,np.mean(fbk.motorSensorTemperature[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
 		data.windingTemp = np.hstack((data.windingTemp,np.mean(fbk.windingTemp[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
 		data.windingTempFlt = np.hstack((data.windingTempFlt,np.mean(fbk.windingTempFlt[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
@@ -216,71 +193,39 @@ def AverageDataSet(fbk,index_set):
 		data.torqueID = np.hstack((data.torqueID,np.mean(fbk.torqueID[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
 		data.accel = np.hstack((data.accel,np.mean(fbk.accel[:,index_set[i-1]:index_set[i]],axis=1,keepdims=True)))
 
-	if index_set[length-1] == fbk.time.size:
-		data.time = np.hstack((data.time,np.mean(fbk.time[index_set[length-1]:-1])))
-		data.position = np.hstack((data.position,np.mean(fbk.position[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		data.velocity = np.hstack((data.velocity,np.mean(fbk.velocity[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		data.torque = np.hstack((data.torque,np.mean(fbk.torque[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-
-		data.positionCmd = np.hstack((data.positionCmd,np.mean(fbk.positionCmd[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		data.velocityCmd = np.hstack((data.velocityCmd,np.mean(fbk.velocityCmd[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		data.accelCmd = np.hstack((data.accelCmd,np.mean(fbk.accelCmd[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-
-		data.deflection = np.hstack((data.deflection,np.mean(fbk.deflection[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		data.deflection_vel = np.hstack((data.deflection_vel,np.mean(fbk.deflection_vel[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		data.velocityFlt = np.hstack((data.velocityFlt,np.mean(fbk.velocityFlt[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		
-		data.motorSensorTemperature = np.hstack((data.motorSensorTemperature,np.mean(fbk.motorSensorTemperature[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		data.windingTemp = np.hstack((data.windingTemp,np.mean(fbk.windingTemp[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		data.windingTempFlt = np.hstack((data.windingTempFlt,np.mean(fbk.windingTempFlt[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		data.torqueCmd = np.hstack((data.torqueCmd,np.mean(fbk.torqueCmd[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		data.torqueID = np.hstack((data.torqueID,np.mean(fbk.torqueID[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-		data.accel = np.hstack((data.accel,np.mean(fbk.accel[:,index_set[length-1]:-1],axis=1,keepdims=True)))
-
-
 	return data
 
 def resetPosition(motorOn,ps,position):
-	tf = 4.
-	start_time = rospy.Time.now()
+	#Reset the arm back to the start position using a position controller with grav comp
+	#	motorOn [in]	= specifier for whether to actuate the system (convenience feature for testing)
+	#	ps [in]			= publisher subscriber class for communicating to the modules
+	# 	position [in]	= position named tuple designating start configuration
+
+	tf = 4.		#Length of time to send the command
+	start_time = rospy.Time.now()	#Get the current time
 	time_from_start = 0.
 
 	cmd = model_learning.msg.CommandML()
 	point = JointTrajectoryPoint()
 
+	#Perform inverse kinematics on the input position named touple
 	point.positions = TG.inverseKinematics(position.c_x,position.c_y,position.c_z,position.theta)
 	point.velocities = [0.,0.,0.,0.,0.]
+
+	#Populate the command struct
 	cmd.epsTau = [0.,0.,0.,0.,0.]
 	cmd.jointTrajectory.points.append(point)
 	cmd.motorOn = float(motorOn)
-	cmd.controlType = 0.
+	cmd.controlType = 0.		#controlType designated as position control
 
+	#Send the position command until the final time is reached
+	#Assumes it reaches the point in that time and avoids an actual confirmation
 	while tf- time_from_start> 0:
 		current_time = rospy.Time.now()
 		cmd.jointTrajectory.header.stamp = current_time
 		time_from_start = ((current_time-start_time).secs
 						  +(current_time-start_time).nsecs/1000000000.)
 		ps.traj_pub.publish(cmd)
-
-class dataStruct:
-	def __init__(self):
-		self.time = np.empty(shape=(1,))
-		self.position = np.empty(shape=(5,1))
-		self.positionCmd = np.empty(shape=(5,1))
-		self.velocity = np.empty(shape=(5,1))
-		self.velocityCmd = np.empty(shape=(5,1))
-		self.velocityFlt = np.empty(shape=(5,1))
-		self.accel = np.empty(shape=(5,1))
-		self.accelCmd = np.empty(shape=(5,1))
-		self.torque = np.empty(shape=(5,1))
-		self.torqueCmd = np.empty(shape=(5,1))
-		self.torqueID = np.empty(shape=(5,1))
-		self.deflection = np.empty(shape=(5,1))
-		self.deflection_vel = np.empty(shape=(5,1))
-		self.motorSensorTemperature = np.empty(shape=(5,1))
-		self.windingTemp = np.empty(shape=(5,1))
-		self.windingTempFlt = np.empty(shape=(5,1))
-		self.epsTau = np.empty(shape=(5,1))
 
 class pubSub:
 	def __init__(self,bag=False,folderName=None,flush=False,control_info={}):
@@ -318,33 +263,6 @@ class pubSub:
 			else:
 				raise ValueError('If bagging data, a folderName must be given')
 			self.bag = rosbag.Bag(self.bag_name, 'w')
-		# self.state_sub = rospy.Subscriber("jointState_fbk",
-		# 								JointState,self.jointStateCallback,
-		# 								queue_size=1000)
-		# self.cmd_sub = rospy.Subscriber("trajectoryCmd_fbk",
-		# 								JointTrajectoryPoint,
-		# 								self.trajectoryCmdCallback,
-										# queue_size=1000)
-
-
-	# def jointStateCallback(self,ros_data):
-	# 	if self.restart_joint or self.restart_traj or self.restart_arm:
-	# 		self.addToQueue(ros_data,New=True,fbk_type="jointState")
-	# 		self.restart_joint = False
-	# 	else:
-	# 		self.addToQueue(ros_data,New=False,fbk_type="jointState")
-	# 		self.count[0] += 1
-	# 	self.minimum = min(self.count)-1
-		
-	# def trajectoryCmdCallback(self,ros_data):
-	# 	if self.restart_joint or self.restart_traj or self.restart_arm:
-	# 		self.addToQueue(ros_data,New=True,fbk_type="trajectoryCmd")
-	# 		self.restart_traj = False
-	# 	else:
-	# 		self.addToQueue(ros_data,New=False,fbk_type="trajectoryCmd")
-	# 		self.count[1] += 1
-	# 		print self.count
-	# 	self.minimum = min(self.count)-1
 
 	def armControlCallback(self,ros_data):
 		if self.restart_arm:
@@ -508,8 +426,6 @@ class modelDatabase:
 				if not self.train_mod_set == None:
 					self.train_mod_set = None
 				self.train_set_size = self.ps.minimum
-				# print self.ps.count
-				# print self.ps.minimum
 			else:
 				if self.trained == False:
 					raise ValueError('ModelDatabase training set cannot be\
@@ -575,9 +491,6 @@ class modelDatabase:
 				if not self.train_mod_set == None:
 					self.test_mod_set = None
 				self.test_set_size = self.ps.minimum
-				# print self.ps.count
-				# print self.ps.minimum
-			else:
 				if self.tested == False:
 					raise ValueError('ModelDatabase verification set cannot \
 									  be updated from an empty set')
@@ -910,6 +823,11 @@ class modelDatabase:
 			train_temperature.shape = (1,num_training_points)
 
 	def verifyData(self,Set="verify"):
+		#Function for benchmarking the prediction error using normalized mean square error
+		#for the RBD and task-based GP
+		# Set [in]		= set to verify
+
+		#Parsing the set specified
 		if Set.lower() == "verify":
 			data = self.verify_set
 		if Set.lower() == "train":
@@ -917,6 +835,7 @@ class modelDatabase:
 		elif Set.lower() == "test":
 			data = self.test_set
 
+		#Extracting datafields from the dataset
 		time = data.time
 		position = data.position
 		positionCmd = data.positionCmd
@@ -931,6 +850,7 @@ class modelDatabase:
 		torqueID = data.torqueID
 		temperature = data.motorSensorTemperature
 
+		#Further extraction based on the joints being learned
 		verify_position = position[self.joints_ML]
 		verify_positionCmd = positionCmd[self.joints_ML]
 		verify_velocity = velocity[self.joints_ML]
@@ -944,6 +864,8 @@ class modelDatabase:
 		verify_torqueID = torqueID[self.joints_ML]
 		verify_temperature = temperature[self.joints_ML]
 
+		#If only one point is being learned, the numpy array must
+		#be kept two dimensional by defining the shape
 		if len(self.joints_ML) == 1:
 			num_verifying_points = time.size
 			verify_position.shape = (num_verifying_points,1)
@@ -958,6 +880,7 @@ class modelDatabase:
 			verify_torqueCmd.shape = (num_verifying_points,1)
 			verify_torqueID.shape = (num_verifying_points,1)
 			verify_temperature.shape = (num_verifying_points,1)
+		#Otherweise, transpose the array to get it in the correct format
 		else:
 			verify_position = np.transpose(verify_position)
 			verify_positionCmd = np.transpose(verify_positionCmd)
@@ -972,6 +895,9 @@ class modelDatabase:
 			verify_torqueID = np.transpose(verify_torqueID)
 			verify_temperature = np.transpose(verify_temperature)
 
+		#Build the X_test input to the model predicter based off of the dimesnion of the input.
+		#The base form is to learn pos,vel,accel, but this can be extended to include temp and deflection
+		#Single joint version
 		if self.joints_ML.size == 1:
 			if self.learn_temp and self.learn_def:
 				X_test = np.hstack((verify_position,verify_velocity,verify_accel,verify_deflection,verify_temperature))
@@ -985,6 +911,7 @@ class modelDatabase:
 			else:
 				X_test = np.hstack((verify_position,verify_velocity,verify_accel))
 				dimen = 3
+		#Multi joint version
 		else:
 			first_joint = 0
 			for i in range(0,self.joints_ML.size):
@@ -1015,81 +942,68 @@ class modelDatabase:
 					else:
 						X_test = np.vstack((X_test,verify_position[:,i],verify_velocity[:,i],verify_accel[:,i]))
 						dimen = 3
-			X_test = X_test.T
+			X_test = X_test.T 	#Transposing the test input 
 		
+		#Predict the appropriate error values based on the test inputs
 		eps_pred, cov_pred = self.model.predict(X_test)
-		eps_pred = eps_pred.T + self.epsOffset
-		for i in range(len(self.joints_ML)):
-			eps_a = verify_torqueCmd[:,i] - verify_torqueID[:,i]
-			eps_p = eps_pred[i]
-			verify_torqueGP = verify_torqueID[:,i]+eps_p
+		eps_pred = eps_pred.T + self.epsOffset	#Add in the offset used to make the data zero-mean
 
+		for i in range(len(self.joints_ML)):
+			eps_p = eps_pred[i]
+
+			#Calculate the normalized mean square errror as the MSE/target variance
 			target_variance = np.var(verify_torqueCmd[:,i])
 			nMSE_RBD = np.mean(np.square(verify_torqueCmd[:,i]-verify_torqueID[:,i]))/target_variance
 			nMSE_GP =  np.mean(np.square(verify_torqueCmd[:,i]-(verify_torqueID[:,i]+eps_p)))/target_variance
 
 			percent_improvement = (nMSE_RBD-nMSE_GP)/nMSE_RBD*100
 
+			#Output the resultant imporvement
 			print 'nMSE_RBD = ', nMSE_RBD
 			print 'nMSE_RBD+GP = ', nMSE_GP
 			print 'Percentage Improvement = ', percent_improvement
 
-			# plt.figure(i)
-			# plt.plot(verify_torqueCmd[:,i],'g',label='Reference Torque')
-			# plt.plot(verify_torqueID[:,i],'b',label='RBD Torque')
-			# if self.learn_temp and self.learn_def:
-			# 	plt.plot(verify_torqueGP,'m',label='RBD+GP Torque (Def+Temp)')
-			# elif self.learn_temp:
-			# 	plt.plot(verify_torqueGP,'c',label='RBD+GP Torque (Temp)')
-			# # elif self.learn_def:
-			# 	# plt.plot(verify_torqueGP,'y',label='RBD+GP Torque (Def)')
-			# else:
-			# 	plt.plot(verify_torqueGP,'r',label='RBD+GP Torque')
-
-			# plt.figure(i+10)
-			# plt.plot(time,eps_a,'b',label='Actual Error')
-			# if self.learn_temp and self.learn_def:
-			# 	plt.plot(time,eps_p,'m',linewidth=2)
-			# elif self.learn_temp:
-			# 	plt.plot(time,eps_p,'c',linewidth=2)
-			# # elif self.learn_def:
-			# 	# plt.plot(time,eps_p,'y',linewidth=2)
-			# else:
-			# 	plt.plot(time,eps_p,'r',linewidth=2,label='Predicted Error')
-			
-			# # plt.title('Comparison of Actual Error Verus Model Predictive Error')
-			# plt.ylabel('Torque [N-m]')
-			# plt.xlabel('Time [s]')
-			# plt.legend()
-
 	def setSampleParams(self,downsample_f=20.,data_cap=2000):
+		#Setter function for the sampling frequency and data_cap
 		self.downsample_f = downsample_f
 		self.data_cap = data_cap
 
 	def setJointsToLearn(self,joints):
+		#Setter function for the joints to be learned from
 		self.joints_ML = joints
 
 	def controller(self,motorOn,control_info):
+		#Cotnroller for creating the command message to pass to the arm_controller
+		# 	motorOn [in]	= specifier for whether to actuate the system (convenience feature for testing)
+		#	control_info [in]= control structure specifying the relevant control parameters
+
 		start_time = rospy.Time.now()
 		time_from_start = 0.
 		self.ps.final_time=control_info['tf']
 		if self.ps.startBag:
 			self.ps.bagging = True
 
+		#MinJerk trajectory type specifies waypoints to move to with zero velocity and accelration
+		#boundary conditions
 		if control_info['type'] == "MinJerk":
-				c_x = 0.0
-				c_y = 0.3
-				c_z = 0.1
-				radius = 0.095
 				waypoints = np.array([[-0.02, -0.02, -0.02, 0.365,  0.365, 0.365,   0.0,   0.0],
 									  [ 0.49,  0.49,  0.49, 0.2175,  0.2175, 0.2175, 0.395, 0.395],
 									  [  0.1,   -0.02,   0.1,  0.1,   -0.02,  0.1,   0.1,   0.1],
 									  [   0.,   0.0,    0.,np.pi/2,np.pi/2,  0.0,   0.0,   0.0]])
+				#Specify time interval for each segment
 				time_array = np.array([   2.,    2.,    2.,   2.,    2.,   2.,  2.,   2.])
+				#Compute the total time needed
 				tf = np.sum(time_array)
-				initial_angles= TG.inverseKinematics(c_x,c_y+radius,c_z,0)
+				#Use the inverseKinematics function to generate the starting joint configuration
+				initial_angles= TG.inverseKinematics(0.0,0.395,0.1,0)
+
+				#Compute the minimum jerk constants
+				joint_const = TG.minJerkSetup_now(initial_angles,tf,waypoints,t_array=time_array)
+
+		#Loop for the duration of the control interval
 		while control_info['tf']-time_from_start> 0:
 			deflection = self.ps.queue.deflection[:,-1]
+			temperature = self.ps.queue.windingTempFlt[:,-1]
 			cmd = model_learning.msg.CommandML()
 			trajectory = JointTrajectory()
 			point = JointTrajectoryPoint()
@@ -1097,26 +1011,15 @@ class modelDatabase:
 			point.time_from_start = trajectory.header.stamp-start_time
 			time_from_start = (point.time_from_start.secs
 							  + point.time_from_start.nsecs/1000000000.)
+
+			#Compute the next time step for the minimum jerk trajectory
 			if control_info['type'] == "MinJerk":
-				joint_const = TG.minJerkSetup_now(initial_angles,tf,waypoints,t_array=time_array)
 				pos_v,vel_v,accel_v = TG.minJerkStep_now(time_from_start,tf,waypoints,joint_const,t_array=time_array)
 
+			#For each of the joints, populate the command trajectory
 			for joint in range(0,5):
 				if joint == 0 or joint==1 or joint == 2 or joint == 3 or joint == 4:
-					# if Set.lower() == "train":
-					if control_info['type'] == "SuperSine":
-						c_x = 0.0
-						c_y = 0.3
-						c_z = -0.025
-						radius = 0.095
-						initial_position = TG.inverseKinematics(c_x,c_y+radius,c_z,0)
-						# initial_position = [1.68437, -0.445017, 1.18675, 4.7561,7.94885]
-						pos,vel,accel = superpositionSine(time_from_start,
-													amp=control_info['amp'][joint],
-													f=control_info['freq'][joint],
-													phi=control_info['phi'][joint])
-						pos = pos+initial_position[joint]
-					elif control_info['type'] == "Circle":
+					if control_info['type'] == "Circle":
 						pos_v,vel_v,accel_v = TG.generateJointTrajectory_now(time_from_start)
 						pos = pos_v[joint]
 						vel = vel_v[joint]
@@ -1125,10 +1028,6 @@ class modelDatabase:
 						pos = pos_v[joint]
 						vel = vel_v[joint]
 						accel = accel_v[joint]
-				# elif joint == 1:
-				# 	pos,vel,accel = superpositionSine(time_from_start,
-				# 								amp=[np.pi/36,np.pi/32],
-				# 								f=control_info['freq'])
 				else:
 					pos,vel,accel = 0.,0.,0.
 				point.positions.append(pos)
@@ -1137,13 +1036,16 @@ class modelDatabase:
 				 
 			first_joint = 0
 			eps = [0.,0.,0.,0.,0.]
-			if control_info['ml']:
+			if control_info['ml']:		#If model learning is active
+				#Specify color for the tracking of the end effector
 				color = std_msgs.msg.ColorRGBA();
 				color.r = 0.0;
 				color.g = 1.0;
 				color.b = 0.0;
 				color.a = 0.5;
 				self.ps.path2_pub.publish(color)
+				#Update the X_test prediction point based on what set of inputs
+				#is being learned (pos,vel,accel,[deflection,temperature])
 				for i in self.joints_ML:
 					if first_joint==0:
 						if self.learn_temp and self.learn_def:
@@ -1193,6 +1095,7 @@ class modelDatabase:
 
 				X_test.shape = (1,dimen*self.joints_ML.size)
 
+				#Ppedict the error for the given desired trajectory point
 				eps_pred,eps_cov = self.model.predict(X_test)
 				for i in range(0,self.joints_ML.size):
 					eps[self.joints_ML[i]] = eps_pred[0][i]+self.epsOffset[i]
@@ -1204,23 +1107,17 @@ class modelDatabase:
 				color.a = 0.5;
 				self.ps.path1_pub.publish(color)
 
+			#Popuylate the command message with appropriate values
 			cmd.epsTau = eps
-
 			cmd.jointTrajectory.points.append(point)
 			cmd.motorOn = float(motorOn)
-			cmd.controlType = 1.
+			cmd.controlType = 1.		# Designates torque control
 			cmd.closedLoop = control_info['closedLoop']
 			cmd.feedforward = control_info['feedforward']
 			cmd.pos_gain = control_info['p_gain']
 			cmd.vel_gain = control_info['v_gain']
 			self.ps.traj_pub.publish(cmd)
-			# if self.ps.bagging:
-			# 	message = model_learning.msg.FeedbackML()
-			# 	self.ps.bag.write("armcontroller_fbk",message)
-			# if control_info['ml']:
-				# time.sleep(0.005)
-			# else:
-				# time.sleep(0.01)
+
 		if self.ps.startBag:
 			self.ps.startBag = False
 			self.ps.bagging = False
@@ -1557,11 +1454,13 @@ if __name__ == '__main__':
 	parser.add_argument("-p", "--plot", type=str,default="none")
 	parser.add_argument("-t", "--traj", type=str,default="pnp")
 	parser.add_argument("-s", "--save", type=str,default="no")
+	parser.add_argument("-o", "--opt", type=str,default="no")
 	args = parser.parse_args()
 
 	plotting = args.plot.lower()
 	traj_type = args.traj.lower()
 	saving = (args.save.lower()=="yes")
+	opt = (args.save.lower()=="yes")
 
 	position = namedtuple('Position', ['c_x', 'c_y','c_z','theta'])
 
@@ -1631,7 +1530,7 @@ if __name__ == '__main__':
 		db.downSample(Set="train")
 
 		#Update and potentially optimize models			
-		db.updateModel(optimize=True,gaus_noise=gaus_noise)
+		db.updateModel(optimize=opt,gaus_noise=gaus_noise)
 		ps.unregister()
 		time.sleep(1)
 
@@ -1668,7 +1567,7 @@ if __name__ == '__main__':
 		resetPosition(motorOn,ps,position)
 		db.updateSet(New=False,Set="train")
 		db.downSample(Set="train")
-		db.updateModel(optimize=False,gaus_noise=gaus_noise)
+		db.updateModel(optimize=opt,gaus_noise=gaus_noise)
 		ps.unregister()
 
 		##### Testing the Closed Loop Model ######
