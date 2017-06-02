@@ -279,6 +279,31 @@ void armcontroller::init()
 	{
 		perror("Failed to get module group");
 	}
+
+	std::vector<double> positionKp = {2, 2, 2.8, 5, 5};
+	std::vector<double> positionKi = {0, 0,   0, 0, 0};
+	std::vector<double> positionKd = {5, 1, 0.7, 0, 2};
+	std::vector<double> positionFF = {0, 0,   0, 0, 0};
+
+	std::vector<double> torqueKp = {0,0,0,0,0};
+	std::vector<double> torqueKi = {0,0,0,0,0};
+	std::vector<double> torqueKd = {0,0,0,0,0};
+	std::vector<double> torqueFF = {0.029,0.029,0.029,0.067,0.188};
+
+	hebi::GroupCommand cmd(arm_group->size());
+	for(int i=0;i<arm_group->size();i++)
+	{
+		cmd[i].settings().actuator().controlStrategy().set(hebi::Command::ControlStrategy::Strategy3);
+		cmd[i].settings().actuator().positionGains().positionKp().set(positionKp[i]);
+		cmd[i].settings().actuator().positionGains().positionKi().set(positionKi[i]);
+		cmd[i].settings().actuator().positionGains().positionKd().set(positionKd[i]);
+		cmd[i].settings().actuator().positionGains().positionFeedForward().set(positionFF[i]);
+
+		cmd[i].settings().actuator().torqueGains().torqueKp().set(torqueKp[i]);
+		cmd[i].settings().actuator().torqueGains().torqueKi().set(torqueKi[i]);
+		cmd[i].settings().actuator().torqueGains().torqueKd().set(torqueKd[i]);
+		cmd[i].settings().actuator().torqueGains().torqueFeedForward().set(torqueFF[i]);
+	}
 }
 
 bool armcontroller::updateFeedback()
