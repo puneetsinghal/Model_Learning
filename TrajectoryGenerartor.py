@@ -178,60 +178,75 @@ def minJerkStep(t,constants):
 	return pos,vel,accel
 
 def minJerkSetup_now(initial_angles,tf,waypoints,t_array=None):
-    num_waypoints = waypoints.shape[1]
-    if t_array == None:
-        del_t = float(tf)/float(num_waypoints)
-        t_array = del_t*np.ones((num_waypoints,1))
-    if not t_array.size == num_waypoints:
-        raise ValueError('Time array is length is incorrect')
-    if not tf == np.sum(t_array):
-        raise ValueError('Time array must add up to final time')
-       
-    joint_constants = namedtuple('joint_constants','J1 J2 J3 J4 J5')
-    joint_const = joint_constants(np.zeros((6,num_waypoints)),
-                                np.zeros((6,num_waypoints)),
-                                np.zeros((6,num_waypoints)),
-                                np.zeros((6,num_waypoints)),
-                                np.zeros((6,num_waypoints)))
-    
-    x0 = np.zeros((5,6))
-    if initial_angles.ndim == 2:
-    	if initial_angles.shape[0] == 5:
-    		initial_angles = initial_angles.T
-    x0[:,0] = initial_angles
-    x0[:,3] = inverseKinematics(waypoints[0,0],
-                                   waypoints[1,0],
-                                   waypoints[2,0],
-                                   waypoints[3,0]).T
+	num_waypoints = waypoints.shape[1]
+	try:
+		if t_array == None:
+			del_t = float(tf)/float(num_waypoints)
+			t_array = del_t*np.ones((num_waypoints,1))
+		elif not t_array.size == num_waypoints:
+			raise ValueError('Time array length is incorrect')
+		elif not tf == np.sum(t_array):
+			raise ValueError('Time array must add up to final time')
+	except:
+		if not t_array.size == num_waypoints:
+			raise ValueError('Time array length is incorrect')
+		elif not tf == np.sum(t_array):
+			raise ValueError('Time array must add up to final time')
 
-    t0 = np.zeros((num_waypoints,1))
-    tf = np.zeros((num_waypoints,1))
-    tf[0] = t_array[0]
+	joint_constants = namedtuple('joint_constants','J1 J2 J3 J4 J5')
+	joint_const = joint_constants(np.zeros((6,num_waypoints)),
+								np.zeros((6,num_waypoints)),
+								np.zeros((6,num_waypoints)),
+								np.zeros((6,num_waypoints)),
+								np.zeros((6,num_waypoints)))
+	
+	x0 = np.zeros((5,6))
+	if initial_angles.ndim == 2:
+		if initial_angles.shape[0] == 5:
+			initial_angles = initial_angles.T
+	x0[:,0] = initial_angles
+	x0[:,3] = inverseKinematics(waypoints[0,0],
+								   waypoints[1,0],
+								   waypoints[2,0],
+								   waypoints[3,0]).T
 
-    for i in range(num_waypoints):
-        if i > 0:
-            x0[:,0] = x0[:,3]
-            x0[:,3] = inverseKinematics(waypoints[0,i],
-                                           waypoints[1,i],
-                                           waypoints[2,i],
-                                           waypoints[3,i]).T
-            t0[i] = tf[i-1]
-            tf[i] = t0[i]+t_array[i]
-        joint_const.J1[:,i] = minJerkSetup(x0[0],t0[i],tf[i])
-        joint_const.J2[:,i] = minJerkSetup(x0[1],t0[i],tf[i])
-        joint_const.J3[:,i] = minJerkSetup(x0[2],t0[i],tf[i])
-        joint_const.J4[:,i] = minJerkSetup(x0[3],t0[i],tf[i])
-        joint_const.J5[:,i] = minJerkSetup(x0[4],t0[i],tf[i])
-    
-    return joint_const
+	t0 = np.zeros((num_waypoints,1))
+	tf = np.zeros((num_waypoints,1))
+	tf[0] = t_array[0]
+
+	for i in range(num_waypoints):
+		if i > 0:
+			x0[:,0] = x0[:,3]
+			x0[:,3] = inverseKinematics(waypoints[0,i],
+										   waypoints[1,i],
+										   waypoints[2,i],
+										   waypoints[3,i]).T
+			t0[i] = tf[i-1]
+			tf[i] = t0[i]+t_array[i]
+		joint_const.J1[:,i] = minJerkSetup(x0[0],t0[i],tf[i])
+		joint_const.J2[:,i] = minJerkSetup(x0[1],t0[i],tf[i])
+		joint_const.J3[:,i] = minJerkSetup(x0[2],t0[i],tf[i])
+		joint_const.J4[:,i] = minJerkSetup(x0[3],t0[i],tf[i])
+		joint_const.J5[:,i] = minJerkSetup(x0[4],t0[i],tf[i])
+	
+	return joint_const
 
 def minJerkStep_now(time,tf,waypoints,joint_const,t_array=None):
 	num_waypoints = waypoints.shape[1]
-	if t_array == None:
-		del_t = float(tf)/float(num_waypoints)
-		t_array = del_t*np.ones((num_waypoints,1))
-		k = int(np.floor(time/(del_t)))
-	else:
+	try:
+		if t_array == None:
+			del_t = float(tf)/float(num_waypoints)
+			t_array = del_t*np.ones((num_waypoints,1))
+			k = int(np.floor(time/(del_t)))
+		else:
+			sum_time = 0.
+			k = 0
+			for i in range(t_array.size-1):
+				sum_time = sum_time + t_array[i]
+				if time < sum_time:
+					break
+				k = k+1
+	except:
 		sum_time = 0.
 		k = 0
 		for i in range(t_array.size-1):
@@ -239,6 +254,7 @@ def minJerkStep_now(time,tf,waypoints,joint_const,t_array=None):
 			if time < sum_time:
 				break
 			k = k+1
+
 	if not t_array.size == num_waypoints:
 		raise ValueError('Time array is length is incorrect')
 	if not tf == np.sum(t_array):
