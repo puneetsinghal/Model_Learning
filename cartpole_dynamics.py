@@ -131,7 +131,7 @@ class CartPoleEnv(object):
 
         return self.viewer.render(return_rgb_array = mode=='rgb_array')
 
-    def _training(self, startPosition, startTime=0, runTime=4, debug=False):
+    def _training(self, startPosition, startTime=0, runTime=4., debug=False):
         
         currentTime = np.array(startTime).reshape(1,1)
         trainingData = copy(startPosition)
@@ -155,7 +155,7 @@ class CartPoleEnv(object):
             trainingData = np.vstack((trainingData, np.hstack((self.state, action))))
             currentTime = currentTime + self.tau
             timeArray = np.vstack((timeArray, currentTime))
-
+            
             count += 1
             if(count == 10):
                 applyForce=True
@@ -251,10 +251,11 @@ class koopmanMechanics(object):
 
         return (data, timeArray)
 
-def plotting(data,time):
-    plt.figure()
+def plotting(data,time, newFigure = True, color = "k"):
+    if newFigure:
+        plt.figure()
     plt.subplot(2, 2, 1)
-    plt.plot(time, data[:,0], linewidth=3, label='x')
+    plt.plot(time, data[:,0], color=color, linewidth=3, label='x')
     plt.title('x')
     plt.legend()
     plt.ylabel('meter')
@@ -262,7 +263,7 @@ def plotting(data,time):
     plt.grid()
 
     plt.subplot(2, 2, 2)
-    plt.plot(time, data[:,1], linewidth=3, label='dx')
+    plt.plot(time, data[:,1], color=color, linewidth=3, label='dx')
     plt.title('dx')
     plt.legend()
     plt.ylabel('m/s')
@@ -270,7 +271,7 @@ def plotting(data,time):
     plt.grid()
 
     plt.subplot(2, 2, 3)
-    plt.plot(time, data[:,2], linewidth=3, label='theta')
+    plt.plot(time, data[:,2], color=color, linewidth=3, label='theta')
     plt.title('theta')
     plt.legend()
     plt.ylabel('radians')
@@ -278,7 +279,7 @@ def plotting(data,time):
     plt.grid()
 
     plt.subplot(2, 2, 4)
-    plt.plot(time, data[:,3], linewidth=3, label='dtheta')
+    plt.plot(time, data[:,3], color=color, linewidth=3, label='dtheta')
     plt.title('dtheta')
     plt.legend()
     plt.ylabel('radians/sec')
@@ -289,10 +290,10 @@ if __name__ == '__main__':
     
     #Parsing inputs for plotting, trajectory generation, and saving options
     parser = argparse.ArgumentParser()
-    parser.add_argument("-t", "--train",    type=int,  default = 0)
-    parser.add_argument("-db", "--debug",    type=bool,  default = False)
-    parser.add_argument("-s", "--save",     type=str,   default="no")
-    parser.add_argument("-o", "--opt",      type=str,   default="no")
+    parser.add_argument("-t",       "--train",    type=int,     default = 0)
+    parser.add_argument("-db",      "--debug",    type=bool,    default = False)
+    parser.add_argument("-s",       "--save",     type=str,     default="no")
+    parser.add_argument("-o",       "--opt",      type=str,     default="no")
 
     args = parser.parse_args()
     training = args.train
@@ -304,15 +305,14 @@ if __name__ == '__main__':
     x, dx, th, dth, u = symbols('x dx th dth u')
     varArray = [x, dx, th, dth, u]
     
-    if not training == 0:
-        CP = CartPoleEnv()
-        # plt.ion()   
+    CP = CartPoleEnv()
+    CP.dim = len(varArray) - 1
 
-        CP.dim = len(varArray) - 1
+    if not training == 0:
 
         startPosition = np.array((0., 0., math.pi, 0., 0.)) #[x, dx, theta, dtheta, input]
         startTime = 0.
-        runtime = 20
+        runtime = 20.
         # Training Round 1
         print("training round 1...")
         trainingData, trainingTime = CP._training(startPosition, startTime, runtime, debug=debugging)
@@ -345,7 +345,12 @@ if __name__ == '__main__':
         KOOPMAN.K = np.loadtxt("koopmanOperatorCartPole.txt")
     # Test the performance of Koopman Operator derived
     print("Testing Koopman Dynamics...")
-    testData, testTime = KOOPMAN.koopmanPlay(startPosition = np.array((0., 0., 2.0, 0., 0.)), startTime=0., runTime=4., debug=False)
-    plotting(testData, testTime)
+    runTime = 4.0
+    startPosition = np.array((0., 0., 2.0, 0., 0.)) #[x, dx, theta, dtheta, input]
+    testData, testTime = KOOPMAN.koopmanPlay(startPosition = startPosition, startTime=0., runTime=runTime, debug=False)
+    testDataKnownDynamics, testTimeKnownDynamics = CP._training(startPosition=startPosition, startTime=0, runTime=runTime, debug=False)
+    plotting(testData, testTime )
+    plotting(testDataKnownDynamics, testTimeKnownDynamics, newFigure=False, color="r")
+    
     
     plt.show()
