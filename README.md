@@ -28,8 +28,13 @@ Ubuntu 14.04 with [ROS Indigo Igloo](http://wiki.ros.org/indigo/Installation/Ubu
 ```
 	sudo apt install libeigen3-dev
 ```
+### Matlab
+1. Ardiuno Support Package (for the Hebi Arm Demos)
+- https://www.mathworks.com/hardware-support/arduino-matlab.html
 
-## Running the Code
+### OpenCV (3.2.0 or greater)
+
+## Running the Code (ROS)
 After the catkin package has been built and the setup.bash file sourced, the first step is to start a terminal and run:
 ```
 	roscore
@@ -70,3 +75,15 @@ The trajectory generator has some simple tasks (circle and infinity-loop) along 
 ### HEBI Module Frequency
 The HEBI modules are capped at a maximum frequency of 1kHz, which includes both feedback and command signals. This is something that is partially accounted for in the code with delays. However, if the control signal is sent at a higher frequency than 1kHz, the modules will begin dropping the majority of packages and the feedback frequency will drop to a very low value (~5-20Hz). Additionally, the setting of the feedback frequency of the modules in the arm_controller init function only sets the maximum frequency and is still constrained by the 1kHz limit.
 
+## Running the Code (Hebi Arm Demos)
+### Arm_Teach_Repeat_Demo.m
+Teach repeat demo for the Hebi Arm. Follow the instructions on the screen.
+
+### GrabGreenBall_v2.m
+Uses the overhead camera to localize a handheld green ball and then, after 'q' is pressed, picks up ball and places the ball into a cup taped on the cart. Then enters teleoperation mode. Press ten (10) on the joystick to exit localization and relocalizes the ball.
+
+### HEBI_Arm_Joystick_control_Demo_V2.m
+Joytick teleoperation with gripper. Press 2 to turn on gripper and 3 to turn off gripper.
+
+### HEBI_Arm_Joystick_control_Compliance_Demo.m
+Joytick teleoperation without gripper. Arm will stop if contacted in the z direction.
