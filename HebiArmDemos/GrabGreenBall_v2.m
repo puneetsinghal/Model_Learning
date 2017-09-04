@@ -1,4 +1,4 @@
-%%This script makes 5dof arm grab yellow ball
+%%This script makes 5dof arm grab green ball
 %--------------------------------------------------------------------------
 %
 %Zero position of arm is considered with the arm fully upright. Total
