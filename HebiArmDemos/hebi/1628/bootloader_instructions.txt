@@ -1,0 +1,13 @@
+Mainly because customers kept pressing them accidentally. While this is often not a huge issue on the snake modules, it can really screw up the X-Series modules.
+
+The buttons still exist in the (hidden) 'bootloader' GUI. You can call it from commandline using:
+
+java -cp <jar-file> us.hebi.gui.Bootloader
+
+Btw. be careful with that GUI as there are no safety checks on anything.
+
+---
+cd C:\Users\medgroup01\Documents\Julian\hebi API\hebi
+java -cp hebi-gui-0.4-rev1515.jar us.hebi.gui.Bootloader
+java -cp hebi-gui-0.4-rev1628.jar us.hebi.gui.Bootloader
+
