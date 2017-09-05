@@ -3,7 +3,7 @@ function [ xyz] = getCoordinates()
 % Author: Garrison Johnston	
 %% Run Python Script
 
-oscmd = 'C:\Python27\python.exe C:\Users\Johnsg7\Desktop\CMUInternship\ModelLearning\ComputerVision\DetectYellowBall.py'; % change this for your system
+oscmd = 'C:\Python27\python.exe C:\Users\Johnsg7\Desktop\CMUInternship\ModelLearning\ComputerVision\DetectYGreenBall.py'; % change this for your system
 [status,cmdout] = system(oscmd);
 
 %% Data Type Conversion
