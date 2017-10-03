@@ -249,7 +249,7 @@ void armcontroller::init()
 
 	// Lab Research Arm's Mac Addresses
 	std::vector<std::string> modules = {"D8:80:39:E8:B3:3C",
-										"D8:80:39:E9:06:36",
+										"D8:80:39:9B:37:7F",
 										"D8:80:39:9D:29:4E",
 										"D8:80:39:9D:3F:9D",
 										"D8:80:39:9D:04:78"};
