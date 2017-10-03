@@ -92,7 +92,7 @@ def UpdateDataSet(data,fbk,New=True,min_limit=0):
 
 	#Print to the screen number of data points dropped to equalize set
 	if Max-Min>10:
-		print Max-Min, "samples had to be dropped to equalize set"
+		print (Max-Min, "samples had to be dropped to equalize set")
 	max_limit = Min
 
 	#Create new arrays for the dataStruct no data already exists
@@ -118,7 +118,7 @@ def UpdateDataSet(data,fbk,New=True,min_limit=0):
 			data.accel = np.asarray((fbk.accel[:,min_limit:max_limit]))
 
 		else:
-			print "Minimum limit cannot be creater than the size of the smallest dataStruct element"
+			print("Minimum limit cannot be creater than the size of the smallest dataStruct element")
 	#Append the fbk arrays to the data arrays to combine the two datasets
 	else:
 		if max_limit>min_limit:
@@ -142,7 +142,7 @@ def UpdateDataSet(data,fbk,New=True,min_limit=0):
 			data.epsTau = np.hstack((data.epsTau,np.asarray((fbk.epsTau[:,min_limit:max_limit]))))
 			data.accel = np.hstack((data.accel,np.asarray((fbk.accel[:,min_limit:max_limit]))))
 		else:
-			print "Minimum limit cannot be creater than the size of the smallest dataStruct element"
+			print("Minimum limit cannot be creater than the size of the smallest dataStruct element")
 
 	return data
 
@@ -373,7 +373,7 @@ class modelDatabase:
 		if Set.lower() == "train":
 			if New:
 				if self.trained == True:
-					print "Overwriting self.trained dataset"
+					print("Overwriting self.trained dataset")
 				else:
 					self.trained = True
 				min_limit = 0
@@ -407,7 +407,7 @@ class modelDatabase:
 		elif Set.lower() == "verify":
 			if New:
 				if self.verified == True:
-					print "Overwriting verification dataset"
+					print("Overwriting verification dataset")
 				else:
 					self.verified = True
 				for i in range(0,self.ps.queue.time.size):
@@ -439,7 +439,7 @@ class modelDatabase:
 		elif Set.lower() == "test":
 			if New:
 				if self.tested == True:
-					print "Overwriting verification dataset"
+					print("Overwriting verification dataset")
 				else:
 					self.tested = True
 				for i in range(0,self.ps.queue.time.size):
@@ -476,25 +476,25 @@ class modelDatabase:
 			datapoints = self.train_set.time.size
 			orig_freq = float(datapoints)/(self.train_set.time[-1]
 										   - self.train_set.time[0])
-			print "Original Frequency: ", orig_freq
+			print("Original Frequency: ", orig_freq)
 
 			if self.data_cap<datapoints:
 				limited_f = float(self.data_cap)/float(datapoints)*orig_freq
 				if limited_f<self.minimum_f:
 					downsample_f = self.minimum_f
-					print "Minimum",downsample_f,"Frequency Reached"
+					print("Minimum",downsample_f,"Frequency Reached")
 				elif limited_f<self.downsample_f:
 					downsample_f = limited_f
-					print "Data Cap Limitting"
+					print("Data Cap Limitting")
 				else:
 					downsample_f = self.downsample_f
-				print "Downsampled Frequency: ", downsample_f
+				print("Downsampled Frequency: ", downsample_f)
 			elif orig_freq < self.downsample_f:
-				print "No Downsampling Required"
+				print("No Downsampling Required")
 				return
 			else:
 				downsample_f = self.downsample_f
-				print "Downsampled Frequency: ", downsample_f
+				print("Downsampled Frequency: ", downsample_f)
 			T = 1/downsample_f
 			duration = self.train_set.time[-1]-self.train_set.time[0]
 			start_time = self.train_set.time[0]
@@ -513,25 +513,25 @@ class modelDatabase:
 			datapoints = self.verify_set.time.size
 			orig_freq = float(datapoints)/(self.verify_set.time[-1]
 										   - self.verify_set.time[0])
-			print "Original Frequency: ", orig_freq
+			print("Original Frequency: ", orig_freq)
 
 			if self.data_cap<datapoints:
 				limited_f = float(self.data_cap)/float(datapoints)*orig_freq
 				if limited_f<self.minimum_f:
 					downsample_f = self.minimum_f
-					print "Minimum",downsample_f,"Frequency Reached"
+					print("Minimum",downsample_f,"Frequency Reached")
 				elif limited_f<self.downsample_f:
 					downsample_f = limited_f
-					print "Data Cap Limitting"
+					print("Data Cap Limitting")
 				else:
 					downsample_f = self.downsample_f
-				print "Downsampled Frequency: ", downsample_f
+				print("Downsampled Frequency: ", downsample_f)
 			elif orig_freq < self.downsample_f:
-				print "No Downsampling Required"
+				print("No Downsampling Required")
 				return
 			else:
 				downsample_f = self.downsample_f
-				print "Downsampled Frequency: ", downsample_f
+				print("Downsampled Frequency: ", downsample_f)
 			T = 1/downsample_f
 			duration = self.verify_set.time[-1]-self.verify_set.time[0]
 			start_time = self.verify_set.time[0]
@@ -551,25 +551,25 @@ class modelDatabase:
 			datapoints = self.test_set.time.size
 			orig_freq = float(datapoints)/(self.test_set.time[-1]
 										   - self.test_set.time[0])
-			print "Original Frequency: ", orig_freq
+			print("Original Frequency: ", orig_freq)
 
 			if self.data_cap<datapoints:
 				limited_f = float(self.data_cap)/float(datapoints)*orig_freq
 				if limited_f<self.minimum_f:
 					downsample_f = self.minimum_f
-					print "Minimum",downsample_f,"Frequency Reached"
+					print("Minimum",downsample_f,"Frequency Reached")
 				elif limited_f<self.downsample_f:
 					downsample_f = limited_f
-					print "Data Cap Limitting"
+					print("Data Cap Limitting")
 				else:
 					downsample_f = self.downsample_f
-				print "Downsampled Frequency: ", downsample_f
+				print("Downsampled Frequency: ", downsample_f)
 			elif orig_freq < self.downsample_f:
-				print "No Downsampling Required"
+				print("No Downsampling Required")
 				return
 			else:
 				downsample_f = self.downsample_f
-				print "Downsampled Frequency: ", downsample_f
+				print("Downsampled Frequency: ", downsample_f)
 			T = 1/downsample_f
 			duration = self.test_set.time[-1]-self.test_set.time[0]
 			start_time = self.test_set.time[0]
@@ -660,8 +660,8 @@ class modelDatabase:
 
 		train_eps_tau_centered = np.zeros(train_position.shape)
 		eps_tau = train_torqueCmd-train_torqueID
-		# print train_position.shape
-		# print eps_tau.shape
+		# print(train_position.shape)
+		# print( eps_tau.shape)
 
 		epsOffset = np.zeros((self.joints_ML.size,1))
 		length_scale = []
@@ -714,8 +714,8 @@ class modelDatabase:
 						length_scale.append(joint_length_scale[self.joints_ML[i]][4]) #Temperature length scale
 						dimen = 5
 					elif self.learn_def:
-						print train_deflection_vel[:,i].shape
-						print train_deflection[:,i].shape
+						print(train_deflection_vel[:,i].shape)
+						print(train_deflection[:,i].shape)
 						X = np.vstack((train_position[:,i],train_velocity[:,i],train_accel[:,i],train_deflection[:,i],train_deflection_vel[:,i]))
 						length_scale.append(joint_length_scale[self.joints_ML[i]][3]) #Deflection length scale
 						length_scale.append(joint_length_scale[self.joints_ML[i]][4]) #Deflection velocity length scale
@@ -758,15 +758,15 @@ class modelDatabase:
 		self.model = GPy.models.GPRegression(X,Y,self.kernel)
 		self.model.Gaussian_noise = gaus_noise
 		self.model.Gaussian_noise.variance.fix()
-		# print self.model
-		# print self.model.rbf.lengthscale
+		# print(self.model)
+		# print(self.model.rbf.lengthscale)
 		if optimize:
 			if restarts>0:
 				self.model.optimize_restarts(num_restarts=restarts)
 			else:
 				self.model.optimize()
-		# print self.model
-		# print self.model.rbf.lengthscale
+		# print(self.model)
+		# print(self.model.rbf.lengthscale)
 		self.epsOffset = epsOffset
 
 		if len(self.joints_ML) == 1:
@@ -920,9 +920,9 @@ class modelDatabase:
 			percent_improvement = (nMSE_RBD-nMSE_GP)/nMSE_RBD*100
 
 			#Output the resultant imporvement
-			print 'nMSE_RBD = ', nMSE_RBD
-			print 'nMSE_RBD+GP = ', nMSE_GP
-			print 'Percentage Improvement = ', percent_improvement
+			print('nMSE_RBD = ', nMSE_RBD)
+			print('nMSE_RBD+GP = ', nMSE_GP)
+			print('Percentage Improvement = ', percent_improvement)
 
 	def setSampleParams(self,downsample_f=20.,data_cap=2000):
 		#Setter function for the sampling frequency and data_cap
@@ -1558,7 +1558,7 @@ if __name__ == '__main__':
 
 		if saving:
 			db.saveDatabase()
-			print "Data sets saved"
+			print("Data sets saved")
 
 		ps.unregister()
 
@@ -1576,11 +1576,11 @@ if __name__ == '__main__':
 				RMSE_GP1_pos = np.sqrt(np.mean(np.square(db.verify_set.positionCmd[db.joints_ML[k],:final_index]-db.verify_set.position[db.joints_ML[k],:final_index])))
 				RMSE_GP2_pos = np.sqrt(np.mean(np.square(db.test_set.positionCmd[db.joints_ML[k]]-db.test_set.position[db.joints_ML[k]])))
 				#Print to the screen the Position RMSE and the percent imporvement
-				print "Joint",k+1,"Pos_RMSE_RBD: ", RMSE_RBD_pos
-				print "Joint",k+1,"Pos_RMSE_GP1: ", RMSE_GP1_pos
-				print "Joint",k+1,"Pos_RMSE_GP2: ", RMSE_GP2_pos
-				print "Joint",k+1,"Percentage Improvement in Position GP1: ", (RMSE_RBD_pos-RMSE_GP1_pos)/RMSE_RBD_pos*100
-				print "Joint",k+1,"Percentage Improvement in Position GP2: ", (RMSE_RBD_pos-RMSE_GP2_pos)/RMSE_RBD_pos*100
+				print("Joint",k+1,"Pos_RMSE_RBD: ", RMSE_RBD_pos)
+				print("Joint",k+1,"Pos_RMSE_GP1: ", RMSE_GP1_pos)
+				print("Joint",k+1,"Pos_RMSE_GP2: ", RMSE_GP2_pos)
+				print("Joint",k+1,"Percentage Improvement in Position GP1: ", (RMSE_RBD_pos-RMSE_GP1_pos)/RMSE_RBD_pos*100)
+				print("Joint",k+1,"Percentage Improvement in Position GP2: ", (RMSE_RBD_pos-RMSE_GP2_pos)/RMSE_RBD_pos*100)
 				
 				plt.figure(10+k) #Plots in the 10's range designate position
 				plt.plot(db.test_set.time,db.test_set.position[db.joints_ML[k]],linewidth=3,color="green",label='Task-Based GP Trial 2')
@@ -1597,11 +1597,11 @@ if __name__ == '__main__':
 				RMSE_GP1_vel = np.sqrt(np.mean(np.square(db.verify_set.velocityCmd[db.joints_ML[k],:final_index]-db.verify_set.velocityFlt[db.joints_ML[k],:final_index])))
 				RMSE_GP2_vel = np.sqrt(np.mean(np.square(db.test_set.velocityCmd[db.joints_ML[k]]-db.test_set.velocityFlt[db.joints_ML[k]])))
 				#Print to the screen the velocity RMSE and the percent imporvement
-				print "Joint",k+1,"Vel_RMSE_RBD: ", RMSE_RBD_vel
-				print "Joint",k+1,"Vel_RMSE_GP1: ", RMSE_GP1_vel
-				print "Joint",k+1,"Vel_RMSE_GP2: ", RMSE_GP2_vel
-				print "Joint",k+1,"Percentage Improvement in Velocity GP1: ", (RMSE_RBD_vel-RMSE_GP1_vel)/RMSE_RBD_vel*100
-				print "Joint",k+1,"Percentage Improvement in Velocity GP2: ", (RMSE_RBD_vel-RMSE_GP2_vel)/RMSE_RBD_vel*100
+				print("Joint",k+1,"Vel_RMSE_RBD: ", RMSE_RBD_vel)
+				print("Joint",k+1,"Vel_RMSE_GP1: ", RMSE_GP1_vel)
+				print("Joint",k+1,"Vel_RMSE_GP2: ", RMSE_GP2_vel)
+				print("Joint",k+1,"Percentage Improvement in Velocity GP1: ", (RMSE_RBD_vel-RMSE_GP1_vel)/RMSE_RBD_vel*100)
+				print("Joint",k+1,"Percentage Improvement in Velocity GP2: ", (RMSE_RBD_vel-RMSE_GP2_vel)/RMSE_RBD_vel*100)
 				
 				plt.figure(20+k) #Plots in the 20's range designate velocity
 				plt.plot(db.test_set.time,db.test_set.velocityFlt[db.joints_ML[k]],linewidth=3,color="green",label='Task-Based GP Trial 2')
