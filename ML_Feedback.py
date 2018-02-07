@@ -30,28 +30,8 @@ import os
 
 #Python Script
 import TrajectoryGenerartor as TG
-
-class dataStruct:
-	#Class for the initialization of a dataset struct with numpy
-	#array members
-	def __init__(self):
-		self.time = np.empty(shape=(1,))
-		self.position = np.empty(shape=(5,1))
-		self.positionCmd = np.empty(shape=(5,1))
-		self.velocity = np.empty(shape=(5,1))
-		self.velocityCmd = np.empty(shape=(5,1))
-		self.velocityFlt = np.empty(shape=(5,1))
-		self.accel = np.empty(shape=(5,1))
-		self.accelCmd = np.empty(shape=(5,1))
-		self.torque = np.empty(shape=(5,1))
-		self.torqueCmd = np.empty(shape=(5,1))
-		self.torqueID = np.empty(shape=(5,1))
-		self.deflection = np.empty(shape=(5,1))
-		self.deflection_vel = np.empty(shape=(5,1))
-		self.motorSensorTemperature = np.empty(shape=(5,1))
-		self.windingTemp = np.empty(shape=(5,1))
-		self.windingTempFlt = np.empty(shape=(5,1))
-		self.epsTau = np.empty(shape=(5,1))
+from dataStruct import dataStruct
+from pubSub import pubSub
 
 def checkMinMax(Min,Max,Test):
 	# Checks the minimum and maximum values against a test point
@@ -226,125 +206,6 @@ def resetPosition(motorOn,ps,position):
 		time_from_start = ((current_time-start_time).secs
 						  +(current_time-start_time).nsecs/1000000000.)
 		ps.traj_pub.publish(cmd)
-
-class pubSub:
-	#Publisher and subscriber class for communicating with the C++ arm_controller
-	#via custom ROS messages (FeedbackML and CommandML)
-	def __init__(self,bag=False,folderName=None,flush=False,control_info={}):
-		#Initialization function for the publisher and subscriber class
-		#	bag [in]	= specify if bagging of the data is desired
-		#	folderName [in]	= name of the folder for saving the bag files
-		#	flush [in]	=
-		self.queue = dataStruct()
-		self.restart_arm = True	#Clears the queue data and restarts collection
-		self.count = 1
-		self.minimum = 0
-		self.initial_time = 0.
-		self.prev_time = 0.
-		self.bagging = False #Signals that bagging of the data is desired
-		self.startBag = False #Signal to start collecting data in the bag while flag active
-		self.flush = flush #Flush clears the queue by running the subscriber callback but not
-						   #actually putting any of the datat into the queue
-
-		#Create a ROS publisher for sending command signals to the arm controller
-		self.traj_pub = rospy.Publisher("ml_publisher",
-										model_learning.msg.CommandML,queue_size=1)
-		#Create two ROS publishers for displaying end effector colors in Rviz
-		self.path1_pub = rospy.Publisher("/path1/color",
-							std_msgs.msg.ColorRGBA,queue_size=1)
-		self.path2_pub = rospy.Publisher("/path2/color",
-							std_msgs.msg.ColorRGBA,queue_size=1)
-		#Create a ROS subscriber for collecting the arm controller feedback into a queue to be potentially
-		#input into one of the modeldatabase datasets
-		#Queue size is large since Python is substantially slower at processing the data than the arm
-		#controller
-		self.fbk_sub = rospy.Subscriber("armcontroller_fbk",
-							model_learning.msg.FeedbackML,self.armControlCallback,
-							queue_size=5000)
-		#If the bag flag is active, create a rosbag file to save the incoming data
-		if bag:
-			self.startBag = True
-			if not folderName == None:
-				if os.path.exists(folderName):
-					self.bag_name = (folderName + '/'
-									+ control_info['Set'] + '.bag')
-				else:
-					raise ValueError('The folder does not exist')
-			else:
-				raise ValueError('If bagging data, a folderName must be given')
-			self.bag = rosbag.Bag(self.bag_name, 'w')
-		
-
-	def armControlCallback(self,ros_data):
-		#Callback function for the armcontroller_fbk subscriber for every new feedback
-		#message received
-		#	ros_data[in]	= FeedbckML custom ROS message
-		if self.restart_arm: #Reset the arm_controller queue
-			self.addToQueue(ros_data,New=True)
-			self.restart_arm = False
-			self.count = 1
-		elif not self.flush: #If flush is active, the update step is skipped entirely
-			self.addToQueue(ros_data,New=False)
-			self.count += 1
-		self.minimum = self.count #Count the size of the queue
-		if self.bagging:
-			self.bag.write(control_info['Set'],ros_data)
-			
-	def addToQueue(self,fbk,New=True):
-		#Add the current data into the queue
-		#	fbk [in]	= FeedbackML custom ROS message
-		#	New [in] 	= flag for designating if the queue is new
-		if New: #Inititialize all of the arrays in the queue
-			time_secs = float(fbk.header.stamp.secs)+float(fbk.header.stamp.nsecs)/1000000000.
-			self.initial_time = time_secs
-			self.queue.time = np.array(time_secs-time_secs)
-			self.queue.position = np.array(np.matrix((fbk.jointState.position)).T)
-			self.queue.velocity = np.array(np.matrix((fbk.jointState.velocity)).T)
-			self.queue.torque = np.array(np.matrix((fbk.jointState.effort)).T)
-			self.queue.positionCmd = np.array(np.matrix((fbk.trajectoryCmd.positions)).T)
-			self.queue.velocityCmd = np.array(np.matrix((fbk.trajectoryCmd.velocities)).T)
-			self.queue.accelCmd = np.array(np.matrix((fbk.trajectoryCmd.accelerations)).T)
-			self.queue.deflection = np.array(np.matrix((fbk.deflections)).T)
-			self.queue.deflection_vel = np.array(np.matrix((fbk.deflection_vel)).T)
-			self.queue.velocityFlt = np.array(np.matrix((fbk.velocityFlt)).T)
-			self.queue.motorSensorTemperature = np.array(np.matrix((fbk.motorSensorTemperature)).T)
-			self.queue.windingTemp = np.array(np.matrix((fbk.windingTemp)).T)
-			self.queue.windingTempFlt = np.array(np.matrix((fbk.windingTempFlt)).T)
-			self.queue.torqueCmd = np.array(np.matrix((fbk.torqueCmd)).T)
-			self.queue.torqueID = np.array(np.matrix((fbk.torqueID)).T)
-			self.queue.epsTau = np.array(np.matrix((fbk.epsTau)).T)
-			self.queue.accel = np.array(np.matrix((fbk.accel)).T)
-		else: #Stack the new data point into the existent queue
-			time_secs = float(fbk.header.stamp.secs)+float(fbk.header.stamp.nsecs)/1000000000. - self.initial_time
-			self.queue.time = np.hstack((self.queue.time,np.array(time_secs)))
-			self.queue.position = np.hstack((self.queue.position,np.array(np.matrix((fbk.jointState.position)).T)))
-			self.queue.velocity = np.hstack((self.queue.velocity,np.array(np.matrix((fbk.jointState.velocity)).T)))
-			self.queue.torque = np.hstack((self.queue.torque,np.array(np.matrix((fbk.jointState.effort)).T)))
-			self.queue.positionCmd = np.hstack((self.queue.positionCmd,np.array(np.matrix((fbk.trajectoryCmd.positions)).T)))
-			self.queue.velocityCmd = np.hstack((self.queue.velocityCmd,np.array(np.matrix((fbk.trajectoryCmd.velocities)).T)))
-			self.queue.accelCmd = np.hstack((self.queue.accelCmd,np.array(np.matrix((fbk.trajectoryCmd.accelerations)).T)))
-			self.queue.deflection = np.hstack((self.queue.deflection,np.array(np.matrix((fbk.deflections)).T)))
-			self.queue.deflection_vel = np.hstack((self.queue.deflection_vel,np.array(np.matrix((fbk.deflection_vel)).T)))
-			self.queue.velocityFlt = np.hstack((self.queue.velocityFlt,np.array(np.matrix((fbk.velocityFlt)).T)))
-			self.queue.motorSensorTemperature = np.hstack((self.queue.motorSensorTemperature,np.array(np.matrix((fbk.motorSensorTemperature)).T)))
-			self.queue.windingTemp = np.hstack((self.queue.windingTemp,np.array(np.matrix((fbk.windingTemp)).T)))
-			self.queue.windingTempFlt = np.hstack((self.queue.windingTempFlt,np.array(np.matrix((fbk.windingTempFlt)).T)))
-			self.queue.torqueCmd = np.hstack((self.queue.torqueCmd,np.array(np.matrix((fbk.torqueCmd)).T)))
-			self.queue.torqueID = np.hstack((self.queue.torqueID,np.array(np.matrix((fbk.torqueID)).T)))
-			self.queue.epsTau = np.hstack((self.queue.epsTau,np.array(np.matrix((fbk.epsTau)).T)))
-			self.queue.accel = np.hstack((self.queue.accel,np.array(np.matrix((fbk.accel)).T)))
-			
-	def unregister(self):
-		#Unregister the subscriber from the ROS topic
-		self.fbk_sub.unregister()
-		self.fbk_sub = None
-
-	def reset(self):
-		#Resets the publisher and subscriber class queue
-		self.restart_arm = True
-		self.queue = dataStruct()
-		self.count = 1
-		self.initial_time = 0.
 
 class modelDatabase:
 	def __init__(self,ps,deflection=False,temperature=False):
@@ -1127,86 +988,21 @@ class modelDatabase:
 				#Add all of the data into the respecitve column
 				for i in range(self.train_set.time.size):
 					writer.writerow([self.train_set.time[i],
-						self.train_set.position[0,i],
-						self.train_set.position[1,i],
-						self.train_set.position[2,i],
-						self.train_set.position[3,i],
-						self.train_set.position[4,i],
-						self.train_set.positionCmd[0,i],
-						self.train_set.positionCmd[1,i],
-						self.train_set.positionCmd[2,i],
-						self.train_set.positionCmd[3,i],
-						self.train_set.positionCmd[4,i],
-						self.train_set.velocity[0,i],
-						self.train_set.velocity[1,i],
-						self.train_set.velocity[2,i],
-						self.train_set.velocity[3,i],
-						self.train_set.velocity[4,i],
-						self.train_set.velocityCmd[0,i],
-						self.train_set.velocityCmd[1,i],
-						self.train_set.velocityCmd[2,i],
-						self.train_set.velocityCmd[3,i],
-						self.train_set.velocityCmd[4,i],
-						self.train_set.velocityFlt[0,i],
-						self.train_set.velocityFlt[1,i],
-						self.train_set.velocityFlt[2,i],
-						self.train_set.velocityFlt[3,i],
-						self.train_set.velocityFlt[4,i],
-						self.train_set.accel[0,i],
-						self.train_set.accel[1,i],
-						self.train_set.accel[2,i],
-						self.train_set.accel[3,i],
-						self.train_set.accel[4,i],
-						self.train_set.accelCmd[0,i],
-						self.train_set.accelCmd[1,i],
-						self.train_set.accelCmd[2,i],
-						self.train_set.accelCmd[3,i],
-						self.train_set.accelCmd[4,i],
-						self.train_set.torque[0,i],
-						self.train_set.torque[1,i],
-						self.train_set.torque[2,i],
-						self.train_set.torque[3,i],
-						self.train_set.torque[4,i],
-						self.train_set.torqueCmd[0,i],
-						self.train_set.torqueCmd[1,i],
-						self.train_set.torqueCmd[2,i],
-						self.train_set.torqueCmd[3,i],
-						self.train_set.torqueCmd[4,i],
-						self.train_set.torqueID[0,i],
-						self.train_set.torqueID[1,i],
-						self.train_set.torqueID[2,i],
-						self.train_set.torqueID[3,i],
-						self.train_set.torqueID[4,i],
-						self.train_set.deflection[0,i],
-						self.train_set.deflection[1,i],
-						self.train_set.deflection[2,i],
-						self.train_set.deflection[3,i],
-						self.train_set.deflection[4,i],
-						self.train_set.deflection_vel[0,i],
-						self.train_set.deflection_vel[1,i],
-						self.train_set.deflection_vel[2,i],
-						self.train_set.deflection_vel[3,i],
-						self.train_set.deflection_vel[4,i],
-						self.train_set.motorSensorTemperature[0,i],
-						self.train_set.motorSensorTemperature[1,i],
-						self.train_set.motorSensorTemperature[2,i],
-						self.train_set.motorSensorTemperature[3,i],
-						self.train_set.motorSensorTemperature[4,i],
-						self.train_set.windingTemp[0,i],
-						self.train_set.windingTemp[1,i],
-						self.train_set.windingTemp[2,i],
-						self.train_set.windingTemp[3,i],
-						self.train_set.windingTemp[4,i],
-						self.train_set.windingTempFlt[0,i],
-						self.train_set.windingTempFlt[1,i],
-						self.train_set.windingTempFlt[2,i],
-						self.train_set.windingTempFlt[3,i],
-						self.train_set.windingTempFlt[4,i],
-						self.train_set.epsTau[0,i],
-						self.train_set.epsTau[1,i],
-						self.train_set.epsTau[2,i],
-						self.train_set.epsTau[3,i],
-						self.train_set.epsTau[4,i]])
+						self.train_set.position[0,i], self.train_set.position[1,i], self.train_set.position[2,i], self.train_set.position[3,i], self.train_set.position[4,i],
+						self.train_set.positionCmd[0,i], self.train_set.positionCmd[1,i], self.train_set.positionCmd[2,i], self.train_set.positionCmd[3,i], self.train_set.positionCmd[4,i], 
+						self.train_set.velocity[0,i], self.train_set.velocity[1,i], self.train_set.velocity[2,i], self.train_set.velocity[3,i], self.train_set.velocity[4,i], 
+						self.train_set.velocityCmd[0,i], self.train_set.velocityCmd[1,i], self.train_set.velocityCmd[2,i], self.train_set.velocityCmd[3,i], self.train_set.velocityCmd[4,i], 
+						self.train_set.velocityFlt[0,i], self.train_set.velocityFlt[1,i], self.train_set.velocityFlt[2,i], self.train_set.velocityFlt[3,i], self.train_set.velocityFlt[4,i], 
+						self.train_set.accel[0,i], self.train_set.accel[1,i], self.train_set.accel[2,i], self.train_set.accel[3,i], self.train_set.accel[4,i], self.train_set.accelCmd[0,i], 
+						self.train_set.accelCmd[1,i], self.train_set.accelCmd[2,i], self.train_set.accelCmd[3,i], self.train_set.accelCmd[4,i], self.train_set.torque[0,i],
+						self.train_set.torque[1,i], self.train_set.torque[2,i], self.train_set.torque[3,i], self.train_set.torque[4,i], self.train_set.torqueCmd[0,i], self.train_set.torqueCmd[1,i], 
+						self.train_set.torqueCmd[2,i], self.train_set.torqueCmd[3,i], self.train_set.torqueCmd[4,i], self.train_set.torqueID[0,i], self.train_set.torqueID[1,i], self.train_set.torqueID[2,i], 
+						self.train_set.torqueID[3,i], self.train_set.torqueID[4,i], self.train_set.deflection[0,i], self.train_set.deflection[1,i], self.train_set.deflection[2,i], self.train_set.deflection[3,i], 
+						self.train_set.deflection[4,i], self.train_set.deflection_vel[0,i], self.train_set.deflection_vel[1,i], self.train_set.deflection_vel[2,i], self.train_set.deflection_vel[3,i], self.train_set.deflection_vel[4,i], 
+						self.train_set.motorSensorTemperature[0,i], self.train_set.motorSensorTemperature[1,i], self.train_set.motorSensorTemperature[2,i], self.train_set.motorSensorTemperature[3,i], self.train_set.motorSensorTemperature[4,i], 
+						self.train_set.windingTemp[0,i], self.train_set.windingTemp[1,i], self.train_set.windingTemp[2,i], self.train_set.windingTemp[3,i], self.train_set.windingTemp[4,i], 
+						self.train_set.windingTempFlt[0,i], self.train_set.windingTempFlt[1,i], self.train_set.windingTempFlt[2,i], self.train_set.windingTempFlt[3,i], self.train_set.windingTempFlt[4,i], 
+						self.train_set.epsTau[0,i], self.train_set.epsTau[1,i], self.train_set.epsTau[2,i], self.train_set.epsTau[3,i], self.train_set.epsTau[4,i]])
 
 		#Check if the database has a training set
 		if hasattr(self,'test_set'):
@@ -1236,87 +1032,22 @@ class modelDatabase:
 
 				#Add all of the data into the respecitve column
 				for i in range(self.test_set.time.size):
-					writer.writerow([self.test_set.time[i],
-						self.test_set.position[0,i],
-						self.test_set.position[1,i],
-						self.test_set.position[2,i],
-						self.test_set.position[3,i],
-						self.test_set.position[4,i],
-						self.test_set.positionCmd[0,i],
-						self.test_set.positionCmd[1,i],
-						self.test_set.positionCmd[2,i],
-						self.test_set.positionCmd[3,i],
-						self.test_set.positionCmd[4,i],
-						self.test_set.velocity[0,i],
-						self.test_set.velocity[1,i],
-						self.test_set.velocity[2,i],
-						self.test_set.velocity[3,i],
-						self.test_set.velocity[4,i],
-						self.test_set.velocityCmd[0,i],
-						self.test_set.velocityCmd[1,i],
-						self.test_set.velocityCmd[2,i],
-						self.test_set.velocityCmd[3,i],
-						self.test_set.velocityCmd[4,i],
-						self.test_set.velocityFlt[0,i],
-						self.test_set.velocityFlt[1,i],
-						self.test_set.velocityFlt[2,i],
-						self.test_set.velocityFlt[3,i],
-						self.test_set.velocityFlt[4,i],
-						self.test_set.accel[0,i],
-						self.test_set.accel[1,i],
-						self.test_set.accel[2,i],
-						self.test_set.accel[3,i],
-						self.test_set.accel[4,i],
-						self.test_set.accelCmd[0,i],
-						self.test_set.accelCmd[1,i],
-						self.test_set.accelCmd[2,i],
-						self.test_set.accelCmd[3,i],
-						self.test_set.accelCmd[4,i],
-						self.test_set.torque[0,i],
-						self.test_set.torque[1,i],
-						self.test_set.torque[2,i],
-						self.test_set.torque[3,i],
-						self.test_set.torque[4,i],
-						self.test_set.torqueCmd[0,i],
-						self.test_set.torqueCmd[1,i],
-						self.test_set.torqueCmd[2,i],
-						self.test_set.torqueCmd[3,i],
-						self.test_set.torqueCmd[4,i],
-						self.test_set.torqueID[0,i],
-						self.test_set.torqueID[1,i],
-						self.test_set.torqueID[2,i],
-						self.test_set.torqueID[3,i],
-						self.test_set.torqueID[4,i],
-						self.test_set.deflection[0,i],
-						self.test_set.deflection[1,i],
-						self.test_set.deflection[2,i],
-						self.test_set.deflection[3,i],
-						self.test_set.deflection[4,i],
-						self.test_set.deflection_vel[0,i],
-						self.test_set.deflection_vel[1,i],
-						self.test_set.deflection_vel[2,i],
-						self.test_set.deflection_vel[3,i],
-						self.test_set.deflection_vel[4,i],
-						self.test_set.motorSensorTemperature[0,i],
-						self.test_set.motorSensorTemperature[1,i],
-						self.test_set.motorSensorTemperature[2,i],
-						self.test_set.motorSensorTemperature[3,i],
-						self.test_set.motorSensorTemperature[4,i],
-						self.test_set.windingTemp[0,i],
-						self.test_set.windingTemp[1,i],
-						self.test_set.windingTemp[2,i],
-						self.test_set.windingTemp[3,i],
-						self.test_set.windingTemp[4,i],
-						self.test_set.windingTempFlt[0,i],
-						self.test_set.windingTempFlt[1,i],
-						self.test_set.windingTempFlt[2,i],
-						self.test_set.windingTempFlt[3,i],
-						self.test_set.windingTempFlt[4,i],
-						self.test_set.epsTau[0,i],
-						self.test_set.epsTau[1,i],
-						self.test_set.epsTau[2,i],
-						self.test_set.epsTau[3,i],
-						self.test_set.epsTau[4,i]])
+					writer.writerow([self.test_set.time[i], self.test_set.position[0,i], self.test_set.position[1,i], self.test_set.position[2,i], self.test_set.position[3,i], self.test_set.position[4,i], 
+						self.test_set.positionCmd[0,i], self.test_set.positionCmd[1,i], self.test_set.positionCmd[2,i], self.test_set.positionCmd[3,i], self.test_set.positionCmd[4,i], 
+						self.test_set.velocity[0,i], self.test_set.velocity[1,i], self.test_set.velocity[2,i], self.test_set.velocity[3,i], self.test_set.velocity[4,i], 
+						self.test_set.velocityCmd[0,i], self.test_set.velocityCmd[1,i], self.test_set.velocityCmd[2,i], self.test_set.velocityCmd[3,i], self.test_set.velocityCmd[4,i], 
+						self.test_set.velocityFlt[0,i], self.test_set.velocityFlt[1,i], self.test_set.velocityFlt[2,i], self.test_set.velocityFlt[3,i], self.test_set.velocityFlt[4,i], 
+						self.test_set.accel[0,i], self.test_set.accel[1,i], self.test_set.accel[2,i], self.test_set.accel[3,i], self.test_set.accel[4,i], 
+						self.test_set.accelCmd[0,i], self.test_set.accelCmd[1,i], self.test_set.accelCmd[2,i], self.test_set.accelCmd[3,i], self.test_set.accelCmd[4,i], 
+						self.test_set.torque[0,i], self.test_set.torque[1,i], self.test_set.torque[2,i], self.test_set.torque[3,i], self.test_set.torque[4,i], 
+						self.test_set.torqueCmd[0,i], self.test_set.torqueCmd[1,i], self.test_set.torqueCmd[2,i], self.test_set.torqueCmd[3,i], self.test_set.torqueCmd[4,i], 
+						self.test_set.torqueID[0,i], self.test_set.torqueID[1,i], self.test_set.torqueID[2,i], self.test_set.torqueID[3,i], self.test_set.torqueID[4,i], 
+						self.test_set.deflection[0,i], self.test_set.deflection[1,i], self.test_set.deflection[2,i], self.test_set.deflection[3,i], self.test_set.deflection[4,i], 
+						self.test_set.deflection_vel[0,i], self.test_set.deflection_vel[1,i], self.test_set.deflection_vel[2,i], self.test_set.deflection_vel[3,i], self.test_set.deflection_vel[4,i], 
+						self.test_set.motorSensorTemperature[0,i], self.test_set.motorSensorTemperature[1,i], self.test_set.motorSensorTemperature[2,i], self.test_set.motorSensorTemperature[3,i], self.test_set.motorSensorTemperature[4,i], 
+						self.test_set.windingTemp[0,i], self.test_set.windingTemp[1,i], self.test_set.windingTemp[2,i], self.test_set.windingTemp[3,i], self.test_set.windingTemp[4,i], 
+						self.test_set.windingTempFlt[0,i], self.test_set.windingTempFlt[1,i], self.test_set.windingTempFlt[2,i], self.test_set.windingTempFlt[3,i], self.test_set.windingTempFlt[4,i], 
+						self.test_set.epsTau[0,i], self.test_set.epsTau[1,i], self.test_set.epsTau[2,i], self.test_set.epsTau[3,i], self.test_set.epsTau[4,i]])
 
 		#Check if the database has a training set
 		if hasattr(self,'verify_set'):
@@ -1346,87 +1077,23 @@ class modelDatabase:
 
 				#Add all of the data into the respecitve column
 				for i in range(self.verify_set.time.size):
-					writer.writerow([self.verify_set.time[i],
-						self.verify_set.position[0,i],
-						self.verify_set.position[1,i],
-						self.verify_set.position[2,i],
-						self.verify_set.position[3,i],
-						self.verify_set.position[4,i],
-						self.verify_set.positionCmd[0,i],
-						self.verify_set.positionCmd[1,i],
-						self.verify_set.positionCmd[2,i],
-						self.verify_set.positionCmd[3,i],
-						self.verify_set.positionCmd[4,i],
-						self.verify_set.velocity[0,i],
-						self.verify_set.velocity[1,i],
-						self.verify_set.velocity[2,i],
-						self.verify_set.velocity[3,i],
-						self.verify_set.velocity[4,i],
-						self.verify_set.velocityCmd[0,i],
-						self.verify_set.velocityCmd[1,i],
-						self.verify_set.velocityCmd[2,i],
-						self.verify_set.velocityCmd[3,i],
-						self.verify_set.velocityCmd[4,i],
-						self.verify_set.velocityFlt[0,i],
-						self.verify_set.velocityFlt[1,i],
-						self.verify_set.velocityFlt[2,i],
-						self.verify_set.velocityFlt[3,i],
-						self.verify_set.velocityFlt[4,i],
-						self.verify_set.accel[0,i],
-						self.verify_set.accel[1,i],
-						self.verify_set.accel[2,i],
-						self.verify_set.accel[3,i],
-						self.verify_set.accel[4,i],
-						self.verify_set.accelCmd[0,i],
-						self.verify_set.accelCmd[1,i],
-						self.verify_set.accelCmd[2,i],
-						self.verify_set.accelCmd[3,i],
-						self.verify_set.accelCmd[4,i],
-						self.verify_set.torque[0,i],
-						self.verify_set.torque[1,i],
-						self.verify_set.torque[2,i],
-						self.verify_set.torque[3,i],
-						self.verify_set.torque[4,i],
-						self.verify_set.torqueCmd[0,i],
-						self.verify_set.torqueCmd[1,i],
-						self.verify_set.torqueCmd[2,i],
-						self.verify_set.torqueCmd[3,i],
-						self.verify_set.torqueCmd[4,i],
-						self.verify_set.torqueID[0,i],
-						self.verify_set.torqueID[1,i],
-						self.verify_set.torqueID[2,i],
-						self.verify_set.torqueID[3,i],
-						self.verify_set.torqueID[4,i],
-						self.verify_set.deflection[0,i],
-						self.verify_set.deflection[1,i],
-						self.verify_set.deflection[2,i],
-						self.verify_set.deflection[3,i],
-						self.verify_set.deflection[4,i],
-						self.verify_set.deflection_vel[0,i],
-						self.verify_set.deflection_vel[1,i],
-						self.verify_set.deflection_vel[2,i],
-						self.verify_set.deflection_vel[3,i],
-						self.verify_set.deflection_vel[4,i],
-						self.verify_set.motorSensorTemperature[0,i],
-						self.verify_set.motorSensorTemperature[1,i],
-						self.verify_set.motorSensorTemperature[2,i],
-						self.verify_set.motorSensorTemperature[3,i],
-						self.verify_set.motorSensorTemperature[4,i],
-						self.verify_set.windingTemp[0,i],
-						self.verify_set.windingTemp[1,i],
-						self.verify_set.windingTemp[2,i],
-						self.verify_set.windingTemp[3,i],
-						self.verify_set.windingTemp[4,i],
-						self.verify_set.windingTempFlt[0,i],
-						self.verify_set.windingTempFlt[1,i],
-						self.verify_set.windingTempFlt[2,i],
-						self.verify_set.windingTempFlt[3,i],
-						self.verify_set.windingTempFlt[4,i],
-						self.verify_set.epsTau[0,i],
-						self.verify_set.epsTau[1,i],
-						self.verify_set.epsTau[2,i],
-						self.verify_set.epsTau[3,i],
-						self.verify_set.epsTau[4,i]])
+					writer.writerow([self.verify_set.time[i], 
+						self.verify_set.position[0,i], self.verify_set.position[1,i], self.verify_set.position[2,i], self.verify_set.position[3,i], self.verify_set.position[4,i], 
+						self.verify_set.positionCmd[0,i], self.verify_set.positionCmd[1,i], self.verify_set.positionCmd[2,i], self.verify_set.positionCmd[3,i], self.verify_set.positionCmd[4,i], 
+						self.verify_set.velocity[0,i], self.verify_set.velocity[1,i], self.verify_set.velocity[2,i], self.verify_set.velocity[3,i], self.verify_set.velocity[4,i], 
+						self.verify_set.velocityCmd[0,i], self.verify_set.velocityCmd[1,i], self.verify_set.velocityCmd[2,i], self.verify_set.velocityCmd[3,i], self.verify_set.velocityCmd[4,i], 
+						self.verify_set.velocityFlt[0,i], self.verify_set.velocityFlt[1,i], self.verify_set.velocityFlt[2,i], self.verify_set.velocityFlt[3,i], self.verify_set.velocityFlt[4,i], 
+						self.verify_set.accel[0,i], self.verify_set.accel[1,i], self.verify_set.accel[2,i], self.verify_set.accel[3,i], self.verify_set.accel[4,i], 
+						self.verify_set.accelCmd[0,i], self.verify_set.accelCmd[1,i], self.verify_set.accelCmd[2,i], self.verify_set.accelCmd[3,i], self.verify_set.accelCmd[4,i], 
+						self.verify_set.torque[0,i], self.verify_set.torque[1,i], self.verify_set.torque[2,i], self.verify_set.torque[3,i], self.verify_set.torque[4,i], 
+						self.verify_set.torqueCmd[0,i], self.verify_set.torqueCmd[1,i], self.verify_set.torqueCmd[2,i], self.verify_set.torqueCmd[3,i], self.verify_set.torqueCmd[4,i], 
+						self.verify_set.torqueID[0,i], self.verify_set.torqueID[1,i], self.verify_set.torqueID[2,i], self.verify_set.torqueID[3,i], self.verify_set.torqueID[4,i], 
+						self.verify_set.deflection[0,i], self.verify_set.deflection[1,i], self.verify_set.deflection[2,i], self.verify_set.deflection[3,i], self.verify_set.deflection[4,i], 
+						self.verify_set.deflection_vel[0,i], self.verify_set.deflection_vel[1,i], self.verify_set.deflection_vel[2,i], self.verify_set.deflection_vel[3,i], self.verify_set.deflection_vel[4,i], 
+						self.verify_set.motorSensorTemperature[0,i], self.verify_set.motorSensorTemperature[1,i], self.verify_set.motorSensorTemperature[2,i], self.verify_set.motorSensorTemperature[3,i], self.verify_set.motorSensorTemperature[4,i], 
+						self.verify_set.windingTemp[0,i], self.verify_set.windingTemp[1,i], self.verify_set.windingTemp[2,i], self.verify_set.windingTemp[3,i], self.verify_set.windingTemp[4,i], 
+						self.verify_set.windingTempFlt[0,i], self.verify_set.windingTempFlt[1,i], self.verify_set.windingTempFlt[2,i], self.verify_set.windingTempFlt[3,i], self.verify_set.windingTempFlt[4,i], 
+						self.verify_set.epsTau[0,i], self.verify_set.epsTau[1,i], self.verify_set.epsTau[2,i], self.verify_set.epsTau[3,i], self.verify_set.epsTau[4,i]])
 
 if __name__ == '__main__':
 	#Parsing inputs for plotting, trajectory generation, and saving options
@@ -1520,7 +1187,7 @@ if __name__ == '__main__':
 
 		#Plotting the train and verify set before relearning occcurs
 		for k in range(db.joints_ML.size):
-			if plotting == "miminal" or plotting == "all": #Minimal plotting is only position
+			if plotting == "minimal" or plotting == "all": #Minimal plotting is only position
 				plt.figure(10+k) #Plots in the 10's range designate position
 				plt.plot(db.train_set.time,db.train_set.position[db.joints_ML[k]],linewidth=3,label='RBD',color='b')
 				plt.plot(db.verify_set.time,db.verify_set.position[db.joints_ML[k]],linewidth=3,label='Task-Based GP Trial 1',color='m')
@@ -1541,7 +1208,7 @@ if __name__ == '__main__':
 		db.setJointsToLearn(np.array([0,1,2,3,4]))
 		db.controller(motorOn,control_info)
 		resetPosition(motorOn,ps,position)
-		db.updateSet(New=False,Set="train")
+		db.updateSet(New=True,Set="train")
 		db.downSample(Set="train")
 		db.updateModel(optimize=opt,gaus_noise=gaus_noise)
 		ps.unregister()
@@ -1562,14 +1229,15 @@ if __name__ == '__main__':
 
 		ps.unregister()
 
-		
+		final_index = db.verify_set.time.size
+		time.sleep(2)
 
 		#### TRACKING PLOTS #####
 		#Tracking plots and RMSE for each one of the learned joints
 		for k in range(db.joints_ML.size):
 			idx = db.joints_ML[k] #Index corresponding with the joint number
 			#Minimal plotting is only position
-			if plotting == "miminal" or plotting == "all":
+			if plotting == "minimal" or plotting == "all":
 				#Compute the position tracking RMSE for the three tasks: RBD, Task-Based GP Trial 1 (GP1),
 				#Task-Based GP Trial 2 (GP2)			
 				RMSE_RBD_pos = np.sqrt(np.mean(np.square(db.train_set.positionCmd[db.joints_ML[k],:final_index]-db.train_set.position[db.joints_ML[k],:final_index])))

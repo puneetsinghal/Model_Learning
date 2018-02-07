@@ -3,75 +3,7 @@ import numpy as np
 from collections import namedtuple
 from numpy.linalg import inv
 
-
-def inverseKinematics(x,y,z,theta):	
-	if z < -0.03:
-		raise ValueError('Point is inside of the table')
-
-	angles = np.zeros((5,1))
-
-	L1 = 0.28
-	L2 = 0.28
-
-	combined_x_offset = 0.044
-
-	tool_z_offset = 0.032
-	module5_z_offset = 0.055;
-	module1_z_offset = 0.;
-	module2_z_offset = 0.07;
-
-	z_mod = (-module2_z_offset - module1_z_offset + z + tool_z_offset
-		 + module5_z_offset)
-
-	r = np.sqrt(x**2+y**2+z_mod**2)
-	if r > 0.572*0.95:
-		raise ValueError('Point is outside of the reachable workspace')
-
-	r1 = np.sqrt(x**2+y**2)
-	if r1 > combined_x_offset:
-		d = np.sqrt(r1**2 - combined_x_offset**2)
-	else:
-		raise ValueError('Radius of arm is too close to the base')
-
-	angles[0] = (np.pi/2 + np.arccos((d**2 - combined_x_offset**2 + r1**2)
-				/ (2*d*r1))- np.arcsin(x/r1))
-
-	r2 = np.sqrt(z_mod**2 + d**2)
-
-	angles[1] = -(-np.arcsin(z_mod/r2) + np.pi/2
-				 - np.arccos((L1**2-L2**2+r2**2)/(2*L1*r2)))
-	angles[2] = np.pi-np.arccos((L1**2+L2**2-r2**2)/(2*L1*L2))
-
-	angles[3] = -(np.pi + angles[1] - angles[2])
-	angles[4] = -(np.pi/2 - angles[0]) + theta
-
-	return angles
-
-def forwardKinematics(angles):
-	offset = np.array([[0.,	 0.,	0.,		0.,		0.,     0.],
-					   [0,-0.006, 0.031, -0.031, -0.038,    0.],
-					   [0,  0.07,  0.28,   0.28,  0.055, 0.032]])
-	Transform = Tz(angles[0],offset[:,0])
-	Transform = np.dot(Transform,Ty(-angles[1],offset[:,1]))
-	Transform = np.dot(Transform,Ty(angles[2],offset[:,2]))
-	Transform = np.dot(Transform,Ty(-angles[3],offset[:,3]))
-	Transform = np.dot(Transform,Tz(angles[4],offset[:,4]))
-	return np.around(np.dot(Transform,T(offset[:,5])),decimals=5)
-def Ty(theta,trans):
-	return np.array([[np.cos(theta),  0., np.sin(theta), 	trans[0]],
-					 [		0.,  	  1., 		0.,			trans[1]],
-					 [-np.sin(theta), 0., np.cos(theta), 	trans[2]],
-					 [		0., 	  0., 		0., 		 	  1]])
-def Tz(theta,trans):
-	return np.array([[np.cos(theta), -np.sin(theta), 0., trans[0]],
-					 [np.sin(theta),  np.cos(theta), 0., trans[1]],
-					 [ 		0., 				0.,  1., trans[2]],
-					 [		0., 				0.,  0., 	   1.]])
-def T(trans):
-	return np.array([[1., 0.,  0., trans[0]],
-					 [0., 1.,  0., trans[1]],
-					 [0., 0.,  1., trans[2]],
-					 [0., 0.,  0., 	   1.]])
+from kinematics import Kinematics as KMTCS
 
 def generateTrajectory(posList,dt):
 	trajectory = namedtuple('Trajectory',['pos','vel','acc','time'])
@@ -93,10 +25,10 @@ def generateJointTrajectory(posList,dt):
 	jointTrajectory = namedtuple('JointTrajectory',['ang','vel','acc','time'])
 	theta = np.zeros(posList.x.shape)
 
-	jointTrajectory.ang = inverseKinematics(posList.x[0],posList.y[0],posList.z[0],theta[0])
+	jointTrajectory.ang = KMTCS.inverseKinematics(posList.x[0],posList.y[0],posList.z[0],theta[0])
 
 	for i in range(1,posList.x.size):
-		angles = inverseKinematics(posList.x[i],posList.y[i],posList.z[i],theta[i])
+		angles = KMTCS.inverseKinematics(posList.x[i],posList.y[i],posList.z[i],theta[i])
 		jointTrajectory.ang = np.append(jointTrajectory.ang,angles,axis=1)
 
 	jointTrajectory.vel = np.zeros(jointTrajectory.ang.shape)
@@ -123,7 +55,7 @@ def generateJointTrajectory_now(time,traj_type='circle',tf=2.5):
 		for i in range(5):
 			peturb = dt*float(i-2)
 			x,y,z = circle_now(c_x,c_y,c_z,radius,time+peturb,tf)
-			ang_temp = inverseKinematics(x,y,z,theta)
+			ang_temp = KMTCS.inverseKinematics(x,y,z,theta)
 			for j in range(5):
 				angles[i,j] = ang_temp[j]
 
@@ -205,7 +137,7 @@ def minJerkSetup_now(initial_angles,tf,waypoints,t_array=None):
 		if initial_angles.shape[0] == 5:
 			initial_angles = initial_angles.T
 	x0[:,0] = initial_angles
-	x0[:,3] = inverseKinematics(waypoints[0,0],
+	x0[:,3] = KMTCS.inverseKinematics(waypoints[0,0],
 								   waypoints[1,0],
 								   waypoints[2,0],
 								   waypoints[3,0]).T
@@ -217,7 +149,7 @@ def minJerkSetup_now(initial_angles,tf,waypoints,t_array=None):
 	for i in range(num_waypoints):
 		if i > 0:
 			x0[:,0] = x0[:,3]
-			x0[:,3] = inverseKinematics(waypoints[0,i],
+			x0[:,3] = KMTCS.inverseKinematics(waypoints[0,i],
 										   waypoints[1,i],
 										   waypoints[2,i],
 										   waypoints[3,i]).T
