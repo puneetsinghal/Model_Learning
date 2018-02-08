@@ -26,6 +26,19 @@ def generateData(batchSize):
 
 	return batch_x, batch_y, batch_l
 
+def generateTrajectory():
+	theta_1 = np.hstack((np.linspace(0,0,100), np.linspace(0.5,0.5,100), np.linspace(1.,1.,100), np.linspace(1.5,1.5,100), np.linspace(2.,2.,100), np.linspace(2.5,2.5,100), np.linspace(pi,pi,100)))
+	theta_2 = np.hstack((np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100)))
+	batch_x = np.vstack((theta_1, theta_2))
+	batch_x = batch_x.T
+	batch_y = np.zeros(batch_x.shape)
+	batch_l = np.ones(batch_x.shape) * 0.2
+	
+	for i in range(batch_x.shape[0]):
+		batch_y[i, :] = FK(batch_x[i,:])
+
+	return batch_x, batch_y, batch_l
+
 def make_log_dir(log_parent_dir):
 	import datetime, os
 	current_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
@@ -51,7 +64,7 @@ if __name__ == '__main__':
 	learningRate = 0.001
 	numSteps = 10000
 	batchSize = 32
-	hiddenSize = 100
+	hiddenSize = 128
 	displayStep = 100
 	saveStep = 10000
 
@@ -69,17 +82,17 @@ if __name__ == '__main__':
 	#L = tf.constant([[0.2, 0.2]], dtype=tf.float64)
 
 	# Construct model
-	h_jointAngles = layers.fully_connected(inputs=X, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=None) # Change sigmoid (relu, cos/sin)   |    is there bias ??
+	h_jointAngles = layers.fully_connected(inputs=X, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.sin) # Change sigmoid (relu, cos/sin)   |    is there bias ??
 	h_lengths = layers.fully_connected(inputs=L, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=None)
 	concateInput = tf.concat([h_jointAngles, h_lengths], 1)
 	layer1 = layers.fully_connected(inputs=concateInput, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
 	layer2 = layers.fully_connected(inputs=layer1, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-	layer3 = layers.fully_connected(inputs=layer2, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-	layer4 = layers.fully_connected(inputs=layer3, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-	layer5 = layers.fully_connected(inputs=layer4, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-	layer6 = layers.fully_connected(inputs=layer5, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-	layer7 = layers.fully_connected(inputs=layer6, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-	outputLayer = layers.fully_connected(inputs=layer7, num_outputs=numOutput, biases_initializer=tf.zeros_initializer(), activation_fn=None)
+	# layer3 = layers.fully_connected(inputs=layer2, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	# layer4 = layers.fully_connected(inputs=layer3, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	# layer5 = layers.fully_connected(inputs=layer4, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	# layer6 = layers.fully_connected(inputs=layer5, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	# layer7 = layers.fully_connected(inputs=layer6, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	outputLayer = layers.fully_connected(inputs=layer2, num_outputs=numOutput, biases_initializer=tf.zeros_initializer(), activation_fn=None)
 
 	# Define loss and optimizer
 	cost = 1000*0.5*tf.reduce_mean((outputLayer - Y)**2)
@@ -133,7 +146,7 @@ if __name__ == '__main__':
 			saver.restore(sess, tf.train.latest_checkpoint('./model/'))
 			print("Model restored.")
 			# Check the values of the variables
-			batch_x, batch_y, batch_l = generateData(batchSize)
+			batch_x, batch_y, batch_l = generateTrajectory()
 			out = sess.run(outputLayer, feed_dict={X: batch_x, L:batch_l})
 			# print(out.shape)
 			# print(batch_y.shape)
@@ -141,4 +154,9 @@ if __name__ == '__main__':
 			print(error)
 			print(np.sum(error)/batchSize)
 			print(tf.reduce_mean((out - batch_y)**2))
+
+			plt.figure(1)
+			plt.plot(batch_y[:,0], batch_y[:,1],'g*')
+			plt.plot(out[:,0], out[:,1],'r*')
+			plt.show()
 	print("Optimization Finished!")
