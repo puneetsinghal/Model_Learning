@@ -28,8 +28,13 @@ if __name__ == '__main__':
 	tf.reset_default_graph()
 
 	# Parameters
-	batchSize = 100
-	
+	learningRate = 0.001
+	numSteps = 10000
+	batchSize = 32
+	hiddenSize = 100
+	displayStep = 100
+	saveStep = 10000
+
 	# Network Parameters
 	numInput = 2
 	numOutput = 2
@@ -41,10 +46,17 @@ if __name__ == '__main__':
 	#L = tf.constant([[0.2, 0.2]], dtype=tf.float64)
 
 	# Construct model
-	h_jointAngles = layers.fully_connected(inputs=X, num_outputs=100, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.tanh) # Change sigmoid (relu, cos/sin)   |    is there bias ??
-	h_lengths = layers.fully_connected(inputs=L, num_outputs=100, biases_initializer=tf.zeros_initializer(), activation_fn=None)
-	new_input = tf.concat([h_jointAngles, h_lengths], 1)
-	outputLayer = layers.fully_connected(inputs=new_input, num_outputs=numOutput, biases_initializer=tf.zeros_initializer(), activation_fn=None)
+	h_jointAngles = layers.fully_connected(inputs=X, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=None) # Change sigmoid (relu, cos/sin)   |    is there bias ??
+	h_lengths = layers.fully_connected(inputs=L, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=None)
+	concateInput = tf.concat([h_jointAngles, h_lengths], 1)
+	layer1 = layers.fully_connected(inputs=concateInput, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	layer2 = layers.fully_connected(inputs=layer1, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	layer3 = layers.fully_connected(inputs=layer2, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	layer4 = layers.fully_connected(inputs=layer3, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	layer5 = layers.fully_connected(inputs=layer4, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	layer6 = layers.fully_connected(inputs=layer5, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	layer7 = layers.fully_connected(inputs=layer6, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	outputLayer = layers.fully_connected(inputs=layer7, num_outputs=numOutput, biases_initializer=tf.zeros_initializer(), activation_fn=None)
 
 	init = tf.global_variables_initializer()
 	# Later, launch the model, use the saver to restore variables from disk, and
@@ -61,6 +73,7 @@ if __name__ == '__main__':
 		out = sess.run(outputLayer, feed_dict={X: batch_x, L:batch_l})
 		# print(out.shape)
 		# print(batch_y.shape)
-		error = (out - batch_y)**2
-		print(np.sum(error))
+		error = np.sum((out - batch_y)**2,1)
+		print(error)
+		print(np.sum(error)/batchSize)
 		print(tf.reduce_mean((out - batch_y)**2))
