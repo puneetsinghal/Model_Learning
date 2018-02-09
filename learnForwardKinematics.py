@@ -12,14 +12,15 @@ import matplotlib.pyplot as plt
 def FK(angles):
 	l1 = 0.2
 	l2 = 0.2
-	x = l1*cos(angles[0]) + l2*cos(angles[0] + angles[1])
-	y = l1*sin(angles[0]) + l2*sin(angles[0] + angles[1])
+	l3 = 0.2
+	x = l1*cos(angles[0]) + l2*cos(angles[0] + angles[1]) + l3*cos(angles[0] + angles[1] + angles[2])
+	y = l1*sin(angles[0]) + l2*sin(angles[0] + angles[1]) + l3*sin(angles[0] + angles[1] + angles[2])
 	return np.array([x, y])
 
-def generateData(batchSize):
-	batch_x = pi*np.random.rand(batchSize, 2)
+def generateData(batchSize, dof=3):
+	batch_x = pi*np.random.rand(batchSize, dof)
 	batch_y = np.zeros((batchSize, 2))
-	batch_l = np.ones((batchSize,2)) * 0.2
+	batch_l = np.ones((batchSize,dof)) * 0.2
 	
 	for i in range(batchSize):
 		batch_y[i, :] = FK(batch_x[i,:])
@@ -28,10 +29,12 @@ def generateData(batchSize):
 
 def generateTrajectory():
 	theta_1 = np.hstack((np.linspace(0,0,100), np.linspace(0.5,0.5,100), np.linspace(1.,1.,100), np.linspace(1.5,1.5,100), np.linspace(2.,2.,100), np.linspace(2.5,2.5,100), np.linspace(pi,pi,100)))
-	theta_2 = np.hstack((np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100)))
+	theta_2 = np.hstack((np.linspace(0,0,100), np.linspace(0.5,0.5,100), np.linspace(1.,1.,100), np.linspace(1.5,1.5,100), np.linspace(2.,2.,100), np.linspace(2.5,2.5,100), np.linspace(pi,pi,100)))
+	theta_3 = np.hstack((np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100)))
 	batch_x = np.vstack((theta_1, theta_2))
+	batch_x = np.vstack((batch_x, theta_3))
 	batch_x = batch_x.T
-	batch_y = np.zeros(batch_x.shape)
+	batch_y = np.zeros((batch_x.shape[0],2))
 	batch_l = np.ones(batch_x.shape) * 0.2
 	
 	for i in range(batch_x.shape[0]):
@@ -61,15 +64,16 @@ if __name__ == '__main__':
 	args = parser.parse_args()
 
 	# Parameters
+	dof = 3
 	learningRate = 0.001
 	numSteps = 10000
-	batchSize = 32
-	hiddenSize = 128
+	batchSize = 64
+	hiddenSize = 256
 	displayStep = 100
 	saveStep = 10000
 
 	# Network Parameters
-	numInput = 2
+	numInput = dof
 	numOutput = 2
 
 	log_parent_dir = './train_log'
@@ -87,12 +91,12 @@ if __name__ == '__main__':
 	concateInput = tf.concat([h_jointAngles, h_lengths], 1)
 	layer1 = layers.fully_connected(inputs=concateInput, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
 	layer2 = layers.fully_connected(inputs=layer1, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-	# layer3 = layers.fully_connected(inputs=layer2, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	layer3 = layers.fully_connected(inputs=layer2, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
 	# layer4 = layers.fully_connected(inputs=layer3, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
 	# layer5 = layers.fully_connected(inputs=layer4, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
 	# layer6 = layers.fully_connected(inputs=layer5, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
 	# layer7 = layers.fully_connected(inputs=layer6, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-	outputLayer = layers.fully_connected(inputs=layer2, num_outputs=numOutput, biases_initializer=tf.zeros_initializer(), activation_fn=None)
+	outputLayer = layers.fully_connected(inputs=layer3, num_outputs=numOutput, biases_initializer=tf.zeros_initializer(), activation_fn=None)
 
 	# Define loss and optimizer
 	cost = 1000*0.5*tf.reduce_mean((outputLayer - Y)**2)
@@ -136,27 +140,27 @@ if __name__ == '__main__':
 			save_path = saver.save(sess, "./model/checkpoint.ckpt")
 			print("Model saved in path: %s" % save_path)
 
-	elif(args.mode == 'test'):
-		batchSize = 100
-		with tf.Session() as sess:
+	# elif(args.mode == 'test'):
+	batchSize = 100
+	with tf.Session() as sess:
 
-			sess.run(init)
-			# Restore variables from disk.
-			saver = tf.train.import_meta_graph('./model/checkpoint.ckpt.meta')
-			saver.restore(sess, tf.train.latest_checkpoint('./model/'))
-			print("Model restored.")
-			# Check the values of the variables
-			batch_x, batch_y, batch_l = generateTrajectory()
-			out = sess.run(outputLayer, feed_dict={X: batch_x, L:batch_l})
-			# print(out.shape)
-			# print(batch_y.shape)
-			error = np.sum((out - batch_y)**2,1)
-			print(error)
-			print(np.sum(error)/batchSize)
-			print(tf.reduce_mean((out - batch_y)**2))
+		sess.run(init)
+		# Restore variables from disk.
+		saver = tf.train.import_meta_graph('./model/checkpoint.ckpt.meta')
+		saver.restore(sess, tf.train.latest_checkpoint('./model/'))
+		print("Model restored.")
+		# Check the values of the variables
+		batch_x, batch_y, batch_l = generateTrajectory()
+		out = sess.run(outputLayer, feed_dict={X: batch_x, L:batch_l})
+		# print(out.shape)
+		# print(batch_y.shape)
+		error = np.sum((out - batch_y)**2,1)
+		# print(error)
+		print("Error = {}".format(np.sum(error)/batchSize))
+		print(tf.reduce_mean((out - batch_y)**2))
 
-			plt.figure(1)
-			plt.plot(batch_y[:,0], batch_y[:,1],'g*')
-			plt.plot(out[:,0], out[:,1],'r*')
-			plt.show()
+		plt.figure(1)
+		plt.plot(batch_y[:,0], batch_y[:,1],'g*')
+		plt.plot(out[:,0], out[:,1],'r*')
+		plt.show()
 	print("Optimization Finished!")
