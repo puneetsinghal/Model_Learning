@@ -119,11 +119,11 @@ if __name__ == '__main__':
 	# Parameters
 	dof = 5
 	learningRate = 0.0005
-	numSteps = 20000
-	batchSize = 64
+	numSteps = 50000
+	batchSize = 128
 	hiddenSize = 256
 	displayStep = 100
-	saveStep = 10000
+	saveStep = 1000
 	tolerance = 5*1e-3
 
 	# Network Parameters
@@ -175,10 +175,10 @@ if __name__ == '__main__':
 	# h_jointAngles = layers.fully_connected(inputs=X, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.sin) # Change sigmoid (relu, cos/sin)   |    is there bias ??
 	inputCombinations = tf.matmul(X, combinationMatrix)
 	h_jointAngles = tf.concat([tf.sin(inputCombinations), tf.cos(inputCombinations)],1)
-	layer1 = layers.fully_connected(inputs=h_jointAngles, num_outputs=256, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.sigmoid)
-	layer2 = layers.fully_connected(inputs=layer1, num_outputs=256, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.sigmoid)
-	layer3 = layers.fully_connected(inputs=layer2, num_outputs=256, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.sigmoid)
-	# layer4 = layers.fully_connected(inputs=layer3, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	layer1 = layers.fully_connected(inputs=h_jointAngles, num_outputs=512, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	layer2 = layers.fully_connected(inputs=layer1, num_outputs=512, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	layer3 = layers.fully_connected(inputs=layer2, num_outputs=512, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+	layer4 = layers.fully_connected(inputs=layer3, num_outputs=512, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
 	# layer5 = layers.fully_connected(inputs=layer4, num_outputs=hiddenSize, biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
 	outputLayer = layers.fully_connected(inputs=layer3, num_outputs=numOutput, biases_initializer=tf.zeros_initializer(), activation_fn=None)
 
