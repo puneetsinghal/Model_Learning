@@ -27,7 +27,6 @@ def visualize_map(map,title,probed_points=None):
 	# plt.show()
 	plt.pause(0.01)
 
-
 def evaluateStiffness(grid, groundTruth, X_query):
 	return griddata( grid, groundTruth, X_query)
 

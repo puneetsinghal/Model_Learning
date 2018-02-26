@@ -257,7 +257,7 @@ if __name__ == '__main__':
 		print("Model restored.")
 
 		# Check the values of the variables
-		batch_x, batch_y, batch_l = robot.generateTrajectory()
+		batch_x, batch_y, batch_l = generateTrajectory()
 		out = sess.run(outputLayer, feed_dict={X: batch_x})
 		print(out.shape)
 		errorVector = np.sqrt(np.sum((out - batch_y)**2, 1))
