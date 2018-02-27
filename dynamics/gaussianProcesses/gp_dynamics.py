@@ -42,16 +42,16 @@ if __name__ == '__main__':
 
 	if(args.mode == 'train'):
 		# Parameters
-		params = {'dof', 'numOutput', 'linkLengths', 'mLink', 'inertia', 'gravity', 'batchSize', 'optimizationStep', 'dh_parameters', 'tolerance'}
-		results = {'trainingTime', 'testingTime', 'errorVector', 'reward', 'averageCost'}
+		params = {}
+		results = {}
 		if(args.robot == "planarRR"):
 			params['dof'] = 2
 			params['numOutput'] = 2
-			params['linkLengths'] = np.array([1., 1.])
+			params['linkLength'] = np.array([1., 1.])
 			params['mLink'] = np.array([0.1, 0.1])
 			params['inertia'] = np.array([0., 0.])
 			params['gravity'] = -9.81
-			params['batchSize'] = 100
+			params['batchSize'] = 3000
 			params['optimizationStep'] = 1
 			robot = PlanarRR(params)
 
@@ -105,7 +105,7 @@ if __name__ == '__main__':
 		print(params)
 		robot.numOutput = params['numOutput']
 
-		X, Y = robot.generateFKData(params['batchSize'])
+		X, Y = robot.generateInverseDynamicsData(params['batchSize'])
 		
 		startTime = time.time()
 		kernel = C(1.0, (1e-3, 1e3)) * RBF(12, (1e-2, 1e2))
@@ -115,7 +115,7 @@ if __name__ == '__main__':
 		endLearningTime = time.time()
 		results['trainingTime'] = endLearningTime - startTime
 		
-		testBatchX, testBatchY = robot.generateFKTrajectory()
+		testBatchX, testBatchY = robot.generateInverseDynamicsTrajectory()
 
 		y_pred, sigma = gp.predict(testBatchX, return_std=True)
 		endTestTime = time.time()
@@ -136,7 +136,7 @@ if __name__ == '__main__':
 		params['tolerance'] = 1*1e-3
 		robot.numOutput = params['numOutput']
 
-		testBatchX, testBatchY = robot.generateFKTrajectory()
+		testBatchX, testBatchY = robot.generateInverseDynamicsTrajectory()
 
 		y_pred, sigma = gp.predict(testBatchX, return_std=True)
 		
