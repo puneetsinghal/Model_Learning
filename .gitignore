@@ -1,5 +1,6 @@
 # train log
 kinematics/gaussianProcesses/train_log
+dynamics/gaussianProcesses/train_log
 # Compiled source #
 ###################
 *.com
