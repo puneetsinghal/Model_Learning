@@ -19,8 +19,9 @@ class PlanarRR(object):
 		return endEffector
 
 	def generateFKData(self, batchSize):
-		np.random.seed(1)
-		batch_x = 2.0*pi*np.random.rand(batchSize, self.dof) - pi*np.ones([batchSize, self.dof])
+		# np.random.seed(1)
+		batch_x = pi*np.random.rand(batchSize, self.dof) - 0.*pi*np.ones([batchSize, self.dof])
+		# batch_x = 2.0*pi*np.random.rand(batchSize, self.dof) - pi*np.ones([batchSize, self.dof])
 		batch_y = np.zeros((batchSize, self.numOutput))
 		
 		for i in range(batchSize):
@@ -107,8 +108,9 @@ class PlanarRRR(object):
 		return endEffector
 
 	def generateFKData(self, batchSize):
-		np.random.seed(1)
-		batch_x = 2.0*pi*np.random.rand(batchSize, self.dof) - pi*np.ones([batchSize, self.dof])
+		# np.random.seed(1)
+		batch_x = pi*np.random.rand(batchSize, self.dof) - 0.*pi*np.ones([batchSize, self.dof])
+		# batch_x = 2.0*pi*np.random.rand(batchSize, self.dof) - pi*np.ones([batchSize, self.dof])
 		batch_y = np.zeros((batchSize, self.numOutput))
 		
 		for i in range(batchSize):
