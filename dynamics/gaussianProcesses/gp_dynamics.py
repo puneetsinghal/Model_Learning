@@ -47,11 +47,11 @@ if __name__ == '__main__':
 		if(args.robot == "planarRR"):
 			params['dof'] = 2
 			params['numOutput'] = 2
-			params['linkLength'] = np.array([1., 1.])
+			params['linkLengths'] = np.array([1., 1.])
 			params['mLink'] = np.array([0.1, 0.1])
 			params['inertia'] = np.array([0., 0.])
 			params['gravity'] = -9.81
-			params['batchSize'] = 3000
+			params['batchSize'] = 2000
 			params['optimizationStep'] = 1
 			robot = PlanarRR(params)
 
@@ -59,21 +59,30 @@ if __name__ == '__main__':
 			params['dof'] = 3
 			params['numOutput'] = 2
 			params['linkLengths'] = np.array([1., 1., 1.])
+			params['mLink'] = None
+			params['inertia'] = None
+			params['gravity'] = -9.81
 			params['batchSize'] = 3000
 			params['optimizationStep'] = 1
-			robot = PlanarRRR(params['dof'], params['linkLengths'])
+			robot = PlanarRRR(params)
 			
 		if(args.robot == "nonPlanarRRR"):
 			params['dof'] = 3
 			params['numOutput'] = 3
 			params['linkLengths'] = np.array([1., 1., 1.])
+			params['mLink'] = None
+			params['inertia'] = None
+			params['gravity'] = -9.81
 			params['batchSize'] = 1000
 			params['optimizationStep'] = 1
-			robot = NonPlanarRRR(params['dof'], params['linkLengths'])
+			robot = NonPlanarRRR(params)
 			
 		if(args.robot == "nonPlanarRRRR"):
-			params['dof'] = 5
+			params['dof'] = 5 # 5th joint is fixed
 			params['numOutput'] = 3
+			params['mLink'] = None
+			params['inertia'] = None
+			params['gravity'] = -9.81
 			params['batchSize'] = 5000
 			params['optimizationStep'] = 1
 			d1 = 0.14
@@ -84,11 +93,14 @@ if __name__ == '__main__':
 								    [0.334, pi, 0, 0],
 								    [0, pi/2, d4, pi/2],
 								    [0, 0, d5, 0]])
-			robot = NonPlanarRRRR(params['dof'], params['dh_parameters'])
+			robot = NonPlanarRRRR(params)
 
 		if(args.robot == "nonPlanarRRRRR"):
 			params['dof'] = 5
 			params['numOutput'] = 3
+			params['mLink'] = None
+			params['inertia'] = None
+			params['gravity'] = -9.81
 			params['batchSize'] = 10000
 			params['optimizationStep'] = 1
 			d1 = 0.14
@@ -99,7 +111,7 @@ if __name__ == '__main__':
 								    [0.334, pi, 0, 0],
 								    [0, pi/2, d4, pi/2],
 								    [0, 0, d5, 0]])
-			robot = NonPlanarRRRRR(params['dof'], params['dh_parameters'])
+			robot = NonPlanarRRRRR(params)
 		
 		params['tolerance'] = 1*1e-4
 		print(params)
