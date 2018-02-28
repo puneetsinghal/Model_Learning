@@ -5,7 +5,7 @@ class PlanarRR(object):
 	"""Planar RR manipulator"""
 	def __init__(self, params):
 		self.dof = params['dof']
-		self.link_length = params['linkLength']
+		self.link_length = params['linkLengths']
 		self.mLink = params['mLink']
 		self.inertia = params['inertia']
 		self.gravity = params['gravity']
@@ -92,9 +92,12 @@ class PlanarRR(object):
 
 class PlanarRRR(object):
 	"""Planar RRR manipulator"""
-	def __init__(self, dof, linkLength=None):
-		self.dof = dof
-		self.link_length = linkLength 
+	def __init__(self, params):
+		self.dof = params['dof']
+		self.link_length = params['linkLengths']
+		self.mLink = params['mLink']
+		self.inertia = params['inertia']
+		self.gravity = params['gravity']
 
 	def forwardKinematics(self, angles):
 		x = self.link_length[0]*cos(angles[0]) + self.link_length[1]*cos(angles[0] + angles[1]) + self.link_length[2]*cos(angles[0] + angles[1] + angles[2])
@@ -132,9 +135,12 @@ class PlanarRRR(object):
 
 class NonPlanarRRR(object):
 	"""Planar RRR manipulator"""
-	def __init__(self, dof, linkLength=None):
-		self.dof = dof
-		self.link_length = linkLength 
+	def __init__(self, params):
+		self.dof = params['dof']
+		self.link_length = params['linkLengths']
+		self.mLink = params['mLink']
+		self.inertia = params['inertia']
+		self.gravity = params['gravity']
 
 	def forwardKinematics(self, angles):
 		# RRR 3D manipulator
@@ -221,14 +227,16 @@ class NonPlanarRRR(object):
 
 class NonPlanarRRRRR(object):
 	"""docstring for ClassName"""
-	def __init__(self, dof, dh_parameters=None):
-		if (dh_parameters.any()):
-			self.dof = dh_parameters.shape[0]
-			self.imp_dof = dof
-			self.link_length = (dh_parameters[:, 0]).reshape([1,self.dof])
-			self.link_twist = (dh_parameters[:, 1]).reshape([1,self.dof])
-			self.link_offset = (dh_parameters[:, 2]).reshape([1,self.dof])
-			self.joint_angle = (dh_parameters[:, 3]).reshape([1,self.dof])
+	def __init__(self, params):
+		self.dof = params['dof']
+		self.mLink = params['mLink']
+		self.inertia = params['inertia']
+		self.gravity = params['gravity']
+		self.link_length = (params['dh_parameters'][:, 0]).reshape([1,self.dof])
+		self.link_twist = (params['dh_parameters'][:, 1]).reshape([1,self.dof])
+		self.link_offset = (params['dh_parameters'][:, 2]).reshape([1,self.dof])
+		self.joint_angle = (params['dh_parameters'][:, 3]).reshape([1,self.dof])
+
 
 	def dhMatrix(self, index, jointAngles):
 		theta = jointAngles[index]+ self.joint_angle[0, index]
@@ -285,13 +293,15 @@ class NonPlanarRRRRR(object):
 
 class NonPlanarRRRR(object):
 	"""docstring for ClassName"""
-	def __init__(self, dof, dh_parameters=None):
-		if (dh_parameters.any()):
-			self.dof = dh_parameters.shape[0]
-			self.link_length = (dh_parameters[:, 0]).reshape([1,self.dof])
-			self.link_twist = (dh_parameters[:, 1]).reshape([1,self.dof])
-			self.link_offset = (dh_parameters[:, 2]).reshape([1,self.dof])
-			self.joint_angle = (dh_parameters[:, 3]).reshape([1,self.dof])
+	def __init__(self, params):
+		self.dof = params['dof']
+		self.mLink = params['mLink']
+		self.inertia = params['inertia']
+		self.gravity = params['gravity']
+		self.link_length = (params['dh_parameters'][:, 0]).reshape([1,self.dof])
+		self.link_twist = (params['dh_parameters'][:, 1]).reshape([1,self.dof])
+		self.link_offset = (params['dh_parameters'][:, 2]).reshape([1,self.dof])
+		self.joint_angle = (params['dh_parameters'][:, 3]).reshape([1,self.dof])
 
 	def dhMatrix(self, index, jointAngles):
 		theta = jointAngles[index]+ self.joint_angle[0, index]
