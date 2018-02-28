@@ -180,6 +180,17 @@ if __name__ == '__main__':
 		# Network Parameters
 		# numInput = 2*(3**dof-1)
 
+		 # normalize the gradients using clipping
+		# GRAD_CLIP = 100
+		# local_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
+		# gradients = tf.gradients(cost, local_vars)
+		# var_norms = tf.global_norm(local_vars)
+		# grads, grad_norms = tf.clip_by_global_norm(gradients, GRAD_CLIP)
+
+		# # Apply local gradients to global network
+		# global_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
+		# train_op = optimizer.apply_gradients(zip(grads, global_vars))
+
 	nn = network(params)
 
 	tf.summary.scalar("cost", nn.cost)
