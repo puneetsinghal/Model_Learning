@@ -4,7 +4,7 @@ import argparse
 from copy import copy
 
 import sys
-sys.path.insert(0, '../../')
+sys.path.insert(0, '../../../../')
 from robot import PlanarRR
 from robot import PlanarRRR
 from robot import NonPlanarRRR
@@ -179,8 +179,7 @@ if __name__ == '__main__':
 
 		# Network Parameters
 		# numInput = 2*(3**dof-1)
-
-		 # normalize the gradients using clipping
+		# normalize the gradients using clipping
 		# GRAD_CLIP = 100
 		# local_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
 		# gradients = tf.gradients(cost, local_vars)
@@ -191,26 +190,26 @@ if __name__ == '__main__':
 		# global_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
 		# train_op = optimizer.apply_gradients(zip(grads, global_vars))
 
-	nn = network(params)
+		nn = network(params)
 
-	tf.summary.scalar("cost", nn.cost)
-	tf.summary.scalar("reward", nn.reward)
-	# tf.summary.scalar("gradients", tf.reduce_max(gradients))
-	nn.merged_summary_op = tf.summary.merge_all()
+		tf.summary.scalar("cost", nn.cost)
+		tf.summary.scalar("reward", nn.reward)
+		# tf.summary.scalar("gradients", tf.reduce_max(gradients))
+		nn.merged_summary_op = tf.summary.merge_all()
 
-	# Initialize the variables (i.e. assign their default value)
-	init = tf.global_variables_initializer()
+		# Initialize the variables (i.e. assign their default value)
+		init = tf.global_variables_initializer()
 
-	# Add ops to save and restore all the variables.
-	saver = tf.train.Saver(max_to_keep=None)
+		# Add ops to save and restore all the variables.
+		saver = tf.train.Saver(max_to_keep=1)
 		
-	if(args.mode =='train'):
+	# if(args.mode =='train'):
 		current_timestamp = make_log_dir('')
 		# Start training
 		with tf.Session() as sess:
 			# Run the initializer
 			sess.run(init)
-			save_path = saver.save(sess, './model/' +  args.robot + '_NN/model')
+			save_path = saver.save(sess, './model/' +  args.robot + '_NN.ckpt')
 			log_dir = './train_log/' + args.robot + '_NN_' + current_timestamp
 			os.makedirs(log_dir)
 			summary_writer = tf.summary.FileWriter('./train_log/' + args.robot + '_NN_' + current_timestamp, graph=tf.get_default_graph())
@@ -227,9 +226,9 @@ if __name__ == '__main__':
 
 				if step % params['saveStep'] == 0 or step == 1:
 					# Save the variables to disk.
-					save_path = saver.save(sess, './model/' +  args.robot + '_NN/model',global_step=step, write_meta_graph=False)
+					save_path = saver.save(sess, './model/' +  args.robot + '_NN.ckpt', write_meta_graph=False)
 			
-			save_path = saver.save(sess, './model/' +  args.robot + '_NN/model', global_step=step, write_meta_graph=False)
+			save_path = saver.save(sess, './model/' +  args.robot + '_NN.ckpt', write_meta_graph=False)
 			print("Model saved in path: %s" % save_path)
 			endLearningTime = time.time()
 			results['trainingTime'] = endLearningTime - startTime
@@ -241,37 +240,33 @@ if __name__ == '__main__':
 		results['averageCost'] = np.mean(results['errorVector'])
 		results['reward'] = 100.0/robot.testSize*np.sum(results['errorVector'] < params['tolerance'])
 		
-		filename = './model/' + args.robot +'_NN/pickleData'
+		filename = './model/' + args.robot +'_NN_pickleData'
 		pickle.dump([params, robot, results], open(filename, 'wb'))
 
 	if(args.mode == 'test'):
-		filename = 'model/' + args.model + '_NN/pickleData'
+		filename = 'model/' + args.model + '_NN_pickleData'
 		params, robot, results = pickle.load(open(filename, 'rb'))	
-		# nn = network(params)
+		nn = network(params)
 
-		# init = tf.global_variables_initializer()
-		# graph = tf.get_default_graph()
-		# X = graph.get_tensor_by_name("X:0")
-		# outputLayer = graph.get_tensor_by_name("outputLayer:0")
-		tf.get_collection('outputLayer', outputLayer)
-		tf.get_collection('X', X)
+		init = tf.global_variables_initializer()
+		saver = tf.train.Saver(max_to_keep=1)
 
 		with tf.Session() as sess:
-			# sess.run(init)
-			saver = tf.train.import_meta_graph('model/' + args.model + '_NN/model.meta')
-			savePath = './model/' + args.model + '_NN/'
+			sess.run(init)
+			saver = tf.train.import_meta_graph('model/' + args.model + '_NN.ckpt.meta')
+			savePath = './model/' #+ args.model + '_NN/'
 			saver.restore(sess, tf.train.latest_checkpoint(savePath))
 			print("Model restored.")
 			
 			# Check the values of the variables
 			testBatchX, testBatchY = robot.generateFKTrajectory()
-			y_pred = sess.run(outputLayer, feed_dict={X: testBatchX})
+			y_pred = sess.run(nn.outputLayer, feed_dict={nn.X: testBatchX})
 
 		results['errorVector'] = np.sqrt(np.sum((y_pred - testBatchY)**2, 1))
 		results['averageCost'] = np.mean(results['errorVector'])
 		results['reward'] = 100.0/robot.testSize*np.sum(results['errorVector'] < params['tolerance'])
 
-
+	print("The total time taken for learning is :{} seconds".format(results['trainingTime']))
 	print("Success rate = {}".format(results['reward']))
 	print("Average error is:{}".format(results['averageCost']))
 
