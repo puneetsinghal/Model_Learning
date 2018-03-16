@@ -55,16 +55,16 @@ class network(object):
 		self.inputCombinations = tf.matmul(self.X, self.combinationMatrix)
 		self.h_jointAngles = tf.concat([tf.sin(self.inputCombinations), tf.cos(self.inputCombinations)],1)
 		# self.h_jointAngles = tf.concat([X, self.h_jointAngles],1)
-		self.layer1 = layers.fully_connected(inputs=self.h_jointAngles, num_outputs=params['hiddenSize'], biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-		self.layer2 = layers.fully_connected(inputs=self.layer1, num_outputs=params['hiddenSize'], biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-		self.layer3 = layers.fully_connected(inputs=self.layer2, num_outputs=params['hiddenSize'], biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-		# self.layer4 = layers.fully_connected(inputs=self.layer3, num_outputs=params['hiddenSize'], biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-		# self.layer5 = layers.fully_connected(inputs=self.layer4, num_outputs=params['hiddenSize'], biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
-		self.outputLayer = layers.fully_connected(inputs=self.layer2, num_outputs=params['numOutput'], biases_initializer=tf.zeros_initializer(), activation_fn=None)
+		self.hiddenLayer = layers.fully_connected(inputs=self.h_jointAngles, num_outputs=params['hiddenSize'], biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+		self.hiddenLayer = layers.fully_connected(inputs=self.hiddenLayer, num_outputs=params['hiddenSize'], biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+		self.hiddenLayer = layers.fully_connected(inputs=self.hiddenLayer, num_outputs=params['hiddenSize'], biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+		# self.hiddenLayer = layers.fully_connected(inputs=self.hiddenLayer, num_outputs=params['hiddenSize'], biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+		# self.hiddenLayer = layers.fully_connected(inputs=self.hiddenLayer, num_outputs=params['hiddenSize'], biases_initializer=tf.zeros_initializer(), activation_fn=tf.nn.relu)
+		self.outputLayer = layers.fully_connected(inputs=self.hiddenLayer, num_outputs=params['numOutput'], biases_initializer=tf.zeros_initializer(), activation_fn=None)
 
 		# Define loss and optimizer
 		self.errorVector = ((tf.reduce_sum((self.outputLayer - self.Y)**2, 1)))
-		self.cost = 1e6*tf.reduce_mean(self.errorVector)
+		self.cost = tf.sqrt(tf.reduce_mean(self.errorVector))
 		self.reward = 100.0/params['batchSize']*tf.reduce_sum(tf.cast((tf.sqrt(self.errorVector) < params['tolerance']), tf.float64))
 		self.optimizer = tf.train.AdamOptimizer(learning_rate=params['learningRate'])
 		self.train_op = self.optimizer.minimize(self.cost)
@@ -89,8 +89,8 @@ if __name__ == '__main__':
 		if(args.robot == "planarRR"):
 			params['dof'] = 2
 			params['numOutput'] = 2
-			params['learningRate'] = 0.00005
-			params['numSteps'] = 20000
+			params['learningRate'] = 0.00001
+			params['numSteps'] = 10000
 			params['batchSize'] = 32
 			params['hiddenSize'] = 256
 
@@ -244,7 +244,9 @@ if __name__ == '__main__':
 		pickle.dump([params, robot, results], open(filename, 'wb'))
 
 	if(args.mode == 'test'):
-		filename = 'model/' + args.model + '_NN_pickleData'
+		if args.model == None:
+			filename = 'model/' + args.robot + '_NN_pickleData'
+			modelName = 'model/' + args.robot + '_NN.ckpt.meta'
 		params, robot, results = pickle.load(open(filename, 'rb'))	
 		nn = network(params)
 
@@ -253,7 +255,7 @@ if __name__ == '__main__':
 
 		with tf.Session() as sess:
 			sess.run(init)
-			saver = tf.train.import_meta_graph('model/' + args.model + '_NN.ckpt.meta')
+			saver = tf.train.import_meta_graph(modelName)
 			savePath = './model/' #+ args.model + '_NN/'
 			saver.restore(sess, tf.train.latest_checkpoint(savePath))
 			print("Model restored.")
@@ -262,9 +264,9 @@ if __name__ == '__main__':
 			testBatchX, testBatchY = robot.generateFKTrajectory()
 			y_pred = sess.run(nn.outputLayer, feed_dict={nn.X: testBatchX})
 
-		results['errorVector'] = np.sqrt(np.sum((y_pred - testBatchY)**2, 1))
-		results['averageCost'] = np.mean(results['errorVector'])
-		results['reward'] = 100.0/robot.testSize*np.sum(results['errorVector'] < params['tolerance'])
+		results['errorVector'] = (np.sum((y_pred - testBatchY)**2, 1))
+		results['averageCost'] = np.sqrt(np.mean(results['errorVector']))
+		results['reward'] = 100.0/robot.testSize*np.sum(np.sqrt(results['errorVector']) < params['tolerance'])
 
 	print("The total time taken for learning is :{} seconds".format(results['trainingTime']))
 	print("Success rate = {}".format(results['reward']))
