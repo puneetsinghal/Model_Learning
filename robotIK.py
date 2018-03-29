@@ -18,6 +18,20 @@ class PlanarRR(object):
 		endEffector = np.array([x, y])
 		return endEffector
 
+	def inverseKinematics(self, position):
+		# Planar RR manipulator
+		# print(position.shape)
+		cosineTheta2 = (position[0]**2 + position[1]**2 - self.link_length[0]**2 - self.link_length[1]**2)/(2*self.link_length[0]*self.link_length[1])
+		sineTheta2 = pow((1 - cosineTheta2**2), 0.5)
+		theta2 = atan2(sineTheta2, cosineTheta2)
+
+		sineTheta1 = ((self.link_length[0] + self.link_length[1]*cosineTheta2)*position[1] - self.link_length[1]*sineTheta2*position[0])/(position[0]**2 + position[1]**2)
+		cosineTheta1 = ((self.link_length[0] + self.link_length[1]*cosineTheta2)*position[0] + self.link_length[1]*sineTheta2*position[1])/(position[0]**2 + position[1]**2)
+		theta1 = atan2(sineTheta1, cosineTheta1)
+		
+		theta = np.array([theta1, theta2])
+		return theta
+
 	def generateFKData(self, batchSize):
 		# np.random.seed(1)
 		batch_x = pi*np.random.rand(batchSize, self.dof) - 0.*pi*np.ones([batchSize, self.dof])
@@ -27,6 +41,55 @@ class PlanarRR(object):
 		for i in range(batchSize):
 			batch_y[i, :] = self.forwardKinematics(batch_x[i,:])
 
+		return batch_x, batch_y
+
+	# def generateIKData(self, batchSize):
+	# 	# np.random.seed(1)
+	# 	# batch_x = pi*np.random.rand(batchSize, self.dof) - 0.*pi*np.ones([batchSize, self.dof])
+	# 	# # batch_x = 2.0*pi*np.random.rand(batchSize, self.dof) - pi*np.ones([batchSize, self.dof])
+		
+	# 	R = self.link_length[0] + self.link_length[1]
+	# 	batch_y = np.zeros((batchSize, self.dof))
+	# 	batch_radius = 0.5*R + 0.5*R*np.random.rand(batchSize, 1)
+	# 	batch_theta = 2.0*pi*np.random.rand(batchSize, 1)
+	# 	batch_x = np.hstack((batch_radius*np.cos(batch_theta), batch_radius*np.sin(batch_theta)))
+	# 	# print(batch_x.shape)
+	# 	for i in range(batchSize):
+	# 		batch_y[i, :] = self.inverseKinematics(batch_x[i,:])
+
+	# 	return batch_x, batch_y
+
+	# def generateIKTrajectory(self):
+	# 	# theta_1 = np.hstack((np.linspace(0,0,100), np.linspace(0.5,0.5,100), np.linspace(1.,1.,100), np.linspace(1.5,1.5,100), np.linspace(2.,2.,100), np.linspace(2.5,2.5,100), np.linspace(pi,pi,100)))
+	# 	# theta_2 = np.hstack((np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100)))
+	# 	# batch_x = np.vstack((theta_1, theta_2))
+	# 	# batch_x = batch_x.T
+
+	# 	R = self.link_length[0] + self.link_length[1]
+	# 	batch_radius = np.linspace(0.5*R,R,700).reshape(700,1)
+	# 	# print(radius.shape)
+	# 	batch_theta = np.repeat(np.linspace(0.0,2.0*pi,100),7,0).reshape(700,1)
+	# 	# print(theta.shape)
+	# 	batch_x = np.hstack((batch_radius*np.cos(batch_theta), batch_radius*np.sin(batch_theta)))
+	# 	# print(batch_x.shape)
+	# 	# batch_x = np.vstack((radius, theta))
+	# 	# batch_x = batch_x.T
+
+	# 	self.testSize = batch_x.shape[0]
+	# 	batch_y = np.zeros((self.testSize, self.dof))
+	# 	# print(batch_x.shape)
+	# 	# print(batch_y.shape)
+	# 	for i in range(self.testSize):
+	# 		batch_y[i, :] = self.inverseKinematics(batch_x[i,:])
+			
+	# 	return batch_x, batch_y
+
+	def generateIKData(self, batchSize):
+		batch_y, batch_x = self.generateFKData(batchSize)
+		return batch_x, batch_y
+
+	def generateIKTrajectory(self):
+		batch_y, batch_x = self.generateFKTrajectory()
 		return batch_x, batch_y
 
 	def generateFKTrajectory(self):
@@ -103,8 +166,9 @@ class PlanarRRR(object):
 	def forwardKinematics(self, angles):
 		x = self.link_length[0]*cos(angles[0]) + self.link_length[1]*cos(angles[0] + angles[1]) + self.link_length[2]*cos(angles[0] + angles[1] + angles[2])
 		y = self.link_length[0]*sin(angles[0]) + self.link_length[1]*sin(angles[0] + angles[1]) + self.link_length[2]*sin(angles[0] + angles[1] + angles[2])
-		
-		endEffector = np.array([x, y])
+		theta = (angles[0] + angles[1] + angles[2])%(2*pi)
+
+		endEffector = np.array([x, y, theta])
 		return endEffector
 
 	def generateFKData(self, batchSize):
@@ -119,9 +183,10 @@ class PlanarRRR(object):
 		return batch_x, batch_y
 
 	def generateFKTrajectory(self):
-		theta_1 = np.hstack((np.linspace(0,0,700), np.linspace(0.5,0.5,700), np.linspace(1.,1.,700), np.linspace(1.5,1.5,700), np.linspace(2.,2.,700), np.linspace(2.5,2.5,700), np.linspace(pi,pi,700)))
-		theta_2 = np.hstack((np.linspace(0,0,100), np.linspace(0.5,0.5,100), np.linspace(1.,1.,100), np.linspace(1.5,1.5,100), np.linspace(2.,2.,100), np.linspace(2.5,2.5,100), np.linspace(pi,pi,100)))
-		theta_3 = np.hstack((np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100)))
+		theta_1 = np.hstack((np.linspace(0.1,0.1,700), np.linspace(0.5,0.5,700), np.linspace(1.,1.,700), np.linspace(1.5,1.5,700), np.linspace(2.,2.,700), np.linspace(2.5,2.5,700), np.linspace(0.9*pi,0.9*pi,700)))
+		theta_2 = np.hstack((np.linspace(0.1,0.1,100), np.linspace(0.5,0.5,100), np.linspace(1.,1.,100), np.linspace(1.5,1.5,100), np.linspace(2.,2.,100), np.linspace(2.5,2.5,100), np.linspace(0.9*pi,0.9*pi,100)))
+		# theta_3 = np.hstack((np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100)))
+		theta_3 = np.hstack((np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100)))
 		batch_x = np.vstack((theta_2, theta_3))
 		batch_x = np.vstack((theta_1, np.repeat(batch_x,7,1)))
 		batch_x = batch_x.T
@@ -134,6 +199,13 @@ class PlanarRRR(object):
 			
 		return batch_x, batch_y
 
+	def generateIKData(self, batchSize):
+		batch_y, batch_x = self.generateFKData(batchSize)
+		return batch_x, batch_y
+
+	def generateIKTrajectory(self):
+		batch_y, batch_x = self.generateFKTrajectory()
+		return batch_x, batch_y
 
 class NonPlanarRRR(object):
 	"""Planar RRR manipulator"""
@@ -165,9 +237,10 @@ class NonPlanarRRR(object):
 		return batch_x, batch_y
 
 	def generateFKTrajectory(self):
-		theta_1 = np.hstack((np.linspace(0,0,700), np.linspace(0.5,0.5,700), np.linspace(1.,1.,700), np.linspace(1.5,1.5,700), np.linspace(2.,2.,700), np.linspace(2.5,2.5,700), np.linspace(pi,pi,700)))
-		theta_2 = np.hstack((np.linspace(0,0,100), np.linspace(0.5,0.5,100), np.linspace(1.,1.,100), np.linspace(1.5,1.5,100), np.linspace(2.,2.,100), np.linspace(2.5,2.5,100), np.linspace(pi,pi,100)))
-		theta_3 = np.hstack((np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100)))
+		theta_1 = np.hstack((np.linspace(0.1,0.1,700), np.linspace(0.5,0.5,700), np.linspace(1.,1.,700), np.linspace(1.5,1.5,700), np.linspace(2.,2.,700), np.linspace(2.5,2.5,700), np.linspace(0.9*pi,0.9*pi,700)))
+		theta_2 = np.hstack((np.linspace(0.1,0.1,100), np.linspace(0.5,0.5,100), np.linspace(1.,1.,100), np.linspace(1.5,1.5,100), np.linspace(2.,2.,100), np.linspace(2.5,2.5,100), np.linspace(0.9*pi,0.9*pi,100)))
+		# theta_3 = np.hstack((np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100), np.linspace(0,pi,100)))
+		theta_3 = np.hstack((np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100), np.linspace(0.1,0.9*pi,100)))
 		batch_x = np.vstack((theta_2, theta_3))
 		batch_x = np.vstack((theta_1, np.repeat(batch_x,7,1)))
 		batch_x = batch_x.T
@@ -226,6 +299,14 @@ class NonPlanarRRR(object):
 			torques[i, :] = self.dynamics(q[i,:], qDot[i,:], qDDot[i,:])
 			
 		return np.hstack((np.hstack((q, qDot)), qDDot)), torques
+
+	def generateIKData(self, batchSize):
+		batch_y, batch_x = self.generateFKData(batchSize)
+		return batch_x, batch_y
+
+	def generateIKTrajectory(self):
+		batch_y, batch_x = self.generateFKTrajectory()
+		return batch_x, batch_y
 
 class NonPlanarRRRRR(object):
 	"""docstring for ClassName"""

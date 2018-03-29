@@ -1,0 +1,2 @@
+model_checkpoint_path: "nonPlanarRRR_NN.ckpt"
+all_model_checkpoint_paths: "nonPlanarRRR_NN.ckpt"
