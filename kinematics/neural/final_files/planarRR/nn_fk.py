@@ -20,6 +20,15 @@ from mpl_toolkits.mplot3d import Axes3D
 import time
 import pickle
 
+from inverseOptimizer import INVOPT 
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+config = tf.ConfigProto()
+config.log_device_placement = False
+config.allow_soft_placement = True
+config.gpu_options.allow_growth = True
+config.gpu_options.per_process_gpu_memory_fraction = 1
+SESS = tf.Session(config=config)
 
 def make_log_dir(log_parent_dir):
 	import datetime, os
@@ -68,14 +77,49 @@ class network(object):
 		self.reward = 100.0/params['batchSize']*tf.reduce_sum(tf.cast((tf.sqrt(self.errorVector) < params['tolerance']), tf.float64))
 		self.optimizer = tf.train.AdamOptimizer(learning_rate=params['learningRate'])
 		self.train_op = self.optimizer.minimize(self.cost)
+		
+		self.grad1 = tf.gradients(self.outputLayer[0,0], self.X)
+		self.grad2 = tf.gradients(self.outputLayer[0,1], self.X)
 
+def expressResults(robot, results, params):
 
+	inliers = np.sqrt(results['errorVector']) < params['tolerance']
+	outliers = np.sqrt(results['errorVector']) > params['tolerance']
+	results['reward'] = 100.0/robot.testSize*np.sum(inliers)
+
+	print("The total time taken for learning is :{} seconds".format(results['trainingTime']))
+	print("Success rate = {}".format(results['reward']))
+	print("Average error is:{}".format(results['averageCost']))
+
+	print(np.sqrt(results['errorVector']))
+	print(outputTruth[outliers])
+	print(predOutput[outliers])
+
+	fig = plt.figure(1)
+	ax = fig.add_subplot(111, projection='3d')
+	if(params['numOutput'] == 2):	
+		ax.scatter(outputTruth[:,0], outputTruth[:,1], 0.0*outputTruth[:,1], 'g*')
+		ax.scatter(predOutput[:,0], predOutput[:,1], 0.0*predOutput[:,1], 'r*')
+	else:
+		ax.scatter(outputTruth[:,0], outputTruth[:,1], outputTruth[:,2], 'g*')
+		ax.scatter(predOutput[:,0], predOutput[:,1], predOutput[:,2], 'r*')
+
+	ax.set_xlabel('X axis')
+	ax.set_ylabel('Y axis')
+
+	plt.figure(2)
+	plt.plot(np.linspace(1, results['errorVector'].size, results['errorVector'].size), np.sqrt(results['errorVector']))
+
+	plt.figure(3)
+	plt.hist(np.sqrt(results['errorVector']),np.linspace(0.0,0.01, 100))
+
+	return results
 
 if __name__ == '__main__':
 	startTime = time.time()
 	np.random.seed(1)
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--mode', type=str, default='test')
+	parser.add_argument('--mode', type=str, default='test_fk')
 	parser.add_argument('--robot', type=str, default=None)
 	parser.add_argument('--model', type=str, default=None)
 
@@ -177,19 +221,6 @@ if __name__ == '__main__':
 		params['saveStep'] = 1000
 		print(params)
 
-		# Network Parameters
-		# numInput = 2*(3**dof-1)
-		# normalize the gradients using clipping
-		# GRAD_CLIP = 100
-		# local_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
-		# gradients = tf.gradients(cost, local_vars)
-		# var_norms = tf.global_norm(local_vars)
-		# grads, grad_norms = tf.clip_by_global_norm(gradients, GRAD_CLIP)
-
-		# # Apply local gradients to global network
-		# global_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
-		# train_op = optimizer.apply_gradients(zip(grads, global_vars))
-
 		nn = network(params)
 
 		tf.summary.scalar("cost", nn.cost)
@@ -202,94 +233,91 @@ if __name__ == '__main__':
 
 		# Add ops to save and restore all the variables.
 		saver = tf.train.Saver(max_to_keep=1)
-		
-	# if(args.mode =='train'):
+
 		current_timestamp = make_log_dir('')
 		# Start training
-		with tf.Session() as sess:
+		# with tf.Session() as sess:
 			# Run the initializer
-			sess.run(init)
-			save_path = saver.save(sess, './model/' +  args.robot + '_NN.ckpt')
-			log_dir = './train_log/' + args.robot + '_NN_' + current_timestamp
-			os.makedirs(log_dir)
-			summary_writer = tf.summary.FileWriter('./train_log/' + args.robot + '_NN_' + current_timestamp, graph=tf.get_default_graph())
+		SESS.run(init)
+		save_path = saver.save(SESS, './model/' +  args.robot + '_NN.ckpt')
+		log_dir = './train_log/' + args.robot + '_NN_' + current_timestamp
+		os.makedirs(log_dir)
+		summary_writer = tf.summary.FileWriter('./train_log/' + args.robot + '_NN_' + current_timestamp, graph=tf.get_default_graph())
 
-			for step in range(1, params['numSteps']+1):
-				batch_x, batch_y = robot.generateFKData(params['batchSize'])
-				# Run optimization op (backprop)
-				sess.run(nn.train_op, feed_dict={nn.X: batch_x, nn.Y: batch_y})
-				if step % params['displayStep'] == 0 and step >1000:
-					# Calculatsave_path = saver.save(sess, './model/' +  args.robot + '_NN/model-final'e batch loss and accuracy
-					loss, summary = sess.run([nn.cost, nn.merged_summary_op], feed_dict={nn.X: batch_x, nn.Y: batch_y})
-					print("step: {}, value: {}".format(step, loss))
-					summary_writer.add_summary(summary, step)
+		for step in range(1, params['numSteps']+1):
+			batch_x, batch_y = robot.generateFKData(params['batchSize'])
+			# Run optimization op (backprop)
+			SESS.run(nn.train_op, feed_dict={nn.X: batch_x, nn.Y: batch_y})
+			if step % params['displayStep'] == 0 and step >1000:
+				# Calculatsave_path = saver.save(SESS, './model/' +  args.robot + '_NN/model-final'e batch loss and accuracy
+				loss, summary = SESS.run([nn.cost, nn.merged_summary_op], feed_dict={nn.X: batch_x, nn.Y: batch_y})
+				print("step: {}, value: {}".format(step, loss))
+				summary_writer.add_summary(summary, step)
 
-				if step % params['saveStep'] == 0 or step == 1:
-					# Save the variables to disk.
-					save_path = saver.save(sess, './model/' +  args.robot + '_NN.ckpt', write_meta_graph=False)
-			
-			save_path = saver.save(sess, './model/' +  args.robot + '_NN.ckpt', write_meta_graph=False)
-			print("Model saved in path: %s" % save_path)
-			endLearningTime = time.time()
-			results['trainingTime'] = endLearningTime - startTime
-			# Check the values of the variables
-			testBatchX, testBatchY = robot.generateFKTrajectory()
-			y_pred = sess.run(nn.outputLayer, feed_dict={nn.X: testBatchX})
-
-		results['errorVector'] = np.sqrt(np.sum((y_pred - testBatchY)**2, 1))
-		results['averageCost'] = np.mean(results['errorVector'])
-		results['reward'] = 100.0/robot.testSize*np.sum(results['errorVector'] < params['tolerance'])
+			if step % params['saveStep'] == 0 or step == 1:
+				# Save the variables to disk.
+				save_path = saver.save(SESS, './model/' +  args.robot + '_NN.ckpt', write_meta_graph=False)
 		
-		filename = './model/' + args.robot +'_NN_pickleData'
-		pickle.dump([params, robot, results], open(filename, 'wb'))
+		save_path = saver.save(SESS, './model/' +  args.robot + '_NN.ckpt', write_meta_graph=False)
+		print("Model saved in path: %s" % save_path)
+		endLearningTime = time.time()
+		results['trainingTime'] = endLearningTime - startTime
+		# Check the values of the variables
+		testBatchX, outputTruth = robot.generateFKTrajectory()
+		predOutput = SESS.run(nn.outputLayer, feed_dict={nn.X: testBatchX})
 
-	if(args.mode == 'test'):
+	else:
 		if args.model == None:
 			filename = 'model/' + args.robot + '_NN_pickleData'
 			modelName = 'model/' + args.robot + '_NN.ckpt.meta'
+		
 		params, robot, results = pickle.load(open(filename, 'rb'))	
 		nn = network(params)
 
 		init = tf.global_variables_initializer()
 		saver = tf.train.Saver(max_to_keep=1)
 
-		with tf.Session() as sess:
-			sess.run(init)
-			saver = tf.train.import_meta_graph(modelName)
-			savePath = './model/' #+ args.model + '_NN/'
-			saver.restore(sess, tf.train.latest_checkpoint(savePath))
-			print("Model restored.")
-			
+		# with tf.Session() as sess:
+		SESS.run(init)
+		saver = tf.train.import_meta_graph(modelName)
+		savePath = './model/' #+ args.model + '_NN/'
+		saver.restore(SESS, tf.train.latest_checkpoint(savePath))
+		print("Model restored.")
+		
+		if(args.mode == 'test_fk'):
 			# Check the values of the variables
-			testBatchX, testBatchY = robot.generateFKTrajectory()
-			y_pred = sess.run(nn.outputLayer, feed_dict={nn.X: testBatchX})
+			testBatchX, outputTruth = robot.generateFKTrajectory()
+			predOutput = SESS.run(nn.outputLayer, feed_dict={nn.X: testBatchX})
+			endLearningTime = time.time()
+			
+		if(args.mode == 'test_ik'):
+			robot.testsize = 100
+			outputTruth, inputData = robot.generateFKData(robot.testsize)
+			predOutput = np.zeros(outputTruth.shape)
+			
+			LB = -np.pi
+			UB = np.pi
+			bnds = ((LB, UB), (LB, UB))
 
-		results['errorVector'] = (np.sum((y_pred - testBatchY)**2, 1))
-		results['averageCost'] = np.sqrt(np.mean(results['errorVector']))
-		results['reward'] = 100.0/robot.testSize*np.sum(np.sqrt(results['errorVector']) < params['tolerance'])
+			invKinOptim = INVOPT(robot, params, nn, bnds, SESS)
 
-	print("The total time taken for learning is :{} seconds".format(results['trainingTime']))
-	print("Success rate = {}".format(results['reward']))
-	print("Average error is:{}".format(results['averageCost']))
+			for ind in range(robot.testsize):
+				print("running optimization number {} out of {}".format((ind + 1), outputTruth.shape))
+				results = invKinOptim.optimize(np.array([[0.5, 0.5],]), inputData[ind])
+				predOutput[ind,:] = results.x
+			
+			endLearningTime = time.time()
 
-	fig = plt.figure(1)
-	ax = fig.add_subplot(111, projection='3d')
-	if(params['numOutput'] == 2):	
-		ax.scatter(testBatchY[:,0], testBatchY[:,1], 0.0*testBatchY[:,1], 'g*')
-		ax.scatter(y_pred[:,0], y_pred[:,1], 0.0*y_pred[:,1], 'r*')
-	else:
-		ax.scatter(testBatchY[:,0], testBatchY[:,1], testBatchY[:,2], 'g*')
-		ax.scatter(y_pred[:,0], y_pred[:,1], y_pred[:,2], 'r*')
-
-	ax.set_xlabel('X axis')
-	ax.set_ylabel('Y axis')
-
-	plt.figure(2)
-	plt.plot(np.linspace(1, results['errorVector'].size, results['errorVector'].size), results['errorVector'])
-
-	plt.figure(3)
-	plt.hist(results['errorVector'],np.linspace(0.0,0.01, 100))
+	results['trainingTime'] = endLearningTime - startTime
+	results['errorVector'] = (np.sum((predOutput - outputTruth)**2, 1))
+	results['averageCost'] = np.sqrt(np.mean(results['errorVector']))
+		
+	# embed()
+	results = expressResults(robot, results, params)
+	
+	if(args.mode == 'train'):	
+		filename = './model/' + args.robot +'_NN_pickleData'
+		pickle.dump([params, robot, results], open(filename, 'wb'))
 
 	plt.show()
-
 	print("Optimization Finished!")
